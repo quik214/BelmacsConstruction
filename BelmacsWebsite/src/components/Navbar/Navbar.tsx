@@ -7,8 +7,9 @@ import { Link } from "react-router-dom";
 export default function Navbar() {
   const [navbar, setNavbar] = useState(false);
 
+  // below is arrow function
   const changeBackground = () => {
-    if (window.scrollY >= 10) {
+    if (window.scrollY >= 40) {
         setNavbar(true)
     } else {
         setNavbar(false);
@@ -16,7 +17,7 @@ export default function Navbar() {
   };
 
   window.addEventListener("scroll", changeBackground); 
-  // i would assume that this "scroll" is some default behaviour, and we apply the function changeBackground upon scroll
+  // "scroll" is some default behaviour, and we apply the function changeBackground upon scroll
 
   return (
     <nav className={navbar ? 'navbar active' : 'navbar'}>

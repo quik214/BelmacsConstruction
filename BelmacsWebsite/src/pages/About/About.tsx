@@ -6,7 +6,7 @@ export default function () {
   return (
     <div>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac felis et
+        Hello there dolor sit amet, consectetur adipiscing elit. Sed ac felis et
         eros dictum faucibus. Nullam eget nunc eu nisl facilisis suscipit vel
         non nunc. In hac habitasse platea dictumst. Nulla facilisi. Fusce sit
         amet erat justo. Morbi lacinia, velit eget scelerisque laoreet, nulla
