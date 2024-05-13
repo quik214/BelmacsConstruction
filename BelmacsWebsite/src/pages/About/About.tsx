@@ -1,10 +1,12 @@
-import React from "react";
-import Navbar from "../../components/Navbar/Navbar";
-import "./About.css";
+import React from "react"
+import Navbar from "../../components/Navbar/Navbar"
+import AboutHero from "../../components/AboutHero/AboutHero"
+import "./About.css"
 
 export default function () {
   return (
     <div>
+      <AboutHero />
       <p>
         Hello there dolor sit amet, consectetur adipiscing elit. Sed ac felis et
         eros dictum faucibus. Nullam eget nunc eu nisl facilisis suscipit vel

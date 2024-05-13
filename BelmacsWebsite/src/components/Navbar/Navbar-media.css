@@ -1,0 +1,19 @@
+@media (max-width: 750px) {
+  .hideOnMobile {
+    display: none;
+  }
+
+  .nav-sidebar-icon {
+    display: block;
+  }
+}
+
+@media (max-width: 400px) {
+  .sidebar {
+    width: 100%;
+  }
+
+  .nav-sidebar-icon {
+    display: block;
+  }
+}
