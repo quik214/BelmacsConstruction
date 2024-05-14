@@ -8,7 +8,7 @@ import "./Navbar-media.css";
 import BelmacsBlueBlack from "../../assets/Logos/belmacs-blueblack.png";
 import BelmacsWhiteWhite from "../../assets/Logos/belmacs-whitewhite.png";
 
-/* Sidebar Icons */ 
+/* Sidebar Icons */
 import CloseIcon from "../../assets/Icons/close.svg";
 import MenuBlackIcon from "../../assets/Icons/menu-black.svg";
 import MenuWhiteIcon from "../../assets/Icons/menu-white.svg";
@@ -23,7 +23,7 @@ export default function Navbar() {
 
   const [navbar, setNavbar] = useState(false);
   const [logo, setLogo] = useState(false);
-  
+
   const [menuIcon, setMenuIcon] = useState(false);
 
   // below is arrow function
@@ -45,9 +45,9 @@ export default function Navbar() {
   // for making sidebar appear (onclick of the menu icon)
   const showSideBar = () => {
     const sidebar = document.querySelector(".sidebar");
-    
-    sidebar.classList.remove('close');
-    sidebar.classList.add('open');
+
+    sidebar.classList.remove("close");
+    sidebar.classList.add("open");
 
     sidebar.style.display = "block";
   };
@@ -56,17 +56,15 @@ export default function Navbar() {
   const hideSideBar = () => {
     const sidebar = document.querySelector(".sidebar");
 
-    sidebar.classList.remove('open');
-    sidebar.classList.add('close'); 
+    sidebar.classList.remove("open");
+    sidebar.classList.add("close");
 
     setTimeout(() => {
       sidebar.style.display = "none";
     }, 300);
-    
   };
 
   return (
-
     <div>
       {/* Start of Navbar */}
       <nav className={navbar ? "navbar active" : "navbar"}>
@@ -92,7 +90,6 @@ export default function Navbar() {
         </div>
       </nav>
       {/* End of Navbar */}
-
 
       {/* Start of Sidebar */}
       <nav className="sidebar">
