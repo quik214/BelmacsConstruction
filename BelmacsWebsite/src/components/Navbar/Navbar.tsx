@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "../../assets/fonts.css";
 
+import "./Navbar.css";
+import "./Navbar-media.css";
+
+/* Import Belmacs Icons */
 import BelmacsBlueBlack from "../../assets/Logos/belmacs-blueblack.png";
 import BelmacsWhiteWhite from "../../assets/Logos/belmacs-whitewhite.png";
 
-import "./Navbar.css";
-import "./Navbar-media.css";
+/* Sidebar Icons */ 
 import CloseIcon from "../../assets/Icons/close.svg";
-import MenuIcon from "../../assets/Icons/menu.svg";
+import MenuBlackIcon from "../../assets/Icons/menu-black.svg";
+import MenuWhiteIcon from "../../assets/Icons/menu-white.svg";
 
 // Link (for working with react-router)
 import { Link } from "react-router-dom";
@@ -19,15 +23,19 @@ export default function Navbar() {
 
   const [navbar, setNavbar] = useState(false);
   const [logo, setLogo] = useState(false);
+  
+  const [menuIcon, setMenuIcon] = useState(false);
 
   // below is arrow function
   const changeBackground = () => {
     if (window.scrollY >= 40) {
       setNavbar(true);
       setLogo(true);
+      setMenuIcon(true);
     } else {
       setNavbar(false);
       setLogo(false);
+      setMenuIcon(false);
     }
   };
 
@@ -38,7 +46,6 @@ export default function Navbar() {
   const showSideBar = () => {
     const sidebar = document.querySelector(".sidebar");
     
-
     sidebar.classList.remove('close');
     sidebar.classList.add('open');
 
@@ -78,7 +85,7 @@ export default function Navbar() {
             Contact Us
           </Link>
           <img
-            src={MenuIcon}
+            src={menuIcon ? MenuBlackIcon : MenuWhiteIcon}
             className="nav-sidebar-icon"
             onClick={showSideBar}
           ></img>
