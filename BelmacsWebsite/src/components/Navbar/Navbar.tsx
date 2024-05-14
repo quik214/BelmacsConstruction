@@ -34,45 +34,36 @@ export default function Navbar() {
   window.addEventListener("scroll", changeBackground);
   // "scroll" is some default behaviour, and we apply the function changeBackground upon scroll
 
-  // for making sidebar appear
+  // for making sidebar appear (onclick of the menu icon)
   const showSideBar = () => {
     const sidebar = document.querySelector(".sidebar");
-    sidebar.style.display = "flex";
+    
+
+    sidebar.classList.remove('close');
+    sidebar.classList.add('open');
+
+    sidebar.style.display = "block";
   };
 
-  // for hiding sidebar
+  // for hiding sidebar (onclick of the close icon)
   const hideSideBar = () => {
     const sidebar = document.querySelector(".sidebar");
-    sidebar.style.display = "none";
+
+    sidebar.classList.remove('open');
+    sidebar.classList.add('close'); 
+
+    setTimeout(() => {
+      sidebar.style.display = "none";
+    }, 300);
+    
   };
 
   return (
-    <div>
-      <nav className="sidebar">
-        <div className="sidebar-links">
-          <img
-            src={CloseIcon}
-            className="sidebar-link "
-            onClick={hideSideBar}
-          ></img>
-          <Link to="/" className="sidebar-link">
-            About
-          </Link>
-          <Link to="/projects" className="sidebar-link">
-            Projects
-          </Link>
-          <Link to="/services" className="sidebar-link">
-            Services
-          </Link>
-          <Link to="/contact" className="sidebar-link">
-            Contact Us
-          </Link>
-        </div>
-      </nav>
 
+    <div>
+      {/* Start of Navbar */}
       <nav className={navbar ? "navbar active" : "navbar"}>
         <img src={logo ? logoActive : logoNonActive} className="navbar-logo" />
-
         <div className="nav-links">
           <Link to="/" className="nav-link hideOnMobile">
             About
@@ -93,6 +84,32 @@ export default function Navbar() {
           ></img>
         </div>
       </nav>
+      {/* End of Navbar */}
+
+
+      {/* Start of Sidebar */}
+      <nav className="sidebar">
+        <div className="sidebar-links">
+          <img
+            src={CloseIcon}
+            className="sidebar-img"
+            onClick={hideSideBar}
+          ></img>
+          <Link to="/" className="sidebar-link">
+            About
+          </Link>
+          <Link to="/projects" className="sidebar-link">
+            Projects
+          </Link>
+          <Link to="/services" className="sidebar-link">
+            Services
+          </Link>
+          <Link to="/contact" className="sidebar-link">
+            Contact Us
+          </Link>
+        </div>
+      </nav>
+      {/* End of Sidebar */}
     </div>
   );
 }
