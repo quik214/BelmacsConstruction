@@ -1,4 +1,3 @@
-import React from "react";
 import "../../assets/fonts.css";
 
 import AboutHeroVideo from "../../assets/About/about-hero.mp4";

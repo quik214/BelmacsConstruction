@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState } from "react";
 import "../../assets/fonts.css";
 
 import "./Navbar.css";
@@ -46,22 +46,30 @@ export default function Navbar() {
   const showSideBar = () => {
     const sidebar = document.querySelector(".sidebar");
 
-    sidebar.classList.remove("close");
-    sidebar.classList.add("open");
+    if (sidebar) {
+      sidebar.classList.remove("close");
+      sidebar.classList.add("open");
 
-    sidebar.style.display = "block";
+      (sidebar as HTMLElement).style.display = "block";
+    } else {
+      console.error("Sidebar element not found.");
+    }
   };
 
   // for hiding sidebar (onclick of the close icon)
   const hideSideBar = () => {
     const sidebar = document.querySelector(".sidebar");
 
-    sidebar.classList.remove("open");
-    sidebar.classList.add("close");
+    if (sidebar instanceof HTMLElement) {
+      sidebar.classList.remove("open");
+      sidebar.classList.add("close");
 
-    setTimeout(() => {
-      sidebar.style.display = "none";
-    }, 300);
+      setTimeout(() => {
+        sidebar.style.display = "none";
+      }, 300);
+    } else {
+      console.error("Sidebar element not found or is not an HTMLElement.");
+    }
   };
 
   return (
