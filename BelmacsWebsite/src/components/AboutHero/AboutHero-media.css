@@ -12,7 +12,7 @@
 
   .video-desc {
     font-family: "Lato";
-    font-size: 6.7rem;
+    font-size: 4.5rem;
   }
 }
 
@@ -31,7 +31,7 @@
   }
 
   .video-desc {
-    font-size: 4.8rem;
+    font-size: 3.2rem;
   }
 }
 
@@ -46,7 +46,7 @@
   }
 
   .video-desc {
-    font-size: 3.8rem;
+    font-size: 2.6rem;
   }
 }
 
@@ -61,7 +61,7 @@
   }
 
   .video-desc {
-    font-size: 3.2rem;
+    font-size: 2.0rem;
   }
 }
 
@@ -75,9 +75,7 @@
     font-size: 1rem;
   }
 
-  .video-desc {
-    font-size: 2.6rem;
-  }
+  
 }
 
 /* Small Mobile */
