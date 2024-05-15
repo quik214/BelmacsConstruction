@@ -26,7 +26,11 @@
 }
 
 /* Mobile */
-@media (max-width: 500px) {
+@media (max-width: 550px) {
+  .sidebar .sidebar-img {
+    margin-top: 7px;
+  }
+
   .navbar-logo {
     width: 180px;
     height: 45px;
@@ -46,7 +50,6 @@
 @media (max-width: 390px) {
   .sidebar .sidebar-img {
     margin-top: 5px;
-    
   }
 
   .navbar-logo {
