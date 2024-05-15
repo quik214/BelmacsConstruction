@@ -12,12 +12,12 @@
 
   .video-desc {
     font-family: "Lato";
-    font-size: 4.5rem;
+    font-size: 3.4rem;
   }
 }
 
 /* Normal Screens - currently designed for this */
-@media (1201px <= width <= 1350px) {
+@media (max-width: 1700px) {
 }
 
 /* Landscape Tablets */
@@ -36,7 +36,7 @@
 }
 
 /* Tablets */
-@media (701px <= width <= 950px) {
+@media (max-width: 900px) {
   .video-text {
     margin-left: 4rem;
   }
@@ -61,7 +61,7 @@
   }
 
   .video-desc {
-    font-size: 2.0rem;
+    font-size: 2rem;
   }
 }
 
@@ -74,8 +74,6 @@
   .video-header {
     font-size: 1rem;
   }
-
-  
 }
 
 /* Small Mobile */

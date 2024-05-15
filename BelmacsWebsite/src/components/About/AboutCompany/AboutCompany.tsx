@@ -1,6 +1,6 @@
 import "../../../assets/fonts.css";
-import "./AboutCompany-media.css";
 import "./AboutCompany.css";
+import "./AboutCompany-media.css";
 
 import AboutCompanyImage from "../../../assets/About/about-company.jpg";
 

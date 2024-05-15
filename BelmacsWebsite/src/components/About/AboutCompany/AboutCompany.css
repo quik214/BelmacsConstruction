@@ -5,7 +5,6 @@
 }
 
 .company-text {
-  
 }
 
 .company-header {
@@ -16,14 +15,13 @@
 }
 
 .company-desc {
-  margin-top: 20px;
+  margin-top: 30px;
   font-size: 1rem;
   font-family: "Montserrat";
-  line-height: 1.8rem;
+  line-height: 1.6rem;
 }
 
 .company-img {
   width: 510px;
   height: 400px;
-  
 }

@@ -1,0 +1,46 @@
+/* Large Screens */
+@media (1700px <= width <= 2500px) {
+  .company {
+    column-gap: 3.5rem;
+  }
+
+  .company-header {
+    font-size: 2rem;
+  }
+
+  .company-desc {
+    margin-top: 30px;
+    font-size: 1.2rem;
+    font-family: "Montserrat";
+    line-height: 1.6rem;
+  }
+
+  .company-img {
+    width: 540px;
+    height: 400px;
+  }
+}
+
+/* Normal Screens - currently designed for this */
+@media (max-width: 1700px) {
+}
+
+/* Landscape Tablets */
+@media (max-width: 1200px) {
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+}
+
+/* Smaller Tablets */
+@media (max-width: 700px) {
+}
+
+/* Mobile */
+@media (max-width: 550px) {
+}
+
+/* Small Mobile */
+@media (max-width: 390px) {
+}
