@@ -1,0 +1,29 @@
+.company {
+  display: flex;
+  column-gap: 5rem;
+  margin-top: 50px;
+}
+
+.company-text {
+  
+}
+
+.company-header {
+  font-size: 1.8rem;
+  font-family: "Lato";
+  font-weight: 500;
+  color: rgb(54, 79, 199);
+}
+
+.company-desc {
+  margin-top: 20px;
+  font-size: 1rem;
+  font-family: "Montserrat";
+  line-height: 1.8rem;
+}
+
+.company-img {
+  width: 510px;
+  height: 400px;
+  
+}

@@ -1,4 +1,5 @@
 import AboutHero from "../../components/About/AboutHero/AboutHero"
+import AboutCompany from "../../components/About/AboutCompany/AboutCompany"
 import "./About.css"
 
 export default function () {
@@ -6,7 +7,7 @@ export default function () {
     <div>
       <AboutHero />
       <div className="container">
-        
+        <AboutCompany />
       </div>
     </div>
   );
