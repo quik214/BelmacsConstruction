@@ -26,11 +26,13 @@
 }
 
 .video-header {
+  margin: 0;
   font-family: "Montserrat";
   font-size: 1.6rem;
 }
 
 .video-desc {
+  margin: 0;
   font-family: "Lato";
   font-size: 5.5rem;
 }

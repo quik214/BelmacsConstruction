@@ -3,6 +3,7 @@ import "../../assets/fonts.css";
 import AboutHeroVideo from "../../assets/About/about-hero.mp4";
 
 import "./AboutHero.css";
+import "./AboutHero-media.css";
 
 export default function AboutHero() {
   return (

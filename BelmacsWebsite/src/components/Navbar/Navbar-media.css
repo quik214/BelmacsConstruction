@@ -1,4 +1,21 @@
-@media (max-width: 750px) {
+/* Large Screens */
+@media (max-width: 2000px) {
+}
+
+/* Normal Screens - currently designed for this */
+@media (max-width: 1350px) {
+}
+
+/* Landscape Tablets */
+@media (max-width: 1200px) {
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+}
+
+/* Smaller Tablets */
+@media (max-width: 720px) {
   .hideOnMobile {
     display: none;
   }
@@ -8,12 +25,33 @@
   }
 }
 
-@media (max-width: 400px) {
+/* Mobile */
+@media (max-width: 500px) {
+  .navbar-logo {
+    width: 180px;
+    height: 45px;
+    margin-left: 30px;
+  }
+
   .sidebar {
     width: 100%;
   }
 
   .nav-sidebar-icon {
     display: block;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 390px) {
+  .sidebar .sidebar-img {
+    margin-top: 5px;
+    
+  }
+
+  .navbar-logo {
+    width: 160px;
+    height: 40px;
+    margin-left: 30px;
   }
 }

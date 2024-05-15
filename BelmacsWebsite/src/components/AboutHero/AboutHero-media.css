@@ -1,0 +1,77 @@
+/* Large Screens */
+@media (1700px <= width <= 2500px) {
+  .video-text {
+    margin-left: 8rem;
+    z-index: 1;
+  }
+
+  .video-header {
+    font-family: "Montserrat";
+    font-size: 1.8rem;
+  }
+
+  .video-desc {
+    font-family: "Lato";
+    font-size: 6.7rem;
+  }
+}
+
+/* Normal Screens - currently designed for this */
+@media (1201px <= width <= 1350px) {
+}
+
+/* Landscape Tablets */
+@media (max-width: 1200px) {
+  .video-text {
+    margin-left: 4.2rem;
+  }
+
+  .video-header {
+    font-size: 1.2rem;
+  }
+
+  .video-desc {
+    font-size: 4.8rem;
+  }
+}
+
+/* Tablets */
+@media (701px <= width <= 950px) {
+  .video-text {
+    margin-left: 4rem;
+  }
+
+  .video-header {
+    font-size: 1rem;
+  }
+
+  .video-desc {
+    font-size: 3.8rem;
+  }
+}
+
+/* Smaller Tablets */
+@media (max-width: 700px) {
+  .video-text {
+    margin-left: 4rem;
+  }
+
+  .video-header {
+    font-size: 1rem;
+  }
+
+  .video-desc {
+    font-size: 3.2rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+  .video-text {
+    margin-left: 2rem;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 390px) {
+}
