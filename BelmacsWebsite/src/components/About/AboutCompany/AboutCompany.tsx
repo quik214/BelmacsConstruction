@@ -6,7 +6,7 @@ import AboutCompanyImage from "../../../assets/About/about-company.jpg";
 
 export default function TheCompany() {
   return (
-    <div className="company">
+    <div className="company reveal">
       <div className="company-text">
         <p className="company-header">The Company</p>
         <p className="company-desc one">

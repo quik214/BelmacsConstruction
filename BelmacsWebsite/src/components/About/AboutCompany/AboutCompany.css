@@ -30,3 +30,15 @@
   max-width: 100%;
   height: auto;
 }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(150px);
+  transition: all 1s ease;
+}
+
+.reveal.active {
+  transform: translateY(0px);
+  opacity: 1;
+  
+}
