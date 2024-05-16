@@ -21,7 +21,12 @@
   line-height: 1.6rem;
 }
 
+.company-img-ctr {
+  max-width: 50rem;
+  margin: auto;
+}
+
 .company-img {
-  width: 510px;
-  height: 400px;
+  max-width: 100%;
+  height: auto;
 }

@@ -15,10 +15,7 @@
     line-height: 1.6rem;
   }
 
-  .company-img {
-    width: 540px;
-    height: 400px;
-  }
+  
 }
 
 /* Normal Screens - currently designed for this */
@@ -26,19 +23,52 @@
 }
 
 /* Landscape Tablets */
-@media (max-width: 1200px) {
+@media (max-width: 1270px) {
+  .company-header {
+    font-size: 1.6rem;
+  }
+
+  .company-desc {
+    margin-top: 30px;
+    font-size: 0.8rem;
+    font-family: "Montserrat";
+    line-height: 1.6rem;
+  }
+
+  
 }
 
 /* Tablets */
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
+  .company {
+    flex-wrap: wrap;
+    row-gap: 40px;
+  }
+
+  .company-header {
+    font-size: 1.6rem;
+  }
+
+  .company-desc {
+    font-size: 1rem;
+  }
 }
 
 /* Smaller Tablets */
-@media (max-width: 700px) {
+@media (max-width: 750px) {
+
+  
 }
 
 /* Mobile */
 @media (max-width: 550px) {
+  .company-header {
+    font-size: 1.2rem;
+  }
+
+  .company-desc {
+    font-size: 0.8rem;
+  }
 }
 
 /* Small Mobile */

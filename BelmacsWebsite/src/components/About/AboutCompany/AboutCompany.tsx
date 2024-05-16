@@ -23,7 +23,9 @@ export default function TheCompany() {
           add value to the projects and to our customers, in one way or another.
         </p>
       </div>
+      <div className="company-img-ctr">
       <img src={AboutCompanyImage} className="company-img"></img>
+      </div>
     </div>
   );
 }
