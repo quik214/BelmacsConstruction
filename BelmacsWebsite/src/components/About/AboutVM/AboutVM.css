@@ -1,0 +1,101 @@
+.vision-mission {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 50px;
+}
+
+/* Our Vision */
+.vision {
+  width: 50%;
+  position: relative;
+  text-align: center;
+}
+
+.vision-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+  width: 25rem;
+  flex-wrap: wrap;
+}
+
+.vision-header {
+  font-size: 1.6rem;
+  font-family: "Lato";
+  color: white;
+  border-bottom: 3.5px solid #364fc7;
+  align-self: center;
+  width: 7.5rem;
+}
+
+.vision-desc {
+  font-size: 1.2rem;
+  font-family: "Montserrat";
+  color: white;
+}
+
+.vision-img-ctr {
+  max-width: 100%;
+  flex: 1;
+  margin: auto;
+}
+
+.vision-img {
+  width: 100%;
+  height: 400px;
+  -webkit-filter: brightness(50%);
+  filter: brightness(50%);
+}
+
+/* Our Mission */
+
+.mission {
+  width: 50%;
+  position: relative;
+  text-align: center;
+}
+
+.mission-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+  width: 25rem;
+}
+
+.mission-header {
+  font-size: 1.6rem;
+  font-family: "Lato";
+  color: white;
+  border-bottom: 3.5px solid #364fc7;
+  align-self: center;
+  width: 8.6rem;
+}
+
+.mission-desc {
+  font-size: 1.2rem;
+  font-family: "Montserrat";
+  color: white;
+}
+
+.mission-img-ctr {
+  max-width: 100%;
+  margin: auto;
+  flex: 1;
+}
+
+.mission-img {
+  width: 100%;
+  height: 400px;
+  -webkit-filter: brightness(50%);
+  filter: brightness(50%);
+}

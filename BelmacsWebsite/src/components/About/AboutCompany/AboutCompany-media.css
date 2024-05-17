@@ -15,7 +15,9 @@
     line-height: 1.6rem;
   }
 
-  
+  .company-img-ctr {
+    max-width: 35rem;
+  }
 }
 
 /* Normal Screens - currently designed for this */
@@ -34,8 +36,6 @@
     font-family: "Montserrat";
     line-height: 1.6rem;
   }
-
-  
 }
 
 /* Tablets */
@@ -52,12 +52,14 @@
   .company-desc {
     font-size: 1rem;
   }
+
+  .company-img-ctr {
+    max-width: 35rem;
+  }
 }
 
 /* Smaller Tablets */
 @media (max-width: 750px) {
-
-  
 }
 
 /* Mobile */
