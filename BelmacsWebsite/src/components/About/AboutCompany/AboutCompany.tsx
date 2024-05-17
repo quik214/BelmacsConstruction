@@ -24,7 +24,7 @@ export default function TheCompany() {
         </p>
       </div>
       <div className="company-img-ctr">
-      <img src={AboutCompanyImage} className="company-img"></img>
+        <img src={AboutCompanyImage} className="company-img"></img>
       </div>
     </div>
   );

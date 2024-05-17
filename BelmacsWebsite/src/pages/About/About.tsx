@@ -2,6 +2,7 @@ import AboutHero from "../../components/About/AboutHero/AboutHero";
 import AboutCompany from "../../components/About/AboutCompany/AboutCompany";
 import AboutVM from "../../components/About/AboutVM/AboutVM";
 import "./About.css";
+import AboutProjects from "../../components/About/AboutProjects/AboutProjects";
 
 export default function () {
   const reveal = () => {
@@ -40,6 +41,7 @@ export default function () {
       <div className="container">
         <AboutCompany />
         <AboutVM />
+        <AboutProjects />
       </div>
     </div>
   );
