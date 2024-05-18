@@ -1,0 +1,88 @@
+/* Large Screens */
+@media (1700px <= width <= 2500px) {
+  .ims {
+    column-gap: 3.5rem;
+  }
+
+  .ims-header {
+    font-size: 2rem;
+  }
+
+  .ims-desc {
+    margin-top: 30px;
+    font-size: 1.2rem;
+    font-family: "Montserrat";
+    line-height: 1.6rem;
+  }
+
+  .ims-img-ctr {
+    max-width: 35rem;
+  }
+}
+
+/* Normal Screens - currently designed for this */
+@media (max-width: 1700px) {
+}
+
+/* Landscape Tablets */
+@media (max-width: 1270px) {
+  .ims-header {
+    font-size: 1.6rem;
+  }
+
+  .ims-desc {
+    margin-top: 30px;
+    font-size: 0.8rem;
+    font-family: "Montserrat";
+    line-height: 1.6rem;
+  }
+
+}
+
+/* Tablets */
+@media (max-width: 1200px) {
+  .ims {
+    flex-wrap: wrap;
+    row-gap: 40px;
+  }
+
+  .ims-header {
+    font-size: 1.6rem;
+  }
+
+  .ims-desc {
+    font-size: 1rem;
+  }
+
+  .ims-img-ctr {
+    max-width: 35rem;
+  }
+
+  .ims-image {
+    padding: 0.5rem;
+  }
+}
+
+/* Smaller Tablets */
+@media (max-width: 750px) {
+}
+
+/* Mobile */
+@media (max-width: 550px) {
+  .ims-header {
+    font-size: 1.2rem;
+  }
+
+  .ims-desc {
+    font-size: 0.8rem;
+  }
+
+  .ims-image {
+    padding: 0.5rem;
+  }
+
+}
+
+/* Small Mobile */
+@media (max-width: 390px) {
+}

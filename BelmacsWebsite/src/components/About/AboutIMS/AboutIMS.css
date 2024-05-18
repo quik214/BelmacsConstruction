@@ -1,0 +1,56 @@
+.ims {
+  display: flex;
+  column-gap: 5rem;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+
+.ims-text {
+  flex: 1;
+}
+
+.ims-desc {
+  margin-top: 30px;
+  font-size: 1rem;
+  font-family: "Montserrat";
+  line-height: 1.6rem;
+}
+
+.ims-header {
+  font-size: 1.8rem;
+  font-family: "Lato";
+  font-weight: 500;
+  color: rgb(54, 79, 199);
+}
+
+.ims-img-ctr {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.ims-image {
+  flex: 1 1 calc(33.33% - 1rem);
+  max-width: calc(33.33% - 1rem);
+  box-sizing: border-box;
+  padding: 1.5rem;
+}
+
+.ims-image img {
+  width: 100%;
+  height: auto;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(150px);
+  transition: all 1s ease;
+}
+
+.reveal.active {
+  transform: translateY(0px);
+  opacity: 1;
+}

@@ -3,6 +3,7 @@ import AboutCompany from "../../components/About/AboutCompany/AboutCompany";
 import AboutVM from "../../components/About/AboutVM/AboutVM";
 import "./About.css";
 import AboutProjects from "../../components/About/AboutProjects/AboutProjects";
+import AboutIMS from "../../components/About/AboutIMS/AboutIMS";
 
 export default function () {
   const reveal = () => {
@@ -42,6 +43,7 @@ export default function () {
         <AboutCompany />
         <AboutVM />
         <AboutProjects />
+        <AboutIMS />
       </div>
     </div>
   );
