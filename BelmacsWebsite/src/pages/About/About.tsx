@@ -41,7 +41,12 @@ export default function () {
       <AboutHero />
       <div className="container">
         <AboutCompany />
-        <AboutVM />
+      </div>
+
+      <div className="out-container">
+      <AboutVM />
+      </div>
+      <div className="container">
         <AboutProjects />
         <AboutIMS />
       </div>

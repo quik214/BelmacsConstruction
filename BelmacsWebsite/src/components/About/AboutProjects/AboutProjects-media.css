@@ -1,26 +1,5 @@
 /* Large Screens */
 @media (1700px <= width <= 2500px) {
-  .projects-header {
-    font-size: 2rem;
-  }
-
-  .vision-header {
-    font-size: 1.8rem;
-    width: 8.6rem;
-  }
-
-  .mission-header {
-    font-size: 1.8rem;
-    width: 9.8rem;
-  }
-
-  .vision-img {
-    height: 450px;
-  }
-
-  .mission-img {
-    height: 450px;
-  }
 }
 
 /* Normal Screens - currently designed for this */
