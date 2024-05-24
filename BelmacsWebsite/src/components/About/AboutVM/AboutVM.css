@@ -1,7 +1,6 @@
 .vision-mission {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   width: 100%;
   margin-top: 50px;
 }
@@ -98,4 +97,10 @@
   height: 400px;
   -webkit-filter: brightness(50%);
   filter: brightness(50%);
+}
+
+/* To ensure text wrapping works */
+.vision-text,
+.mission-text {
+  width: 80%; /* Adjust as required */
 }

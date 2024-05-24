@@ -25,20 +25,109 @@
 
 /* Landscape Tablets */
 @media (max-width: 1200px) {
+  .vision-header {
+    font-size: 1.6rem;
+  }
+
+  .mission-header {
+    font-size: 1.6rem;
+  }
+
+  .vision-desc {
+    font-size: 1.1rem;
+  }
+
+  .mission-desc {
+    font-size: 1.1rem;
+  }
 }
 
 /* Tablets */
-@media (max-width: 900px) {
+@media (max-width: 1050px) {
+  .vision-img {
+    height: 375px;
+  }
+  .vision-header {
+    font-size: 1.2rem;
+    width: 5.8rem;
+  }
+
+  .vision-desc {
+    font-size: 1rem;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+
+  .mission-img {
+    height: 375px;
+  }
+
+  .mission-header {
+    font-size: 1.2rem;
+    width: 6.5rem;
+  }
+
+  .mission-desc {
+    font-size: 1rem;
+    white-space: normal;
+    word-wrap: break-word;
+  }
 }
 
 /* Smaller Tablets */
-@media (max-width: 700px) {
+@media (max-width: 1000px) {
+  .vision-img {
+    height: 325px;
+  }
+
+  .mission-img {
+    height: 325px;
+  }
 }
 
 /* Mobile */
-@media (max-width: 550px) {
+@media (max-width: 750px) {
+  .vision-img {
+    height: 300px;
+  }
+
+  .vision-header {
+    font-size: 1rem;
+    width: 4.8rem;
+  }
+
+  .vision-desc {
+    font-size: 0.8rem;
+  }
+
+  .mission-img {
+    height: 300px;
+  }
+
+  .mission-header {
+    font-size: 1rem;
+    width: 5.5rem;
+  }
+
+  .mission-desc {
+    font-size: 0.8rem;
+  }
 }
 
 /* Small Mobile */
-@media (max-width: 390px) {
+@media (max-width: 650px) {
+  .vision-mission {
+    flex-wrap: wrap;
+  }
+
+  .vision,
+  .mission {
+    width: 100%; /* Ensure they occupy the full width of the container */
+    margin-bottom: -10px;
+  }
+
+  .vision-img,
+  .mission-img {
+    height: 250px;
+  }
 }

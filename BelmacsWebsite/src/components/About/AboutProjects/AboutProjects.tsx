@@ -1,9 +1,6 @@
 import "./AboutProjects.css";
 import "./AboutProjects-media.css";
 
-import VisionImage from "../../../assets/About/about-vision.jpg";
-import MissionImage from "../../../assets/About/about-mission.jpg";
-
 export default function AboutProjects() {
   return (
     <div className="projects reveal">

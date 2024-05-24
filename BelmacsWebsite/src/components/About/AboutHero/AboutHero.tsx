@@ -14,9 +14,7 @@ export default function AboutHero() {
 
       <div className="video-text">
         <p className="video-header">Belmacs Consulting Engineers</p>
-        <p className="video-desc">
-          Envisioning Possibilities, Building Solutions
-        </p>
+        <p className="video-desc">Possibilities Through Design</p>
       </div>
     </div>
   );
