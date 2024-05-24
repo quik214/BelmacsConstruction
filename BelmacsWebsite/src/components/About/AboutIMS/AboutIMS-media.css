@@ -36,7 +36,6 @@
     font-family: "Montserrat";
     line-height: 1.6rem;
   }
-
 }
 
 /* Tablets */
@@ -50,12 +49,32 @@
     font-size: 1.6rem;
   }
 
+  .ims-img-ctr {
+    max-width: 25rem;
+  }
+
+  .ims-image {
+    padding: 0.5rem;
+  }
+}
+
+/* Tablets */
+@media (max-width: 1000px) {
+  .ims {
+    flex-wrap: wrap;
+    row-gap: 40px;
+  }
+
+  .ims-header {
+    font-size: 1.6rem;
+  }
+
   .ims-desc {
-    font-size: 1rem;
+    min-width: 400px;
   }
 
   .ims-img-ctr {
-    max-width: 35rem;
+    margin: auto;
   }
 
   .ims-image {
@@ -75,12 +94,13 @@
 
   .ims-desc {
     font-size: 0.8rem;
+    min-width: 200px;
   }
 
   .ims-image {
     padding: 0.5rem;
+    max-width: calc(33.33%);
   }
-
 }
 
 /* Small Mobile */
