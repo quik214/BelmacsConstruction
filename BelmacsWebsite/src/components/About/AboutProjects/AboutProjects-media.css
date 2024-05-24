@@ -1,5 +1,9 @@
 /* Large Screens */
 @media (1700px <= width <= 2500px) {
+  .projects-header {
+    font-size: 2rem;
+  }
+
   .vision-header {
     font-size: 1.8rem;
     width: 8.6rem;
