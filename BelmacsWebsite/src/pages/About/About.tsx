@@ -3,6 +3,7 @@ import AboutCompany from "../../components/About/AboutCompany/AboutCompany";
 import AboutVM from "../../components/About/AboutVM/AboutVM";
 import "./About.css";
 import AboutProjects from "../../components/About/AboutProjects/AboutProjects";
+import AboutPeople from "../../components/About/AboutPeople/AboutPeople";
 import AboutIMS from "../../components/About/AboutIMS/AboutIMS";
 
 export default function () {
@@ -48,7 +49,8 @@ export default function () {
       </div>
       <div className="container">
         <AboutProjects />
-        <AboutIMS />
+        <AboutPeople />
+        <AboutIMS />  
       </div>
     </div>
   );
