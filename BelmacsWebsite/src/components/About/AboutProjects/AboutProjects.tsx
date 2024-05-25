@@ -1,38 +1,66 @@
+import Slider from "react-slick";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 import "./AboutProjects.css";
 import "./AboutProjects-media.css";
 
+import Asana from "../../../assets/About/AboutProjects/asana.png";
+import ClementiWoods from "../../../assets/About/AboutProjects/clementi-woods.jpg";
+import DesignOrchard from "../../../assets/About/AboutProjects/design-orchard.png";
+import FlamingoValley from "../../../assets/About/AboutProjects/flamingo.png";
+
 export default function AboutProjects() {
+  const data = [
+    {
+      img: Asana,
+      project: "The Asana",
+      location: "Tampines Street 86, Singapore",
+    },
+    {
+      img: DesignOrchard,
+      project: "Design Orchard",
+      location: "Orchard Road, Singapore",
+    },
+    {
+      img: ClementiWoods,
+      project: "Clementi Woods",
+      location: "West Coast Road, Singapore",
+    },
+    {
+      img: FlamingoValley,
+      project: "Flamingo Valley",
+      location: "Siglap Road, Singapore",
+    },
+  ];
+
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    autoplay: true,
+  };
+
   return (
     <div className="projects reveal">
       <p className="projects-header">Our Projects</p>
       <div className="flex-container">
-        <div className="card">
-          <img className="card-img" src="../buildings/tapestry.png" />
-          <div className="card-text-container">
-            <p className="card-header">The Tapestry</p>
-            <div className="card-desc-container">
-              <p className="card-desc">Private Condominium (861 Units)</p>
+        <Slider {...settings}>
+          {data.map((d) => (
+            <div className="card" key={d.project}>
+              <img className="card-img" src={d.img} />
+              <div className="card-text-container">
+                <p className="card-header">{d.project}</p>
+                <div className="card-desc-container">
+                  <p className="card-desc">{d.location}</p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="card">
-          <img className="card-img" src="../buildings/tapestry.png" />
-          <div className="card-text-container">
-            <p className="card-header">Grandeur Park Residences</p>
-            <div className="card-desc-container">
-              <p className="card-desc">Bedok South Avenue 3, Singapore</p>
-            </div>
-          </div>
-        </div>
-        <div className="card">
-          <img className="card-img" src="../buildings/tapestry.png" />
-          <div className="card-text-container">
-            <p className="card-header">The Asana</p>
-            <div className="card-desc-container">
-              <p className="card-desc">Queen’s Road, Singapore</p>
-            </div>
-          </div>
-        </div>
+          ))}
+        </Slider>
       </div>
     </div>
   );
