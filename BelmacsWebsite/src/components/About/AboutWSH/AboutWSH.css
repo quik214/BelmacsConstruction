@@ -1,0 +1,93 @@
+.wsh {
+  margin-top: 50px;
+}
+
+.wsh-text {
+  margin-bottom: 20px;
+}
+
+.wsh-header {
+  font-size: 1.8rem;
+  font-family: "Lato";
+  text-shadow: 0 0 0 rgb(112, 123, 177);
+  color: rgb(54, 79, 199);
+  margin-bottom: 0;
+}
+
+.wsh-card-container {
+  display: flex;
+  justify-content: space-between; /* Adjusts spacing between cards */
+}
+
+.wsh-card{
+  width: 33.33%;
+  position: relative;
+  text-align: center;
+}
+
+.wsh-card-background-one{
+  max-width: 100%;
+  flex: 1;
+  margin: auto;
+  background-color: #242D56;
+  height: 240px;
+  width: 100%;
+}
+
+.wsh-card-background-two{
+  max-width: 100%;
+  flex: 1;
+  margin: auto;
+  background-color: #364FC7;
+  height: 240px;
+  width: 100%;
+}
+
+.wsh-card-background-three{
+  max-width: 100%;
+  flex: 1;
+  margin: auto;
+  background-color: #597FF0 ;
+  height: 240px;
+  width: 100%;
+}
+
+.wsh-logo {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+
+  filter: drop-shadow(0px 1000px 0 white); /* this two lines is to transform the logo into white */
+  transform: translateY(-1000px);
+}
+
+.wsh-card-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  width: 70%; /* Adjust to fit within the card */
+}
+
+.wsh-card-title {
+  font-size: 20px;
+  font-weight: 500;
+  font-family: "Lato";
+  color: white;
+  align-self: center;
+}
+
+.wsh-card-desc {
+  font-size: 16px;
+  font-weight: 100;
+  font-family: "Montserrat";
+  color: rgb(231, 231, 231);
+}

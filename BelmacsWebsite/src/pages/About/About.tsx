@@ -5,6 +5,7 @@ import "./About.css";
 import AboutProjects from "../../components/About/AboutProjects/AboutProjects";
 import AboutPeople from "../../components/About/AboutPeople/AboutPeople";
 import AboutIMS from "../../components/About/AboutIMS/AboutIMS";
+import AboutWSH from "../../components/About/AboutWSH/AboutWSH";
 
 export default function () {
   const reveal = () => {
@@ -51,6 +52,7 @@ export default function () {
         <AboutProjects />
         <AboutPeople />
         <AboutIMS />  
+        <AboutWSH />
       </div>
     </div>
   );

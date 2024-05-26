@@ -1,0 +1,75 @@
+/* Large Screens */
+@media (1700px <= width <= 2500px) {
+    .wsh {
+      column-gap: 3.5rem;
+    }
+  
+    .wsh-header {
+      font-size: 2rem;
+    }
+
+  }
+  
+  /* Normal Screens - currently designed for this */
+  @media (max-width: 1700px) {
+  }
+  
+  /* Landscape Tablets */
+  @media (max-width: 1270px) {
+    .wsh-header {
+      font-size: 1.6rem;
+    }
+
+    .wsh-card-title {
+      font-size: 18px;
+    }
+
+    .wsh-card-desc {
+      font-size: 14px;
+    }
+  }
+  
+  /* Tablets */
+  @media (max-width: 1200px) {
+    .wsh {
+      flex-wrap: wrap;
+      row-gap: 40px;
+    }
+  
+    .wsh-header {
+      font-size: 1.6rem;
+    }
+
+    .wsh-card-title {
+      font-size: 16px;
+    }
+      
+    .wsh-card-desc {
+      font-size: 12px;
+    }
+  }
+  
+  /* Smaller Tablets */
+  @media (max-width: 750px) {
+  }
+  
+  /* Mobile */
+  @media (max-width: 550px) {
+    .wsh-header {
+      font-size: 1.2rem;
+    }
+
+    .wsh-card-title {
+      font-size: 14px;
+    }
+      
+    .wsh-card-desc {
+      font-size: 12px;
+    }
+  
+  }
+  
+  /* Small Mobile */
+  @media (max-width: 390px) {
+  }
+  
