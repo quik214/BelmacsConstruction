@@ -16,22 +16,22 @@ export default function AboutProjects() {
     {
       img: Asana,
       project: "The Asana",
-      location: "Tampines Street 86, Singapore",
+      location: "Tampines Street 86",
     },
     {
       img: DesignOrchard,
       project: "Design Orchard",
-      location: "Orchard Road, Singapore",
+      location: "Orchard Road",
     },
     {
       img: ClementiWoods,
       project: "Clementi Woods",
-      location: "West Coast Road, Singapore",
+      location: "West Coast Road",
     },
     {
       img: FlamingoValley,
       project: "Flamingo Valley",
-      location: "Siglap Road, Singapore",
+      location: "Siglap Road",
     },
   ];
 

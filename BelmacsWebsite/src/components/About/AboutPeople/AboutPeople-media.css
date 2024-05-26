@@ -26,11 +26,11 @@
   }
 
   .people-name {
-    font-size: 18px;
+    font-size: 1rem;
   }
 
   .people-role {
-    font-size: 12px;
+    font-size: 0.8rem;
   }
 }
 
@@ -59,11 +59,11 @@
   }
 
   .people-name {
-    font-size: 14px;
+    font-size: 1rem;
   }
 
   .people-role {
-    font-size: 10px;
+    font-size: 0.8rem;
   }
 }
 
@@ -72,6 +72,7 @@
   .people {
     flex-wrap: wrap;
     row-gap: 40px;
+    flex: 50%;
   }
 
   .people-header {
@@ -79,13 +80,12 @@
   }
 
   .people-card {
-    min-width: 145px;
-    max-width: 145px;
+    width: 185px;
   }
 
   .people-card img {
-    width: 145px;
-    height: 200px;
+    /* width: 145px;
+    height: 200px; */
   }
 }
 

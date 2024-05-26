@@ -20,6 +20,7 @@
   flex-wrap: wrap;
   gap: 20px; /* Adjust the gap value to the desired spacing */
   justify-content: space-between; /* Ensure proper spacing between cards */
+  margin-top: 20px;
 }
 
 .people-card {
@@ -31,7 +32,7 @@
 
 .people-card img {
   width: 265px; /* Ensure images fill the card width */
-  height: 370px; /* Maintain aspect ratio */
+  height: 340px; /* Maintain aspect ratio */
 }
 
 .people-card:hover {
@@ -46,6 +47,7 @@
   font-size: 20px;
   font-family: "Lato";
   padding-bottom: 10px;
+  
 }
 
 .people-role {
@@ -54,4 +56,3 @@
   font-weight: 100;
   color: #495057;
 }
-
