@@ -1,5 +1,8 @@
 /* Large Screens */
 @media (1700px <= width <= 2500px) {
+  .projects-header {
+    font-size: 2rem;
+  }
 }
 
 /* Normal Screens - currently designed for this */
@@ -8,6 +11,17 @@
 
 /* Landscape Tablets */
 @media (max-width: 1200px) {
+  .projects-header {
+    font-size: 1.6rem;
+  }
+
+  .card-header {
+    font-size: 1.1rem;
+  }
+
+  .card-desc {
+    font-size: 0.8rem;
+  }
 }
 
 /* Tablets */
@@ -16,12 +30,36 @@
 
 /* Smaller Tablets */
 @media (max-width: 700px) {
+  .card-header {
+    font-size: 0.9rem;
+  }
+
+  .card-desc {
+    font-size: 0.6rem;
+  }
+
+  .card-img {
+    height: 11rem;
+  }
 }
 
 /* Mobile */
 @media (max-width: 550px) {
+  .projects-header {
+    font-size: 1.2rem;
+  }
+
+  .card-img {
+    height: 10rem;
+  }
 }
 
 /* Small Mobile */
 @media (max-width: 390px) {
+  .card-header {
+    font-size: 0.8rem;
+  }
+
+  .card-desc {
+  }
 }

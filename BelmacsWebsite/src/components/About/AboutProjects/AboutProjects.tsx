@@ -42,6 +42,16 @@ export default function AboutProjects() {
     slidesToShow: 3,
     slidesToScroll: 3,
     autoplay: true,
+    arrows: false,
+
+    responsive: [
+      {
+        breakpoint: 900,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+    ],
   };
 
   return (

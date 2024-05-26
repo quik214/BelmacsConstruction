@@ -1,178 +1,164 @@
 /* Large Screens */
 @media (1700px <= width <= 2500px) {
-    .people {
-      column-gap: 3.5rem;
-    }
-  
-    .people-header {
-      font-size: 2rem;
-    }
-
-  }
-  
-  /* Normal Screens - currently designed for this */
-  @media (max-width: 1700px) {
-    
+  .people {
+    column-gap: 3.5rem;
   }
 
-  /* Bigger Tablets*/
-  @media (max-width: 1400px) {
-    .people-card {
-        min-width: 225px;
-        max-width: 225px;
-    }
-      
-    .people-card img {
-        width: 225px;
-        height: 300px; 
-    }
-
-    .people-name {
-        font-size: 18px;
-    }
-  
-    .people-role {
-        font-size: 12px
-    }
-  }  
-  
-  
-  /* Landscape Tablets */
-  @media (max-width: 1270px) {
-    .people-header {
-      font-size: 1.6rem;
-    }
-  
+  .people-header {
+    font-size: 2rem;
   }
-  
-  /* Tablets */
-  @media (max-width: 1200px) {
-    .people {
-      flex-wrap: wrap;
-      row-gap: 40px;
-    }
-  
-    .people-header {
-      font-size: 1.6rem;
-    }
+}
 
-    .people-card {
-        min-width: 185px;
-        max-width: 185px;
-    }
-      
-    .people-card img {
-        width: 185px;
-        height: 230px; 
-    }
+/* Normal Screens - currently designed for this */
+@media (max-width: 1700px) {
+}
 
-    .people-name {
-        font-size: 14px;
-    }
-  
-    .people-role {
-        font-size: 10px;
-    }
-  }
-  
-  /* Tablets */
-  @media (max-width: 1000px) {
-    .people {
-      flex-wrap: wrap;
-      row-gap: 40px;
-    }
-  
-    .people-header {
-      font-size: 1.6rem;
-    }
-
-    .people-card {
-        min-width: 145px;
-        max-width: 145px;
-    }
-      
-    .people-card img {
-        width: 145px;
-        height: 200px; 
-    }
-
-  }
-  
-  /* Smaller Tablets */
-  @media (max-width: 800px) {
-    .people-card {
-        min-width: 125px;
-        max-width: 125px;
-      }
-    
-      .people-card img {
-        width: 125px;
-        height: 170px;
-      }
-
+/* Bigger Tablets*/
+@media (max-width: 1400px) {
+  .people-card {
+    min-width: 225px;
+    max-width: 225px;
   }
 
-  @media (max-width: 700px) {
-    .people-card {
-      min-width: 115px;
-      max-width: 115px;
-    }
-  
-    .people-card img {
-      width: 115px;
-      height: 160px;
-    }
-  }  
-
-  @media (max-width: 650px) {
-    .people-card {
-      min-width: 105px;
-      max-width: 105px;
-    }
-    
-    .people-card img {
-      width: 105px;
-      height: 150px;
-    }
-  }  
-
-  @media (max-width: 600px) {
-    .people-card {
-      min-width: 150px;
-      max-width: 150px;
-    }
-      
-    .people-card img {
-        width: 150px;
-        height: 200px; 
-    }
-    
-    .people-name {
-        font-size: 12px;
-    }
-      
-  }  
-
-
-  /* Mobile */
-  @media (max-width: 550px) {
-    .people-header {
-      font-size: 1.2rem;
-    }
-
-    .people-card {
-      min-width: 135px;
-      max-width: 135px;
-    }
-    
-    .people-card img {
-      width: 135px;
-      height: 170px; 
-    }
-
+  .people-card img {
+    width: 225px;
+    height: 300px;
   }
-  
-  /* Small Mobile */
-  @media (max-width: 390px) {
+
+  .people-name {
+    font-size: 18px;
   }
-  
+
+  .people-role {
+    font-size: 12px;
+  }
+}
+
+/* Landscape Tablets */
+@media (max-width: 1200px) {
+  .people-header {
+    font-size: 1.6rem;
+  }
+
+  .people {
+    row-gap: 40px;
+  }
+
+  .people-header {
+    font-size: 1.6rem;
+  }
+
+  .people-card {
+    min-width: 185px;
+    max-width: 185px;
+  }
+
+  .people-card img {
+    width: 185px;
+    height: 230px;
+  }
+
+  .people-name {
+    font-size: 14px;
+  }
+
+  .people-role {
+    font-size: 10px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 1000px) {
+  .people {
+    flex-wrap: wrap;
+    row-gap: 40px;
+  }
+
+  .people-header {
+    font-size: 1.6rem;
+  }
+
+  .people-card {
+    min-width: 145px;
+    max-width: 145px;
+  }
+
+  .people-card img {
+    width: 145px;
+    height: 200px;
+  }
+}
+
+/* Smaller Tablets */
+@media (max-width: 800px) {
+  .people-card {
+    min-width: 125px;
+    max-width: 125px;
+  }
+
+  .people-card img {
+    width: 125px;
+    height: 170px;
+  }
+}
+
+@media (max-width: 700px) {
+  .people-card {
+    min-width: 115px;
+    max-width: 115px;
+  }
+
+  .people-card img {
+    width: 115px;
+    height: 160px;
+  }
+}
+
+@media (max-width: 650px) {
+  .people-card {
+    min-width: 105px;
+    max-width: 105px;
+  }
+
+  .people-card img {
+    width: 105px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 600px) {
+  .people-card {
+    min-width: 150px;
+    max-width: 150px;
+  }
+
+  .people-card img {
+    width: 150px;
+    height: 200px;
+  }
+
+  .people-name {
+    font-size: 12px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 550px) {
+  .people-header {
+    font-size: 1.2rem;
+  }
+
+  .people-card {
+    min-width: 135px;
+    max-width: 135px;
+  }
+
+  .people-card img {
+    width: 135px;
+    height: 170px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 390px) {
+}
