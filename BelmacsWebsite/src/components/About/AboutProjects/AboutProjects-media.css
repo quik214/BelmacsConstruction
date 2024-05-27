@@ -3,6 +3,10 @@
   .projects-header {
     font-size: 2rem;
   }
+
+  .card-img {
+    height: 14rem;
+  }
 }
 
 /* Normal Screens - currently designed for this */
@@ -26,7 +30,6 @@
 
 /* Tablets */
 @media (max-width: 900px) {
-
   .flex-container {
     width: 102%;
   }
@@ -62,7 +65,6 @@
 
 /* Mobile */
 @media (max-width: 550px) {
-
   .flex-container {
     width: 104%;
   }

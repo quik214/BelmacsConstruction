@@ -2,7 +2,7 @@ import "../../../assets/fonts.css";
 import "./AboutCompany.css";
 import "./AboutCompany-media.css";
 
-import AboutCompanyImage from "../../../assets/About/about-company.jpg";
+import AboutCompanyImage from "../../../assets/About/AboutCompany/about-company.jpg";
 
 export default function TheCompany() {
   return (

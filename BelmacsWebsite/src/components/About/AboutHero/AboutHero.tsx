@@ -1,6 +1,6 @@
 import "../../../assets/fonts.css";
 
-import AboutHeroVideo from "../../../assets/About/about-hero.mp4";
+import AboutHeroVideo from "../../../assets/About/AboutHero/about-hero.mp4";
 
 import "./AboutHero.css";
 import "./AboutHero-media.css";

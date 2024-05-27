@@ -1,8 +1,8 @@
 import "./AboutVM.css";
 import "./AboutVM-media.css";
 
-import VisionImage from "../../../assets/About/about-vision.jpg";
-import MissionImage from "../../../assets/About/about-mission.jpg";
+import VisionImage from "../../../assets/About/AboutVM/about-vision.jpg";
+import MissionImage from "../../../assets/About/AboutVM/about-mission.jpg";
 
 export default function AboutVM() {
   return (

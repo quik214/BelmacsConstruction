@@ -28,8 +28,8 @@
 }
 
 .people-card img {
-  width: 265px; /* Ensure images fill the card width */
-  height: 340px; /* Maintain aspect ratio */
+  width: 255px; /* Ensure images fill the card width */
+  height: 330px; /* Maintain aspect ratio */
 }
 
 .people-card:hover {

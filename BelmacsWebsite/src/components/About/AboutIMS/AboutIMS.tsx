@@ -2,9 +2,9 @@ import "../../../assets/fonts.css";
 import "./AboutIMS.css";
 import "./AboutIMS-media.css";
 
-import AboutImsImageOne from "../../../assets/About/about-ims-one.png";
-import AboutImsImageThree from "../../../assets/About/about-ims-three.png";
-import AboutImsImageFive from "../../../assets/About/about-ims-five.png";
+import AboutImsImageOne from "../../../assets/About/AboutIMS/about-ims-one.png";
+import AboutImsImageThree from "../../../assets/About/AboutIMS/about-ims-three.png";
+import AboutImsImageFive from "../../../assets/About/AboutIMS/about-ims-five.png";
 
 export default function AboutIMS() {
   return (
