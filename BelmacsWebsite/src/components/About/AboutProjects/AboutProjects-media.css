@@ -52,6 +52,11 @@
   .card-img {
     height: 10rem;
   }
+
+  .card-text-container {
+    padding: 0.6rem 0.6rem;
+    margin-left: 5px;
+  }
 }
 
 /* Small Mobile */
