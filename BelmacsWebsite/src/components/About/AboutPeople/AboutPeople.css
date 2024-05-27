@@ -4,9 +4,6 @@
   margin-top: 50px;
 }
 
-.people-text {
-  margin-bottom: 20px;
-}
 
 .people-header {
   font-size: 1.8rem;
@@ -20,14 +17,14 @@
   flex-wrap: wrap;
   gap: 20px; /* Adjust the gap value to the desired spacing */
   justify-content: space-between; /* Ensure proper spacing between cards */
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .people-card {
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.3s ease;
-  max-width: 265px;
+  /* max-width: 265px; */
 }
 
 .people-card img {
@@ -40,14 +37,14 @@
 }
 
 .people-card-info {
-  padding: 15px;
+  padding: 12.5px;
+  padding-left: 15px;
 }
 
 .people-name {
   font-size: 20px;
   font-family: "Lato";
   padding-bottom: 10px;
-  
 }
 
 .people-role {

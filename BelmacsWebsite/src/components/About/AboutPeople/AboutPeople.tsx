@@ -10,9 +10,7 @@ import AboutPeopleCHAU from "../../../assets/About/AboutPeople/CHAU-Yong-Foo.jpg
 export default function AboutPeople() {
   return (
     <div className="people reveal">
-      <div className="people-text">
-        <p className="people-header">Our People</p>
-      </div>
+      <p className="people-header">Our People</p>
       <div className="people-card-container">
         <div className="people-card">
           <img src={AboutPeopleCHIN} />
