@@ -5,7 +5,7 @@ import "./AboutBizSafe-media.css";
 import ConstructionWorker from "../../../assets/About/AboutBizSafe/construction-worker.jpg";
 import BizSafeLogo from "../../../assets/About/AboutBizSafe/bizsafe.png";
 
-export default function TheCompany() {
+export default function AboutBizSafe() {
     return (
         <div className="bizsafe reveal">
             <div className="bizsafe-container">
@@ -18,14 +18,12 @@ export default function TheCompany() {
                     communication, systematic identification, assessment and control
                     of hazards/procedures.
                     </p>
-
                     <p className="bizsafe-text">
                     We are committed and will develop security programmes to include
                     terrorism protection. We will also work together with our clients,
                     fellow consultants, contractors and suppliers to embrace the
                     SGSecure movement.
                     </p>
-
                     <img className="bizsafe-logo" src={BizSafeLogo} />
                 </div>
             </div>
