@@ -28,11 +28,13 @@ export default function ProjectsCategory() {
         <div className="grid-item commercial">
             <div className="overlay">Commercial</div>
         </div>
-        <div className="grid-item existing-building-retrofit">
-            <div className="overlay">Existing Building Retrofit</div>
-        </div>
+
         <div className="grid-item infrastructure">
             <div className="overlay">Infrastructure</div>
+        </div>
+
+        <div className="grid-item existing-building-retrofit">
+            <div className="overlay">Existing Building Retrofit</div>
         </div>
         <div className="grid-item institutional">
             <div className="overlay">Institutional</div>
