@@ -1,0 +1,123 @@
+.footer {
+  height: 150px;
+  background-color: #242d56;
+  margin-top: 50px;
+}
+
+.footer-ctr {
+  width: 90%;
+  margin: auto;
+  padding: 20px;
+
+  display: flex;
+}
+
+/* Footer Left */
+
+.footer-left {
+
+}
+
+.belmacs-logo {
+  height: 60px;
+  width: 210px;
+}
+
+.copy-text {
+  color: white;
+  font-family: "Lato";
+  font-size: 1rem;
+  margin-top: 15px;
+}
+
+/* Footer Center Right */
+.footer-center-right {
+    display: flex;
+}
+
+/* Footer Center */
+.footer-center {
+  margin-left: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-text {
+  color: white;
+  font-family: "Lato";
+  font-size: 1.1rem;
+}
+
+/* Phone */
+.phone {
+  display: flex;
+  align-items: center;
+  margin-top: 17.5px;
+  column-gap: 10px;
+}
+
+.phone-icon {
+  color: white;
+  height: 26px;
+  width: 26px;
+}
+
+.phone-number {
+  color: white;
+  font-size: 1rem;
+  font-family: "Lato";
+  text-decoration: none;
+}
+
+/* Mail */
+
+.mail {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  margin-top: 10px;
+}
+
+.mail-icon {
+  color: white;
+  height: 26px;
+  width: 26px;
+}
+
+.mail-email {
+  color: white;
+  font-size: 1rem;
+  font-family: "Lato";
+  text-decoration: none;
+}
+
+/* Footer Right */
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  margin-left: 60px;
+}
+
+.address-text {
+  color: white;
+  font-family: "Lato";
+  font-size: 1.1rem;
+}
+
+/* Map */
+.map {
+  display: flex;
+  column-gap: 10px;
+  margin-top: 17.5px;
+}
+
+.map-icon {
+  height: 26px;
+  width: 26px;
+}
+
+.map-address {
+  color: white;
+  font-family: "Lato";
+  font-size: 1rem;
+}

@@ -1,0 +1,228 @@
+/* Large Screens */
+@media (1700px <= width <= 2500px) {
+}
+
+/* Normal Screens - currently designed for this */
+@media (max-width: 1700px) {
+}
+
+/* Landscape Tablets */
+@media (max-width: 1100px) {
+  /* Footer Left */
+
+  .belmacs-logo {
+    height: 55px;
+    width: 200px;
+  }
+
+  .copy-text {
+    font-size: 0.9rem;
+  }
+
+  /* Footer Center */
+  .footer-center {
+    margin-left: 60px;
+  }
+
+  .contact-text {
+    font-size: 1rem;
+  }
+
+  .phone-icon {
+    height: 24px;
+    width: 24px;
+  }
+
+  .phone-number {
+    font-size: 0.9rem;
+  }
+
+  .mail-icon {
+    height: 24px;
+    width: 24px;
+  }
+
+  .mail-email {
+    font-size: 0.9rem;
+  }
+
+  /* Footer Right */
+  .address-text {
+    font-size: 1rem;
+  }
+
+  .map-icon {
+    height: 24px;
+    width: 24px;
+  }
+  .map-address {
+    font-size: 0.9rem;
+  }
+}
+
+/* Tablets */
+@media (max-width: 1000px) {
+}
+
+/* Smaller Tablets */
+@media (max-width: 885px) {
+  /* Footer Left */
+
+  .belmacs-logo {
+    height: 50px;
+    width: 190px;
+  }
+
+  .copy-text {
+    font-size: 0.8rem;
+  }
+
+  /* Footer Center */
+  .footer-center {
+    margin-left: 20px;
+  }
+
+  .contact-text {
+    font-size: 0.9rem;
+  }
+
+  .phone-icon {
+    height: 22px;
+    width: 22px;
+  }
+
+  .phone-number {
+    font-size: 0.8rem;
+  }
+
+  .mail-icon {
+    height: 22px;
+    width: 22px;
+  }
+
+  .mail-email {
+    font-size: 0.8rem;
+  }
+
+  /* Footer Right */
+
+  .footer-right {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+  }
+
+  .address-text {
+    font-size: 0.9rem;
+  }
+
+  .map-icon {
+    height: 22px;
+    width: 22px;
+  }
+  .map-address {
+    font-size: 0.8rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+  .footer-ctr {
+    flex-wrap: wrap;
+  }
+
+  /* Footer Left */
+  .footer-left {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+  }
+
+  .belmacs-logo {
+    justify-self: center;
+    align-self: center;
+  }
+
+  .footer {
+    height: auto;
+  }
+
+  /* Footer Center Right */
+  .footer-center-right {
+    margin: auto;
+    margin-top: 30px;
+    column-gap: 60px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 430px) {
+  /* Footer Center Right */
+  .footer-center-right {
+    column-gap: 0px;
+  }
+}
+
+/* Smaller Mobile */
+@media (max-width: 370px) {
+  .copy-text {
+    font-size: 0.8rem;
+  }
+
+  /* Footer Center Right */
+  .footer-center-right {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 20px;
+    margin-top: 20px;
+  }
+
+  /* Footer Center */
+  .footer-center {
+    margin-left: 0px;
+    margin-top: 10px;
+  }
+
+  .contact-text {
+    font-size: 1rem;
+  }
+
+  .phone-icon {
+    height: 24px;
+    width: 24px;
+  }
+
+  .phone-number {
+    font-size: 0.9rem;
+  }
+
+  .mail-icon {
+    height: 24px;
+    width: 24px;
+  }
+
+  .mail-email {
+    font-size: 0.9rem;
+  }
+
+  /* Footer Right */
+
+  .footer-right {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+    margin-top: 10px;
+  }
+
+  .address-text {
+    font-size: 1rem;
+  }
+
+  .map-icon {
+    height: 24px;
+    width: 24px;
+  }
+  .map-address {
+    font-size: 0.9rem;
+  }
+}
