@@ -2,7 +2,7 @@
   display: flex;
   margin-top: 3rem;
   width: 100%;
-  height: 517px;
+  height: 450px;
   background-color: #0a0c0b;
   align-items: center;
   column-gap: 2rem;
@@ -28,14 +28,14 @@
 
 .bizsafe-image {
   max-width: auto;
-  height: 400px;
+  height: 380px;
   
 }
 
 .bizsafe-text {
   font-family: "Montserrat";
   line-height: 2.1875rem;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   color: #ffffff;
 }
 
