@@ -1,0 +1,38 @@
+/* For on-scroll animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(150px);
+  transition: all 1s ease;
+}
+
+.reveal.active {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.pdpa {
+  margin-top: 50px;
+}
+
+.pdpa-header {
+  font-size: 1.8rem;
+  font-family: "Lato";
+  text-shadow: 0 0 0 rgb(112, 123, 177);
+  color: rgb(54, 79, 199);
+}
+
+.pdpa-text {
+  margin-top: 20px;
+}
+
+.pdpa-text p {
+  font-size: 1.4rem;
+  font-family: "Lato";
+}
+
+.pdpa-text p:nth-child(2),
+.pdpa-text p:nth-child(3),
+.pdpa-text p:nth-child(4),
+.pdpa-text p:nth-child(5) {
+  margin-top: 30px;
+}

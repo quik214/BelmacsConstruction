@@ -1,0 +1,51 @@
+/* Large Screens */
+@media (1700px <= width <= 2500px) {
+  .pdpa-header {
+    font-size: 2rem;
+  }
+
+  .pdpa-text p {
+    font-size: 1.6rem;
+  }
+}
+
+/* Normal Screens - currently designed for this */
+@media (max-width: 1700px) {
+}
+
+/* Landscape Tablets */
+@media (max-width: 1200px) {
+  .pdpa-header {
+    font-size: 1.6rem;
+  }
+
+  .pdpa-text p {
+    font-size: 1.2rem;
+  }
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+}
+
+/* Smaller Tablets */
+@media (max-width: 700px) {
+  .pdpa-text p {
+    font-size: 1.15rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 550px) {
+  .pdpa-header {
+    font-size: 1.2rem;
+  }
+
+  .pdpa-text p {
+    font-size: 1rem;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 390px) {
+}

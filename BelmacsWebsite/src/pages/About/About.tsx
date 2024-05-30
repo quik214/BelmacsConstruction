@@ -7,6 +7,7 @@ import AboutPeople from "../../components/About/AboutPeople/AboutPeople";
 import AboutIMS from "../../components/About/AboutIMS/AboutIMS";
 import AboutWSH from "../../components/About/AboutWSH/AboutWSH";
 import AboutBizSafe from "../../components/About/AboutBizSafe/AboutBizSafe";
+import AboutPDPA from "../../components/About/AboutPDPA/AboutPDPA";
 
 export default function () {
   const reveal = () => {
@@ -49,6 +50,7 @@ export default function () {
       <div className="out-container">
         <AboutVM />
       </div>
+
       <div className="container">
         <AboutProjects />
         <AboutPeople />
@@ -57,6 +59,10 @@ export default function () {
       </div>
       <div className="out-container">
         <AboutBizSafe />
+      </div>
+
+      <div className="container">
+        <AboutPDPA />
       </div>
     </div>
   );
