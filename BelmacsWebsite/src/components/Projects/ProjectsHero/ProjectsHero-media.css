@@ -13,7 +13,7 @@
 /* Landscape Tablets */
 @media (max-width: 1200px) {
   .hero-image {
-    height: 60vh;
+    height: 70vh;
   }
 
   .hero-text {
@@ -25,7 +25,7 @@
 /* Tablets */
 @media (max-width: 900px) {
   .hero-image {
-    height: 50vh;
+    height: 65vh;
   }
 
   .hero-text {
@@ -36,6 +36,10 @@
 
 /* Smaller Tablets */
 @media (max-width: 700px) {
+  .hero-image {
+    height: 70vh;
+  }
+
   .hero-text {
     left: 25%;
     font-size: 1.9rem;
@@ -53,7 +57,7 @@
 /* Small Mobile */
 @media (max-width: 460px) {
   .hero-image {
-    height: 45vh;
+    height: 55vh;
   }
 
   .hero-text {
