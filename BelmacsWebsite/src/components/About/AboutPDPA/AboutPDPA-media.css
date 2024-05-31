@@ -1,11 +1,11 @@
 /* Large Screens */
 @media (1700px <= width <= 2500px) {
   .pdpa-header {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   .pdpa-text p {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 }
 

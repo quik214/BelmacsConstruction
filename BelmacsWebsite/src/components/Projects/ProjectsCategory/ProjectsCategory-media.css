@@ -12,42 +12,66 @@
 
 /* Tablets */
 @media (max-width: 1000px) {
-
-    .grid-container {
-        margin-top: 20px;
-      display: grid;
-      grid-template-columns: repeat(4, 2fr);
-      grid-template-rows: repeat(2, 2fr);
+  .grid-container {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2);
+    grid-template-rows: repeat(4);
   }
 
+  .residential {
+    grid-row: 1 / span 2;
+    grid-column: 1;
+    background-image: url("../../../assets/Projects/Residential.png");
+  }
 
-    .residential {
-        grid-row: span 2;
-        grid-column: span 2;
-    }
-    
-    .commercial {
-        grid-column: span 2;
-    }
-    
-    .existing-building-retrofit {
-        grid-row: span 2;
-        grid-column: span 2;
-    }
-    
-    .infrastructure {
-        grid-column: span 2;
+  .commercial {
+    grid-row: 1;
+    grid-column: 2;
+    background-image: url("../../../assets/Projects/Commercial.png");
+  }
 
-    }
-    
-    .institutional {
-        grid-column: span 2;
-    }
-    
-    .industrial {
-        grid-column: span 2;
-    }
-    
+  .institutional {
+    grid-row: 2;
+    grid-column: 2;
+    background-image: url("../../../assets/Projects/Institutional.png");
+  }
+
+  /* .existing-building-retrofit {
+    grid-row: 3 / span 2;
+    grid-column: 2;
+    background-image: url("../../../assets/Projects/Existing-Building-Retrofit.png");
+  }
+
+  .infrastructure {
+    grid-row: 3;
+    grid-column: 1;
+    background-image: url("../../../assets/Projects/Infrastructure.png");
+  }
+
+  .industrial {
+    grid-row: 4;
+    grid-column: 1;
+    background-image: url("../../../assets/Projects/Industrial.png");
+  } */
+
+  .existing-building-retrofit {
+    grid-row: 3 / span 2;
+    grid-column: 1;
+    background-image: url("../../../assets/Projects/Existing-Building-Retrofit.png");
+  }
+
+  .infrastructure {
+    grid-row: 3;
+    grid-column: 2;
+    background-image: url("../../../assets/Projects/Infrastructure.png");
+  }
+
+  .industrial {
+    grid-row: 4;
+    grid-column: 2;
+    background-image: url("../../../assets/Projects/Industrial.png");
+  }
 }
 
 /* Smaller Tablets */
@@ -55,7 +79,7 @@
 }
 
 /* Mobile */
-@media (max-width: 550px) { 
+@media (max-width: 550px) {
 }
 
 /* Small Mobile */
