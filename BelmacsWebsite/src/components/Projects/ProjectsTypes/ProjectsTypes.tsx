@@ -1,6 +1,17 @@
 import "../../../assets/fonts.css";
 import "./ProjectsTypes.css";
 import "./ProjectsTypes-media.css";
+// Link (for working with react-router)
+import { Link } from "react-router-dom";
+
+const category = [
+  "residential",
+  "commercial",
+  "infrastructure",
+  "existingBuildingRetrofit",
+  "institutional",
+  "industrial",
+];
 
 export default function ProjectsTypes() {
   return (
@@ -19,25 +30,34 @@ export default function ProjectsTypes() {
       </p>
 
       <div className="grid-container">
-        <div className="grid-item residential">
+        <Link to={`/projects/${category[0]}`} className="grid-item residential">
           <div className="overlay">Residential</div>
-        </div>
-        <div className="grid-item commercial">
+        </Link>
+        <Link to={`/projects/${category[1]}`} className="grid-item commercial">
           <div className="overlay">Commercial</div>
-        </div>
-        <div className="grid-item institutional">
-          <div className="overlay">Institutional</div>
-        </div>
-
-        <div className="grid-item existing-building-retrofit">
-          <div className="overlay">Existing Building Retrofit</div>
-        </div>
-        <div className="grid-item infrastructure">
+        </Link>
+        <Link
+          to={`/projects/${category[2]}`}
+          className="grid-item infrastructure"
+        >
           <div className="overlay">Infrastructure</div>
-        </div>
-        <div className="grid-item industrial">
+        </Link>
+
+        <Link
+          to={`/projects/${category[3]}`}
+          className="grid-item existing-building-retrofit"
+        >
+          <div className="overlay">Existing Building Retrofit</div>
+        </Link>
+        <Link
+          to={`/projects/${category[4]}`}
+          className="grid-item institutional"
+        >
+          <div className="overlay">Institutional</div>
+        </Link>
+        <Link to={`/projects/${category[5]}`} className="grid-item industrial">
           <div className="overlay">Industrial</div>
-        </div>
+        </Link>
       </div>
     </div>
   );
