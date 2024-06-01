@@ -43,6 +43,7 @@
 
   .nav-sidebar-icon {
     display: block;
+    margin-right: -30px;
   }
 }
 
