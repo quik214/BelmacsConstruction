@@ -1,19 +1,54 @@
 import "../../../assets/fonts.css";
 import "./ProjectsTypes.css";
 import "./ProjectsTypes-media.css";
-// Link (for working with react-router)
-import { Link } from "react-router-dom";
 
-const category = [
-  "residential",
-  "commercial",
-  "infrastructure",
-  "existingBuildingRetrofit",
-  "institutional",
-  "industrial",
+import { useNavigate } from "react-router-dom";
+
+export type projectTypeItem = {
+  title?: string;
+  image?: string;
+  path?: string;
+};
+export const projectTypes: projectTypeItem[] = [
+  {
+    title: "Residential",
+    image: "",
+    path: "residential",
+  },
+  {
+    title: "Commercial",
+    image: "",
+    path: "commercial",
+  },
+  {
+    title: "Infrastructure",
+    image: "",
+    path: "infrastructure",
+  },
+  {
+    title: "Existing Building Retrofit",
+    image: "",
+    path: "existingBuildingRetrofit",
+  },
+  {
+    title: "Institutional",
+    image: "",
+    path: "institutional",
+  },
+  {
+    title: "Industrial",
+    image: "",
+    path: "industrial",
+  },
 ];
 
 export default function ProjectsTypes() {
+  const navigate = useNavigate();
+
+  const handleClick = (project: projectTypeItem) => {
+    navigate(`/projects/${project.path}`, { state: { project } });
+  };
+
   return (
     <div className="category">
       <p className="category-header">Projects</p>
@@ -30,34 +65,18 @@ export default function ProjectsTypes() {
       </p>
 
       <div className="grid-container">
-        <Link to={`/projects/${category[0]}`} className="grid-item residential">
-          <div className="overlay">Residential</div>
-        </Link>
-        <Link to={`/projects/${category[1]}`} className="grid-item commercial">
-          <div className="overlay">Commercial</div>
-        </Link>
-        <Link
-          to={`/projects/${category[2]}`}
-          className="grid-item infrastructure"
-        >
-          <div className="overlay">Infrastructure</div>
-        </Link>
-
-        <Link
-          to={`/projects/${category[3]}`}
-          className="grid-item existing-building-retrofit"
-        >
-          <div className="overlay">Existing Building Retrofit</div>
-        </Link>
-        <Link
-          to={`/projects/${category[4]}`}
-          className="grid-item institutional"
-        >
-          <div className="overlay">Institutional</div>
-        </Link>
-        <Link to={`/projects/${category[5]}`} className="grid-item industrial">
-          <div className="overlay">Industrial</div>
-        </Link>
+        {projectTypes.map((project) => (
+          <div
+            key={project.title} // Assuming title is unique for each category
+            className={`grid-item ${project.title
+              ?.toLowerCase()
+              .replace(/ /g, "-")}`}
+            onClick={() => handleClick(project)}
+            style={{ cursor: "pointer" }}
+          >
+            <div className="overlay">{project.title}</div>
+          </div>
+        ))}
       </div>
     </div>
   );

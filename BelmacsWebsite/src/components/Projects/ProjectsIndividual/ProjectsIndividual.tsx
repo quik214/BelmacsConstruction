@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../../firebase";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
 interface Project {
   id: string;
@@ -13,6 +13,9 @@ interface Project {
 const ProjectList: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const { category } = useParams<{ category: string }>(); // Adjust the parameter name if needed
+  const location = useLocation();
+  const { project } = location.state || {};
+  console.log(location.state);
 
   useEffect(() => {
     const fetchDataFromFirestore = async () => {
@@ -36,7 +39,7 @@ const ProjectList: React.FC = () => {
   }, [category]);
   return (
     <div className="projects">
-      <h1 className="header">Fetch Data</h1>
+      <h1 className="header">{project.title}</h1>
       <div>
         {projects.map((project) => (
           <div key={project.id}>
