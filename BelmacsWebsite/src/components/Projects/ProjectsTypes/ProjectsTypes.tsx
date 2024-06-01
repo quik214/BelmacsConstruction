@@ -4,6 +4,15 @@ import "./ProjectsTypes-media.css";
 
 import { useNavigate } from "react-router-dom";
 
+/* Hero Images to pass */
+/* Only Residential image is good, the rest needs to change */
+import ResidentialImage from "../../../assets/Projects/HeroImages/ResidentialHero.png";
+import CommercialImage from "../../../assets/Projects/Grid-Images/Commercial.png";
+import InstitutionalImage from "../../../assets/Projects/Grid-Images/Institutional.png";
+import ExisitingBuildingRetrofitImage from "../../../assets/Projects/Grid-Images/Existing-Building-Retrofit.png";
+import InfrastructureImage from "../../../assets/Projects/Grid-Images/Infrastructure.png";
+import IndustrialImage from "../../../assets/Projects/Grid-Images/Industrial.png";
+
 export type projectTypeItem = {
   title?: string;
   image?: string;
@@ -12,32 +21,32 @@ export type projectTypeItem = {
 export const projectTypes: projectTypeItem[] = [
   {
     title: "Residential",
-    image: "",
+    image: ResidentialImage,
     path: "residential",
   },
   {
     title: "Commercial",
-    image: "",
+    image: CommercialImage,
     path: "commercial",
   },
   {
     title: "Infrastructure",
-    image: "",
+    image: InfrastructureImage,
     path: "infrastructure",
   },
   {
     title: "Existing Building Retrofit",
-    image: "",
+    image: ExisitingBuildingRetrofitImage,
     path: "existingBuildingRetrofit",
   },
   {
     title: "Institutional",
-    image: "",
+    image: InstitutionalImage,
     path: "institutional",
   },
   {
     title: "Industrial",
-    image: "",
+    image: IndustrialImage,
     path: "industrial",
   },
 ];
@@ -46,7 +55,8 @@ export default function ProjectsTypes() {
   const navigate = useNavigate();
 
   const handleClick = (project: projectTypeItem) => {
-    navigate(`/projects/${project.path}`, { state: { project } });
+    navigate(`/projects/${project.path}`, { state: { paramData: project } });
+
   };
 
   return (
@@ -65,16 +75,16 @@ export default function ProjectsTypes() {
       </p>
 
       <div className="grid-container">
-        {projectTypes.map((project) => (
+        {projectTypes.map((paramData) => (
           <div
-            key={project.title} // Assuming title is unique for each category
-            className={`grid-item ${project.title
+            key={paramData.title} // Assuming title is unique for each category
+            className={`grid-item ${paramData.title
               ?.toLowerCase()
               .replace(/ /g, "-")}`}
-            onClick={() => handleClick(project)}
+            onClick={() => handleClick(paramData)}
             style={{ cursor: "pointer" }}
           >
-            <div className="overlay">{project.title}</div>
+            <div className="overlay">{paramData.title}</div>
           </div>
         ))}
       </div>

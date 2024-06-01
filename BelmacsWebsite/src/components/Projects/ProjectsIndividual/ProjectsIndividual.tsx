@@ -3,6 +3,8 @@ import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../../firebase";
 import { useParams, useLocation } from "react-router-dom";
 
+import ProjectsHero from "../ProjectsHero/ProjectsHero";
+
 interface Project {
   id: string;
   image: string;
@@ -12,16 +14,17 @@ interface Project {
 
 const ProjectList: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
-  const { category } = useParams<{ category: string }>(); // Adjust the parameter name if needed
+  const { category } = useParams<{ category: string }>();
   const location = useLocation();
-  const { project } = location.state || {};
-  console.log(location.state);
+  const { paramData } = location.state || {}; // Destructure paramData from location.state
 
   useEffect(() => {
     const fetchDataFromFirestore = async () => {
+      if (!category) return;
+
       try {
         const querySnapshot = await getDocs(
-          collection(db, category + "-projects")
+          collection(db, `${category}-projects`)
         );
         console.log(category + "-projects");
         const data: Project[] = [];
@@ -37,20 +40,22 @@ const ProjectList: React.FC = () => {
 
     fetchDataFromFirestore();
   }, [category]);
+
   return (
-    <div className="projects">
-      <h1 className="header">{project.title}</h1>
+    <div className="projects-individual">
+      <ProjectsHero imageUrl={paramData.image} heroText={paramData.title} />
       <div>
-        {projects.map((project) => (
-          <div key={project.id}>
-            <img src={project.image} alt={project.name} />
-            <p>{project.name}</p>
-            <p>{project.developer}</p>
+        {projects.map((projectItem) => (
+          <div key={projectItem.id}>
+            <img src={projectItem.image} alt={projectItem.name} />
+            <p>{projectItem.name}</p>
+            <p>{projectItem.developer}</p>
           </div>
         ))}
       </div>
     </div>
   );
 };
+
 
 export default ProjectList;
