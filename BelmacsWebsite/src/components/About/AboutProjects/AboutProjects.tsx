@@ -49,14 +49,14 @@ export default function AboutProjects() {
         breakpoint: 900,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1
+          slidesToScroll: 1,
         },
       },
       {
         breakpoint: 550,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
+          slidesToScroll: 1,
         },
       },
     ],

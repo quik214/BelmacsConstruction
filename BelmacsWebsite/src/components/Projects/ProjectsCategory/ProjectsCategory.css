@@ -1,105 +1,103 @@
 .category {
-    margin-top: 50px;
-  }
-  
-  .category-header {
-    font-size: 1.8rem;
-    font-family: "Lato";
-    text-shadow: 0 0 0 rgb(112, 123, 177);
-    color: rgb(54, 79, 199);
-  }
-  
-  .category-desc {
-    margin-top: 20px;
-    font-size: 1.5rem;
-    font-family: "Lato";
-    color: #495057;
-  }
-  
-  .grid-container {
-        margin-top: 20px;
-      display: grid;
-      grid-template-columns: repeat(4, 2fr);
-      grid-template-rows: repeat(2, 2fr);
-      gap: 20px;
-      width: 100%;
-      height: 100%;
-      box-sizing: border-box;
-  }
-  
-  .grid-item {
-      position: relative;
-      background-size: cover;
-      background-position: center;
-      border-radius: 8px;
-      overflow: hidden;
-  }
-  
-  .grid-item::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: inherit;
-      z-index: 1;
-      filter: brightness(70%);
-  }
-  
-  .grid-item::after {
-      content: "";
-      display: block;
-      padding-top: 100%;
-  }
-  
-  .grid-item .overlay {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      z-index: 2;
-      color: white;
-      font-size: 1.55rem;
-      font-family: "Lato";
-      font-weight: normal;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-      padding: 10px;
-  }
-  
-  .grid-item img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 0;
-  }
-  
-  .residential {
-      grid-row: span 2;
-      background-image: url('../../../assets/Projects/Residential.png');
-  }
-  
-  .commercial {
-      background-image: url('../../../assets/Projects/Commercial.png');
-  }
-  
-  .existing-building-retrofit {
-      grid-row: span 2;
-      background-image: url('../../../assets/Projects/Existing-Building-Retrofit.png');
-  }
-  
-  .infrastructure {
-      background-image: url('../../../assets/Projects/Infrastructure.png');
-  }
-  
-  .institutional {
-      background-image: url('../../../assets/Projects/Institutional.png');
-  }
-  
-  .industrial {
-      background-image: url('../../../assets/Projects/Industrial.png');
-  }
-  
-  
+  margin-top: 50px;
+}
+
+.category-header {
+  font-size: 1.8rem;
+  font-family: "Lato";
+  text-shadow: 0 0 0 rgb(112, 123, 177);
+  color: rgb(54, 79, 199);
+}
+
+.category-desc {
+  margin-top: 20px;
+  font-size: 1.5rem;
+  font-family: "Lato";
+  color: #495057;
+}
+
+.grid-container {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 2fr);
+  grid-template-rows: repeat(2, 2fr);
+  gap: 20px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.grid-item {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.grid-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  z-index: 1;
+  filter: brightness(70%);
+}
+
+.grid-item::after {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+
+.grid-item .overlay {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  color: white;
+  font-size: 1.55rem;
+  font-family: "Lato";
+  font-weight: normal;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+}
+
+.grid-item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.residential {
+  grid-row: span 2;
+  background-image: url("../../../assets/Projects/Residential.png");
+}
+
+.commercial {
+  background-image: url("../../../assets/Projects/Commercial.png");
+}
+
+.existing-building-retrofit {
+  grid-row: span 2;
+  background-image: url("../../../assets/Projects/Existing-Building-Retrofit.png");
+}
+
+.infrastructure {
+  background-image: url("../../../assets/Projects/Infrastructure.png");
+}
+
+.institutional {
+  background-image: url("../../../assets/Projects/Institutional.png");
+}
+
+.industrial {
+  background-image: url("../../../assets/Projects/Industrial.png");
+}
