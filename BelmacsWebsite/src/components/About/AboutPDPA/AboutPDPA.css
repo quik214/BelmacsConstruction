@@ -28,6 +28,7 @@
 .pdpa-text p {
   font-size: 1.4rem;
   font-family: "Lato";
+  text-align: justify;
 }
 
 .pdpa-text p:nth-child(2),

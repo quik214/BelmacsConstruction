@@ -1,4 +1,4 @@
-import ProjectsCategory from "../../components/Projects/ProjectsCategory/ProjectsCategory";
+import ProjectsTypes from "../../components/Projects/ProjectsTypes/ProjectsTypes";
 import ProjectsHero from "../../components/Projects/ProjectsHero/ProjectsHero";
 
 import Footer from "../../components/Footer/Footer"
@@ -8,7 +8,7 @@ export default function Projects() {
     <div>
       <ProjectsHero />
       <div className="container">
-        <ProjectsCategory />
+        <ProjectsTypes />
       </div>
 
       <Footer />

@@ -98,19 +98,18 @@
   .popup-content .popup-name {
     font-size: 1.3rem;
   }
-  
+
   .popup-content .popup-role {
     font-size: 1.1rem;
   }
-  
+
   .popup-content .popup-qualifications {
     font-size: 1rem;
   }
-  
+
   .popup-content .popup-description {
     font-size: 1rem;
   }
-
 }
 
 /* Smaller Tablets */
@@ -123,6 +122,7 @@
   .popup-content-header {
     flex-direction: column;
     align-items: center;
+    margin-bottom: 0px;
   }
   .popup-content img {
     max-width: 181px;
@@ -135,30 +135,28 @@
   .popup-content .popup-name {
     font-size: 1.3rem;
   }
-  
+
   .popup-content .popup-role {
     font-size: 1.1rem;
   }
-  
+
   .popup-content .popup-qualifications {
     font-size: 1rem;
   }
-  
+
   .popup-content .popup-description {
     font-size: 1rem;
+    margin-top: 5px;
   }
-  
 }
-
 
 /* Mobile */
 @media (max-width: 550px) {
-
   .people-card-info {
     padding-top: 7.5px;
     padding-left: 12.5px;
   }
-  
+
   .people-header {
     font-size: 1.2rem;
   }
@@ -184,12 +182,14 @@
   .popup-content {
     width: 70%;
   }
+
+  .popup-content .popup-qualifications {
+    font-size: 0.9rem;
+  }
 }
 
 /* Small Mobile */
 @media (max-width: 400px) {
-
-
   .people-card {
     min-width: 130px;
     max-width: 130px;
@@ -207,11 +207,14 @@
   .people-role {
     font-size: 0.6rem;
   }
+
+  .popup-content .popup-description {
+    font-size: 0.9rem;
+  }
 }
 
 /* Smaller Mobile */
 @media (max-width: 350px) {
-
   .people-card {
     min-width: 110px;
     max-width: 1100px;

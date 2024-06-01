@@ -31,7 +31,8 @@ const People: React.FC = () => {
       \n He started his career in 1995 as an engineer in Beca Carter Hollings & Ferner and had worked on numerous major retrofitting projects including Paragon Shopping Centre, National Blood Centre, Orchard Hotel, Royal Holiday Inn and Amenity Block. He had also completed Saigon Metropolitan, a prestigious office tower in Ho Chi Minh City; Laguna 88 condominium and The Loft at Nassim Road condominium.
       \n In 2001, Yeu Tong left to join Meinhardt and had worked on numerous mega-size projects. He was made a Director of the company in 2010.
       \n The most notable project completed by him is Resorts World at Sentosa which is the first Integrated Resorts in Singapore. He was the Deputy Project Director who started the project from planning stage in 2005 till full completion of the Resorts in 2012. Other significant projects handled and completed by him include District Cooling Plant at Sentosa which equipped the largest capacity chiller in Singapore; One Raffles Quay which is one of the tallest office building in Singapore; Marina Bay Suite which is a prestigious super high-rise condominium in urban area; Circle Line and Downtown Line MRT stations; SIM University; Yale-NUS College; MGM Grand Hotel in Vietnam which is the first MGM flagship casino resorts in South-East Asia; Burj-Dubai Mall Hotel in Dubai; Dubai Marina Mall mixed development consists of retails, Hotel and Service Apartment in Dubai; Capital Plaza Mixed Development in Abu Dhabiwhich was the tallest building in there at that time.
-      \n Yeu Tong joined BELMACS in August 2013 as Director.`,
+      \n Yeu Tong joined BELMACS in August 2013 as Director.
+      \n He was promoted to Managing Director in 2020.`,
     },
     {
       img: AboutPeopleTAN,
@@ -47,7 +48,7 @@ const People: React.FC = () => {
       img: AboutPeopleWONG,
       name: "Er. Wong Yit Hong",
       role: "Director",
-      qualifications: "Bachelors in Mechanical Engineering \n Professional Engineer \n Member, Institution of Engineers, Singapore (MIES) \n Member of the American Society of Heating, Refrigerating and Air-Conditioning Engineers (MASHRAE) \n Design for Safety Coordinator (DfSC)",
+      qualifications: "- Bachelors in Mechanical Engineering \n - Professional Engineer \n - Member, Institution of Engineers, Singapore (MIES) \n - Member of the American Society of Heating, Refrigerating and Air-Conditioning Engineers (MASHRAE) \n - Design for Safety Coordinator (DfSC)",
       description: `Er. Benny WONG received his Bachelor of Engineering (Mechanical) from Nanyang Technological University in 1992. He is a registered Professional Engineer since 2013 and a registered Specialist Professional Engineer in Lift & Escalator.
       \n Benny has more than 22 years of experience in the Building and Construction Industry both in Singapore and Overseas. He started his engineering career with Wormald Fire Systems as a Design / Project engineer working on projects including SIA Hangar 2, CAAS Cargo Agents Buildings and BP Tower.
       \n In 1994, Benny joined Bescon Consulting Engineers Pte of which he designed and commissioned buildings ranging from condominiums, mixed developments, IT-related product manufacturing plant and also a Class 1 Aircraft Hangar Complex with Annex / Lounge Building in Brunei.
