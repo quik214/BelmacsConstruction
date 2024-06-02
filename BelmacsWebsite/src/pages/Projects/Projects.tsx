@@ -1,7 +1,7 @@
 import ProjectsTypes from "../../components/Projects/ProjectsTypes/ProjectsTypes";
 import Hero from "../../components/Hero/Hero";
 
-import DefaultHeroImage from "../../assets/Projects/Hero.jpg";
+import DefaultHeroImage from "../../assets/Hero/Hero.jpg";
 
 export default function Projects() {
   return (

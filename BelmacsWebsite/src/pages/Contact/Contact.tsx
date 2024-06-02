@@ -1,9 +1,11 @@
+import Hero from "../../components/Hero/Hero";
 
+import ContactUsHeroImage from "../../assets/Hero/ContactUs.jpg";
 
 export default function () {
   return (
     <div>
-      <h1>Contact</h1>
+      <Hero imageUrl={ContactUsHeroImage} heroText="Contact Us" />
     </div>
   );
 }

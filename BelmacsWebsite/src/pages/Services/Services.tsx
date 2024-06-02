@@ -1,8 +1,11 @@
+import Hero from "../../components/Hero/Hero";
+
+import ServicesHeroImage from "../../assets/Hero/Services.jpg";
 
 export default function Services() {
   return (
     <div>
-      <h1>Services</h1>
+      <Hero imageUrl={ServicesHeroImage} heroText="Our Services" />
     </div>
   );
 }
