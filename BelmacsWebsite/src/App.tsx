@@ -13,6 +13,8 @@ import ProjectIndividual from "./components/Projects/ProjectsIndividual/Projects
 // import navbar
 import Navbar from "./components/Navbar/Navbar";
 
+import Footer from "./components/Footer/Footer";
+
 function App() {
   return (
     <>
@@ -26,6 +28,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>
+      <Footer />
     </>
   );
 }

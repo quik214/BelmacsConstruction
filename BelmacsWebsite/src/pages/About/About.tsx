@@ -1,15 +1,13 @@
-import AboutHero from "../../components/About/AboutHero/AboutHero"
-import AboutCompany from "../../components/About/AboutCompany/AboutCompany"
-import AboutVM from "../../components/About/AboutVM/AboutVM"
+import AboutHero from "../../components/About/AboutHero/AboutHero";
+import AboutCompany from "../../components/About/AboutCompany/AboutCompany";
+import AboutVM from "../../components/About/AboutVM/AboutVM";
 import "./About.css";
-import AboutProjects from "../../components/About/AboutProjects/AboutProjects"
-import AboutPeople from "../../components/About/AboutPeople/AboutPeople"
-import AboutIMS from "../../components/About/AboutIMS/AboutIMS"
-import AboutWSH from "../../components/About/AboutWSH/AboutWSH"
-import AboutBizSafe from "../../components/About/AboutBizSafe/AboutBizSafe"
-import AboutPDPA from "../../components/About/AboutPDPA/AboutPDPA"
-
-import Footer from "../../components/Footer/Footer"
+import AboutProjects from "../../components/About/AboutProjects/AboutProjects";
+import AboutPeople from "../../components/About/AboutPeople/AboutPeople";
+import AboutIMS from "../../components/About/AboutIMS/AboutIMS";
+import AboutWSH from "../../components/About/AboutWSH/AboutWSH";
+import AboutBizSafe from "../../components/About/AboutBizSafe/AboutBizSafe";
+import AboutPDPA from "../../components/About/AboutPDPA/AboutPDPA";
 
 export default function () {
   const reveal = () => {
@@ -45,7 +43,7 @@ export default function () {
   return (
     <div>
       <AboutHero />
-      
+
       <div className="container">
         <AboutCompany />
       </div>
@@ -57,7 +55,7 @@ export default function () {
       <div className="container">
         <AboutProjects />
         <AboutPeople />
-        <AboutIMS />  
+        <AboutIMS />
         <AboutWSH />
       </div>
       <div className="out-container">
@@ -68,9 +66,7 @@ export default function () {
         <AboutPDPA />
       </div>
 
-      <div className="out-container">
-        <Footer />
-      </div>
+      <div className="out-container"></div>
     </div>
   );
 }

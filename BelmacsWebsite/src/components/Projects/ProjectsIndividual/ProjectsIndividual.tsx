@@ -43,7 +43,10 @@ const ProjectList: React.FC = () => {
 
   return (
     <div className="projects-individual">
-      <ProjectsHero imageUrl={paramData.image} heroText={paramData.title + ' Projects'} />
+      <ProjectsHero
+        imageUrl={paramData.image}
+        heroText={paramData.title + " Projects"}
+      />
       <div>
         {projects.map((projectItem) => (
           <div key={projectItem.id}>
@@ -56,6 +59,5 @@ const ProjectList: React.FC = () => {
     </div>
   );
 };
-
 
 export default ProjectList;
