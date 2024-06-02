@@ -16,6 +16,7 @@ const ProjectList: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const { category } = useParams<{ category: string }>();
   const location = useLocation();
+
   const { paramData } = location.state || {}; // Destructure paramData from location.state
 
   useEffect(() => {
@@ -26,7 +27,7 @@ const ProjectList: React.FC = () => {
         const querySnapshot = await getDocs(
           collection(db, `${category}-projects`)
         );
-        console.log(category + "-projects");
+        // console.log(category + "-projects");
         const data: Project[] = [];
         querySnapshot.forEach((doc) => {
           const docData = doc.data();

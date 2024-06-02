@@ -6,18 +6,21 @@ import { useNavigate } from "react-router-dom";
 
 /* Hero Images to pass */
 /* Only Residential image is good, the rest needs to change */
-import ResidentialImage from "../../../assets/Projects/HeroImages/ResidentialHero.png";
-import CommercialImage from "../../../assets/Projects/Grid-Images/Commercial.png";
-import InstitutionalImage from "../../../assets/Projects/Grid-Images/Institutional.png";
-import ExisitingBuildingRetrofitImage from "../../../assets/Projects/Grid-Images/Existing-Building-Retrofit.png";
-import InfrastructureImage from "../../../assets/Projects/Grid-Images/Infrastructure.png";
-import IndustrialImage from "../../../assets/Projects/Grid-Images/Industrial.png";
+import ResidentialImage from "../../../assets/Projects/HeroImages/ResidentialHero.jpg";
+import CommercialImage from "../../../assets/Projects/HeroImages/CommercialHero.jpg";
+import InstitutionalImage from "../../../assets/Projects/HeroImages/InstitutionalHero.jpg";
+import ExisitingBuildingRetrofitImage from "../../../assets/Projects/HeroImages/ExistingBuildingHero.jpg";
+import InfrastructureImage from "../../../assets/Projects/HeroImages/ExistingBuildingHero.jpg";
+import IndustrialImage from "../../../assets/Projects/HeroImages/IndustrialHero.jpg";
+
+
 
 export type projectTypeItem = {
   title?: string;
   image?: string;
   path?: string;
 };
+
 export const projectTypes: projectTypeItem[] = [
   {
     title: "Residential",
@@ -75,16 +78,17 @@ export default function ProjectsTypes() {
       </p>
 
       <div className="grid-container">
-        {projectTypes.map((paramData) => (
+        {projectTypes.map((type) => (
           <div
-            key={paramData.title} // Assuming title is unique for each category
-            className={`grid-item ${paramData.title
+            key={type.title} // Assuming title is unique for each category
+            // make sure css works correctly
+            className={`grid-item ${type.title
               ?.toLowerCase()
               .replace(/ /g, "-")}`}
-            onClick={() => handleClick(paramData)}
+            onClick={() => handleClick(type)}
             style={{ cursor: "pointer" }}
           >
-            <div className="overlay">{paramData.title}</div>
+            <div className="overlay">{type.title}</div>
           </div>
         ))}
       </div>
