@@ -63,9 +63,9 @@ export default function ProjectsTypes() {
   };
 
   return (
-    <div className="category">
-      <p className="category-header">Projects</p>
-      <p className="category-desc">
+    <div className="project-types">
+      <p className="project-types-header">Projects</p>
+      <p className="project-types-desc">
         We are a leading provider of integrated automation and control
         solutions. Specializing in customized automation systems, the company
         serves diverse industries such as marine, oil and gas, and industrial
@@ -77,12 +77,12 @@ export default function ProjectsTypes() {
         trusted partner for complex automation and control projects.
       </p>
 
-      <div className="grid-container">
+      <div className="project-types-grid-container">
         {projectTypes.map((type) => (
           <div
             key={type.title} // Assuming title is unique for each category
             // make sure css works correctly
-            className={`grid-item ${type.title
+            className={`project-types-grid-item ${type.title
               ?.toLowerCase()
               .replace(/ /g, "-")}`}
             onClick={() => handleClick(type)}

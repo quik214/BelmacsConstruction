@@ -4,9 +4,6 @@ import "./ServicesTypes-media.css";
 
 import { useNavigate } from "react-router-dom";
 
-/* Hero Images to pass */
-/* Only Residential image is good, the rest needs to change */
-
 export type servicesTypeItem = {
   title?: string;
   image?: string;
@@ -73,9 +70,9 @@ export const servicesTypes: servicesTypeItem[] = [
 
 export default function ProjectsTypes() {
   return (
-    <div className="category">
-      <p className="category-header">Services</p>
-      <p className="category-desc">
+    <div className="services">
+      <p className="services-header">Services</p>
+      <p className="services-desc">
         We are a leading provider of integrated automation and control
         solutions. Specializing in customized automation systems, the company
         serves diverse industries such as marine, oil and gas, and industrial
@@ -87,14 +84,22 @@ export default function ProjectsTypes() {
         trusted partner for complex automation and control projects.
       </p>
 
-      <div className="grid-container">
-        {servicesTypes.map((type) => (
+      <div className="grid-container-3-cols">
+        {servicesTypes.slice(0, 7).map((type) => (
           <div
-            key={type.title} // Assuming title is unique for each category
-            // make sure css works correctly
-            className={`grid-item ${type.css
-              ?.toLowerCase()
-              .replace(/ /g, "-")}`}
+            key={type.title}
+            className={`services-grid-item ${type.css?.toLowerCase().replace(/ /g, "-")}`}
+          >
+            <div className="overlay">{type.title}</div>
+          </div>
+        ))}
+      </div>
+
+      <div className="grid-container-4-cols">
+        {servicesTypes.slice(7).map((type) => (
+          <div
+            key={type.title}
+            className={`services-grid-item ${type.css?.toLowerCase().replace(/ /g, "-")}`}
           >
             <div className="overlay">{type.title}</div>
           </div>

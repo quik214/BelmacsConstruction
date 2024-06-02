@@ -1,15 +1,15 @@
-.category {
+.project-types {
   margin-top: 50px;
 }
 
-.category-header {
+.project-types-header {
   font-size: 1.8rem;
   font-family: "Lato";
   text-shadow: 0 0 0 rgb(112, 123, 177);
   color: rgb(54, 79, 199);
 }
 
-.category-desc {
+.project-types-desc {
   margin-top: 20px;
   font-size: 1.2rem;
   font-family: "Lato";
@@ -17,7 +17,7 @@
   text-align: justify;
 }
 
-.grid-container {
+.project-types-grid-container {
   margin-top: 50px;
   margin-bottom: 50px;
   display: grid;
@@ -29,7 +29,7 @@
   box-sizing: border-box;
 }
 
-.grid-item {
+.project-types-grid-item {
   position: relative;
   background-size: cover;
   background-position: center;
@@ -37,7 +37,7 @@
   overflow: hidden;
 }
 
-.grid-item::before {
+.project-types-grid-item::before {
   content: "";
   position: absolute;
   top: 0;
@@ -49,13 +49,13 @@
   filter: brightness(70%);
 }
 
-.grid-item::after {
+.project-types-grid-item::after {
   content: "";
   display: block;
   padding-top: 100%;
 }
 
-.grid-item .overlay {
+.project-types-grid-item .overlay {
   position: absolute;
   top: 10px;
   left: 8px;
@@ -68,7 +68,7 @@
   padding: 10px;
 }
 
-.grid-item img {
+.project-types-grid-item img {
   position: absolute;
   top: 0;
   left: 0;
