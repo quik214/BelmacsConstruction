@@ -78,38 +78,63 @@
   z-index: 0;
 }
 
-.residential {
-  grid-row: 1 / span 2;
+.air-conditioning-and-mechanical-ventilation {
+  grid-row: 1;
   grid-column: 1;
   background-image: url("../../../assets/Projects/Grid-Images/Residential.png");
 }
 
-.commercial {
+.plumbing-sanitary-and-gas {
   grid-row: 1;
   grid-column: 2;
   background-image: url("../../../assets/Projects/Grid-Images/Commercial.png");
 }
 
-.institutional {
-  grid-row: 2;
-  grid-column: 2;
+.fire-protection {
+  grid-row: 1;
+  grid-column: 3;
   background-image: url("../../../assets/Projects/Grid-Images/Institutional.png");
 }
 
-.existing-building-retrofit {
-  grid-row: 1 / span 2;
-  grid-column: 3;
+.swimming-pool-filtration {
+  grid-row: 2;
+  grid-column: 1;
   background-image: url("../../../assets/Projects/Grid-Images/Existing-Building-Retrofit.png");
 }
 
-.infrastructure {
-  grid-row: 1;
-  grid-column: 4;
+.electrical-and-security {
+  grid-row: 2;
+  grid-column: 2;
   background-image: url("../../../assets/Projects/Grid-Images/Infrastructure.png");
 }
 
-.industrial {
+.lift-and-escalator {
   grid-row: 2;
+  grid-column: 3;
+  background-image: url("../../../assets/Projects/Grid-Images/Industrial.png");
+}
+.building-management-system {
+  grid-row: 3;
+  grid-column: 1;
+  background-image: url("../../../assets/Projects/Grid-Images/Industrial.png");
+}
+.feasibility-studies {
+  grid-row: 4;
+  grid-column: 1;
+  background-image: url("../../../assets/Projects/Grid-Images/Industrial.png");
+}
+.testing-and-commissioning {
+  grid-row: 4;
+  grid-column: 2;
+  background-image: url("../../../assets/Projects/Grid-Images/Industrial.png");
+}
+.authority-and-submission {
+  grid-row: 4;
+  grid-column: 3;
+  background-image: url("../../../assets/Projects/Grid-Images/Industrial.png");
+}
+.vetting-of-tenancy-me-design {
+  grid-row: 4;
   grid-column: 4;
   background-image: url("../../../assets/Projects/Grid-Images/Industrial.png");
 }

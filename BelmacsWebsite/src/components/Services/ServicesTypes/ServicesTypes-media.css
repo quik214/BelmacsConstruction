@@ -1,0 +1,121 @@
+/* Large Screens */
+@media (1700px <= width <= 2500px) {
+  .category-header {
+    font-size: 2rem;
+  }
+
+  .category-desc {
+    font-size: 1.4rem;
+  }
+
+  .grid-item .overlay {
+    font-size: 1.4rem;
+  }
+}
+
+/* Normal Screens - currently designed for this */
+@media (max-width: 1700px) {
+  .category-header {
+    font-size: 1.8rem;
+  }
+}
+
+/* Landscape Tablets */
+@media (max-width: 1200px) {
+  .category-header {
+    font-size: 1.6rem;
+  }
+}
+
+/* Tablets */
+@media (max-width: 1000px) {
+  .grid-container {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(2);
+    grid-template-rows: repeat(4);
+  }
+
+  .grid-item .overlay {
+    font-size: 1.55rem;
+  }
+
+  .residential {
+    grid-row: 1 / span 2;
+    grid-column: 1;
+  }
+
+  .commercial {
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .institutional {
+    grid-row: 2;
+    grid-column: 2;
+  }
+
+  /* .existing-building-retrofit {
+    grid-row: 3 / span 2;
+    grid-column: 2;
+  }
+
+  .infrastructure {
+    grid-row: 3;
+    grid-column: 1;
+  }
+
+  .industrial {
+    grid-row: 4;
+    grid-column: 1;
+  } */
+
+  .existing-building-retrofit {
+    grid-row: 3 / span 2;
+    grid-column: 1;
+  }
+
+  .infrastructure {
+    grid-row: 3;
+    grid-column: 2;
+  }
+
+  .industrial {
+    grid-row: 4;
+    grid-column: 2;
+  }
+}
+
+/* Smaller Tablets */
+@media (max-width: 700px) {
+  .category-desc {
+    font-size: 1.1rem;
+  }
+
+  .grid-item .overlay {
+    font-size: 1.2rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 550px) {
+  .grid-item .overlay {
+    font-size: 1.1rem;
+  }
+
+  .category-header {
+    font-size: 1.2rem;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 390px) {
+  .grid-item .overlay {
+    font-size: 1rem;
+    left: 5px;
+  }
+
+  .category-desc {
+    font-size: 1rem;
+  }
+}
