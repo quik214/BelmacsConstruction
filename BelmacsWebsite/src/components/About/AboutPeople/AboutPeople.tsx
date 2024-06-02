@@ -25,7 +25,7 @@ const People: React.FC = () => {
       img: AboutPeopleCHIN,
       name: "Er. Chin Yeu Tong",
       role: "Managing Director",
-      qualifications: "Bachelors in Mechanical Engineering \n Professional Engineer \n Certified GMFP",
+      qualifications: "- Bachelors in Mechanical Engineering \n - Professional Engineer \n - Certified GMFP",
       description: `Er. CHIN Yeu Tong graduated with a Bachelor of Engineering (Mechanical) from Nanyang Technological University in 1995. He is a registered Professional Engineer in Singapore since 2012. He is also a BCA Certified Green Mark Facilities Professional.
       \n Yeu Tong has more than 20 years of experience in various sectors of building construction industry in Singapore and overseas.
       \n He started his career in 1995 as an engineer in Beca Carter Hollings & Ferner and had worked on numerous major retrofitting projects including Paragon Shopping Centre, National Blood Centre, Orchard Hotel, Royal Holiday Inn and Amenity Block. He had also completed Saigon Metropolitan, a prestigious office tower in Ho Chi Minh City; Laguna 88 condominium and The Loft at Nassim Road condominium.
@@ -38,7 +38,7 @@ const People: React.FC = () => {
       img: AboutPeopleTAN,
       name: "Er. Tan Yan Kiat",
       role: "Founder & Director",
-      qualifications: "Bachelors in Mechanical Engineering \n Professional Engineer \n Senior Member, Institution of Engineers, Singapore (Sr. MIES) \n Member of the American Society of Heating, Refrigerating and Air-Conditioning Engineers (MASHRAE) \n Registered Inspector (M&E)",
+      qualifications: "- Bachelors in Mechanical Engineering \n - Professional Engineer \n - Senior Member, Institution of Engineers, Singapore (Sr. MIES) \n - Member of the American Society of Heating, Refrigerating and Air-Conditioning Engineers (MASHRAE) \n - Registered Inspector (M&E)",
       description: `Er. TAN Yan Kiat graduated with a Bachelor of Engineering (Mechanical) from the University of Singapore in 1979. Upon graduation, he joined Rankine & Hill Consulting Engineers as an Engineer and managed projects such as The Paramount Hotel / Shopping Centre, Excelsior Hotel / Shopping Centre and the Tampines Telephone Exchange. Subsequently, he obtained his Professional Engineer in 1983.
       \n In 1984, Yan Kiat left to join J. Roger Preston & Partners and had worked on numerous projects spanning over a wide sector of the building industry. Some of the more significant projects are The Gateway, UOB Plaza, 396 Alexandra Road (formerly known as BP Tower), AIA Tower, AIA Changi and Mt. Elizabeth Medical Centre. In 1992, he was made a Partner of the local practice as well as a Director in J. Roger Preston & Partners Pte Ltd, a company responsible outside Singapore.
       \n Yan Kiat is personally involved in the development of Fire Life Safety System in high-rise buildings, in particularly UOB Plaza, a 66-storey 250m high-rise office building. He was invited by IES to present a paper on FLSS in UOB Plaza in 1986. Yan Kiat became a M&E Registered Inspector in 1994. In the same year, he co-founded BELMACS Consulting Engineers and held the position of Partner. The practice was incorporated to BELMACS Pte Ltd in 2006 and he has since held the position of Managing Director.
@@ -62,7 +62,7 @@ const People: React.FC = () => {
       img: AboutPeopleCHAU,
       name: "Er. Chau Yong Foo",
       role: "Director",
-      qualifications: "Bachelors in Mechanical Engineering \n Professional Engineer \n Singapore Certified Energy Manager (SCEM) \n ASEAN Chartered Professional Engineer (ACPE) \n Design for Safety Professionals (DfSP)",
+      qualifications: "- Bachelors in Mechanical Engineering \n - Professional Engineer \n - Singapore Certified Energy Manager (SCEM) \n - ASEAN Chartered Professional Engineer (ACPE) \n - Design for Safety Professionals (DfSP)",
       description: `Er. CHAU Yong Foo received his Bachelor of Engineering (Electrical) degree from National University of Singapore in 2006. He is a registered Professional Engineer (Electrical) and ASEAN Chartered Professional Engineer since 2014 and 2017 respectively. He is also registered as Singapore Certified Energy Manager (SCEM) and Design for Safety Professional (DFSP) since year 2014 and 2018 respectively.
       \n Yong Foo started his career as process engineer in the Semiconductor Manufacturing Industry before entering the construction industry as a M&E consulting engineer in his previous employment. Yong Foo has more than 10 years of extensive experience in the building construction industry ranging from residential, commercial and industrial buildings. The projects under his care includes the design and implementation of Keppel District Cooling Plant at Mediapolis, Hotel Indigo at Xiamen, major addition and alternations at UOB Plaza and Alexandra. Other greenfield projects includes a Comestic Factory for Bestworld at Jurong and Samwoh Smart Hub Office cum Factory in Kranji.`
     },
