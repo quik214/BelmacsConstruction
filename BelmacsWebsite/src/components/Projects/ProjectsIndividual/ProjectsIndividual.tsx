@@ -3,7 +3,7 @@ import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../../firebase";
 import { useParams, useLocation } from "react-router-dom";
 
-import ProjectsHero from "../ProjectsHero/ProjectsHero";
+import Hero from "../../Hero/Hero";
 
 interface Project {
   id: string;
@@ -44,7 +44,7 @@ const ProjectList: React.FC = () => {
 
   return (
     <div className="projects-individual">
-      <ProjectsHero
+      <Hero
         imageUrl={paramData.image}
         heroText={paramData.title + " Projects"}
       />

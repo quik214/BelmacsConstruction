@@ -1,14 +1,14 @@
 import React from 'react';
-import "./ProjectsHero.css";
-import "./ProjectsHero-media.css";
-import "../../../assets/fonts.css";
+import "./Hero.css";
+import "./Hero-media.css";
+import "../../assets/fonts.css";
 
-interface ProjectsHeroProps {
+interface HeroProps {
     imageUrl: string;
     heroText: string; // Define a prop for the hero text
 }
 
-const ProjectsHero: React.FC<ProjectsHeroProps> = ({ imageUrl, heroText }) => {
+const Hero: React.FC<HeroProps> = ({ imageUrl, heroText }) => {
     return (
         <div className="hero-container">
             <div className="hero-image" style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${imageUrl})` }}>
@@ -20,4 +20,4 @@ const ProjectsHero: React.FC<ProjectsHeroProps> = ({ imageUrl, heroText }) => {
     );
 }
 
-export default ProjectsHero;
+export default Hero;
