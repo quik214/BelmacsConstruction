@@ -8,3 +8,9 @@
   font-size: 2.4rem;
   font-family: "Lato";
 }
+
+.awards {
+  font-size: 1.25rem;
+  margin: 20px 0;
+  white-space: pre;
+}
