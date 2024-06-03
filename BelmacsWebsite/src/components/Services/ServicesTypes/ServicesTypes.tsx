@@ -68,7 +68,7 @@ export const servicesTypes: servicesTypeItem[] = [
   },
 ];
 
-export default function ProjectsTypes() {
+export default function ServicesTypes() {
   return (
     <div className="services">
       <p className="services-header">Services</p>
@@ -88,7 +88,9 @@ export default function ProjectsTypes() {
         {servicesTypes.slice(0, 7).map((type) => (
           <div
             key={type.title}
-            className={`services-grid-item ${type.css?.toLowerCase().replace(/ /g, "-")}`}
+            className={`services-grid-item ${type.css
+              ?.toLowerCase()
+              .replace(/ /g, "-")}`}
           >
             <div className="overlay">{type.title}</div>
           </div>
@@ -99,7 +101,9 @@ export default function ProjectsTypes() {
         {servicesTypes.slice(7).map((type) => (
           <div
             key={type.title}
-            className={`services-grid-item ${type.css?.toLowerCase().replace(/ /g, "-")}`}
+            className={`services-grid-item ${type.css
+              ?.toLowerCase()
+              .replace(/ /g, "-")}`}
           >
             <div className="overlay">{type.title}</div>
           </div>
