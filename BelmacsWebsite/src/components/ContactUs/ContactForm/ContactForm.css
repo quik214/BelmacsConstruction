@@ -31,11 +31,6 @@ input, textarea, select {
   font-size: 16px; /* Ensure font size consistency */
 }
 
-.h-captcha {
-  margin-bottom: 20px;
-}
-
-
 button {
   background-color: #364FC7;
   color: white;
@@ -48,3 +43,7 @@ button {
 button:hover {
   background-color: #242D56;
 } 
+
+.result {
+  font-family: "Lato";
+}

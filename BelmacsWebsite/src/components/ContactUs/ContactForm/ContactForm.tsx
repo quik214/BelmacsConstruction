@@ -5,6 +5,8 @@ import "../../../assets/fonts.css";
 
 const ContactForm: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
+  const [captchaResponse, setCaptchaResponse] = useState<string | null>(null);
+  const [captchaError, setCaptchaError] = useState<boolean>(false);
   const [resultMessage, setResultMessage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -20,11 +22,19 @@ const ContactForm: React.FC = () => {
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!captchaResponse) {
+      setCaptchaError(true);
+      return;
+    } else {
+      setCaptchaError(false);
+    }
+
     if (formRef.current) {
       // Create form data and append hidden fields
       const formData = new FormData(formRef.current);
       formData.append('access_key', '7bfd764b-90c7-4931-bbfc-c68f7948ac86');
       formData.append('subject', 'Someone dropped you a message from ContactUsForm');
+      formData.append('h-captcha-response', captchaResponse);
 
       // Form submission logic
       fetch('https://api.web3forms.com/submit', {
@@ -42,10 +52,21 @@ const ContactForm: React.FC = () => {
 
       // Reset the form
       formRef.current.reset();
+      setCaptchaResponse(null);  // Reset captcha response
     } else {
       console.error('Form reference is null');
       setResultMessage('Form reference is null');
     }
+  };
+
+  const onCaptchaSuccess = (token: string) => {
+    setCaptchaResponse(token);
+    setCaptchaError(false);
+  };
+
+  const onCaptchaError = () => {
+    setCaptchaResponse(null);
+    setCaptchaError(true);
   };
 
   return (
@@ -80,9 +101,13 @@ const ContactForm: React.FC = () => {
           <textarea rows={5} name="message" id="message" placeholder="Your Message" required></textarea><br /><br />
         </div>
 
+        
+        <div className="h-captcha" data-sitekey="00c8b5f3-b304-4395-a249-05da8ae57c27" data-callback="onCaptchaSuccess" data-error-callback="onCaptchaError"></div>
+        {captchaError && <div className="error">Please complete the captcha.</div>}
+
         <button type="submit">Send Message</button>
 
-        {resultMessage && <p className="text-base text-center text-gray-400" id="result">{resultMessage}</p>}
+        {resultMessage && <p className="result" id="result">{resultMessage}</p>}
       </fieldset>
     </form>
   );
