@@ -1,6 +1,6 @@
 import "../../../assets/fonts.css";
 import "./OtherServices.css";
-import "./OtherTypes-media.css";
+import "./OtherServices-media.css";
 
 import ComplianceLogo from "../../../assets/Icons/AboutWSH/note-pencil-blue.svg";
 
@@ -53,7 +53,7 @@ export default function OtherServices() {
       </p>
       <div className="other-services-card-container">
         {otherServices.map((service) => (
-          <div className="other-services-card">
+          <div className="other-services-card" key={service.title}>
             <div className="other-services-card-background">
               <div className="other-services-card-text">
                 <img className="other-services-logo" src={service.icon} />

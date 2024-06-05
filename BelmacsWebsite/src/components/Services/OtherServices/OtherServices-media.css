@@ -1,0 +1,70 @@
+/* Large Screens */
+@media (1700px <= width <= 2500px) {
+  .other-services-header {
+    font-size: 2rem;
+  }
+
+  .other-services-desc {
+    font-size: 1.4rem;
+  }
+  .other-services-card-title {
+    font-size: 1.4rem;
+  }
+}
+
+/* Normal Screens - currently designed for this */
+@media (max-width: 1700px) {
+  .other-services-header {
+    font-size: 1.8rem;
+  }
+}
+
+/* Landscape Tablets */
+@media (max-width: 1200px) {
+  .other-services-header {
+    font-size: 1.6rem;
+  }
+}
+
+/* Tablets */
+@media (max-width: 1000px) {
+  .other-services-card-container {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 40px;
+  }
+  .other-services-card-title {
+    font-size: 0.9rem;
+  }
+}
+
+/* Smaller Tablets */
+@media (max-width: 700px) {
+  .other-services-desc {
+    font-size: 1.1rem;
+  }
+  .other-services-card-title {
+    font-size: 0.9rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 550px) {
+  .other-services-header {
+    font-size: 1.2rem;
+  }
+  .other-services-card-title {
+    font-size: 0.8rem;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 390px) {
+  .other-services-desc {
+    font-size: 1rem;
+  }
+  .other-services-card-title {
+    font-size: 1rem;
+  }
+}
