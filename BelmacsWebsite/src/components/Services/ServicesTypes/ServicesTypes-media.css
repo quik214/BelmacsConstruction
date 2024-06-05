@@ -27,18 +27,16 @@
   }
 
   .grid-container-3-cols {
-    column-gap: 50px;
+    column-gap: 40px;
   }
 
   .grid-container-4-cols {
-    column-gap: 50px;
+    column-gap: 40px;
   }
-
 }
 
 /* Tablets */
 @media (max-width: 1000px) {
-
   .grid-container-3-cols {
     column-gap: 25px;
     row-gap: 25px;
@@ -47,11 +45,11 @@
 
   .grid-container-4-cols {
     column-gap: 25px;
-    row-gap:25px;
+    row-gap: 25px;
   }
 
   .services-grid-item .overlay {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -64,7 +62,7 @@
   .grid-container-3-cols {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .grid-container-4-cols {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -77,37 +75,37 @@
     grid-row: 1;
     grid-column: 1;
   }
-  
+
   .plumbing-sanitary-and-gas {
     grid-row: 1;
     grid-column: 2;
   }
-  
+
   .fire-protection {
     grid-row: 2;
     grid-column: 1;
   }
-  
+
   .swimming-pool-filtration {
     grid-row: 2;
     grid-column: 2;
   }
-  
+
   .electrical-and-security {
     grid-row: 3;
     grid-column: 1;
   }
-  
+
   .lift-and-escalator {
     grid-row: 3;
     grid-column: 2;
   }
-  
+
   .building-management-system {
     grid-row: 4;
     grid-column: 1 / span 2;
   }
-  
+
   /* Row 4 onwards */
   .feasibility-studies {
     grid-row: 1;
@@ -125,13 +123,18 @@
     grid-row: 2;
     grid-column: 2;
   }
+}
 
+@media (max-width: 700px) {
+  .services-grid-item .overlay {
+    font-size: 0.9rem;
+  }
 }
 
 /* Mobile */
 @media (max-width: 550px) {
-  .grid-item .overlay {
-    font-size: 1.1rem;
+  .services-grid-item .overlay {
+    font-size: 0.8rem;
   }
 
   .services-header {

@@ -2,8 +2,6 @@ import "../../../assets/fonts.css";
 import "./ServicesTypes.css";
 import "./ServicesTypes-media.css";
 
-import { useNavigate } from "react-router-dom";
-
 export type servicesTypeItem = {
   title?: string;
   image?: string;
@@ -12,7 +10,7 @@ export type servicesTypeItem = {
 
 export const servicesTypes: servicesTypeItem[] = [
   {
-    title: "Air Conditioning and Mechanical Ventilation",
+    title: "Air Conditioning & Mechanical Ventilation",
     image: "",
     css: "Air Conditioning and Mechanical Ventilation",
   },

@@ -1,8 +1,8 @@
 /* Large Screens */
 @media (1700px <= width <= 2500px) {
   .hero-text {
-    left: 16%;
-    font-size: 2.8rem;
+    left: 10%;
+    font-size: 3rem;
   }
 }
 
@@ -17,8 +17,8 @@
   }
 
   .hero-text {
-    left: 19%;
-    font-size: 2.2rem;
+    left: 11%;
+    font-size: 2.4rem;
   }
 }
 
@@ -29,7 +29,7 @@
   }
 
   .hero-text {
-    left: 21%;
+    left: 12%;
     font-size: 2rem;
   }
 }
@@ -41,7 +41,7 @@
   }
 
   .hero-text {
-    left: 25%;
+    left: 14%;
     font-size: 1.9rem;
   }
 }
@@ -49,8 +49,8 @@
 /* Mobile */
 @media (max-width: 550px) {
   .hero-text {
-    left: 25%;
-    font-size: 1.8rem;
+    left: 12%;
+    font-size: 2rem;
   }
 }
 
@@ -61,7 +61,7 @@
   }
 
   .hero-text {
-    left: 30%;
+    left: 14%;
     font-size: 1.6rem;
   }
 }
