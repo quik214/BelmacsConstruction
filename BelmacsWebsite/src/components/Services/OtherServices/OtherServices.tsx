@@ -2,7 +2,12 @@ import "../../../assets/fonts.css";
 import "./OtherServices.css";
 import "./OtherServices-media.css";
 
-import ComplianceLogo from "../../../assets/Icons/AboutWSH/note-pencil-blue.svg";
+import ProjectIcon from "../../../assets/Icons/OtherServices/project-mangament-consultancy.svg";
+import GreenMarkIcon from "../../../assets/Icons/OtherServices/green-mark-consultancy.svg";
+import MnEIcon from "../../../assets/Icons/OtherServices/m&e-registered-inspector.svg";
+import FireCertIcon from "../../../assets/Icons/OtherServices/fire-certificate-renewal.svg";
+import FireSafetyIcon from "../../../assets/Icons/OtherServices/fire-safety-inspection.svg";
+import ElectricalIcon from "../../../assets/Icons/OtherServices/electrical-licensing.svg";
 
 export type otherServicesItem = {
   title?: string;
@@ -12,27 +17,27 @@ export type otherServicesItem = {
 export const otherServices: otherServicesItem[] = [
   {
     title: "Project Management Consultancy",
-    icon: ComplianceLogo,
+    icon: ProjectIcon,
   },
   {
     title: "Green Mark Consultancy",
-    icon: ComplianceLogo,
+    icon: GreenMarkIcon,
   },
   {
     title: "M&E Registered Inspector",
-    icon: ComplianceLogo,
+    icon: MnEIcon,
   },
   {
     title: "Fire Certificate Renewal",
-    icon: ComplianceLogo,
+    icon: FireCertIcon,
   },
   {
     title: "Fire Safety Inspection",
-    icon: ComplianceLogo,
+    icon: FireSafetyIcon,
   },
   {
     title: "Electrical Licensing",
-    icon: ComplianceLogo,
+    icon: ElectricalIcon,
   },
 ];
 
