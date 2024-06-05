@@ -22,6 +22,13 @@ const ContactForm: React.FC = () => {
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!captchaResponse) {
+      setCaptchaError(true);
+      return;
+    } else {
+      setCaptchaError(false);
+    }
+
     if (formRef.current) {
       // Create form data and append hidden fields
       const formData = new FormData(formRef.current);
