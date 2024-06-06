@@ -1,0 +1,54 @@
+/* Large Screens */
+@media (1700px <= width <= 2500px) {
+}
+
+/* Normal Screens - currently designed for this */
+@media (max-width: 1700px) {
+}
+
+/* Landscape Tablets */
+@media (max-width: 1200px) {
+}
+
+/* Tablets */
+@media (max-width: 1000px) {
+  .projects-individual-grid-container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Smaller Tablets */
+@media (max-width: 700px) {
+  .project-individual-title {
+    font-size: 1.1rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 550px) {
+  .projects-individual-grid-container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .project-individual-title {
+    font-size: 1.1rem;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 390px) {
+  .projects-individual-grid-container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .project-individual-title {
+    font-size: 1.1rem;
+  }
+}
