@@ -1,21 +1,16 @@
-import React, { useRef, useState, useEffect } from 'react'; 
+import React, { useRef, useState } from 'react'; 
 import "./ContactForm.css";
 import "./ContactForm-media.css";
 import "../../../assets/fonts.css";
+
+import ReCAPTCHA from "react-google-recaptcha";
 
 const ContactForm: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const [resultMessage, setResultMessage] = useState<string | null>(null);
 
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "https://hcaptcha.com/1/api.js";
-    script.async = true;
-    document.body.appendChild(script);
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
+  const [capVal, setCapVal] = useState(null);
+
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,17 +48,17 @@ const ContactForm: React.FC = () => {
       <fieldset>
         <legend>Contact Us</legend>
         <input type="checkbox" name="botcheck" style={{   display: 'none' }} />
-
+        
         <div>
           <label htmlFor="name">Full Name</label><br />
           <input type="text" name="name" id="name" placeholder="Lee Hsien Looong" required /><br /><br />
         </div>
-
+        
         <div>
           <label htmlFor="email">Email Address</label><br />
           <input type="email" name="email" id="email" placeholder="you@company.com" required /><br /><br />
         </div>
-
+        
         <div>
           <label htmlFor="enquiry-type">Enquiry Type</label><br />
           <select name="enquiry-type" id="enquiry-type" required>
@@ -74,13 +69,17 @@ const ContactForm: React.FC = () => {
             <option value="feedback">Feedback</option>
           </select><br /><br />
         </div>
-
+        
         <div>
           <label htmlFor="message">Message</label><br />
           <textarea rows={5} name="message" id="message" placeholder="Your Message" required></textarea><br /><br />
         </div>
 
-        <button type="submit">Send Message</button>
+        <ReCAPTCHA
+        sitekey="6Lf9YPIpAAAAAFnSu5xNGs-Ib8-BT88I9UnZf5ib"
+        onChange={(val: any) => setCapVal(val)}
+        />
+        <button type="submit" disabled={!capVal}>Send Message</button>
 
         {resultMessage && <p className="text-base text-center text-gray-400" id="result">{resultMessage}</p>}
       </fieldset>
