@@ -48,3 +48,17 @@ button:hover {
 .result {
   font-family: "Lato";
 }
+
+.checkbox-ctr {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.checkbox {
+  flex-basis: 0;
+}
+
+.checkbox-text {
+  margin-left: 10px;
+  
+}

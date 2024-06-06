@@ -36,10 +36,6 @@
 
 /* Small Mobile */
 @media (max-width: 390px) {
-
-   
-
-
   input,
   textarea,
   select {
@@ -53,7 +49,7 @@
   }
 
   .recaptcha {
-    transform: scale(0.9);
+    transform: scale(0.8);
     transform-origin: 0 0;
   }
 }

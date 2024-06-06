@@ -10,6 +10,8 @@ const ContactForm: React.FC = () => {
   const form = useRef<HTMLFormElement>(null);
   const [capVal, setCapVal] = useState<string | null>(null);
 
+  const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -34,10 +36,10 @@ const ContactForm: React.FC = () => {
 
   return (
     <form ref={form} onSubmit={sendEmail} id="form">
-      <div className="field-ctr">
+      <div>
         <legend className="contact-header">Contact Us</legend>
         <input type="checkbox" name="botcheck" style={{ display: "none" }} />
-        <div className="name-field">
+        <div>
           <label htmlFor="name">Full Name</label>
           <br />
           <input
@@ -51,7 +53,7 @@ const ContactForm: React.FC = () => {
           <br />
         </div>
 
-        <div className="name-field">
+        <div>
           <label htmlFor="email">Email Address</label>
           <br />
           <input
@@ -65,11 +67,13 @@ const ContactForm: React.FC = () => {
           <br />
         </div>
 
-        <div className="name-field">
+        <div>
           <label htmlFor="enquiry-type">Enquiry Type</label>
           <br />
           <select name="enquiry-type" id="enquiry-type" required>
-            <option value="" disabled selected>Select Enquiry Type</option>
+            <option value="" disabled selected>
+              Select Enquiry Type
+            </option>
             <option value="general">General</option>
             <option value="support">Support</option>
             <option value="sales">Sales</option>
@@ -79,7 +83,7 @@ const ContactForm: React.FC = () => {
           <br />
         </div>
 
-        <div className="name-field">
+        <div>
           <label htmlFor="message">Message</label>
           <br />
           <textarea
@@ -93,13 +97,26 @@ const ContactForm: React.FC = () => {
           <br />
         </div>
 
-        
+        <div className="checkbox-ctr">
+          <input
+            type="checkbox"
+            checked={isCheckboxChecked}
+            onChange={(e) => setIsCheckboxChecked(e.target.checked)}
+            className="checkbox"
+          />
+          <p className="checkbox-text">
+            By checking this box, you consent to the processing and sharing of
+            your personal data for the purposes of addressing your specified
+            queries
+          </p>
+        </div>
+
         <ReCAPTCHA
           sitekey="6Lf9YPIpAAAAAFnSu5xNGs-Ib8-BT88I9UnZf5ib"
           onChange={(val: string | null) => setCapVal(val)}
           className="recaptcha"
         />
-        <button type="submit" disabled={!capVal}>
+        <button type="submit" disabled={!capVal || !isCheckboxChecked}>
           Send Message
         </button>
       </div>
