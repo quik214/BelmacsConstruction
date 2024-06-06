@@ -1,87 +1,106 @@
-import React, { useRef, useState } from 'react'; 
+import React, { useRef, useState } from "react";
+
 import "./ContactForm.css";
 import "./ContactForm-media.css";
 import "../../../assets/fonts.css";
-
+import emailjs from "@emailjs/browser";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const ContactForm: React.FC = () => {
-  const formRef = useRef<HTMLFormElement>(null);
-  const [resultMessage, setResultMessage] = useState<string | null>(null);
+  const form = useRef<HTMLFormElement>(null);
+  const [capVal, setCapVal] = useState<string | null>(null);
 
-  const [capVal, setCapVal] = useState(null);
-
-
-  const onSubmit = (e: React.FormEvent) => {
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (formRef.current) {
-      // Create form data and append hidden fields
-      const formData = new FormData(formRef.current);
-      formData.append('access_key', '7bfd764b-90c7-4931-bbfc-c68f7948ac86');
-      formData.append('subject', 'Someone dropped you a message from ContactUsForm');
-
-      // Form submission logic
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: formData,
-      })
-        .then((response) => {
-          if (response.ok) {
-            setResultMessage('Your message has been sent successfully!');
-          } else {
-            console.error('Form submission error:', response.statusText);
+    if (form.current) {
+      emailjs
+        .sendForm(
+          "service_qg5cvnh",
+          "template_mwoj0us",
+          form.current,
+          "vxGlYoV0lBJb0JYi2"
+        )
+        .then(
+          () => {
+            console.log("SUCCESS!");
+          },
+          (error) => {
+            console.log("FAILED...", error.text);
           }
-        })
-        .catch((error) => setResultMessage('Form submission error: ' + error.message));
-
-      // Reset the form
-      formRef.current.reset();
-    } else {
-      console.error('Form reference is null');
-      setResultMessage('Form reference is null');
+        );
     }
   };
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} id="form">
+    <form ref={form} onSubmit={sendEmail} id="form">
       <fieldset>
         <legend>Contact Us</legend>
-        <input type="checkbox" name="botcheck" style={{   display: 'none' }} />
-        
+        <input type="checkbox" name="botcheck" style={{ display: "none" }} />
+
         <div>
-          <label htmlFor="name">Full Name</label><br />
-          <input type="text" name="name" id="name" placeholder="Lee Hsien Looong" required /><br /><br />
+          <label htmlFor="name">Full Name</label>
+          <br />
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Enter your name"
+            required
+          />
+          <br />
+          <br />
         </div>
-        
+
         <div>
-          <label htmlFor="email">Email Address</label><br />
-          <input type="email" name="email" id="email" placeholder="you@company.com" required /><br /><br />
+          <label htmlFor="email">Email Address</label>
+          <br />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="you@mail.com"
+            required
+          />
+          <br />
+          <br />
         </div>
-        
+
         <div>
-          <label htmlFor="enquiry-type">Enquiry Type</label><br />
+          <label htmlFor="enquiry-type">Enquiry Type</label>
+          <br />
           <select name="enquiry-type" id="enquiry-type" required>
-            <option value="">Select Enquiry Type</option>
+            <option value="" disabled selected>Select Enquiry Type</option>
             <option value="general">General</option>
             <option value="support">Support</option>
             <option value="sales">Sales</option>
             <option value="feedback">Feedback</option>
-          </select><br /><br />
+          </select>
+          <br />
+          <br />
         </div>
-        
+
         <div>
-          <label htmlFor="message">Message</label><br />
-          <textarea rows={5} name="message" id="message" placeholder="Your Message" required></textarea><br /><br />
+          <label htmlFor="message">Message</label>
+          <br />
+          <textarea
+            rows={5}
+            name="message"
+            id="message"
+            placeholder="Enter your message"
+            required
+          ></textarea>
+          <br />
+          <br />
         </div>
 
         <ReCAPTCHA
-        sitekey="6Lf9YPIpAAAAAFnSu5xNGs-Ib8-BT88I9UnZf5ib"
-        onChange={(val: any) => setCapVal(val)}
+          sitekey="6Lf9YPIpAAAAAFnSu5xNGs-Ib8-BT88I9UnZf5ib"
+          onChange={(val: string | null) => setCapVal(val)}
         />
-        <button type="submit" disabled={!capVal}>Send Message</button>
-
-        {resultMessage && <p className="text-base text-center text-gray-400" id="result">{resultMessage}</p>}
+        <button type="submit" disabled={!capVal}>
+          Send Message
+        </button>
       </fieldset>
     </form>
   );

@@ -61,6 +61,13 @@
 
 /* Small Mobile */
 @media (max-width: 390px) {
+
+  .other-services-card-container {
+    display: grid;
+    grid-template-columns: 1fr; /* Make it display only one card per row */
+    column-gap: 0; /* Optional: adjust or remove the gap between columns */
+  }
+
   .other-services-desc {
     font-size: 1rem;
   }
