@@ -10,7 +10,7 @@ import ResidentialImage from "../../../assets/Projects/HeroImages/ResidentialHer
 import CommercialImage from "../../../assets/Projects/HeroImages/CommercialHero.jpg";
 import InstitutionalImage from "../../../assets/Projects/HeroImages/InstitutionalHero.jpg";
 import ExisitingBuildingRetrofitImage from "../../../assets/Projects/HeroImages/ExistingBuildingHero.jpg";
-import InfrastructureImage from "../../../assets/Projects/HeroImages/ExistingBuildingHero.jpg";
+import InfrastructureImage from "../../../assets/Projects/HeroImages/InfrastructureHero.jpg";
 import IndustrialImage from "../../../assets/Projects/HeroImages/IndustrialHero.jpg";
 
 

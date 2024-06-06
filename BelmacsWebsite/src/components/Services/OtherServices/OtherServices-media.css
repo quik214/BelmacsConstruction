@@ -60,18 +60,23 @@
 }
 
 /* Small Mobile */
-@media (max-width: 390px) {
-
-  .other-services-card-container {
-    display: grid;
-    grid-template-columns: 1fr; /* Make it display only one card per row */
-    column-gap: 0; /* Optional: adjust or remove the gap between columns */
-  }
-
+@media (max-width: 500px) {
   .other-services-desc {
     font-size: 1rem;
   }
   .other-services-card-title {
     font-size: 1rem;
+  }
+  .other-services-card-container {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column layout */
+    gap: 20px; /* Add some gap between the cards */
+    width: 100%; /* Ensure full width */
+    padding: 0; /* Remove any padding */
+    margin: 0; /* Remove any margin */
+  }
+  .other-services-card {
+    margin: 0 auto; /* Center cards horizontally */
+    width: 100%; /* Ensure cards take full width */
   }
 }

@@ -34,6 +34,11 @@
   text-align: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;
+  transition: transform 0.7s ease;
+}
+
+.other-services-card:hover {
+  transform: scale(1.03);
 }
 .other-services-card-background {
   max-width: 100%;
@@ -60,10 +65,7 @@
   align-items: center;
   width: 42px;
   height: 42px;
-  filter: drop-shadow(
-    0px 1000px 0 #364fc7
-  ); /* this two lines is to transform the logo into white */
-  transform: translateY(-1000px);
+ 
 }
 
 .other-services-card-title {

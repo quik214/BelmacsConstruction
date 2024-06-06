@@ -34,11 +34,10 @@ const ContactForm: React.FC = () => {
 
   return (
     <form ref={form} onSubmit={sendEmail} id="form">
-      <fieldset>
-        <legend>Contact Us</legend>
+      <div className="field-ctr">
+        <legend className="contact-header">Contact Us</legend>
         <input type="checkbox" name="botcheck" style={{ display: "none" }} />
-
-        <div>
+        <div className="name-field">
           <label htmlFor="name">Full Name</label>
           <br />
           <input
@@ -52,7 +51,7 @@ const ContactForm: React.FC = () => {
           <br />
         </div>
 
-        <div>
+        <div className="name-field">
           <label htmlFor="email">Email Address</label>
           <br />
           <input
@@ -66,7 +65,7 @@ const ContactForm: React.FC = () => {
           <br />
         </div>
 
-        <div>
+        <div className="name-field">
           <label htmlFor="enquiry-type">Enquiry Type</label>
           <br />
           <select name="enquiry-type" id="enquiry-type" required>
@@ -80,7 +79,7 @@ const ContactForm: React.FC = () => {
           <br />
         </div>
 
-        <div>
+        <div className="name-field">
           <label htmlFor="message">Message</label>
           <br />
           <textarea
@@ -94,14 +93,16 @@ const ContactForm: React.FC = () => {
           <br />
         </div>
 
+        
         <ReCAPTCHA
           sitekey="6Lf9YPIpAAAAAFnSu5xNGs-Ib8-BT88I9UnZf5ib"
           onChange={(val: string | null) => setCapVal(val)}
+          className="recaptcha"
         />
         <button type="submit" disabled={!capVal}>
           Send Message
         </button>
-      </fieldset>
+      </div>
     </form>
   );
 };

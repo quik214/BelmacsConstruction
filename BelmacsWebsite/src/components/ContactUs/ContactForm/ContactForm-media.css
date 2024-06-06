@@ -1,0 +1,59 @@
+/* Large Screens */
+@media (1700px <= width <= 2500px) {
+  .contact-header {
+    font-size: 2rem;
+  }
+}
+
+/* Normal Screens - currently designed for this */
+@media (max-width: 1700px) {
+  .contact-header {
+    font-size: 1.8rem;
+  }
+}
+
+/* Landscape Tablets */
+@media (max-width: 1200px) {
+  .contact-header {
+    font-size: 1.6rem;
+  }
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+}
+
+/* Smaller Tablets */
+@media (max-width: 700px) {
+}
+
+/* Mobile */
+@media (max-width: 550px) {
+  .contact-header {
+    font-size: 1.2rem;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 390px) {
+
+   
+
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif; /* Ensure font consistency */
+    font-size: 16px; /* Ensure font size consistency */
+  }
+
+  .recaptcha {
+    transform: scale(0.9);
+    transform-origin: 0 0;
+  }
+}
