@@ -33,28 +33,55 @@
   font-family: "Lato";
   align-self: left;
 }
-.load-more-button {
-  display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.sentinel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 250px; /* Adjust the width as needed */
+  height: 50px; /* Adjust the height as needed */
+  margin: 20px auto; /* Center the div horizontally */
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
   font-size: 16px;
+  color: #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.5s ease-in-out, visibility 0.5s;
+  opacity: 1;
+  visibility: visible;
 }
 
-.load-more-button:hover {
-  background-color: #364fc7;
+.sentinel-hidden {
+  opacity: 0;
+  visibility: hidden;
 }
 
+.sentinel p {
+  margin: 0;
+  padding: 0 10px;
+  font-size: 15px;
+  font-family: "lato";
+}
+
+.sentinel-icon {
+  font-size: 24px;
+  margin-right: 10px;
+  color: #28a745;
+}
+
+@keyframes fadeInOut {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
 .project-individual-card:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
-
 
 /* -- Popup --*/
 
@@ -131,17 +158,17 @@
   margin-bottom: 20px;
 }
 
-.project-popup-content .project-popup-client   {
+.project-popup-content .project-popup-client {
   font-size: 1.4rem;
   margin-bottom: 20px;
 }
 
-.project-popup-content .project-popup-awards   {
+.project-popup-content .project-popup-awards {
   font-size: 1.4rem;
   margin-bottom: 20px;
 }
 
-.project-popup-content .project-popup-completion   {
+.project-popup-content .project-popup-completion {
   font-size: 1.4rem;
   margin-bottom: 20px;
 }

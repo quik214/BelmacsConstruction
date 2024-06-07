@@ -2,12 +2,13 @@ import "../../../assets/fonts.css";
 import "./ProjectsIndividual.css";
 import "./ProjectsIndividual-media.css";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../../firebase";
 import { useParams, useLocation } from "react-router-dom";
 
 import Hero from "../../Hero/Hero";
+import { FaCheckCircle } from "react-icons/fa"; // Import an icon from react-icons
 
 interface Project {
   id: string;
@@ -31,8 +32,12 @@ const ProjectList: React.FC = () => {
 
   const { paramData } = location.state || {}; // Destructure paramData from location.state
 
+  const observer = useRef<IntersectionObserver | null>(null);
+  const sentinelRef = useRef<HTMLDivElement | null>(null);
+
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [showSentinel, setShowSentinel] = useState(false); // State to manage sentinel visibility
 
   useEffect(() => {
     const fetchDataFromFirestore = async () => {
@@ -65,11 +70,38 @@ const ProjectList: React.FC = () => {
     };
 
     fetchDataFromFirestore();
-  }, [type, visibleCount]); // whenever there is a change to type (which is the current project type), the entirety of the above code will re-run
+  }, [type]); // whenever there is a change to type (which is the current project type), the entirety of the above code will re-run
 
   const loadMoreProjects = () => {
     setVisibleCount((prevCount) => prevCount + 6);
   };
+
+  useEffect(() => {
+    setDisplayedProjects(projects.slice(0, visibleCount));
+  }, [projects, visibleCount]);
+
+  useEffect(() => {
+    if (observer.current) observer.current.disconnect();
+
+    observer.current = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        if (visibleCount < projects.length) {
+          loadMoreProjects();
+        } else {
+          setShowSentinel(true);
+          setTimeout(() => {
+            setShowSentinel(false);
+          }, 1000); // Hide the sentinel after 1 seconds
+        }
+      }
+    });
+
+    if (sentinelRef.current) {
+      observer.current.observe(sentinelRef.current);
+    }
+
+    return () => observer.current?.disconnect();
+  }, [visibleCount, projects.length]);
 
   useEffect(() => {
     setDisplayedProjects(projects.slice(0, visibleCount));
@@ -108,11 +140,17 @@ const ProjectList: React.FC = () => {
             </div>
           ))}
         </div>
-        {visibleCount < projects.length && (
-          <button onClick={loadMoreProjects} className="load-more-button">
-            Load More
-          </button>
-        )}
+        <div
+          ref={sentinelRef}
+          className={`sentinel ${showSentinel ? "" : "sentinel-hidden"}`}
+        >
+          {showSentinel && (
+            <>
+              <FaCheckCircle className="sentinel-icon" />
+              <p>All projects loaded</p>
+            </>
+          )}
+        </div>
       </div>
 
       {showPopup && selectedProject && (
