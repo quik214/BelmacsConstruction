@@ -163,7 +163,9 @@ const ProjectList: React.FC = () => {
               &times;
             </span>
             <div className="project-popup-header">
-              <img src={selectedProject.image} alt={selectedProject.name} />
+             
+                <img src={selectedProject.image} alt={selectedProject.name} />
+             
               <div className="project-popup-info">
                 <div className="project-popup-name">{selectedProject.name}</div>
                 {selectedProject.type && (

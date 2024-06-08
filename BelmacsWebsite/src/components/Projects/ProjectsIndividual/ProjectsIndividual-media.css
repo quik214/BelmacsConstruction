@@ -12,6 +12,67 @@
 
 /* Tablets */
 @media (max-width: 1000px) {
+  .project-popup-content {
+    height: 40%;
+  }
+
+  .project-popup-content img {
+    width: 40%;
+    min-height: 333px;
+    max-height: 333px;
+  }
+
+  .project-popup-info {
+    margin-left: 40px;
+  }
+
+  .project-popup-content .project-popup-name {
+    font-size: 1.1rem;
+    margin-top: 25px;
+    margin-bottom: 15px;
+  }
+
+  .project-popup-content .project-popup-buildingtype {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+
+  .project-popup-content .project-popup-location {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+
+  .project-popup-content .project-popup-developer {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+
+  .project-popup-content .project-popup-client {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+
+  .project-popup-content .project-popup-awards {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+
+  .project-popup-content .project-popup-completion {
+    font-size: 0.9rem;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    font-size: 30px;
+    cursor: pointer;
+    color: black;
+  }
+}
+
+/* Smaller Tablets */
+@media (max-width: 700px) {
   .projects-individual-grid-container {
     margin-top: 50px;
     margin-bottom: 50px;
@@ -27,22 +88,56 @@
 
   .project-popup-content img {
     width: 100%;
-    max-height: 600px;
+    min-height: 260px;
+    max-height: 260px;
   }
 
   .project-popup-content {
     text-align: center;
+    height: 70%;
+    width: 60%; /* Adjust width as needed */
+    overflow-y: auto;
   }
-  
 
-
-
-}
-
-/* Smaller Tablets */
-@media (max-width: 700px) {
   .project-individual-title {
     font-size: 1.1rem;
+  }
+
+  .project-popup-info {
+    padding-bottom: 25px;
+  }
+
+  .project-popup-content .project-popup-name {
+    font-size: 1.25rem;
+  }
+
+  .project-popup-content .project-popup-buildingtype {
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+  }
+
+  .project-popup-content .project-popup-location {
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+  }
+
+  .project-popup-content .project-popup-developer {
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+  }
+
+  .project-popup-content .project-popup-client {
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+  }
+
+  .project-popup-content .project-popup-awards {
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+  }
+
+  .project-popup-content .project-popup-completion {
+    font-size:  1.05rem;
   }
 }
 
@@ -57,6 +152,46 @@
   .project-individual-title {
     font-size: 1.1rem;
   }
+
+  .project-popup-content {
+    width: 70%;
+    height: 60%;
+  }
+
+  .project-popup-content .project-popup-name {
+    font-size: 1.15rem;
+    margin-top: 25px;
+    margin-bottom: 20px;
+  }
+
+  .project-popup-content .project-popup-buildingtype {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .project-popup-content .project-popup-location {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .project-popup-content .project-popup-developer {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .project-popup-content .project-popup-client {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .project-popup-content .project-popup-awards {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .project-popup-content .project-popup-completion {
+    font-size: 1rem;
+  }
 }
 
 /* Small Mobile */
@@ -66,8 +201,18 @@
     margin-bottom: 50px;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
+
+  }
+
+  .project-popup-content {
+    height: 60%;
+    width: 80%;
   }
   .project-individual-title {
     font-size: 1.1rem;
+  }
+
+  .project-popup-info {
+    padding-bottom: 25px;
   }
 }

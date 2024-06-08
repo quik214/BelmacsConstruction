@@ -8,12 +8,23 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 const ContactForm: React.FC = () => {
   const form = useRef<HTMLFormElement>(null);
-  const [capVal, setCapVal] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [enquiryType, setEnquiryType] = useState("");
   const [message, setMessage] = useState("");
+
+  // const [capVal, setCapVal] = useState(false);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+  // const [isValid, setIsValid] = useState(false);
+
+  const handleRecaptchaChange = (value: string | null) => {
+    if (value && isCheckboxChecked) {
+      const sidebar = document.querySelector(".submit-button");
+      if (sidebar) {
+        sidebar.classList.add("enabled");
+      }
+    }
+  };
 
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -107,6 +118,14 @@ const ContactForm: React.FC = () => {
         .then(
           () => {
             console.log("SUCCESS!");
+            const form = document.querySelector(".form-ctr");
+            const submittext = document.querySelector(".on-submit");
+            if (form && submittext) {
+              form.classList.add("hidden");
+              submittext.classList.add("message-appear");
+            }
+
+           
           },
           (error) => {
             console.log("FAILED...", error.text);
@@ -129,16 +148,16 @@ const ContactForm: React.FC = () => {
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31910.443477732275!2d103.77878131083983!3d1.2910719999999982!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da1a2c8fcb8bcf%3A0x686207b4efd1b40!2sBELMACS%20Pte%20Ltd!5e0!3m2!1sen!2ssg!4v1686929055442!5m2!1sen!2ssg"
         loading="lazy"
         width="100%"
-        height="450"
         style={{ border: 0 }}
         allowFullScreen
         referrerPolicy="no-referrer-when-downgrade"
+        className="google-maps"
       ></iframe>
 
       <div className="form-ctr">
         <form ref={form} onSubmit={sendEmail} id="form">
           <div>
-            <legend className="contact-header">Contact Us</legend>
+            <div className="contact-header">Contact Us</div>
             <input
               type="checkbox"
               name="botcheck"
@@ -240,14 +259,18 @@ const ContactForm: React.FC = () => {
 
             <ReCAPTCHA
               sitekey="6Lf9YPIpAAAAAFnSu5xNGs-Ib8-BT88I9UnZf5ib"
-              onChange={(val: string | null) => setCapVal(val)}
+              onChange={handleRecaptchaChange}
               className="recaptcha"
             />
-            <button type="submit" disabled={!capVal || !isCheckboxChecked}>
+            <button type="submit" className="submit-button">
               Send Message
             </button>
           </div>
         </form>
+      </div>
+
+      <div className="on-submit">
+        Thank you for your submission. <br></br> <br></br> A confirmation email has been sent to the provided email address. 
       </div>
     </div>
   );
