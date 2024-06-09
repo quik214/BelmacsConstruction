@@ -106,15 +106,24 @@ button:hover {
   height: 450px;
 }
 
-.on-submit {
-  font-family: Arial;
+.on-submit-ctr {
   padding-top: 50px;
-  font-size: 1.5rem;
   width: 80%;
   text-align: center;
   margin: auto;
 
   display: none;
+}
+
+.mailbox {
+  width: 250px;
+  height: auto;
+}
+
+.on-submit-text {
+  margin-top: 50px;
+  font-family: Arial;
+  font-size: 1.5rem;
 }
 
 .message-appear {

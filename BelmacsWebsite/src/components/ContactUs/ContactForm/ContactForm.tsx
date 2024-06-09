@@ -6,6 +6,8 @@ import "../../../assets/fonts.css";
 import emailjs from "@emailjs/browser";
 import ReCAPTCHA from "react-google-recaptcha";
 
+import mailbox from "../../../assets/Contact/mainbox.svg";
+
 const ContactForm: React.FC = () => {
   const form = useRef<HTMLFormElement>(null);
   const [name, setName] = useState("");
@@ -269,8 +271,9 @@ const ContactForm: React.FC = () => {
         </form>
       </div>
 
-      <div className="on-submit">
-        Thank you for your submission. <br></br> <br></br> A confirmation email has been sent to the provided email address. 
+      <div className="on-submit-ctr">
+        <img className="mailbox" src={mailbox}></img>
+        <p className="on-submit-text">Thank you for your submission. <br></br> <br></br> A confirmation email has been sent to the provided email address. </p>
       </div>
     </div>
   );
