@@ -27,6 +27,7 @@
 @media (max-width: 1200px) {
   .vision-header {
     font-size: 1.6rem;
+    width: 8.5rem;
   }
 
   .mission-header {

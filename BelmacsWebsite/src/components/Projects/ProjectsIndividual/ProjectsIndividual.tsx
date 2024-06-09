@@ -166,6 +166,7 @@ const ProjectList: React.FC = () => {
              
                 <img src={selectedProject.image} alt={selectedProject.name} />
              
+            
               <div className="project-popup-info">
                 <div className="project-popup-name">{selectedProject.name}</div>
                 {selectedProject.type && (

@@ -1,13 +1,8 @@
 /* Large Screens */
-@media (1700px <= width <= 2500px) {
-}
-
-/* Normal Screens - currently designed for this */
-@media (max-width: 1700px) {
-}
-
-/* Landscape Tablets */
-@media (max-width: 1200px) {
+@media (min-width: 1700px) {
+  .project-popup-content {
+    height: 50%;
+  }
 }
 
 /* Tablets */
@@ -16,20 +11,17 @@
     height: 40%;
   }
 
+ 
+
   .project-popup-content img {
     width: 40%;
     min-height: 333px;
     max-height: 333px;
   }
 
-  .project-popup-info {
-    margin-left: 40px;
-  }
-
   .project-popup-content .project-popup-name {
     font-size: 1.1rem;
-    margin-top: 25px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
   }
 
   .project-popup-content .project-popup-buildingtype {
@@ -80,6 +72,7 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+
   .project-popup-header {
     flex-direction: column;
     align-items: center;
@@ -94,7 +87,7 @@
 
   .project-popup-content {
     text-align: center;
-    height: 70%;
+    height: 80%;
     width: 60%; /* Adjust width as needed */
     overflow-y: auto;
   }
@@ -102,13 +95,13 @@
   .project-individual-title {
     font-size: 1.1rem;
   }
-
   .project-popup-info {
-    padding-bottom: 25px;
+    padding: 20px 50px;
   }
 
   .project-popup-content .project-popup-name {
-    font-size: 1.25rem;
+    font-size: 1.4rem;
+    margin-bottom: 30px;
   }
 
   .project-popup-content .project-popup-buildingtype {
@@ -137,7 +130,8 @@
   }
 
   .project-popup-content .project-popup-completion {
-    font-size:  1.05rem;
+    font-size: 1.05rem;
+    padding-bottom: 0px;
   }
 }
 
@@ -155,11 +149,15 @@
 
   .project-popup-content {
     width: 70%;
-    height: 60%;
+  }
+
+  
+  .project-popup-info {
+    padding: 0px 50px;
   }
 
   .project-popup-content .project-popup-name {
-    font-size: 1.15rem;
+    font-size: 1.3rem;
     margin-top: 25px;
     margin-bottom: 20px;
   }
@@ -201,11 +199,10 @@
     margin-bottom: 50px;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-
   }
 
   .project-popup-content {
-    height: 60%;
+    height: 70%;
     width: 80%;
   }
   .project-individual-title {
