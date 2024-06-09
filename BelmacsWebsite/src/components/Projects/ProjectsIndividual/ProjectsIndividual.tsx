@@ -91,7 +91,7 @@ const ProjectList: React.FC = () => {
           setShowSentinel(true);
           setTimeout(() => {
             setShowSentinel(false);
-          }, 1000); // Hide the sentinel after 1 seconds
+          }, 1500); // Hide the sentinel after 1 seconds
         }
       }
     });
