@@ -17,12 +17,9 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 
 function App() {
-  const location = useLocation();
-  const isAdminPage = location.pathname === "/admin";
-
   return (
     <>
-      {!isAdminPage && <Navbar />}
+      <Navbar />
       <div>
         <Routes>
           <Route path="/" element={<About />} />
