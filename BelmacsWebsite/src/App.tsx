@@ -6,7 +6,12 @@ import Projects from "./pages/Projects/Projects";
 import Services from "./pages/Services/Services";
 import Contact from "./pages/Contact/Contact";
 import ProjectIndividual from "./components/Projects/ProjectsIndividual/ProjectsIndividual";
+
+// Admin Page
 import Admin from "./pages/Admin/Admin";
+import AdminDashboard from "./components/Admin/AdminDashboard/AdminDashboard";
+import AdminCreate from "./components/Admin/AdminCreate/AdminCreate";
+import AdminEdit from "./components/Admin/AdminEdit/AdminEdit";
 
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
@@ -26,6 +31,9 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/create" element={<AdminCreate />} />
+          <Route path="/admin/edit" element={<AdminEdit />} />
         </Routes>
       </div>
       <Footer />
