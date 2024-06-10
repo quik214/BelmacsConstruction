@@ -148,3 +148,7 @@ body {
 .sidebar.close {
   animation: slideOutRight 0.3s forwards;
 }
+
+.hidden {
+  display: none;
+}

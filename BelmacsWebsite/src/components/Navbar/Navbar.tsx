@@ -82,6 +82,7 @@ export default function Navbar() {
     firebaseSignOut(auth)
       .then(() => {
         console.log("Sign out successful");
+        hideSideBar();
       })
       .catch((error) => {
         console.error(error);
@@ -90,13 +91,15 @@ export default function Navbar() {
 
   return (
     <div>
+      {/* DESKTOP NAVBAR */}
       <nav className={authUser || navbar ? "navbar active" : "navbar"}>
         <img
           src={logo || authUser ? BelmacsBlueBlack : BelmacsWhiteWhite}
           className="navbar-logo"
         />
         <div className="nav-links">
-          {!authUser && (
+          {/* (If user is not authenticated) && (The page is not admin), */}
+          {!authUser && location.pathname !== "/admin" && (
             <>
               <Link to="/" className="nav-link hideOnMobile">
                 About
@@ -114,7 +117,7 @@ export default function Navbar() {
           )}
           {authUser && (
             <>
-              <Link to="/admin" className="nav-link">
+              <Link to="/admin/dashboard" className="nav-link hideOnMobile">
                 Dashboard
               </Link>
               <Link
@@ -126,13 +129,17 @@ export default function Navbar() {
               </Link>
             </>
           )}
-          <img
-            src={menuIcon ? MenuBlackIcon : MenuWhiteIcon}
-            className="nav-sidebar-icon"
-            onClick={showSideBar}
-          ></img>
+          {authUser && (
+            <img
+              src={menuIcon ? MenuBlackIcon : MenuWhiteIcon}
+              className="nav-sidebar-icon"
+              onClick={showSideBar}
+            ></img>
+          )}
         </div>
       </nav>
+
+      {/* MOBILE SIDEBAR*/}
 
       <nav className="sidebar">
         <div className="sidebar-links">
@@ -141,7 +148,7 @@ export default function Navbar() {
             className="sidebar-img"
             onClick={hideSideBar}
           ></img>
-          {!authUser && (
+          {!authUser && location.pathname !== "/admin" && (
             <>
               <Link to="/" className="sidebar-link">
                 About
@@ -160,12 +167,12 @@ export default function Navbar() {
 
           {authUser && (
             <>
-              <Link to="/admin" className="sidebar-link">
+              <Link to="/admin/dashboard" className="sidebar-link ">
                 Dashboard
               </Link>
-              <button onClick={handleSignOut} className="nav-link hideOnMobile">
+              <Link to="/admin" onClick={handleSignOut}  className="sidebar-link ">
                 Sign Out
-              </button>
+              </Link>
             </>
           )}
         </div>

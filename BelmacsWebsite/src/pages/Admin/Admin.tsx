@@ -1,14 +1,12 @@
-import React from 'react'
-import './Admin.css'
+import React from "react";
+import "./Admin.css"
 
-import AdminLogin from '../../components/Admin/AdminLogin/AdminLogin'
-import AuthDetails from '../../components/Admin/AuthDetails'
+import AdminLogin from "../../components/Admin/AdminLogin/AdminLogin";
 
 export default function Admin() {
-    return (
-        <div className="admin-ctr">
-            <AdminLogin />
-            <AuthDetails />
-        </div>
-    )
+  return (
+    <div className="container">
+      <AdminLogin />
+    </div>
+  );
 }

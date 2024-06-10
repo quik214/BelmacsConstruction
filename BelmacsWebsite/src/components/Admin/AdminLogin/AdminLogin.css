@@ -1,0 +1,18 @@
+.signin-header {
+  font-size: 1.8rem;
+  font-family: "Lato";
+  text-shadow: 0 0 0 rgb(112, 123, 177);
+  color: rgb(54, 79, 199);
+}
+
+.signin-details {
+  margin-top: 20px;
+}
+
+.signin-email {
+
+}
+
+.signin-password {
+  margin-top: 20px;
+}
