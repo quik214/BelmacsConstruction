@@ -83,14 +83,55 @@
   .mobile-table {
     display: none;
   }
+
+  .delete-confirmation-popup {
+    width: 50%;
+  }
+
+  .delete-confirmation-header {
+    font-size: 1.4rem;
+  }
+  
+  .delete-confirmation-description {
+    font-size: 1rem;
+    text-align: center;
+  }
+  
+  .popup-cancel-btn {
+    font-size: 1.1rem;
+  }
+  
+  .popup-confirm-btn {
+    font-size: 1.1rem;
+  }
 }
 
 /* Smaller Tablets */
 @media (max-width: 700px) {
+
+  .delete-confirmation-header {
+    font-size: 1.2rem;
+  }
+  
+  .delete-confirmation-description {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  
+  .popup-cancel-btn {
+    font-size: 1rem;
+  }
+  
+  .popup-confirm-btn {
+    font-size: 1rem;
+  }
 }
 
 /* Mobile */
 @media (max-width: 550px) {
+  .delete-confirmation-popup {
+    width: 65%;
+  }
 }
 
 /* Small Mobile */

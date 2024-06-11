@@ -144,7 +144,7 @@ const Dashboard: React.FC = () => {
       console.log("Project deleted:", selectedProject.id);
       setShowDeleteConfirmation(false); // Hide the confirmation dialog after deletion
       setNotification({
-        message: "Project deleted successfully",
+        message: selectedProject.name + " deleted successfully",
         type: "success",
       }); // Show success notification
       setTimeout(() => {
@@ -153,7 +153,7 @@ const Dashboard: React.FC = () => {
     } catch (error) {
       console.error("Error deleting project:", error);
       setShowDeleteConfirmation(false); // Hide the confirmation dialog on error
-      setNotification({ message: "Error deleting project", type: "error" }); // Show error notification
+      setNotification({ message: "Error deleting " + selectedProject.name, type: "error" }); // Show error notification
       setTimeout(() => {
         setNotification(null); 
       }, 2500);
