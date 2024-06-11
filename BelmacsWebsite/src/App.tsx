@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, Navigate } from "react-router-dom";
 
 import About from "./pages/About/About";
 import Projects from "./pages/Projects/Projects";
@@ -12,11 +12,21 @@ import Admin from "./pages/Admin/Admin";
 import AdminDashboard from "./components/Admin/AdminDashboard/AdminDashboard";
 import AdminCreate from "./components/Admin/AdminCreate/AdminCreate";
 import AdminEdit from "./components/Admin/AdminEdit/AdminEdit";
+import PrivateRoute from "./components/Admin/PrivateRoute";
 
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 
 function App() {
+  const location = useLocation();
+
+  // Define paths where you don't want to show the footer
+  const noFooterPaths = [
+    "/admin",
+    "/admin/dashboard",
+    "/admin/create",
+    "/admin/edit",
+  ];
   return (
     <>
       <Navbar />
@@ -28,12 +38,35 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<Admin />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/create" element={<AdminCreate />} />
-          <Route path="/admin/edit" element={<AdminEdit />} />
+          <Route
+            path="/admin/dashboard"
+            element={
+              <PrivateRoute>
+                <AdminDashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/create"
+            element={
+              <PrivateRoute>
+                <AdminCreate />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/edit"
+            element={
+              <PrivateRoute>
+                <AdminEdit />
+              </PrivateRoute>
+            }
+          />
+          {/* Catch-all route for invalid paths */}
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
-      <Footer />
+      {!noFooterPaths.includes(location.pathname) && <Footer />}
     </>
   );
 }
