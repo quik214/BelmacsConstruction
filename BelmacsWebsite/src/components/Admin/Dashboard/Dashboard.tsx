@@ -5,7 +5,7 @@ import EditIcon from "../../../assets/Icons/AdminDashboard/pencil-simple.svg";
 import DeleteIcon from "../../../assets/Icons/AdminDashboard/trash.svg";
 
 import React, { useState, useEffect, useRef } from "react";
-import { getDocs, collection } from "firebase/firestore";
+import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../../firebase";
 
 import { FaCheckCircle } from "react-icons/fa"; // Import an icon from react-icons
@@ -34,6 +34,14 @@ const Dashboard: React.FC = () => {
   const observer = useRef<IntersectionObserver | null>(null);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const [showSentinel, setShowSentinel] = useState(false);
+
+  // for delete
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [notification, setNotification] = useState<{
+    message: string;
+    type: "success" | "error";
+  } | null>(null);
 
   useEffect(() => {
     const fetchDataFromFirestore = async () => {
@@ -116,9 +124,40 @@ const Dashboard: React.FC = () => {
     console.log("Edit project:", project);
   };
 
-  const handleDelete = (projectId: string) => {
-    // Add your delete logic here
-    console.log("Delete project ID:", projectId);
+  const handleDelete = (project: Project) => {
+    setSelectedProject(project);
+    setShowDeleteConfirmation(true);
+  };
+
+  const confirmDelete = async () => {
+    if (!selectedType || !selectedProject) return;
+    try {
+      await deleteDoc(doc(db, `${selectedType}-projects`, selectedProject.id));
+      setProjects((prevProjects) =>
+        prevProjects.filter((project) => project.id !== selectedProject.id)
+      );
+      setDisplayedProjects((prevDisplayedProjects) =>
+        prevDisplayedProjects.filter(
+          (project) => project.id !== selectedProject.id
+        )
+      );
+      console.log("Project deleted:", selectedProject.id);
+      setShowDeleteConfirmation(false); // Hide the confirmation dialog after deletion
+      setNotification({
+        message: "Project deleted successfully",
+        type: "success",
+      }); // Show success notification
+      setTimeout(() => {
+        setNotification(null);
+      }, 2500);
+    } catch (error) {
+      console.error("Error deleting project:", error);
+      setShowDeleteConfirmation(false); // Hide the confirmation dialog on error
+      setNotification({ message: "Error deleting project", type: "error" }); // Show error notification
+      setTimeout(() => {
+        setNotification(null); 
+      }, 2500);
+    }
   };
 
   const handleAddProject = () => {
@@ -222,7 +261,7 @@ const Dashboard: React.FC = () => {
                   </button>
                   <button
                     className="action-button delete-button"
-                    onClick={() => handleDelete(projectItem.id)}
+                    onClick={() => handleDelete(projectItem)}
                   >
                     <img src={DeleteIcon} className="action-icons" />
                   </button>
@@ -243,6 +282,40 @@ const Dashboard: React.FC = () => {
           )}
         </div>
       </div>
+
+      {showDeleteConfirmation && selectedProject && (
+        <>
+          <div className="delete-overlay"></div>
+          <div className="delete-confirmation-popup">
+            <div className="delete-confirmation-ctr">
+              <div className="delete-confirmation-header">Are you sure?</div>
+              <div className="delete-confirmation-description">
+                Are you sure you want to delete{" "}
+                <span style={{ color: "#364FC7" }}>
+                  {selectedProject.name}?
+                </span>{" "}
+                This action cannot be undone.
+              </div>
+
+              <div className="button-container">
+                <button className="popup-cancel-btn" onClick={() => setShowDeleteConfirmation(false)}>
+                  Cancel
+                </button>
+                <button className="popup-confirm-btn" onClick={confirmDelete}>
+                  Confirm
+                  </button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* Notification */}
+      {notification && (
+        <div className={`notification-btm-right ${notification.type}`}>
+          {notification.message}
+        </div>
+      )}
     </div>
   );
 };

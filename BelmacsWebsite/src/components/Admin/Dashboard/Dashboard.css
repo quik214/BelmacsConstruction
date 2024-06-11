@@ -115,3 +115,98 @@
 .search-ctr input {
   padding-left: 12.5px;
 }
+
+/* delete */
+
+.delete-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 1; /* Ensure it's behind the delete confirmation dialog */
+}
+
+.delete-confirmation-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  font-family: "Lato";
+}
+
+.delete-confirmation-ctr {
+  width: 80%;
+  margin: auto;
+}
+
+.delete-confirmation p {
+  margin-bottom: 10px;
+}
+
+.delete-confirmation-header {
+  margin: 25px;
+  font-size: 2rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.delete-confirmation-description {
+  font-size: 1rem;
+  text-align: center;
+}
+
+.button-container {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between; /* Align buttons to the left and right */
+}
+
+.delete-confirmation-popup button {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.popup-cancel-btn {
+  font-size: 1.2rem;
+  background-color: white;
+}
+
+.popup-confirm-btn {
+  font-size: 1.2rem;
+  color: white;
+  background-color: #F15858;
+  border: white;
+}
+
+.delete-confirmation-popup button:last-child:hover {
+  background-color: #f03838;
+  
+}
+
+.delete-confirmation-popup button:hover {
+  background-color: #f0f0f0;
+}
+
+
+/* notification upon success/error */
+.notification-btm-right {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #4caf50; /* Green */
+  color: white;
+  border-radius: 4px;
+  z-index: 9999;
+}
+
+.notification-btm-right.error {
+  background-color: #f44336; /* Red */
+}
