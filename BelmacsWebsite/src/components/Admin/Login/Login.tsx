@@ -3,7 +3,7 @@ import "./Login.css";
 import "./Login-media.css";
 
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { auth } from "../../../firebase";
 
 import { useNavigate } from "react-router-dom";
