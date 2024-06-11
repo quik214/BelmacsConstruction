@@ -1,0 +1,117 @@
+.dashboard-ctr {
+  margin-top: 120px;
+  font-family: Arial, Helvetica, sans-serif;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dashboard-header {
+  font-size: 2rem;
+  color: #364fc7;
+}
+
+.dropdown-ctr {
+  margin-top: 35px;
+}
+
+.select-project-type {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.dashboard-table-ctr {
+  margin-top: 20px;
+}
+
+.project-image {
+  height: 100px; /* Set your desired height */
+  width: 120px;
+
+  object-fit: cover;
+}
+
+.project-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.project-table th,
+.project-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.project-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.table-actions {
+  gap: 10px;
+}
+
+.add-project-ctr {
+  display: flex;
+  margin-left: auto;
+  justify-content: flex-end;
+}
+
+.add-project-button {
+  margin-top: 10px;
+  background-color: #1fb185;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+
+  border-radius: 4px;
+  padding: 10px 12.5px;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 5px 7.5px;
+  margin: auto;
+}
+
+.edit-button {
+  background-color: #fb980a;
+  color: white;
+}
+
+.delete-button {
+  background-color: #f15858;
+  color: white;
+  margin-top: 10px;
+}
+
+.action-icons {
+  height: 25px;
+  width: 25px;
+}
+
+.sentinel {
+  text-align: center;
+
+  font-size: 16px;
+}
+
+.search {
+  font-size: 1.1rem;
+  margin-top: 15px;
+}
+
+.search-ctr {
+  margin-top: 10px;
+}
+
+.search-ctr input {
+  padding-left: 12.5px;
+}

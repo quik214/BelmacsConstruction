@@ -1,6 +1,6 @@
 import "../../../assets/fonts.css";
-import "./AdminLogin.css";
-import "./AdminLogin-media.css";
+import "./Login.css";
+import "./Login-media.css";
 
 
 import React, { useState } from "react";
@@ -9,7 +9,7 @@ import { auth } from "../../../firebase";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
-const SignIn = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -47,10 +47,10 @@ const SignIn = () => {
           onChange={(e) => setPassword(e.target.value)}
         ></input>
         </div>
-        <button type="submit">Log In</button>
+        <button type="submit" className="login-button">Log In</button>
       </form>
     </div>
   );
 };
 
-export default SignIn;
+export default Login;

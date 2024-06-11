@@ -18,7 +18,7 @@
 input {
   margin-bottom: 15px;
 }
-button {
+.login-button {
   background-color: #364fc7;
   color: white;
   padding: 10px 15px;

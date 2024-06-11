@@ -1,5 +1,8 @@
-import "./AdminDashboard.css";
-import "./AdminDashboard-media.css";
+import "./Dashboard.css";
+import "./Dashboard-media.css";
+
+import EditIcon from "../../../assets/Icons/AdminDashboard/pencil-simple.svg";
+import DeleteIcon from "../../../assets/Icons/AdminDashboard/trash.svg";
 
 import React, { useState, useEffect, useRef } from "react";
 import { getDocs, collection } from "firebase/firestore";
@@ -19,11 +22,14 @@ interface Project {
   location: string;
 }
 
-const AdminDashboard: React.FC = () => {
+const Dashboard: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [displayedProjects, setDisplayedProjects] = useState<Project[]>([]);
   const [visibleCount, setVisibleCount] = useState(6);
-  const [selectedType, setSelectedType] = useState<string>("");
+  const [selectedType, setSelectedType] = useState<string>("residential");
+
+  // for search
+  const [searchQuery, setSearchQuery] = useState(""); // Add search query state
 
   const observer = useRef<IntersectionObserver | null>(null);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
@@ -59,6 +65,15 @@ const AdminDashboard: React.FC = () => {
 
     fetchDataFromFirestore();
   }, [selectedType, visibleCount]);
+
+  // for search
+
+  useEffect(() => {
+    const filteredProjects = projects.filter((project) =>
+      project.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setDisplayedProjects(filteredProjects.slice(0, visibleCount));
+  }, [projects, visibleCount, searchQuery]);
 
   const loadMoreProjects = () => {
     setVisibleCount((prevCount) => prevCount + 6);
@@ -111,19 +126,25 @@ const AdminDashboard: React.FC = () => {
     console.log("Add project button clicked");
   };
 
+  // for search
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
+
   return (
     <div className="dashboard-ctr">
-      <div className="dashboard-header">
-        Projects
-      </div>
+      <div className="dashboard-header">Projects</div>
       <div className="dropdown-ctr">
-        <label htmlFor="project-type">Select Project Type: </label>
+        <label htmlFor="project-type" className="select-project-type">
+          Select Project Type{" "}
+        </label>
         <select
           id="project-type"
           value={selectedType}
           onChange={handleTypeChange}
         >
-          <option value="">--Select Type--</option>
+          {/* <option value="">--Select Type--</option> */}
+
           <option value="residential">Residential</option>
           <option value="commercial">Commercial</option>
           <option value="existingBuildingRetrofit">
@@ -134,19 +155,40 @@ const AdminDashboard: React.FC = () => {
           <option value="industrial">Industrial</option>
         </select>
       </div>
-      <button className="add-project-button" onClick={handleAddProject}>Add Project</button>
+      <label htmlFor="search" className="search">
+        Search
+      </label>
+      <div className="search-ctr">
+        <input
+          type="text"
+          placeholder="Search projects..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+        />
+      </div>
+
+      <div className="add-project-ctr">
+        <button className="add-project-button" onClick={handleAddProject}>
+          Add Project
+        </button>
+      </div>
+
       <div className="dashboard-table-ctr">
         <table className="project-table">
           <thead>
             <tr>
               <th>Image</th>
               <th>Name</th>
-              <th>Developer</th>
-              <th>Awards</th>
-              <th>Type</th>
-              <th>Completion</th>
-              <th>Client</th>
-              <th>Location</th>
+              {selectedType !== "existingBuildingRetrofit" && (
+                <th className="mobile-table">Developer</th>
+              )}
+              <th className="mobile-table">Awards</th>
+              <th className="mobile-table">Type</th>
+              <th className="mobile-table">Completion</th>
+              {selectedType === "existingBuildingRetrofit" && (
+                <th className="mobile-table">Client</th>
+              )}
+              <th className="mobile-table">Location</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -161,24 +203,28 @@ const AdminDashboard: React.FC = () => {
                   />
                 </td>
                 <td>{projectItem.name}</td>
-                <td>{projectItem.developer}</td>
-                <td>{projectItem.awards}</td>
-                <td>{projectItem.type}</td>
-                <td>{projectItem.completion}</td>
-                <td>{projectItem.client}</td>
-                <td>{projectItem.location}</td>
+                {selectedType !== "existingBuildingRetrofit" && (
+                  <td className="mobile-table">{projectItem.developer}</td>
+                )}
+                <td className="mobile-table">{projectItem.awards}</td>
+                <td className="mobile-table">{projectItem.type}</td>
+                <td className="mobile-table">{projectItem.completion}</td>
+                {selectedType === "existingBuildingRetrofit" && (
+                  <td className="mobile-table">{projectItem.client}</td>
+                )}
+                <td className="mobile-table">{projectItem.location}</td>
                 <td className="table-actions">
                   <button
                     className="action-button edit-button"
                     onClick={() => handleEdit(projectItem)}
                   >
-                    Edit
+                    <img src={EditIcon} className="action-icons" />
                   </button>
                   <button
                     className="action-button delete-button"
                     onClick={() => handleDelete(projectItem.id)}
                   >
-                    Delete
+                    <img src={DeleteIcon} className="action-icons" />
                   </button>
                 </td>
               </tr>
@@ -201,4 +247,4 @@ const AdminDashboard: React.FC = () => {
   );
 };
 
-export default AdminDashboard;
+export default Dashboard;

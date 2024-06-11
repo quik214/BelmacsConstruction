@@ -8,10 +8,10 @@ import Contact from "./pages/Contact/Contact";
 import ProjectIndividual from "./components/Projects/ProjectsIndividual/ProjectsIndividual";
 
 // Admin Page
-import Admin from "./pages/Admin/Admin";
-import AdminDashboard from "./components/Admin/AdminDashboard/AdminDashboard";
-import AdminCreate from "./components/Admin/AdminCreate/AdminCreate";
-import AdminEdit from "./components/Admin/AdminEdit/AdminEdit";
+import AdminLogin from "./pages/Admin/AdminLogin/AdminLogin";
+import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
+import AdminCreate from "./pages/Admin/AdminDashboard/AdminDashboard";
+import AdminEdit from "./components/Admin/Edit/Edit";
 import PrivateRoute from "./components/Admin/PrivateRoute";
 
 import Navbar from "./components/Navbar/Navbar";
@@ -37,7 +37,7 @@ function App() {
           <Route path="/projects/:type" element={<ProjectIndividual />} />
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin" element={<AdminLogin />} />
           <Route
             path="/admin/dashboard"
             element={

@@ -1,5 +1,5 @@
-import "./AdminCreate.css";
-import "./AdminCreate-media.css";
+import "./Create.css";
+import "./Create-media.css";
 
 export default function AdminCreate() {
   return (

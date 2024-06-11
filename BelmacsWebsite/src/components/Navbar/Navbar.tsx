@@ -29,18 +29,31 @@ export default function Navbar() {
       } else {
         setAuthUser(null);
         window.addEventListener("scroll", changeBackground);
-
-        // Change navbar when on login page
-        if (location.pathname === "/admin") {
-          setNavbar(true);
-          setLogo(true);
-          setMenuIcon(true);
-        }
       }
     });
 
     return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    const checkInitialStates = () => {
+      if (location.pathname === "/admin" || location.pathname.includes("/dashboard")) {
+        setNavbar(true);
+        setLogo(true);
+        setMenuIcon(true);
+      } else {
+        changeBackground();
+      }
+    };
+  
+    checkInitialStates();
+    
+  
+    return () => {
+      window.removeEventListener("scroll", changeBackground);
+    };
+  }, [location.pathname]);
+
 
   const changeBackground = () => {
     if (window.scrollY >= 40) {
