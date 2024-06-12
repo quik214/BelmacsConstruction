@@ -3,8 +3,10 @@ import "./Create-media.css";
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { db } from "../../../firebase";
+import { db, storage  } from "../../../firebase";
 import { setDoc, doc } from "firebase/firestore";
+
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const Create: React.FC = () => {
   const [projectDetails, setProjectDetails] = useState({
@@ -17,11 +19,10 @@ const Create: React.FC = () => {
     client: "",
     location: "",
   });
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const navigate = useNavigate();
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setProjectDetails((prevDetails) => ({
       ...prevDetails,
@@ -33,14 +34,45 @@ const Create: React.FC = () => {
     navigate(-1); // Go back to the previous page
   };
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setImageFile(e.target.files[0]);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!imageFile) {
+      alert("Please select an image file");
+      return;
+    }
+
     try {
-      await setDoc(
-        doc(db, `${projectDetails.type}-projects`, projectDetails.name),
-        projectDetails
+      // Upload image to Firebase Storage
+      const storageRef = ref(storage, `belmacs_images/${projectDetails.type}/${projectDetails.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, imageFile);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          // Handle progress if needed
+        },
+        (error) => {
+          console.error("Error uploading file: ", error);
+        },
+        async () => {
+          // Get the download URL
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          
+          // Save project details along with image URL in Firestore
+          await setDoc(doc(db, `${projectDetails.type}-projects`, projectDetails.name), {
+            ...projectDetails,
+            image: downloadURL,
+          });
+          
+          navigate("/admin/dashboard");
+        }
       );
-      navigate("/admin/dashboard");
     } catch (error) {
       console.error("Error adding project: ", error);
     }
@@ -140,6 +172,13 @@ const Create: React.FC = () => {
             onChange={handleChange}
             required
           />
+
+<input
+          type="file"
+          onChange={handleImageChange}
+          accept="image/*"
+          required
+        />
           
           <div className="create-project-button-ctr">
             <button type="submit" className="create-project-button">Add Project</button>
