@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes, useLocation, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 
 import About from "./pages/About/About";
 import Projects from "./pages/Projects/Projects";
@@ -10,7 +10,7 @@ import ProjectIndividual from "./components/Projects/ProjectsIndividual/Projects
 // Admin Page
 import AdminLogin from "./pages/Admin/AdminLogin/AdminLogin";
 import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
-import AdminCreate from "./pages/Admin/AdminCreate/AdminCreate";
+import AdminCreate from "./components/Admin/Create/Create";
 import AdminEdit from "./components/Admin/Edit/Edit";
 import PrivateRoute from "./components/Admin/PrivateRoute";
 
@@ -18,6 +18,12 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 
 function App() {
+  return (
+    <MainApp />
+  );
+}
+
+function MainApp() {
   const location = useLocation();
 
   // Define paths where you don't want to show the footer
@@ -27,6 +33,7 @@ function App() {
     "/admin/create",
     "/admin/edit",
   ];
+
   return (
     <>
       <Navbar />

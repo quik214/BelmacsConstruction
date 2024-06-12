@@ -4,12 +4,12 @@ import App from "./App.tsx";
 import "./index.css";
 
 // for react-router
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter basename="/BelmacsConstruction/">
+    <HashRouter >
       <App />
-    </BrowserRouter> 
+    </HashRouter>
   </React.StrictMode>
 );
