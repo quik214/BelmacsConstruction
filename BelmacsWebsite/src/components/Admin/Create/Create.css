@@ -9,6 +9,10 @@
     color: #364FC7;
 }
 
+.upload-image-input {
+    border: 2px dashed #ccc;
+}
+
 .create-project-secondary-header {
     font-size: 1.4rem;
     font-weight: bold;

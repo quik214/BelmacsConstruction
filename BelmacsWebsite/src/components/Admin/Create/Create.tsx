@@ -106,6 +106,7 @@ const Create: React.FC = () => {
 
           <label htmlFor="name">Upload Image File</label>
           <input
+          className="upload-image-input"
           type="file"
           onChange={handleImageChange}
           accept="image/*"
