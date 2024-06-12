@@ -6,8 +6,9 @@ import DeleteIcon from "../../../assets/Icons/AdminDashboard/trash.svg";
 
 import React, { useState, useEffect, useRef } from "react";
 import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
-import { db } from "../../../firebase";
+import { db, storage } from "../../../firebase";
 import { useNavigate } from "react-router-dom";
+import { ref, deleteObject } from "firebase/storage";
 
 import { FaCheckCircle } from "react-icons/fa"; // Import an icon from react-icons
 
@@ -135,6 +136,16 @@ const Dashboard: React.FC = () => {
   const confirmDelete = async () => {
     if (!selectedType || !selectedProject) return;
     try {
+      // Delete firestore storage image
+      const imageRef = ref(
+        storage,
+        `belmacs_images/${selectedProject.type}/${selectedProject.name}`
+      );
+
+      // Delete the image file
+      await deleteObject(imageRef);
+
+      // Delete firestore data
       await deleteDoc(doc(db, `${selectedType}-projects`, selectedProject.id));
       setProjects((prevProjects) =>
         prevProjects.filter((project) => project.id !== selectedProject.id)
@@ -156,9 +167,12 @@ const Dashboard: React.FC = () => {
     } catch (error) {
       console.error("Error deleting project:", error);
       setShowDeleteConfirmation(false); // Hide the confirmation dialog on error
-      setNotification({ message: "Error deleting " + selectedProject.name, type: "error" }); // Show error notification
+      setNotification({
+        message: "Error deleting " + selectedProject.name,
+        type: "error",
+      }); // Show error notification
       setTimeout(() => {
-        setNotification(null); 
+        setNotification(null);
       }, 2500);
     }
   };
@@ -300,12 +314,15 @@ const Dashboard: React.FC = () => {
               </div>
 
               <div className="button-container">
-                <button className="popup-cancel-btn" onClick={() => setShowDeleteConfirmation(false)}>
+                <button
+                  className="popup-cancel-btn"
+                  onClick={() => setShowDeleteConfirmation(false)}
+                >
                   Cancel
                 </button>
                 <button className="popup-confirm-btn" onClick={confirmDelete}>
                   Confirm
-                  </button>
+                </button>
               </div>
             </div>
           </div>

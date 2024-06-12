@@ -54,7 +54,7 @@ const Create: React.FC = () => {
 
       uploadTask.on(
         "state_changed",
-        (snapshot) => {
+        (_snapshot) => {
           // Handle progress if needed
         },
         (error) => {
