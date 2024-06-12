@@ -10,7 +10,7 @@ import ProjectIndividual from "./components/Projects/ProjectsIndividual/Projects
 // Admin Page
 import AdminLogin from "./pages/Admin/AdminLogin/AdminLogin";
 import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
-import AdminCreate from "./components/Admin/Create/Create";
+import AdminCreate from "./pages/Admin/AdminCreate/AdminCreate";
 import AdminEdit from "./components/Admin/Edit/Edit";
 import PrivateRoute from "./components/Admin/PrivateRoute";
 

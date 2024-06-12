@@ -1,0 +1,62 @@
+.create-project-ctr {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.create-project-header {
+    font-size: 2rem;
+    color: #364FC7;
+}
+
+.create-project-secondary-header {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.create-project-form-ctr {
+    margin-top: 40px;
+}
+
+.create-project-type {
+    margin-bottom: 15px;
+}
+
+.create-project-button-ctr {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 10px;
+}
+
+.create-project-button {
+    background-color: #1fb185;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  
+    border-radius: 4px;
+    padding: 10px 12.5px;
+}
+
+.cancel-project-button {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    font-size: 16px;
+  
+    border-radius: 4px;
+    padding: 9px 12.5px;
+}
+
+.create-project-button:hover {
+    background-color: #13644c;
+    
+  }
+  
+  .cancel-project-button:hover {
+    background-color: rgb(211, 211, 211);
+  }

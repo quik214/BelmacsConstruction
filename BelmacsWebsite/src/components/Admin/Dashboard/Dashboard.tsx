@@ -7,6 +7,7 @@ import DeleteIcon from "../../../assets/Icons/AdminDashboard/trash.svg";
 import React, { useState, useEffect, useRef } from "react";
 import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../../firebase";
+import { useNavigate } from "react-router-dom";
 
 import { FaCheckCircle } from "react-icons/fa"; // Import an icon from react-icons
 
@@ -27,6 +28,8 @@ const Dashboard: React.FC = () => {
   const [displayedProjects, setDisplayedProjects] = useState<Project[]>([]);
   const [visibleCount, setVisibleCount] = useState(6);
   const [selectedType, setSelectedType] = useState<string>("residential");
+
+  const navigate = useNavigate();
 
   // for search
   const [searchQuery, setSearchQuery] = useState(""); // Add search query state
@@ -161,8 +164,7 @@ const Dashboard: React.FC = () => {
   };
 
   const handleAddProject = () => {
-    // Add your add project logic here
-    console.log("Add project button clicked");
+    navigate("/admin/create"); // Navigate to AddProject component
   };
 
   // for search

@@ -42,7 +42,8 @@ export default function Navbar() {
         setLogo(true);
         setMenuIcon(true);
       } else {
-        changeBackground();
+        window.addEventListener("scroll", changeBackground);
+        
       }
     };
   
@@ -142,7 +143,7 @@ export default function Navbar() {
               </Link>
             </>
           )}
-          {authUser && (
+          {(authUser || location.pathname !== "/admin") && (
             <img
               src={menuIcon ? MenuBlackIcon : MenuWhiteIcon}
               className="nav-sidebar-icon"
