@@ -37,7 +37,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const checkInitialStates = () => {
-      if (location.pathname === "/admin" || location.pathname.includes("/dashboard")) {
+      if (location.pathname === "/admin" || location.pathname.includes("/dashboard") || location.pathname.includes("/create") || location.pathname.includes("/edit")) {
         setNavbar(true);
         setLogo(true);
         setMenuIcon(true);
