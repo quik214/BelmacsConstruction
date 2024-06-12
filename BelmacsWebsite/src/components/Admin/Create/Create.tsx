@@ -104,6 +104,13 @@ const Create: React.FC = () => {
             <option value="industrial">Industrial</option>
           </select>
 
+          <label htmlFor="name">Upload Image File</label>
+          <input
+          type="file"
+          onChange={handleImageChange}
+          accept="image/*"
+          required
+          />
 
           <div className="create-project-secondary-header">
             Enter Project Details:
@@ -173,13 +180,6 @@ const Create: React.FC = () => {
             required
           />
 
-<input
-          type="file"
-          onChange={handleImageChange}
-          accept="image/*"
-          required
-        />
-          
           <div className="create-project-button-ctr">
             <button type="submit" className="create-project-button">Add Project</button>
             <button type="button" className="cancel-project-button" onClick={handleCancel}>Cancel</button>
