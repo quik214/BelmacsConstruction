@@ -94,6 +94,7 @@ const People: React.FC = () => {
                 <p className="people-name">{person.name}</p>
                 <p className="people-role">{person.role}</p>
               </div>
+              <div className="people-card-read-more">Click to read more</div>
             </div>
           ))}
         </div>

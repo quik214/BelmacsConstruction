@@ -178,7 +178,10 @@
   .people-role {
     font-size: 0.6rem;
   }
-
+  
+  .people-card-read-more {
+    font-size: 0.7rem;
+  }
   .popup-content {
     width: 70%;
   }

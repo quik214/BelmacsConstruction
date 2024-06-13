@@ -20,18 +20,38 @@
 }
 
 .people-card {
-  /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: box-shadow 0.3s ease;
-  /* max-width: 265px; */
-  /* border-radius: 8px; */
+  transition: box-shadow 0.3s ease, height 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  width: 255px;
+  
 }
 
 .people-card img {
-  width: 255px; /* Ensure images fill the card width */
-  height: 330px; /* Maintain aspect ratio */
-  /* border-top-left-radius: 8px;
-  border-top-right-radius: 8px; */
+  width: 100%;
+  height: 330px;
+}
+
+.people-card-info {
+  padding: 12.5px;
+  padding-left: 15px;
+  background: white;
+  transition: transform 0.3s ease;
+}
+
+.people-card-read-more {
+  position: absolute;
+  bottom: -30px;
+  left: 0;
+  width: 100%;
+  background: #364fc7;
+  color: white;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 14px;
+  font-family: "Lato";
+  transition: bottom 0.3s ease;
 }
 
 .people-card:hover {
@@ -39,9 +59,12 @@
   cursor: pointer;
 }
 
-.people-card-info {
-  padding: 12.5px;
-  padding-left: 15px;
+.people-card:hover .people-card-info {
+  transform: translateY(-30px);
+}
+
+.people-card:hover .people-card-read-more {
+  bottom: 0;
 }
 
 .people-name {
@@ -56,6 +79,7 @@
   font-weight: 100;
   color: #495057;
 }
+
 
 /* -- Popup --*/
 
