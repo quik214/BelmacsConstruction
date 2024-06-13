@@ -3,7 +3,7 @@ import "./Create-media.css";
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { db, storage  } from "../../../firebase";
+import { db, storage } from "../../../firebase";
 import { setDoc, doc } from "firebase/firestore";
 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -22,7 +22,9 @@ const Create: React.FC = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const navigate = useNavigate();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setProjectDetails((prevDetails) => ({
       ...prevDetails,
@@ -49,7 +51,10 @@ const Create: React.FC = () => {
 
     try {
       // Upload image to Firebase Storage
-      const storageRef = ref(storage, `belmacs_images/${projectDetails.type}/${projectDetails.name}`);
+      const storageRef = ref(
+        storage,
+        `belmacs_images/${projectDetails.type}/${projectDetails.name}`
+      );
       const uploadTask = uploadBytesResumable(storageRef, imageFile);
 
       uploadTask.on(
@@ -63,13 +68,16 @@ const Create: React.FC = () => {
         async () => {
           // Get the download URL
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          
+
           // Save project details along with image URL in Firestore
-          await setDoc(doc(db, `${projectDetails.type}-projects`, projectDetails.name), {
-            ...projectDetails,
-            image: downloadURL,
-          });
-          
+          await setDoc(
+            doc(db, `${projectDetails.type}-projects`, projectDetails.name),
+            {
+              ...projectDetails,
+              image: downloadURL,
+            }
+          );
+
           navigate("/admin/dashboard");
         }
       );
@@ -80,9 +88,7 @@ const Create: React.FC = () => {
 
   return (
     <div className="create-project-ctr">
-      <div className="create-project-header">
-        Add New Project
-      </div>
+      <div className="create-project-header">Add New Project</div>
       <div className="create-project-form-ctr">
         <form onSubmit={handleSubmit}>
           <label htmlFor="type">Select Project Type</label>
@@ -106,17 +112,17 @@ const Create: React.FC = () => {
 
           <label htmlFor="name">Upload Image File</label>
           <input
-          className="upload-image-input"
-          type="file"
-          onChange={handleImageChange}
-          accept="image/*"
-          required
+            className="upload-image-input"
+            type="file"
+            onChange={handleImageChange}
+            accept="image/*"
+            required
           />
 
           <div className="create-project-secondary-header">
             Enter Project Details:
           </div>
-          
+
           <label htmlFor="name">Project Name</label>
           <input
             id="name"
@@ -139,7 +145,10 @@ const Create: React.FC = () => {
             required
           />
 
-          <label htmlFor="awards">Awards</label>
+          <div className="awards-field">
+            <label htmlFor="awards" className="awards-header">Awards</label>(\n to separate awards)
+          </div>
+
           <input
             id="awards"
             type="text"
@@ -152,7 +161,7 @@ const Create: React.FC = () => {
           <label htmlFor="completion">Completion Date</label>
           <input
             id="completion"
-            type="date"
+            type="text"
             name="completion"
             placeholder="Completion Date"
             value={projectDetails.completion}
@@ -182,8 +191,16 @@ const Create: React.FC = () => {
           />
 
           <div className="create-project-button-ctr">
-            <button type="submit" className="create-project-button">Add Project</button>
-            <button type="button" className="cancel-project-button" onClick={handleCancel}>Cancel</button>
+            <button type="submit" className="create-project-button">
+              Add Project
+            </button>
+            <button
+              type="button"
+              className="cancel-project-button"
+              onClick={handleCancel}
+            >
+              Cancel
+            </button>
           </div>
         </form>
       </div>

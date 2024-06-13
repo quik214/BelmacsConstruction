@@ -1,5 +1,6 @@
 import "./App.css";
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 import About from "./pages/About/About";
 import Projects from "./pages/Projects/Projects";
@@ -11,7 +12,7 @@ import ProjectIndividual from "./components/Projects/ProjectsIndividual/Projects
 import AdminLogin from "./pages/Admin/AdminLogin/AdminLogin";
 import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
 import AdminCreate from "./pages/Admin/AdminCreate/AdminCreate";
-import AdminEdit from "./components/Admin/Edit/Edit";
+import AdminEdit from "./pages/Admin/AdminEdit/AdminEdit";
 import PrivateRoute from "./components/Admin/PrivateRoute";
 
 import Navbar from "./components/Navbar/Navbar";
@@ -34,6 +35,13 @@ function MainApp() {
     "/admin/edit",
   ];
 
+  // Check if the current path includes any of the paths in noFooterPaths
+  const shouldShowFooter = !noFooterPaths.some(path => location.pathname.includes(path));
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+  
   return (
     <>
       <Navbar />
@@ -62,7 +70,7 @@ function MainApp() {
             }
           />
           <Route
-            path="/admin/edit"
+            path="/admin/edit/:type/:id"
             element={
               <PrivateRoute>
                 <AdminEdit />
@@ -73,7 +81,7 @@ function MainApp() {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
-      {!noFooterPaths.includes(location.pathname) && <Footer />}
+      {shouldShowFooter && <Footer />}
     </>
   );
 }

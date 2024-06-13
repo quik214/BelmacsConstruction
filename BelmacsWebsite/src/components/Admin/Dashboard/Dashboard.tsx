@@ -12,6 +12,7 @@ import { ref, deleteObject } from "firebase/storage";
 
 import { FaCheckCircle } from "react-icons/fa"; // Import an icon from react-icons
 
+
 interface Project {
   id: string;
   image: string;
@@ -124,8 +125,7 @@ const Dashboard: React.FC = () => {
   };
 
   const handleEdit = (project: Project) => {
-    // Add your edit logic here
-    console.log("Edit project:", project);
+    navigate(`/admin/edit/${selectedType}/${project.id}`, { state: { paramData: project } });
   };
 
   const handleDelete = (project: Project) => {
@@ -139,7 +139,7 @@ const Dashboard: React.FC = () => {
       // Delete firestore storage image
       const imageRef = ref(
         storage,
-        `belmacs_images/${selectedProject.type}/${selectedProject.name}`
+        `belmacs_images/${selectedType}/${selectedProject.name}`
       );
 
       // Delete the image file

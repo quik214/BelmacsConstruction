@@ -64,3 +64,14 @@
   .cancel-project-button:hover {
     background-color: rgb(211, 211, 211);
   }
+
+  .awards-field {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    margin-bottom: 5px;
+}
+
+.awards-header {
+    margin-bottom: 0px;
+}

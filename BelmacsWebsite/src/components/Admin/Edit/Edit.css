@@ -1,0 +1,93 @@
+.edit-project-ctr {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-project-header {
+    font-size: 2rem;
+    color: #364FC7;
+}
+
+.upload-image-input {
+    border: 2px dashed #ccc;
+    margin-top: 15px;
+}
+
+.edit-project-secondary-header {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.edit-project-form-ctr {
+    margin-top: 40px;
+}
+
+.edit-project-type {
+    margin-bottom: 15px;
+}
+
+.edit-project-button-ctr {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 10px;
+}
+
+.edit-project-button {
+    background-color: #1fb185;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  
+    border-radius: 4px;
+    padding: 10px 12.5px;
+}
+
+.cancel-project-button {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    font-size: 16px;
+  
+    border-radius: 4px;
+    padding: 9px 12.5px;
+}
+
+.edit-project-button:hover {
+    background-color: #13644c;
+}
+
+.cancel-project-button:hover {
+    background-color: rgb(211, 211, 211);
+}
+
+.notification {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.notification.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.notification.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.awards {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    margin-bottom: 5px;
+}
+
+.awards-header {
+    margin-bottom: 0px;
+}
