@@ -1,6 +1,7 @@
 import "./App.css";
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { ToastProvider } from "./components/Toast/ToastContext";
 
 import About from "./pages/About/About";
 import Projects from "./pages/Projects/Projects";
@@ -20,7 +21,9 @@ import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
-    <MainApp />
+    <ToastProvider>
+      <MainApp />
+    </ToastProvider>
   );
 }
 
@@ -36,12 +39,14 @@ function MainApp() {
   ];
 
   // Check if the current path includes any of the paths in noFooterPaths
-  const shouldShowFooter = !noFooterPaths.some(path => location.pathname.includes(path));
+  const shouldShowFooter = !noFooterPaths.some((path) =>
+    location.pathname.includes(path)
+  );
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
-  
+
   return (
     <>
       <Navbar />
