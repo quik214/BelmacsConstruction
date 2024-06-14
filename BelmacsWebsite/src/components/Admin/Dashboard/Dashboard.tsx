@@ -12,6 +12,7 @@ import { ref, deleteObject } from "firebase/storage";
 
 import { FaCheckCircle } from "react-icons/fa"; // Import an icon from react-icons
 
+
 interface Project {
   id: string;
   image: string;
@@ -295,6 +296,7 @@ const Dashboard: React.FC = () => {
           {notification.message}
         </div>
       )}
+
     </div>
   );
 };

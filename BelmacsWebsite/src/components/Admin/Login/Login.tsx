@@ -46,8 +46,23 @@ const Login = () => {
     return valid;
   };
 
-  const notify = () => {
+  // toast setup for login error
+  const loginErrorToast = () => {
     toast.error("Please fix the errors in the form", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
+  // toast setup for login success
+  const loginSuccessToast = (email: string) => {
+    toast.success(`You have successfully logged in as ${email}`, {
       position: "bottom-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -62,9 +77,9 @@ const Login = () => {
   const signIn = (e: any) => {
     e.preventDefault(); // ensure that the page does not get reloaded
 
-    if (!validate()) {
+    if (!validate()) { // if validate() function returns false, then we will perform the following
       // calls the validate function, and does the following
-      notify(); // displays a toast specifying that the user must fix errors in the form
+      loginErrorToast(); // displays a toast specifying that the user must fix errors in the form
       return; // does this to immediately return once validation fails
     }
 
@@ -72,7 +87,10 @@ const Login = () => {
       .then((userCredential) => {
         // if the sign-in attempt (through Firebase) is successful, this executes
         console.log(userCredential); // log the user credentials to check login success
-        showToast("Successfully Authenticated", "success");
+
+        const userEmail = userCredential.user.email ?? "unknown email"; // get user's email address, if unknown, will display unknown email (will not happen)
+        // "unknown email is just a fallback"
+        loginSuccessToast(userEmail); // display the success toast
         navigate("/admin/dashboard"); // navigate user to the dashboard upon a successful login
       })
       .catch((error) => {
@@ -112,7 +130,7 @@ const Login = () => {
           Log In
         </button>
 
-        <ToastContainer />
+        
       </form>
     </div>
   );

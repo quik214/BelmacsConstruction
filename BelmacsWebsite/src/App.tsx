@@ -9,6 +9,10 @@ import Services from "./pages/Services/Services";
 import Contact from "./pages/Contact/Contact";
 import ProjectIndividual from "./components/Projects/ProjectsIndividual/ProjectsIndividual";
 
+// Toast
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 // Admin Page
 import AdminLogin from "./pages/Admin/AdminLogin/AdminLogin";
 import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
@@ -87,6 +91,7 @@ function MainApp() {
         </Routes>
       </div>
       {shouldShowFooter && <Footer />}
+      <ToastContainer /> {/* Must be included in root (here), so that can be accessed across every page*/}
     </>
   );
 }
