@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { doc, getDoc, setDoc, deleteDoc } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 import { db } from "../../../firebase";
 
 import "./Edit.css";
 
 interface Project {
-  id: string;
   image: string;
   name: string;
   developer: string;
@@ -20,12 +19,11 @@ interface Project {
 
 const EditProject: React.FC = () => {
   const { id, type } = useParams<{ id: string; type: string }>();
+  const [oldId, setOldId] = useState<string>(id || ""); // State variable for old id
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const [selectedType, setSelectedType] = useState<string>(
-    type || "residential"
-  );
+  const [selectedImage, setSelectedImage] = useState<string | File | null>(null);
+  const [selectedType, setSelectedType] = useState<string>(type || "residential");
   const [editSuccess, setEditSuccess] = useState<boolean>(false);
   const [notification, setNotification] = useState<{
     message: string;
@@ -38,12 +36,13 @@ const EditProject: React.FC = () => {
       if (!id || !type) return;
 
       try {
-        const docRef = doc(db, `${type}-projects`, id);
+        const docRef = doc(db, `${type}-projects`, oldId);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          setProject({ id: docSnap.id, ...docSnap.data() } as Project);
-          
+          const projectData = docSnap.data() as Project;
+          setProject(projectData);
+          setSelectedImage(projectData.image); // Set the selected image to the current image URL
         } else {
           console.error("No such document!");
         }
@@ -76,39 +75,54 @@ const EditProject: React.FC = () => {
     event.preventDefault();
     if (!project || !type) return;
 
+    const storage = getStorage();
     let imageUrl = project.image;
 
-    if (selectedImage) {
-      const storage = getStorage();
-      const imageRef = ref(
-        storage,
-        `belmacs_images/${selectedType}/${project.name}`
-      );
-      try {
-        await uploadBytes(imageRef, selectedImage);
-        imageUrl = await getDownloadURL(imageRef);
-      } catch (error) {
-        console.error("Error uploading image: ", error);
-        setNotification({ message: "Error uploading image", type: "error" });
-        setTimeout(() => {
-          setNotification(null);
-        }, 2500);
-        return;
-      }
-    }
-
     try {
-      // If the project type has changed, delete from the old collection and add to the new one
-      if (type !== selectedType) {
-        const oldProjectRef = doc(db, `${type}-projects`, project.id);
-        await deleteDoc(oldProjectRef); // Delete the old project record
+      // Delete the old document
+      const oldProjectRef = doc(db, `${type}-projects`, oldId);
+      await deleteDoc(oldProjectRef);
 
-        const newProjectRef = doc(db, `${selectedType}-projects`, project.id);
-        await setDoc(newProjectRef, { ...project, image: imageUrl }); // Add project details to the new collection
+      if (selectedImage instanceof File) {
+        // Delete the old image if a new image is uploaded
+        const oldImageRef = ref(storage, project.image);
+        if (project.image) {
+          await deleteObject(oldImageRef);
+        }
+
+        if (type !== selectedType) {
+          // Upload new image
+          const newImageRef = ref(storage, `belmacs_images/${selectedType}/${project.name}`);
+          await uploadBytes(newImageRef, selectedImage);
+          imageUrl = await getDownloadURL(newImageRef);
+        } else {
+          // Upload new image
+          const newImageRef = ref(storage, `belmacs_images/${type}/${project.name}`);
+          await uploadBytes(newImageRef, selectedImage);
+          imageUrl = await getDownloadURL(newImageRef);
+        }
+
+        
       } else {
-        const projectRef = doc(db, `${type}-projects`, project.id);
-        await setDoc(projectRef, { ...project, image: imageUrl });
+        // Re-upload the old image to the new location if no new image is uploaded
+        const oldImageRef = ref(storage, project.image);
+
+        if (type !== selectedType) {
+          const newImageRef = ref(storage, `belmacs_images/${selectedType}/${project.name}`);
+          const imageSnapshot = await getDownloadURL(oldImageRef);
+          await uploadBytes(newImageRef, await fetch(imageSnapshot).then(res => res.blob()));
+          imageUrl = await getDownloadURL(newImageRef);
+        } else {
+          const newImageRef = ref(storage, `belmacs_images/${type}/${project.name}`);
+          const imageSnapshot = await getDownloadURL(oldImageRef);
+          await uploadBytes(newImageRef, await fetch(imageSnapshot).then(res => res.blob()));
+          imageUrl = await getDownloadURL(newImageRef);
+        }
       }
+
+      // Add project details to the new collection
+      const newProjectRef = doc(db, `${selectedType}-projects`, oldId);
+      await setDoc(newProjectRef, { ...project, image: imageUrl });
 
       setNotification({
         message: "Project updated successfully, redirecting you to the dashboard",
@@ -205,7 +219,7 @@ const EditProject: React.FC = () => {
             />
           </div>)}
 
-         <div>
+          <div>
             <div className="awards">
               <label className="awards-header">Awards </label>(\n to separate awards)
             </div>
