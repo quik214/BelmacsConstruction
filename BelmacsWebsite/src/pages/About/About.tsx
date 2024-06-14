@@ -11,13 +11,22 @@ import AboutPDPA from "../../components/About/AboutPDPA/AboutPDPA";
 
 export default function () {
   const reveal = () => {
-    var reveals = document.querySelectorAll(".reveal");
-
-    for (var i = 0; i < reveals.length; i++) {
-      var windowHeight = window.innerHeight;
-      var revealTop = reveals[i].getBoundingClientRect().top;
-      var revealPoint = 150;
-
+    const reveals = document.querySelectorAll(".reveal, .reveal-one, .reveal-two, .reveal-three");
+  
+    for (let i = 0; i < reveals.length; i++) {
+      const windowHeight = window.innerHeight;
+      const revealTop = reveals[i].getBoundingClientRect().top;
+      let revealPoint = 150; // Default reveal point
+  
+      // Adjust the reveal point based on the specific class
+      if (reveals[i].classList.contains("reveal-one")) {
+        revealPoint = 200;
+      } else if (reveals[i].classList.contains("reveal-two")) {
+        revealPoint = 225;
+      } else if (reveals[i].classList.contains("reveal-three")) {
+        revealPoint = 250;
+      }
+  
       if (revealTop < windowHeight - revealPoint) {
         reveals[i].classList.add("active");
       } else {
@@ -25,6 +34,9 @@ export default function () {
       }
     }
   };
+  
+  window.addEventListener("scroll", reveal);
+  document.addEventListener("DOMContentLoaded", reveal); // Initial check on page load
 
   // Function to run reveal after DOM content is loaded
   const runRevealAfterDOMLoaded = () => {
