@@ -7,6 +7,7 @@ import { db, storage } from "../../../firebase";
 import { setDoc, doc } from "firebase/firestore";
 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { useToast } from "../../Toast/ToastContext";
 
 const Create: React.FC = () => {
   const [projectDetails, setProjectDetails] = useState({
@@ -21,6 +22,7 @@ const Create: React.FC = () => {
   });
   const [imageFile, setImageFile] = useState<File | null>(null);
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -77,12 +79,13 @@ const Create: React.FC = () => {
               image: downloadURL,
             }
           );
-
+          showToast(projectDetails.name + " sucessfully Added", "success");
           navigate("/admin/dashboard");
         }
       );
     } catch (error) {
       console.error("Error adding project: ", error);
+      showToast("Error adding project", "error");
     }
   };
 
@@ -146,7 +149,10 @@ const Create: React.FC = () => {
           />
 
           <div className="awards-field">
-            <label htmlFor="awards" className="awards-header">Awards</label>(\n to separate awards)
+            <label htmlFor="awards" className="awards-header">
+              Awards
+            </label>
+            (\n to separate awards)
           </div>
 
           <input

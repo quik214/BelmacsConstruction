@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { auth } from "../../firebase";
+import { useToast } from "../Toast/ToastContext";
 import {
   onAuthStateChanged,
   User,
@@ -21,6 +22,7 @@ export default function Navbar() {
   const [menuIcon, setMenuIcon] = useState(false);
   const [authUser, setAuthUser] = useState<User | null>(null);
   const location = useLocation();
+  const { showToast } = useToast();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -37,24 +39,26 @@ export default function Navbar() {
 
   useEffect(() => {
     const checkInitialStates = () => {
-      if (location.pathname === "/admin" || location.pathname.includes("/dashboard") || location.pathname.includes("/create") || location.pathname.includes("/edit")) {
+      if (
+        location.pathname === "/admin" ||
+        location.pathname.includes("/dashboard") ||
+        location.pathname.includes("/create") ||
+        location.pathname.includes("/edit")
+      ) {
         setNavbar(true);
         setLogo(true);
         setMenuIcon(true);
       } else {
         window.addEventListener("scroll", changeBackground);
-        
       }
     };
-  
+
     checkInitialStates();
-    
-  
+
     return () => {
       window.removeEventListener("scroll", changeBackground);
     };
   }, [location.pathname]);
-
 
   const changeBackground = () => {
     if (window.scrollY >= 40) {
@@ -97,9 +101,11 @@ export default function Navbar() {
       .then(() => {
         console.log("Sign out successful");
         hideSideBar();
+        showToast("Sign out successful", "success");
       })
       .catch((error) => {
         console.error(error);
+        showToast("Error signing out", "error");
       });
   };
 
@@ -184,7 +190,11 @@ export default function Navbar() {
               <Link to="/admin/dashboard" className="sidebar-link ">
                 Dashboard
               </Link>
-              <Link to="/admin" onClick={handleSignOut}  className="sidebar-link ">
+              <Link
+                to="/admin"
+                onClick={handleSignOut}
+                className="sidebar-link "
+              >
                 Sign Out
               </Link>
             </>
