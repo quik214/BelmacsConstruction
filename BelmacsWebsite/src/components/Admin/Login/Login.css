@@ -38,6 +38,9 @@ input {
   font-size: 1em;
   cursor: pointer;
   margin-top: 15px;
-  
+}
+
+.Toastify__toast-container {
+  width: 380px;
 }
 
