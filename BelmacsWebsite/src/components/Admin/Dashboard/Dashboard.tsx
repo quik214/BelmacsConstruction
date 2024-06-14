@@ -4,13 +4,12 @@ import "./Dashboard-media.css";
 import EditIcon from "../../../assets/Icons/AdminDashboard/pencil-simple.svg";
 import DeleteIcon from "../../../assets/Icons/AdminDashboard/trash.svg";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { db, storage } from "../../../firebase";
 import { useNavigate } from "react-router-dom";
 import { ref, deleteObject } from "firebase/storage";
 
-import { FaCheckCircle } from "react-icons/fa"; // Import an icon from react-icons
 
 
 interface Project {
@@ -35,8 +34,7 @@ const Dashboard: React.FC = () => {
   // for search
   const [searchQuery, setSearchQuery] = useState(""); // Add search query state
 
-  const observer = useRef<IntersectionObserver | null>(null);
-  const sentinelRef = useRef<HTMLDivElement | null>(null);
+  
 
   // for delete
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);

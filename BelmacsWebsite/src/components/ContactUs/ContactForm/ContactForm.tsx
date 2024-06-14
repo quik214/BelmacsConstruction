@@ -121,7 +121,7 @@ const ContactForm: React.FC = () => {
           () => {
             console.log("SUCCESS!");
             const form = document.querySelector(".form-ctr");
-            const submittext = document.querySelector(".on-submit");
+            const submittext = document.querySelector(".on-submit-ctr");
             if (form && submittext) {
               form.classList.add("hidden");
               submittext.classList.add("message-appear");
@@ -273,7 +273,7 @@ const ContactForm: React.FC = () => {
 
       <div className="on-submit-ctr">
         <img className="mailbox" src={mailbox}></img>
-        <p className="on-submit-text">Thank you for your submission. <br></br> <br></br> A confirmation email has been sent to the provided email address. </p>
+        <p className="on-submit-text">Thank you for your submission. <br></br> A confirmation email has been sent to the provided email address. </p>
       </div>
     </div>
   );

@@ -73,7 +73,7 @@ const Create: React.FC = () => {
 
   // createSuccessToast
   const createSuccessToast = (message: string) => {
-    toast.success(<div>You have added <b>message</b></div>, {
+    toast.success(<div>You have added <b>{message}</b></div>, {
       position: "bottom-right",
       autoClose: 2000,
       hideProgressBar: false,
