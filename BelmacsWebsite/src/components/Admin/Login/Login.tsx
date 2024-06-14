@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useToast } from "../../Toast/ToastContext";
 
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
@@ -62,22 +62,28 @@ const Login = () => {
 
   // toast setup for login success
   const loginSuccessToast = (email: string) => {
-    toast.success(`You have successfully logged in as ${email}`, {
-      position: "bottom-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
+    toast.success(
+      <div>
+        Welcome, <b>{email}</b>
+      </div>,
+      {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }
+    );
   };
 
   const signIn = (e: any) => {
     e.preventDefault(); // ensure that the page does not get reloaded
 
-    if (!validate()) { // if validate() function returns false, then we will perform the following
+    if (!validate()) {
+      // if validate() function returns false, then we will perform the following
       // calls the validate function, and does the following
       loginErrorToast(); // displays a toast specifying that the user must fix errors in the form
       return; // does this to immediately return once validation fails
@@ -129,8 +135,6 @@ const Login = () => {
         <button type="submit" className="login-button">
           Log In
         </button>
-
-        
       </form>
     </div>
   );
