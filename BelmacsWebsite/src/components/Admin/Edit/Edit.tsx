@@ -43,6 +43,7 @@ const EditProject: React.FC = () => {
 
         if (docSnap.exists()) {
           setProject({ id: docSnap.id, ...docSnap.data() } as Project);
+          
         } else {
           console.error("No such document!");
         }
@@ -204,7 +205,7 @@ const EditProject: React.FC = () => {
             />
           </div>
 
-          <div>
+          {project.awards && (<div>
             <div className="awards">
               <label className="awards-header">Awards </label>(\n to separate awards)
             </div>
@@ -214,7 +215,7 @@ const EditProject: React.FC = () => {
               value={project.awards}
               onChange={handleInputChange}
             />
-          </div>
+          </div>)}
 
           <div>
             <label>Type</label>
@@ -226,7 +227,7 @@ const EditProject: React.FC = () => {
             />
           </div>
 
-          <div>
+          {project.completion && (<div>
             <label>Completion</label>
 
             <input
@@ -235,9 +236,9 @@ const EditProject: React.FC = () => {
               value={project.completion}
               onChange={handleInputChange}
             />
-          </div>
+          </div>)}
 
-          <div>
+          {project.client && (<div>
             <label>Client</label>
             <input
               type="text"
@@ -245,7 +246,7 @@ const EditProject: React.FC = () => {
               value={project.client}
               onChange={handleInputChange}
             />
-          </div>
+          </div>)}
 
           <div>
             <label>Location</label>
