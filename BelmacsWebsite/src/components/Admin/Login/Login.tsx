@@ -77,6 +77,20 @@ const Login = () => {
     );
   };
 
+   // toast setup for login failure
+   const loginFailureToast = () => {
+    toast.error("Please enter a valid email address and Password", {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
   const signIn = (e: any) => {
     e.preventDefault(); // ensure that the page does not get reloaded
 
@@ -99,7 +113,7 @@ const Login = () => {
       })
       .catch((error) => {
         console.log(error); // catch any errors
-        // any invalid login credentials will be further caught
+        loginFailureToast(); // any invalid login credentials will be further caught
       });
   };
 

@@ -34,7 +34,7 @@
 }
 
 .card-img {
-  height: 12rem;
+  height: 275px;
   width: 100%;
   /* Take up full width of its card container */
   object-fit: cover;
