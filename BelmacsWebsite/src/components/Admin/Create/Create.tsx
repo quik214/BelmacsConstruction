@@ -7,7 +7,9 @@ import { db, storage } from "../../../firebase";
 import { setDoc, doc } from "firebase/firestore";
 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { useToast } from "../../Toast/ToastContext";
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Create: React.FC = () => {
   const [projectDetails, setProjectDetails] = useState({
@@ -20,9 +22,20 @@ const Create: React.FC = () => {
     client: "",
     location: "",
   });
+
+  // useState function with array to hold error messages
+  const [errors, setErrors] = useState({
+    image: "",
+    name: "",
+    developer: "",
+    awards: "",
+    completion: "",
+    client: "",
+    location: "",
+  });
+
   const [imageFile, setImageFile] = useState<File | null>(null);
   const navigate = useNavigate();
-  const { showToast } = useToast();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -44,10 +57,99 @@ const Create: React.FC = () => {
     }
   };
 
+  // createErrorToast
+  const createErrorToast = () => {
+    toast.error("Please fix the errors in the form", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
+  // createSuccessToast
+  const createSuccessToast = (message: string) => {
+    toast.success(<div>You have added <b>message</b></div>, {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+  
+  // createFailureToast (will not happen)
+  const createFailureToast = () => {
+    toast.error("Your project failed to be added", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
+  // form validation function
+  const validate = () => {
+    const newErrors = {
+      image: "",
+      name: "",
+      developer: "",
+      awards: "",
+      completion: "",
+      client: "",
+      location: "",
+    };
+    let isValid = true;
+
+    if (!projectDetails.name.trim()) {
+      newErrors.name = "Project name is required";
+      isValid = false;
+    }
+
+    if (!projectDetails.developer.trim()) {
+      newErrors.developer = "Developer is required";
+      isValid = false;
+    }
+
+    if (!projectDetails.completion.trim()) {
+      newErrors.completion = "Completion date is required";
+      isValid = false;
+    }
+
+    if (!projectDetails.location.trim()) {
+      newErrors.location = "Location is required";
+      isValid = false;
+    }
+
+    if (!imageFile) {
+      newErrors.image = "Image file is required";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!imageFile) {
-      alert("Please select an image file");
+    // if (!imageFile) {
+    //   alert("Please select an image file");
+    //   return;
+    // }
+
+    if (!validate() || !imageFile) {
+      createErrorToast();
       return;
     }
 
@@ -79,13 +181,14 @@ const Create: React.FC = () => {
               image: downloadURL,
             }
           );
-          showToast(projectDetails.name + " sucessfully Added", "success");
+          createSuccessToast(projectDetails.name);
+
           navigate("/admin/dashboard");
         }
       );
     } catch (error) {
       console.error("Error adding project: ", error);
-      showToast("Error adding project", "error");
+      createFailureToast();
     }
   };
 
@@ -101,7 +204,6 @@ const Create: React.FC = () => {
             name="type"
             value={projectDetails.type}
             onChange={handleChange}
-            required
           >
             <option value="residential">Residential</option>
             <option value="commercial">Commercial</option>
@@ -115,18 +217,20 @@ const Create: React.FC = () => {
 
           <label htmlFor="name">Upload Image File</label>
           <input
-            className="upload-image-input"
+            className="upload-image-input create-input"
             type="file"
             onChange={handleImageChange}
             accept="image/*"
-            required
           />
+          {errors.image && <p className="error-msg">{errors.image}</p>}
 
           <div className="create-project-secondary-header">
             Enter Project Details:
           </div>
 
-          <label htmlFor="name">Project Name</label>
+          <label htmlFor="name" className="create-field-header">
+            Project Name
+          </label>
           <input
             id="name"
             type="text"
@@ -134,10 +238,13 @@ const Create: React.FC = () => {
             placeholder="Project Name"
             value={projectDetails.name}
             onChange={handleChange}
-            required
+            className="create-input"
           />
+          {errors.name && <p className="error-msg">{errors.name}</p>}
 
-          <label htmlFor="developer">Developer</label>
+          <label htmlFor="developer" className="create-field-header">
+            Developer
+          </label>
           <input
             id="developer"
             type="text"
@@ -145,11 +252,12 @@ const Create: React.FC = () => {
             placeholder="Developer"
             value={projectDetails.developer}
             onChange={handleChange}
-            required
+            className="create-input"
           />
+          {errors.developer && <p className="error-msg">{errors.developer}</p>}
 
           <div className="awards-field">
-            <label htmlFor="awards" className="awards-header">
+            <label htmlFor="awards" className="create-field-header">
               Awards
             </label>
             (\n to separate awards)
@@ -162,9 +270,13 @@ const Create: React.FC = () => {
             placeholder="Awards"
             value={projectDetails.awards}
             onChange={handleChange}
+            className="create-input"
           />
+          {errors.awards && <p className="error-msg">{errors.awards}</p>}
 
-          <label htmlFor="completion">Completion Date</label>
+          <label htmlFor="completion" className="create-field-header">
+            Completion Date
+          </label>
           <input
             id="completion"
             type="text"
@@ -172,10 +284,15 @@ const Create: React.FC = () => {
             placeholder="Completion Date"
             value={projectDetails.completion}
             onChange={handleChange}
-            required
+            className="create-input"
           />
+          {errors.completion && (
+            <p className="error-msg">{errors.completion}</p>
+          )}
 
-          <label htmlFor="client">Client</label>
+          <label htmlFor="client" className="create-field-header">
+            Client
+          </label>
           <input
             id="client"
             type="text"
@@ -183,9 +300,13 @@ const Create: React.FC = () => {
             placeholder="Client"
             value={projectDetails.client}
             onChange={handleChange}
+            className="create-input"
           />
+          {errors.client && <p className="error-msg">{errors.client}</p>}
 
-          <label htmlFor="location">Location</label>
+          <label htmlFor="location" className="create-field-header">
+            Location
+          </label>
           <input
             id="location"
             type="text"
@@ -193,8 +314,9 @@ const Create: React.FC = () => {
             placeholder="Location"
             value={projectDetails.location}
             onChange={handleChange}
-            required
+            className="create-input"
           />
+          {errors.location && <p className="error-msg">{errors.location}</p>}
 
           <div className="create-project-button-ctr">
             <button type="submit" className="create-project-button">
