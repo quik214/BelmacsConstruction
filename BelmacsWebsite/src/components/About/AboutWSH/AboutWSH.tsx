@@ -12,7 +12,7 @@ export default function AboutWSH() {
       <p className="wsh-header">Our Workplace Safety and Health Policy</p>
 
       <div className="wsh-card-container">
-        <div className="wsh-card">
+        <div className="wsh-card reveal-one">
           <div className="wsh-card-background-one">
             <div className="wsh-card-text one">
               <img className="wsh-logo" src={ComplianceLogo} />
@@ -23,7 +23,7 @@ export default function AboutWSH() {
             </div>
           </div>
         </div>
-        <div className="wsh-card">
+        <div className="wsh-card reveal-two">
           <div className="wsh-card-background-two">
             <div className="wsh-card-text two">
               <img className="wsh-logo" src={PreventionLogo} />
@@ -35,7 +35,7 @@ export default function AboutWSH() {
             </div>
           </div>
         </div>
-        <div className="wsh-card three">
+        <div className="wsh-card reveal-three">
           <div className="wsh-card-background-three">
             <div className="wsh-card-text three">
               <img className="wsh-logo" src={EducationLogo} />

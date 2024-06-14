@@ -1,3 +1,38 @@
+/* For on-scroll animation */
+.reveal-one {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s ease;
+}
+
+.reveal-two {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all 1.25s ease;
+}
+
+.reveal-three {
+  opacity: 0;
+  transform: translateY(150px);
+  transition: all 1.5s ease;
+}
+
+.reveal-one.active {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.reveal-two.active {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.reveal-three.active {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+
 .wsh {
   margin-top: 50px;
 }

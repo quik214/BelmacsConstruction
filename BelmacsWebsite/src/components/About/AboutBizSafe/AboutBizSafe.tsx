@@ -13,12 +13,12 @@ export default function AboutBizSafe() {
                     <img className="bizsafe-image" src={ConstructionWorker} />
                 </div>
                 <div className="bizsafe-text">
-                    <p className="bizsafe-text">
+                    <p className="bizsafe-text reveal">
                     We aim to promote a proactive WSH policy based on effective
                     communication, systematic identification, assessment and control
                     of hazards/procedures.
                     </p>
-                    <p className="bizsafe-text">
+                    <p className="bizsafe-text reveal">
                     We are committed and will develop security programmes to include
                     terrorism protection. We will also work together with our clients,
                     fellow consultants, contractors and suppliers to embrace the
