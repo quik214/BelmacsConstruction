@@ -47,8 +47,9 @@
 }
 
 .cancel-project-button {
-    background-color: white;
-    color: black;
+    color: white;
+    background-color: grey;
+    border: none;
     cursor: pointer;
     font-size: 16px;
   

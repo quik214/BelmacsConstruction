@@ -29,6 +29,7 @@
 @media (max-width: 550px) {
   .sidebar .sidebar-img {
     margin-top: 7px;
+    margin-right: 35px;
   }
 
   .navbar-logo {

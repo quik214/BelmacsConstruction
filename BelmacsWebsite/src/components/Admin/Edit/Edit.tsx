@@ -140,9 +140,9 @@ const EditProject: React.FC = () => {
       )}
       {!editSuccess && project && (
         <form onSubmit={handleSubmit}>
-          <h2>Edit Project</h2>
+          <p className="edit-project-header">Edit Project</p>
 
-          <div>
+          <div className="edit-project-fields">
             <label>Project Type</label>
             <select
               value={selectedType}
