@@ -9,12 +9,23 @@
   margin-top: 20px;
 }
 
-.signin-email {
+.email {
+  margin-bottom: 0px;
 }
 
-.signin-password {
-  margin-top: 20px;
+.email-portion {
+  margin-bottom: 15px;
 }
+
+.password {
+  margin-bottom: 0px;
+}
+
+.error-text {
+  margin-top: 5px;
+  color: #ff0000;
+}
+
 input {
   margin-bottom: 15px;
 }
@@ -25,4 +36,8 @@ input {
   border: none;
   border-radius: 4px;
   font-size: 1em;
+  cursor: pointer;
+  margin-top: 15px;
+  
 }
+
