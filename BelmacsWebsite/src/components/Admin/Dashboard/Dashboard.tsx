@@ -12,7 +12,6 @@ import { ref, deleteObject } from "firebase/storage";
 
 import { FaCheckCircle } from "react-icons/fa"; // Import an icon from react-icons
 
-
 interface Project {
   id: string;
   image: string;
@@ -28,7 +27,6 @@ interface Project {
 const Dashboard: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [displayedProjects, setDisplayedProjects] = useState<Project[]>([]);
-  const [visibleCount, setVisibleCount] = useState(6);
   const [selectedType, setSelectedType] = useState<string>("residential");
 
   const navigate = useNavigate();
@@ -38,7 +36,6 @@ const Dashboard: React.FC = () => {
 
   const observer = useRef<IntersectionObserver | null>(null);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
-  const [showSentinel, setShowSentinel] = useState(false);
 
   // for delete
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
@@ -70,14 +67,14 @@ const Dashboard: React.FC = () => {
         });
 
         setProjects(data);
-        setDisplayedProjects(data.slice(0, visibleCount));
+        setDisplayedProjects(data);
       } catch (error) {
         console.error("Error fetching projects: ", error);
       }
     };
 
     fetchDataFromFirestore();
-  }, [selectedType, visibleCount]);
+  }, [selectedType]);
 
   // for search
 
@@ -85,47 +82,21 @@ const Dashboard: React.FC = () => {
     const filteredProjects = projects.filter((project) =>
       project.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    setDisplayedProjects(filteredProjects.slice(0, visibleCount));
-  }, [projects, visibleCount, searchQuery]);
-
-  const loadMoreProjects = () => {
-    setVisibleCount((prevCount) => prevCount + 6);
-  };
+    setDisplayedProjects(filteredProjects);
+  }, [projects, searchQuery]);
 
   useEffect(() => {
-    setDisplayedProjects(projects.slice(0, visibleCount));
-  }, [projects, visibleCount]);
-
-  useEffect(() => {
-    if (observer.current) observer.current.disconnect();
-
-    observer.current = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        if (visibleCount < projects.length) {
-          loadMoreProjects();
-        } else {
-          setShowSentinel(true);
-          setTimeout(() => {
-            setShowSentinel(false);
-          }, 1500);
-        }
-      }
-    });
-
-    if (sentinelRef.current) {
-      observer.current.observe(sentinelRef.current);
-    }
-
-    return () => observer.current?.disconnect();
-  }, [visibleCount, projects.length]);
+    setDisplayedProjects(projects);
+  }, [projects]);
 
   const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedType(event.target.value);
-    setVisibleCount(6); // Reset visible count when type changes
   };
 
   const handleEdit = (project: Project) => {
-    navigate(`/admin/edit/${selectedType}/${project.id}`, { state: { paramData: project } });
+    navigate(`/admin/edit/${selectedType}/${project.id}`, {
+      state: { paramData: project },
+    });
   };
 
   const handleDelete = (project: Project) => {
@@ -286,17 +257,6 @@ const Dashboard: React.FC = () => {
             ))}
           </tbody>
         </table>
-        <div
-          ref={sentinelRef}
-          className={`sentinel ${showSentinel ? "" : "sentinel-hidden"}`}
-        >
-          {showSentinel && (
-            <>
-              <FaCheckCircle className="sentinel-icon" />
-              <p>All projects loaded</p>
-            </>
-          )}
-        </div>
       </div>
 
       {showDeleteConfirmation && selectedProject && (

@@ -97,12 +97,6 @@
   width: 25px;
 }
 
-.sentinel {
-  text-align: center;
-
-  font-size: 16px;
-}
-
 .search {
   font-size: 1.1rem;
   margin-top: 15px;
@@ -181,19 +175,17 @@
 .popup-confirm-btn {
   font-size: 1.25rem;
   color: white;
-  background-color: #F15858;
+  background-color: #f15858;
   border: white;
 }
 
 .delete-confirmation-popup button:last-child:hover {
   background-color: #f03838;
-  
 }
 
 .delete-confirmation-popup button:hover {
   background-color: #f0f0f0;
 }
-
 
 /* notification upon success/error */
 .notification-btm-right {
