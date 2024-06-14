@@ -58,7 +58,7 @@ const AboutProjects: React.FC = () => {
     speed: 1000,
     slidesToShow: slidesToShow,
     slidesToScroll: slidesToScroll,
-    autoplay: data.length > 1,
+    autoplay: true,
     arrows: false,
     responsive: [
       {
