@@ -30,6 +30,10 @@
 
 /* Smaller Tablets */
 @media (max-width: 700px) {
+  .pdpa-header {
+    font-size: 1.5rem;
+  }
+
   .pdpa-text p {
     font-size: 1.15rem;
   }
@@ -38,14 +42,21 @@
 /* Mobile */
 @media (max-width: 550px) {
   .pdpa-header {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
 
   .pdpa-text p {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 }
 
 /* Small Mobile */
 @media (max-width: 390px) {
+  .pdpa-header {
+    font-size: 1.2rem;
+  }
+
+  .pdpa-text p {
+    font-size: 0.8rem;
+  }
 }

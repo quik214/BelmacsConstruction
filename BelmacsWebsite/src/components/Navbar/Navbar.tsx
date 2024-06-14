@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { auth } from "../../firebase";
-import { useToast } from "../Toast/ToastContext";
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import {
   onAuthStateChanged,
   User,
@@ -22,7 +25,6 @@ export default function Navbar() {
   const [menuIcon, setMenuIcon] = useState(false);
   const [authUser, setAuthUser] = useState<User | null>(null);
   const location = useLocation();
-  const { showToast } = useToast();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -101,11 +103,29 @@ export default function Navbar() {
       .then(() => {
         console.log("Sign out successful");
         hideSideBar();
-        showToast("Sign out successful", "success");
+        toast.success("Sign out successful", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       })
       .catch((error) => {
         console.error(error);
-        showToast("Error signing out", "error");
+        toast.error("Signing out fail please countant administrator", {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       });
   };
 
