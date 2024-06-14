@@ -12,7 +12,8 @@
 .services-desc {
   margin-top: 20px;
   font-size: 1.2rem;
-  font-family: "Lato";
+  font-family: "Montserrat";
+  line-height: 1.6rem;
   color: #495057;
   text-align: justify;
 }
