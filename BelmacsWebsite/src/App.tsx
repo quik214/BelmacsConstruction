@@ -1,7 +1,6 @@
 import "./App.css";
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { ToastProvider } from "./components/Toast/ToastContext";
 
 import About from "./pages/About/About";
 import Projects from "./pages/Projects/Projects";
@@ -10,7 +9,7 @@ import Contact from "./pages/Contact/Contact";
 import ProjectIndividual from "./components/Projects/ProjectsIndividual/ProjectsIndividual";
 
 // Toast
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // Admin Page
@@ -24,11 +23,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 
 function App() {
-  return (
-    <ToastProvider>
-      <MainApp />
-    </ToastProvider>
-  );
+  return <MainApp />;
 }
 
 function MainApp() {
@@ -91,7 +86,8 @@ function MainApp() {
         </Routes>
       </div>
       {shouldShowFooter && <Footer />}
-      <ToastContainer /> {/* Must be included in root (here), so that can be accessed across every page*/}
+      <ToastContainer />{" "}
+      {/* Must be included in root (here), so that can be accessed across every page*/}
     </>
   );
 }

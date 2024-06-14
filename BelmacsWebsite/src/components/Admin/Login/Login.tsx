@@ -6,7 +6,6 @@ import { useState } from "react";
 import { auth } from "../../../firebase";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useToast } from "../../Toast/ToastContext";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,7 +16,6 @@ const Login = () => {
   const [errors, setErrors] = useState<{ email?: string; password?: string }>(
     {}
   );
-  const { showToast } = useToast();
 
   const navigate = useNavigate();
 
@@ -101,7 +99,7 @@ const Login = () => {
       })
       .catch((error) => {
         console.log(error); // catch any errors
-        showToast("Invalid login credentials", "error"); // any invalid login credentials will be further caught
+        // any invalid login credentials will be further caught
       });
   };
 
