@@ -133,7 +133,7 @@ const EditProject: React.FC = () => {
   }
 
   return (
-    <div className="edit-project-container">
+    <div className="edit-project-ctr">
       {notification && (
         <div className={`notification ${notification.type}`}>
           {notification.message}
@@ -195,7 +195,7 @@ const EditProject: React.FC = () => {
             />
           </div>
 
-          <div>
+          {selectedType !== "existingBuildingRetrofit" && (<div>
             <label>Developer</label>
             <input
               type="text"
@@ -203,9 +203,9 @@ const EditProject: React.FC = () => {
               value={project.developer}
               onChange={handleInputChange}
             />
-          </div>
+          </div>)}
 
-          {project.awards && (<div>
+         <div>
             <div className="awards">
               <label className="awards-header">Awards </label>(\n to separate awards)
             </div>
@@ -215,7 +215,7 @@ const EditProject: React.FC = () => {
               value={project.awards}
               onChange={handleInputChange}
             />
-          </div>)}
+          </div>
 
           <div>
             <label>Type</label>
@@ -238,7 +238,7 @@ const EditProject: React.FC = () => {
             />
           </div>)}
 
-          {project.client && (<div>
+          {selectedType === "existingBuildingRetrofit" && (<div>
             <label>Client</label>
             <input
               type="text"

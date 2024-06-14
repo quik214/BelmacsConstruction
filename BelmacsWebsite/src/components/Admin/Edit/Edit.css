@@ -1,7 +1,7 @@
+
+
 .edit-project-ctr {
-    font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    flex-direction: column;
+    padding-bottom: 15px;
 }
 
 .edit-project-header {
