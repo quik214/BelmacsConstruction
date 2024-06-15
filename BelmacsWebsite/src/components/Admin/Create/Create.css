@@ -93,3 +93,65 @@
     color: #ff0000;
     margin-bottom: 10px;
 }
+
+
+
+
+
+/* TOGGLE SWITCH CSS */
+
+.featured-switch-ctr {
+    margin-top: 10px;
+}
+
+.featured-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  .featured-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .featured-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+  }
+  
+  .featured-slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+  }
+  
+  input:checked + .featured-slider {
+    background-color: #2196F3;
+  }
+  
+  input:checked + .featured-slider:before {
+    transform: translateX(26px);
+  }
+  
+  .featured-slider.round {
+    border-radius: 34px;
+  }
+  
+  .featured-slider.round:before {
+    border-radius: 50%;
+  }
+  

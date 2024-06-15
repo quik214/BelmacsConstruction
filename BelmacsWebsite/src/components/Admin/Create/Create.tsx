@@ -21,6 +21,7 @@ const Create: React.FC = () => {
     completion: "",
     client: "",
     location: "",
+    featured: "no",
     ProjectType: "residential",
   });
 
@@ -59,6 +60,19 @@ const Create: React.FC = () => {
     }
   };
 
+  // for toggle switch (project.featured)
+  const handleToggleChange: React.ChangeEventHandler<HTMLInputElement> = (
+    e
+  ) => {
+    const { name } = e.target;
+    const currentFeaturedValue =
+      projectDetails.featured === "yes" ? "no" : "yes";
+    setProjectDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: currentFeaturedValue,
+    }));
+  };
+
   // createErrorToast
   const createErrorToast = () => {
     toast.error("Please fix the errors in the form", {
@@ -75,18 +89,23 @@ const Create: React.FC = () => {
 
   // createSuccessToast
   const createSuccessToast = (message: string) => {
-    toast.success(<div>You have added <b>{message}</b></div>, {
-      position: "bottom-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
+    toast.success(
+      <div>
+        You have added <b>{message}</b>
+      </div>,
+      {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }
+    );
   };
-  
+
   // createFailureToast (will not happen)
   const createFailureToast = () => {
     toast.error("Your project failed to be added", {
@@ -186,7 +205,11 @@ const Create: React.FC = () => {
 
           // Save project details along with image URL in Firestore
           await setDoc(
-            doc(db, `${projectDetails.ProjectType}-projects`, projectDetails.name),
+            doc(
+              db,
+              `${projectDetails.ProjectType}-projects`,
+              projectDetails.name
+            ),
             {
               ...filteredDetails,
               image: downloadURL,
@@ -208,11 +231,11 @@ const Create: React.FC = () => {
       <div className="create-project-header">Add New Project</div>
       <div className="create-project-form-ctr">
         <form onSubmit={handleSubmit}>
-          <label htmlFor="type">Select Project Type</label>
+          <label htmlFor="ProjectType">Select Project Type</label>
           <select
-            id="type"
+            id="ProjectType"
             className="create-project-type"
-            name="type"
+            name="ProjectType"
             value={projectDetails.ProjectType}
             onChange={handleChange}
           >
@@ -297,9 +320,7 @@ const Create: React.FC = () => {
             onChange={handleChange}
             className="create-input"
           />
-          {errors.type && (
-            <p className="error-msg">{errors.type}</p>
-          )}
+          {errors.type && <p className="error-msg">{errors.type}</p>}
 
           <label htmlFor="completion" className="create-field-header">
             Completion Date
@@ -344,6 +365,22 @@ const Create: React.FC = () => {
             className="create-input"
           />
           {errors.location && <p className="error-msg">{errors.location}</p>}
+
+          <div className="featured-switch-ctr">
+            <label htmlFor="featured" className="create-featured-header">
+              Featured
+            </label>
+            <label className="featured-switch">
+              <input
+                type="checkbox"
+                id="featured"
+                name="featured"
+                value={projectDetails.featured}
+                onChange={handleToggleChange}
+              />
+              <span className="featured-slider round"></span>
+            </label>
+          </div>
 
           <div className="create-project-button-ctr">
             <button type="submit" className="create-project-button">

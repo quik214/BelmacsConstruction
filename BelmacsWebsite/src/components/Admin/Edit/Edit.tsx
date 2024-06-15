@@ -21,6 +21,7 @@ interface Project {
   completion: string;
   client: string;
   location: string;
+  featured: "yes" | "no";
 }
 
 const EditProject: React.FC = () => {
@@ -297,6 +298,25 @@ const EditProject: React.FC = () => {
               value={project.location}
               onChange={handleInputChange}
             />
+          </div>
+
+          <div>
+            <label>Featured</label>
+            <div className="featured-toggle-ctr">
+              <label className="featured-switch">
+                <input
+                  type="checkbox"
+                  checked={project.featured === "yes"}
+                  onChange={(e) =>
+                    setProject({
+                      ...project,
+                      featured: e.target.checked ? "yes" : "no",
+                    })
+                  }
+                />
+                <span className="featured-slider round"></span>
+              </label>
+            </div>
           </div>
 
           <div className="edit-project-button-ctr">
