@@ -19,7 +19,7 @@ interface Project {
 
 const EditProject: React.FC = () => {
   const { id, type } = useParams<{ id: string; type: string }>();
-  const [oldId, setOldId] = useState<string>(id || ""); // State variable for old id
+  const [oldId, setOldId] = useState<string>(id || "");
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedImage, setSelectedImage] = useState<string | File | null>(null);
@@ -42,7 +42,7 @@ const EditProject: React.FC = () => {
         if (docSnap.exists()) {
           const projectData = docSnap.data() as Project;
           setProject(projectData);
-          setSelectedImage(projectData.image); // Set the selected image to the current image URL
+          setSelectedImage(projectData.image);
         } else {
           console.error("No such document!");
         }
@@ -79,59 +79,68 @@ const EditProject: React.FC = () => {
     let imageUrl = project.image;
 
     try {
+      if (selectedImage instanceof File) {
+        // If a new image is uploaded
+        const imageFormat = selectedImage.type.split("/")[1]; // Extract format from MIME type
+        const newImageRef = ref(
+          storage,
+          `belmacs_images/${selectedType}/${project.name}.${imageFormat}`
+        );
+
+        // Upload new image
+        await uploadBytes(newImageRef, selectedImage);
+        imageUrl = await getDownloadURL(newImageRef);
+
+        // If project name or type changed, delete the old image
+        if (
+          project.image &&
+          (project.name !== oldId || type !== selectedType)
+        ) {
+          const oldImageRef = ref(storage, project.image);
+          await deleteObject(oldImageRef);
+        }
+      } else if (type !== selectedType || project.name !== oldId) {
+        // If type or name has changed and no new image is uploaded, re-upload the old image
+        const oldImageRef = ref(storage, project.image);
+
+        // Fetch the old image and re-upload it
+        const oldImageUrl = await getDownloadURL(oldImageRef);
+        const response = await fetch(oldImageUrl);
+        if (!response.ok) {
+          throw new Error("Failed to fetch old image.");
+        }
+        const blob = await response.blob();
+        const newImageRef = ref(
+          storage,
+          `belmacs_images/${selectedType}/${project.name}.${
+            blob.type.split("/")[1]
+          }`
+        );
+
+        await uploadBytes(newImageRef, blob);
+        imageUrl = await getDownloadURL(newImageRef);
+
+        // Delete the old image if necessary
+        await deleteObject(oldImageRef);
+      }
+
       // Delete the old document
       const oldProjectRef = doc(db, `${type}-projects`, oldId);
       await deleteDoc(oldProjectRef);
 
-      if (selectedImage instanceof File) {
-        // Delete the old image if a new image is uploaded
-        const oldImageRef = ref(storage, project.image);
-        if (project.image) {
-          await deleteObject(oldImageRef);
-        }
-
-        if (type !== selectedType) {
-          // Upload new image
-          const newImageRef = ref(storage, `belmacs_images/${selectedType}/${project.name}`);
-          await uploadBytes(newImageRef, selectedImage);
-          imageUrl = await getDownloadURL(newImageRef);
-        } else {
-          // Upload new image
-          const newImageRef = ref(storage, `belmacs_images/${type}/${project.name}`);
-          await uploadBytes(newImageRef, selectedImage);
-          imageUrl = await getDownloadURL(newImageRef);
-        }
-
-        
-      } else {
-        // Re-upload the old image to the new location if no new image is uploaded
-        const oldImageRef = ref(storage, project.image);
-
-        if (type !== selectedType) {
-          const newImageRef = ref(storage, `belmacs_images/${selectedType}/${project.name}`);
-          const imageSnapshot = await getDownloadURL(oldImageRef);
-          await uploadBytes(newImageRef, await fetch(imageSnapshot).then(res => res.blob()));
-          imageUrl = await getDownloadURL(newImageRef);
-        } else {
-          const newImageRef = ref(storage, `belmacs_images/${type}/${project.name}`);
-          const imageSnapshot = await getDownloadURL(oldImageRef);
-          await uploadBytes(newImageRef, await fetch(imageSnapshot).then(res => res.blob()));
-          imageUrl = await getDownloadURL(newImageRef);
-        }
-      }
-
       // Add project details to the new collection
-      const newProjectRef = doc(db, `${selectedType}-projects`, oldId);
+      const newProjectRef = doc(db, `${selectedType}-projects`, project.name);
       await setDoc(newProjectRef, { ...project, image: imageUrl });
 
       setNotification({
-        message: "Project updated successfully, redirecting you to the dashboard",
+        message:
+          "Project updated successfully, redirecting you to the dashboard",
         type: "success",
       });
       setEditSuccess(true);
       setTimeout(() => {
         setNotification(null);
-        navigate(-1); // Go back to the previous page after a delay
+        navigate(-1);
       }, 2500);
     } catch (error) {
       console.error("Error updating project: ", error);
@@ -141,6 +150,7 @@ const EditProject: React.FC = () => {
       }, 2500);
     }
   };
+  
 
   if (loading) {
     return <div>Loading...</div>;
@@ -171,6 +181,7 @@ const EditProject: React.FC = () => {
               </option>
               <option value="institutional">Institutional</option>
               <option value="infrastructure">Infrastructure</option>
+              <option value="industrial">Industrial</option>
             </select>
           </div>
 

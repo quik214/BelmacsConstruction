@@ -107,13 +107,10 @@ const Dashboard: React.FC = () => {
     if (!selectedType || !selectedProject) return;
     try {
       // Delete firestore storage image
-      const imageRef = ref(
-        storage,
-        `belmacs_images/${selectedType}/${selectedProject.name}`
-      );
+      const oldImageRef = ref(storage, selectedProject.image);
 
-      // Delete the image file
-      await deleteObject(imageRef);
+      // Delete the old image if necessary
+      await deleteObject(oldImageRef);
 
       // Delete firestore data
       await deleteDoc(doc(db, `${selectedType}-projects`, selectedProject.id));

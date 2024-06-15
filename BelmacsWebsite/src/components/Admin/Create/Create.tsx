@@ -17,10 +17,11 @@ const Create: React.FC = () => {
     name: "",
     developer: "",
     awards: "",
-    type: "residential",
+    type: "",
     completion: "",
     client: "",
     location: "",
+    ProjectType: "residential",
   });
 
   // useState function with array to hold error messages
@@ -29,6 +30,7 @@ const Create: React.FC = () => {
     name: "",
     developer: "",
     awards: "",
+    type: "",
     completion: "",
     client: "",
     location: "",
@@ -106,6 +108,7 @@ const Create: React.FC = () => {
       name: "",
       developer: "",
       awards: "",
+      type: "",
       completion: "",
       client: "",
       location: "",
@@ -124,6 +127,11 @@ const Create: React.FC = () => {
 
     if (!projectDetails.completion.trim()) {
       newErrors.completion = "Completion date is required";
+      isValid = false;
+    }
+
+    if (!projectDetails.type.trim()) {
+      newErrors.completion = "Type is required";
       isValid = false;
     }
 
@@ -157,7 +165,7 @@ const Create: React.FC = () => {
       // Upload image to Firebase Storage
       const storageRef = ref(
         storage,
-        `belmacs_images/${projectDetails.type}/${projectDetails.name}`
+        `belmacs_images/${projectDetails.ProjectType}/${projectDetails.name}`
       );
       const uploadTask = uploadBytesResumable(storageRef, imageFile);
 
@@ -173,11 +181,14 @@ const Create: React.FC = () => {
           // Get the download URL
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
 
+          // Destructure projectType out of projectDetails and assign the rest to filteredDetails
+          const { ProjectType, ...filteredDetails } = projectDetails;
+
           // Save project details along with image URL in Firestore
           await setDoc(
-            doc(db, `${projectDetails.type}-projects`, projectDetails.name),
+            doc(db, `${projectDetails.ProjectType}-projects`, projectDetails.name),
             {
-              ...projectDetails,
+              ...filteredDetails,
               image: downloadURL,
             }
           );
@@ -202,7 +213,7 @@ const Create: React.FC = () => {
             id="type"
             className="create-project-type"
             name="type"
-            value={projectDetails.type}
+            value={projectDetails.ProjectType}
             onChange={handleChange}
           >
             <option value="residential">Residential</option>
@@ -273,6 +284,22 @@ const Create: React.FC = () => {
             className="create-input"
           />
           {errors.awards && <p className="error-msg">{errors.awards}</p>}
+
+          <label htmlFor="type" className="create-field-header">
+            Type
+          </label>
+          <input
+            id="type"
+            type="text"
+            name="type"
+            placeholder="Type"
+            value={projectDetails.type}
+            onChange={handleChange}
+            className="create-input"
+          />
+          {errors.type && (
+            <p className="error-msg">{errors.type}</p>
+          )}
 
           <label htmlFor="completion" className="create-field-header">
             Completion Date
