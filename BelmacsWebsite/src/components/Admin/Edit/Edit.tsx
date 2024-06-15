@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { doc, getDoc, setDoc, deleteDoc } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
 import { db } from "../../../firebase";
 
 import "./Edit.css";
@@ -19,11 +25,15 @@ interface Project {
 
 const EditProject: React.FC = () => {
   const { id, type } = useParams<{ id: string; type: string }>();
-  const [oldId, setOldId] = useState<string>(id || "");
+  const [oldId] = useState<string>(id || "");
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [selectedImage, setSelectedImage] = useState<string | File | null>(null);
-  const [selectedType, setSelectedType] = useState<string>(type || "residential");
+  const [selectedImage, setSelectedImage] = useState<string | File | null>(
+    null
+  );
+  const [selectedType, setSelectedType] = useState<string>(
+    type || "residential"
+  );
   const [editSuccess, setEditSuccess] = useState<boolean>(false);
   const [notification, setNotification] = useState<{
     message: string;
@@ -150,7 +160,6 @@ const EditProject: React.FC = () => {
       }, 2500);
     }
   };
-  
 
   if (loading) {
     return <div>Loading...</div>;
@@ -220,19 +229,22 @@ const EditProject: React.FC = () => {
             />
           </div>
 
-          {selectedType !== "existingBuildingRetrofit" && (<div>
-            <label>Developer</label>
-            <input
-              type="text"
-              name="developer"
-              value={project.developer}
-              onChange={handleInputChange}
-            />
-          </div>)}
+          {selectedType !== "existingBuildingRetrofit" && (
+            <div>
+              <label>Developer</label>
+              <input
+                type="text"
+                name="developer"
+                value={project.developer}
+                onChange={handleInputChange}
+              />
+            </div>
+          )}
 
           <div>
             <div className="awards">
-              <label className="awards-header">Awards </label>(\n to separate awards)
+              <label className="awards-header">Awards </label>(\n to separate
+              awards)
             </div>
 
             <textarea
@@ -252,26 +264,30 @@ const EditProject: React.FC = () => {
             />
           </div>
 
-          {project.completion && (<div>
-            <label>Completion</label>
+          {project.completion && (
+            <div>
+              <label>Completion</label>
 
-            <input
-              type="text"
-              name="completion"
-              value={project.completion}
-              onChange={handleInputChange}
-            />
-          </div>)}
+              <input
+                type="text"
+                name="completion"
+                value={project.completion}
+                onChange={handleInputChange}
+              />
+            </div>
+          )}
 
-          {selectedType === "existingBuildingRetrofit" && (<div>
-            <label>Client</label>
-            <input
-              type="text"
-              name="client"
-              value={project.client}
-              onChange={handleInputChange}
-            />
-          </div>)}
+          {selectedType === "existingBuildingRetrofit" && (
+            <div>
+              <label>Client</label>
+              <input
+                type="text"
+                name="client"
+                value={project.client}
+                onChange={handleInputChange}
+              />
+            </div>
+          )}
 
           <div>
             <label>Location</label>
