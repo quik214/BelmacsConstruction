@@ -47,6 +47,9 @@ const EditProject: React.FC = () => {
   } | null>(null);
   const navigate = useNavigate();
 
+  // for form errors
+  const [errors, setErrors] = useState<{ [key: string]: string | null }>({});
+
   useEffect(() => {
     const fetchProject = async () => {
       if (!id || !type) return;
@@ -105,6 +108,11 @@ const EditProject: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
     if (!project || !type) return;
 
     const storage = getStorage();
@@ -189,7 +197,8 @@ const EditProject: React.FC = () => {
   const editSuccessToast = (projectName: string) => {
     toast.success(
       <div>
-        Successfully edited <b>{projectName}</b>, redirecting you to the dashboard
+        Successfully edited <b>{projectName}</b>, redirecting you to the
+        dashboard
       </div>,
       {
         position: "bottom-right",
@@ -202,6 +211,26 @@ const EditProject: React.FC = () => {
         theme: "light",
       }
     );
+  };
+
+  // form validation
+
+  const validateForm = () => {
+    const newErrors: { [key: string]: string | null } = {};
+
+    
+    if (!project?.name) {
+      newErrors.name = "Name is required.";
+    }
+    if (!project?.type) {
+      newErrors.type = "Type is required.";
+    }
+    if (!project?.location) {
+      newErrors.location = "Location is required.";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   return (
@@ -241,6 +270,7 @@ const EditProject: React.FC = () => {
               value={project.name}
               onChange={handleInputChange}
             />
+            {errors.name && <p className="error">{errors.name}</p>}
           </div>
 
           <div className="edit-field">
@@ -283,8 +313,7 @@ const EditProject: React.FC = () => {
           <div className="edit-field">
             <div className="awards">
               <label className="awards-header edit-field-header">Awards </label>
-              <span className="separate-text">(\n to separate
-              awards)</span>
+              <span className="separate-text">(\n to separate awards)</span>
             </div>
 
             <textarea
@@ -298,12 +327,12 @@ const EditProject: React.FC = () => {
           <div className="edit-field">
             <label className="edit-field-header">Type</label>
             <input
-    
               type="text"
               name="type"
               value={project.type}
               onChange={handleInputChange}
             />
+            {errors.type && <p className="error">{errors.type}</p>}
           </div>
 
           {project.completion && (
@@ -339,6 +368,7 @@ const EditProject: React.FC = () => {
               value={project.location}
               onChange={handleInputChange}
             />
+            {errors.location && <p className="error">{errors.location}</p>}
           </div>
 
           <div className="edit-field">

@@ -171,3 +171,7 @@ input:checked + .featured-slider:before {
 .featured-slider.round:before {
   border-radius: 50%;
 }
+
+.error {
+    margin-top: -5px;
+}
