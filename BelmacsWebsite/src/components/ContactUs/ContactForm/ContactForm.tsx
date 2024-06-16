@@ -207,6 +207,7 @@ const ContactForm: React.FC = () => {
               <select
                 name="enquiry-type"
                 id="enquiry-type"
+                className="enquiry-dropdown"
                 value={enquiryType}
                 onChange={(e) => setEnquiryType(e.target.value)}
                 onBlur={validateEnquiryType}

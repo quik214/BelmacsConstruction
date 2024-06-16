@@ -46,6 +46,10 @@ label {
   font-size: 1.1rem;
 }
 
+.enquiry-dropdown {
+  margin-bottom: 15px;
+}
+
 input,
 textarea,
 select {
