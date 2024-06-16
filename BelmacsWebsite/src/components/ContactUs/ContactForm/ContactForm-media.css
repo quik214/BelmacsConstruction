@@ -28,6 +28,14 @@
   .company-address {
     font-size: 1.8rem;
   }
+
+  .mailbox {
+    width: 200px;
+  }
+
+  .on-submit-text {
+    font-size: 1.1rem;
+  }
 }
 
 /* Smaller Tablets */
@@ -43,17 +51,32 @@
   .checkbox-text {
     font-size: 0.8rem;
   }
+
+  .mailbox {
+    width: 175px;
+  }
+
+  .on-submit-text {
+    font-size: 1rem;
+  }
 }
 
 /* Mobile */
 @media (max-width: 550px) {
-
   .google-maps {
     height: 350px;
   }
 
   .contact-header {
     font-size: 1.2rem;
+  }
+
+  .mailbox {
+    width: 175px;
+  }
+
+  .on-submit-text {
+    font-size: 0.9rem;
   }
 }
 
@@ -97,5 +120,13 @@
   .recaptcha {
     transform: scale(0.8);
     transform-origin: 0 0;
+  }
+
+  .mailbox {
+    width: 150px;
+  }
+
+  .on-submit-text {
+    font-size: 0.8rem;
   }
 }

@@ -84,6 +84,10 @@ button:hover {
   font-family: "Lato";
 }
 
+.field-label {
+  font-weight: 600;
+}
+
 .checkbox-ctr {
   display: flex;
   margin-bottom: 20px;
@@ -116,14 +120,14 @@ button:hover {
 }
 
 .mailbox {
-  width: 250px;
+  width: 225px;
   height: auto;
 }
 
 .on-submit-text {
   margin-top: 50px;
   font-family: Arial;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .message-appear {

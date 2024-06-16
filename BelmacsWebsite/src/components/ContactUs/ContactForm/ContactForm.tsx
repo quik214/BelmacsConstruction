@@ -166,7 +166,7 @@ const ContactForm: React.FC = () => {
               style={{ display: "none" }}
             />
             <div>
-              <label htmlFor="name">Full Name</label>
+              <p className="field-label">Full Name</p>
               <br />
               <input
                 type="text"
@@ -184,7 +184,7 @@ const ContactForm: React.FC = () => {
             </div>
 
             <div>
-              <label htmlFor="email">Email Address</label>
+              <p className="field-label">Email Address</p>
               <br />
               <input
                 type="email"
@@ -202,7 +202,7 @@ const ContactForm: React.FC = () => {
             </div>
 
             <div>
-              <label htmlFor="enquiry-type">Enquiry Type</label>
+              <p className="field-label">Enquiry Type</p>
               <br />
               <select
                 name="enquiry-type"
@@ -226,7 +226,7 @@ const ContactForm: React.FC = () => {
             </div>
 
             <div>
-              <label htmlFor="message">Message</label>
+              <p className="field-label">Message</p>
               <br />
               <textarea
                 rows={5}
