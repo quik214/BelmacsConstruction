@@ -4,7 +4,7 @@ import Edit from "../../../components/Admin/Edit/Edit";
 
 export default function AdminCreate() {
   return (
-    <div className="container">
+    <div className="admin-container">
       <Edit />
     </div>
   );

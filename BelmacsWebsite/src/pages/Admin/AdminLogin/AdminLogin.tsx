@@ -4,7 +4,7 @@ import Login from "../../../components/Admin/Login/Login";
 
 export default function AdminLogin() {
   return (
-    <div className="container">
+    <div className="admin-container">
       <Login />
     </div>
   );
