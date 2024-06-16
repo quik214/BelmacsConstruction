@@ -67,9 +67,7 @@
     height: 350px;
   }
 
-  .contact-header {
-    font-size: 1.2rem;
-  }
+  
 
   .mailbox {
     width: 175px;
@@ -78,6 +76,7 @@
   .on-submit-text {
     font-size: 0.9rem;
   }
+
 }
 
 /* Small Mobile */
@@ -95,7 +94,7 @@
   }
 
   .contact-header {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 
   label {

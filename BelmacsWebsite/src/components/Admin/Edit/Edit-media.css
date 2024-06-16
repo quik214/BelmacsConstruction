@@ -1,0 +1,39 @@
+/* Large Screens */
+@media (1700px <= width <= 2500px) {
+  .edit-project-header {
+    font-size: 2rem;
+  }
+}
+
+/* Normal Screens - currently designed for this */
+@media (max-width: 1700px) {
+}
+
+/* Landscape Tablets */
+@media (max-width: 1200px) {
+  .edit-project-header {
+    font-size: 1.6rem;
+  }
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+}
+
+/* Smaller Tablets */
+@media (max-width: 700px) {
+}
+
+/* Mobile */
+@media (max-width: 550px) {
+  .separate-text {
+    margin-top:0;
+  }
+  .edit-field-header {
+    font-size: 1rem;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 390px) {
+}

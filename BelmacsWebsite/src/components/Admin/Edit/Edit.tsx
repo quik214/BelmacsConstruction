@@ -10,7 +10,12 @@ import {
 } from "firebase/storage";
 import { db } from "../../../firebase";
 
+// toast
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import "./Edit.css";
+import "./Edit-media.css";
 
 interface Project {
   image: string;
@@ -159,16 +164,14 @@ const EditProject: React.FC = () => {
       const newProjectRef = doc(db, `${selectedType}-projects`, project.name);
       await setDoc(newProjectRef, { ...project, image: imageUrl });
 
-      setNotification({
-        message:
-          "Project updated successfully, redirecting you to the dashboard",
-        type: "success",
-      });
+      // show toast
+      editSuccessToast(project.name);
+
       setEditSuccess(true);
       setTimeout(() => {
         setNotification(null);
         navigate(-1);
-      }, 2500);
+      }, 1500);
     } catch (error) {
       console.error("Error updating project: ", error);
       setNotification({ message: "Error updating project", type: "error" });
@@ -182,6 +185,25 @@ const EditProject: React.FC = () => {
     return <div>Loading...</div>;
   }
 
+  // toast setup for login success
+  const editSuccessToast = (projectName: string) => {
+    toast.success(
+      <div>
+        Successfully edited <b>{projectName}</b>, redirecting you to the dashboard
+      </div>,
+      {
+        position: "bottom-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }
+    );
+  };
+
   return (
     <div className="edit-project-ctr">
       {notification && (
@@ -193,8 +215,8 @@ const EditProject: React.FC = () => {
         <form onSubmit={handleSubmit}>
           <p className="edit-project-header">Edit Project</p>
 
-          <div className="edit-project-fields">
-            <label>Project Type</label>
+          <div className="edit-field">
+            <label className="edit-field-header">Project Type</label>
             <select
               value={selectedType}
               onChange={(e) => setSelectedType(e.target.value)}
@@ -211,8 +233,8 @@ const EditProject: React.FC = () => {
             </select>
           </div>
 
-          <div>
-            <label>Name</label>
+          <div className="edit-field">
+            <label className="edit-field-header">Name</label>
             <input
               type="text"
               name="name"
@@ -221,8 +243,8 @@ const EditProject: React.FC = () => {
             />
           </div>
 
-          <div>
-            <label>Image</label>
+          <div className="edit-field">
+            <label className="edit-field-header">Image</label>
             <div className="current-img">
               {project.image && (
                 <div>
@@ -247,8 +269,8 @@ const EditProject: React.FC = () => {
           </div>
 
           {selectedType !== "existingBuildingRetrofit" && (
-            <div>
-              <label>Developer</label>
+            <div className="edit-field">
+              <label className="edit-field-header">Developer</label>
               <input
                 type="text"
                 name="developer"
@@ -258,22 +280,25 @@ const EditProject: React.FC = () => {
             </div>
           )}
 
-          <div>
+          <div className="edit-field">
             <div className="awards">
-              <label className="awards-header">Awards </label>(\n to separate
-              awards)
+              <label className="awards-header edit-field-header">Awards </label>
+              <span className="separate-text">(\n to separate
+              awards)</span>
             </div>
 
             <textarea
               name="awards"
+              className="awards-field"
               value={project.awards}
               onChange={handleInputChange}
             />
           </div>
 
-          <div>
-            <label>Type</label>
+          <div className="edit-field">
+            <label className="edit-field-header">Type</label>
             <input
+    
               type="text"
               name="type"
               value={project.type}
@@ -282,8 +307,8 @@ const EditProject: React.FC = () => {
           </div>
 
           {project.completion && (
-            <div>
-              <label>Completion</label>
+            <div className="edit-field">
+              <label className="edit-field-header">Completion</label>
 
               <input
                 type="text"
@@ -295,8 +320,8 @@ const EditProject: React.FC = () => {
           )}
 
           {selectedType === "existingBuildingRetrofit" && (
-            <div>
-              <label>Client</label>
+            <div className="edit-field">
+              <label className="edit-field-header">Client</label>
               <input
                 type="text"
                 name="client"
@@ -306,8 +331,8 @@ const EditProject: React.FC = () => {
             </div>
           )}
 
-          <div>
-            <label>Location</label>
+          <div className="edit-field">
+            <label className="edit-field-header">Location</label>
             <input
               type="text"
               name="location"
@@ -316,8 +341,8 @@ const EditProject: React.FC = () => {
             />
           </div>
 
-          <div>
-            <label>Featured</label>
+          <div className="edit-field">
+            <label className="edit-field-header">Featured</label>
             <div className="featured-toggle-ctr">
               <label className="featured-switch">
                 <input
