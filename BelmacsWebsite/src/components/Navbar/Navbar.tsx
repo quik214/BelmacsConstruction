@@ -161,7 +161,7 @@ export default function Navbar() {
                 Dashboard
               </Link>
               <Link
-                to="/admin"
+                to="/projects"
                 onClick={handleSignOut}
                 className="nav-link hideOnMobile"
               >
