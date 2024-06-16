@@ -1,7 +1,7 @@
 import "./Create.css";
 import "./Create-media.css";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { db, storage } from "../../../firebase";
 import { setDoc, doc } from "firebase/firestore";
@@ -36,6 +36,21 @@ const Create: React.FC = () => {
     client: "",
     location: "",
   });
+
+  useEffect(() => {
+    // Reset the fields based on the project type
+    if (projectDetails.ProjectType !== "existingBuildingRetrofit") {
+      setProjectDetails((prevDetails) => ({
+        ...prevDetails,
+        client: "", // Clear the client field
+      }));
+    } else {
+      setProjectDetails((prevDetails) => ({
+        ...prevDetails,
+        developer: "", // Clear the developer field
+      }));
+    }
+  }, [projectDetails.ProjectType, setProjectDetails]);
 
   const [imageFile, setImageFile] = useState<File | null>(null);
   const navigate = useNavigate();
@@ -276,20 +291,25 @@ const Create: React.FC = () => {
           />
           {errors.name && <p className="error-msg">{errors.name}</p>}
 
-          <label htmlFor="developer" className="create-field-header">
-            Developer
-          </label>
-          <input
-            id="developer"
-            type="text"
-            name="developer"
-            placeholder="Developer"
-            value={projectDetails.developer}
-            onChange={handleChange}
-            className="create-input"
-          />
-          {errors.developer && <p className="error-msg">{errors.developer}</p>}
-
+          {projectDetails.ProjectType !== "existingBuildingRetrofit" && (
+            <div>
+              <label htmlFor="developer" className="create-field-header">
+                Developer
+              </label>
+              <input
+                id="developer"
+                type="text"
+                name="developer"
+                placeholder="Developer"
+                value={projectDetails.developer}
+                onChange={handleChange}
+                className="create-input"
+              />
+              {errors.developer && (
+                <p className="error-msg">{errors.developer}</p>
+              )}
+            </div>
+          )}
           <div className="awards-field">
             <label htmlFor="awards" className="create-field-header">
               Awards
@@ -338,20 +358,23 @@ const Create: React.FC = () => {
             <p className="error-msg">{errors.completion}</p>
           )}
 
-          <label htmlFor="client" className="create-field-header">
-            Client
-          </label>
-          <input
-            id="client"
-            type="text"
-            name="client"
-            placeholder="Client"
-            value={projectDetails.client}
-            onChange={handleChange}
-            className="create-input"
-          />
-          {errors.client && <p className="error-msg">{errors.client}</p>}
-
+          {projectDetails.ProjectType === "existingBuildingRetrofit" && (
+            <div>
+              <label htmlFor="client" className="create-field-header">
+                Client
+              </label>
+              <input
+                id="client"
+                type="text"
+                name="client"
+                placeholder="Client"
+                value={projectDetails.client}
+                onChange={handleChange}
+                className="create-input"
+              />
+              {errors.client && <p className="error-msg">{errors.client}</p>}
+            </div>
+          )}
           <label htmlFor="location" className="create-field-header">
             Location
           </label>

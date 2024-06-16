@@ -67,6 +67,22 @@ const EditProject: React.FC = () => {
     fetchProject();
   }, [id, type]);
 
+  useEffect(() => {
+    if (project) {
+      if (selectedType !== "existingBuildingRetrofit") {
+        setProject((prevProject) => ({
+          ...prevProject!,
+          client: "",
+        }));
+      } else {
+        setProject((prevProject) => ({
+          ...prevProject!,
+          developer: "",
+        }));
+      }
+    }
+  }, [selectedType]);
+
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
