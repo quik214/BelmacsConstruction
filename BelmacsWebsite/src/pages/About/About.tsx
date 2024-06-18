@@ -8,16 +8,19 @@ import AboutIMS from "../../components/About/AboutIMS/AboutIMS";
 import AboutWSH from "../../components/About/AboutWSH/AboutWSH";
 import AboutBizSafe from "../../components/About/AboutBizSafe/AboutBizSafe";
 import AboutPDPA from "../../components/About/AboutPDPA/AboutPDPA";
+import AboutAchievements from "../../components/About/AboutStatistics/AboutAchievements";
 
 export default function () {
   const reveal = () => {
-    const reveals = document.querySelectorAll(".reveal, .reveal-one, .reveal-two, .reveal-three");
-  
+    const reveals = document.querySelectorAll(
+      ".reveal, .reveal-one, .reveal-two, .reveal-three"
+    );
+
     for (let i = 0; i < reveals.length; i++) {
       const windowHeight = window.innerHeight;
       const revealTop = reveals[i].getBoundingClientRect().top;
       let revealPoint = 150; // Default reveal point
-  
+
       // Adjust the reveal point based on the specific class
       if (reveals[i].classList.contains("reveal-one")) {
         revealPoint = 200;
@@ -26,7 +29,7 @@ export default function () {
       } else if (reveals[i].classList.contains("reveal-three")) {
         revealPoint = 250;
       }
-  
+
       if (revealTop < windowHeight - revealPoint) {
         reveals[i].classList.add("active");
       } else {
@@ -34,7 +37,7 @@ export default function () {
       }
     }
   };
-  
+
   window.addEventListener("scroll", reveal);
   document.addEventListener("DOMContentLoaded", reveal); // Initial check on page load
 
@@ -67,9 +70,17 @@ export default function () {
       <div className="container">
         <AboutProjects />
         <AboutPeople />
+      </div>
+
+      <div className="out-container">
+        <AboutAchievements />
+      </div>
+
+      <div className="container">
         <AboutIMS />
         <AboutWSH />
       </div>
+
       <div className="out-container">
         <AboutBizSafe />
       </div>

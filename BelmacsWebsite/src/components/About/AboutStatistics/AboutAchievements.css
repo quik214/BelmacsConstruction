@@ -1,0 +1,52 @@
+.achievements-container {
+    margin-top: 100px;
+    text-align: center;
+    background-color: #364fc7; /* Adjust background color */
+    color: white;
+    background-image: url('../../../assets/Projects/HeroImages/CommercialHero.jpg'); /* Background image */
+    background-size: cover;
+    background-blend-mode: multiply;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .icon {
+    width: 40px;
+  }
+  
+  .achievements-header {
+    padding-top: 100px;
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  
+  .achievements {
+    display: flex;
+    justify-content:center;
+    flex-wrap: nowrap;
+    
+  }
+  
+  .achievement {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+  }
+  
+  .icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+  }
+  
+  .info h3 {
+    font-size: 2em;
+    margin: 5px 0;
+  }
+  
+  .info p {
+    font-size: 1em;
+    margin: 5px 0;
+  }
+  
