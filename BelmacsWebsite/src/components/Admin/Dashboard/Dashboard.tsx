@@ -5,19 +5,24 @@ import EditIcon from "../../../assets/Icons/AdminDashboard/pencil-simple.svg";
 import DeleteIcon from "../../../assets/Icons/AdminDashboard/trash.svg";
 
 import React, { useState, useEffect } from "react";
-import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  deleteDoc,
+  doc,
+  DocumentData,
+  QueryDocumentSnapshot,
+} from "firebase/firestore";
 import { db, storage } from "../../../firebase";
 import { useNavigate } from "react-router-dom";
 import { ref, deleteObject } from "firebase/storage";
-
-
 
 interface Project {
   id: string;
   image: string;
   name: string;
   developer: string;
-  awards: string;
+  awards: { id: string; title: string }[];
   type: string;
   completion: string;
   client: string;
@@ -34,8 +39,6 @@ const Dashboard: React.FC = () => {
   // for search
   const [searchQuery, setSearchQuery] = useState(""); // Add search query state
 
-  
-
   // for delete
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -49,15 +52,28 @@ const Dashboard: React.FC = () => {
       if (!selectedType) return;
 
       try {
-        const querySnapshot = await getDocs(
-          collection(db, `${selectedType}-projects`)
-        );
+        const projectsCollectionRef = collection(db, `${selectedType}-projects`);
+        const querySnapshot = await getDocs(projectsCollectionRef);
 
         const data: Project[] = [];
-        querySnapshot.forEach((doc) => {
-          const docData = doc.data();
-          data.push({ id: doc.id, ...docData } as Project);
-        });
+        await Promise.all(
+          querySnapshot.docs.map(async (doc: QueryDocumentSnapshot<DocumentData>) => {
+            const projectData = doc.data();
+            const awardsCollectionRef = collection(doc.ref, "awards");
+            const awardsSnapshot = await getDocs(awardsCollectionRef);
+
+            const awards = awardsSnapshot.docs.map((awardDoc) => ({
+              id: awardDoc.id,
+              title: awardDoc.data().title,
+            }));
+
+            data.push({
+              id: doc.id,
+              ...projectData,
+              awards: awards,
+            } as Project);
+          })
+        );
 
         data.sort((a, b) => {
           const dateA: any = new Date(a.completion);
@@ -67,6 +83,7 @@ const Dashboard: React.FC = () => {
 
         setProjects(data);
         setDisplayedProjects(data);
+        
       } catch (error) {
         console.error("Error fetching projects: ", error);
       }
@@ -76,17 +93,12 @@ const Dashboard: React.FC = () => {
   }, [selectedType]);
 
   // for search
-
   useEffect(() => {
     const filteredProjects = projects.filter((project) =>
       project.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setDisplayedProjects(filteredProjects);
   }, [projects, searchQuery]);
-
-  useEffect(() => {
-    setDisplayedProjects(projects);
-  }, [projects]);
 
   const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedType(event.target.value);
@@ -108,12 +120,22 @@ const Dashboard: React.FC = () => {
     try {
       // Delete firestore storage image
       const oldImageRef = ref(storage, selectedProject.image);
-
-      // Delete the old image if necessary
       await deleteObject(oldImageRef);
 
+      // Delete subcollection 'awards' first
+      const projectRef = doc(db, `${selectedType}-projects`, selectedProject.id);
+      const awardsCollectionRef = collection(projectRef, "awards");
+      const awardsSnapshot = await getDocs(awardsCollectionRef);
+
+      const deletePromises = awardsSnapshot.docs.map(async (doc) => {
+        await deleteDoc(doc.ref);
+      });
+      await Promise.all(deletePromises);
+
       // Delete firestore data
-      await deleteDoc(doc(db, `${selectedType}-projects`, selectedProject.id));
+      await deleteDoc(projectRef);
+
+      // Update projects and displayedProjects after deletion
       setProjects((prevProjects) =>
         prevProjects.filter((project) => project.id !== selectedProject.id)
       );
@@ -122,6 +144,7 @@ const Dashboard: React.FC = () => {
           (project) => project.id !== selectedProject.id
         )
       );
+
       console.log("Project deleted:", selectedProject.id);
       setShowDeleteConfirmation(false); // Hide the confirmation dialog after deletion
       setNotification({
@@ -228,7 +251,13 @@ const Dashboard: React.FC = () => {
                 {selectedType !== "existingBuildingRetrofit" && (
                   <td className="mobile-table">{projectItem.developer}</td>
                 )}
-                <td className="mobile-table">{projectItem.awards}</td>
+<td className="mobile-table">
+  <ul className="awards-list">
+    {projectItem.awards.map((award) => (
+      <li key={award.id}>{award.title}</li>
+    ))}
+  </ul>
+</td>
                 <td className="mobile-table">{projectItem.type}</td>
                 <td className="mobile-table">{projectItem.completion}</td>
                 {selectedType === "existingBuildingRetrofit" && (
@@ -291,7 +320,6 @@ const Dashboard: React.FC = () => {
           {notification.message}
         </div>
       )}
-
     </div>
   );
 };

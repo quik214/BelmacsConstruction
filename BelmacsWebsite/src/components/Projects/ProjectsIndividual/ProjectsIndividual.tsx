@@ -15,7 +15,7 @@ interface Project {
   image: string;
   name: string;
   developer: string;
-  awards: string;
+  awards: string[];
   type: string;
   completion: string;
   client: string;
@@ -23,54 +23,58 @@ interface Project {
 }
 
 const ProjectList: React.FC = () => {
-  const [projects, setProjects] = useState<Project[]>([]); // create a useState hook, where we have a variable projects and a function that updates the variable
-  // currently, projects is set to be an empty array of Project objects
+  const [projects, setProjects] = useState<Project[]>([]);
   const [displayedProjects, setDisplayedProjects] = useState<Project[]>([]);
-  const [visibleCount, setVisibleCount] = useState(6); // Initial number of projects to display
-  const { type } = useParams<{ type: string }>(); // captures the part of the URL after the last /
+  const [visibleCount, setVisibleCount] = useState(6);
+  const { type } = useParams<{ type: string }>();
   const location = useLocation();
 
-  const { paramData } = location.state || {}; // Destructure paramData from location.state
+  const { paramData } = location.state || {};
 
   const observer = useRef<IntersectionObserver | null>(null);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
 
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [showSentinel, setShowSentinel] = useState(false); // State to manage sentinel visibility
+  const [showSentinel, setShowSentinel] = useState(false);
 
   useEffect(() => {
+    const fetchAwards = async (projectId: string) => {
+      const awardsCollection = collection(db, `${type}-projects`, projectId, 'awards');
+      const awardsSnapshot = await getDocs(awardsCollection);
+      return awardsSnapshot.docs.map(doc => doc.id);
+    };
+
     const fetchDataFromFirestore = async () => {
       if (!type) return;
 
       try {
         const querySnapshot = await getDocs(
-          collection(db, `${type}-projects`) // get the documents from the Firestore collection with the name of (type)-projects
+          collection(db, `${type}-projects`)
         );
-        // console.log(category + "-projects");
-        const data: Project[] = []; // empty array to hold each project's data
-        querySnapshot.forEach((doc) => {
-          // iterate over each project and its data (in the Firebase collection), assign it to doc
-          const docData = doc.data(); // assign the data to a variable
-          data.push({ id: doc.id, ...docData } as Project); // push everything from docData to the data array (from id, to the last piece of data)
-        });
 
-        // Sort the data by completionDate
+        const data: Project[] = [];
+        for (const doc of querySnapshot.docs) {
+          const docData = doc.data();
+          const awards = await fetchAwards(doc.id);
+          data.push({ id: doc.id, ...docData, awards } as Project);
+        }
+
         data.sort((a, b) => {
           const dateA: any = new Date(a.completion);
           const dateB: any = new Date(b.completion);
           return dateB - dateA;
         });
 
-        setProjects(data); // update projects state with the fetched data
-        setDisplayedProjects(data.slice(0, visibleCount)); // Display initial projects
+        setProjects(data);
+        setDisplayedProjects(data.slice(0, visibleCount));
       } catch (error) {
-        console.error("Error fetching projects: ", error); // if there is error, log to console
+        console.error("Error fetching projects: ", error);
       }
     };
 
     fetchDataFromFirestore();
-  }, [type]); // whenever there is a change to type (which is the current project type), the entirety of the above code will re-run
+  }, [type]);
 
   const loadMoreProjects = () => {
     setVisibleCount((prevCount) => prevCount + 6);
@@ -91,7 +95,7 @@ const ProjectList: React.FC = () => {
           setShowSentinel(true);
           setTimeout(() => {
             setShowSentinel(false);
-          }, 1500); // Hide the sentinel after 1 seconds
+          }, 1500);
         }
       }
     });
@@ -102,10 +106,6 @@ const ProjectList: React.FC = () => {
 
     return () => observer.current?.disconnect();
   }, [visibleCount, projects.length]);
-
-  useEffect(() => {
-    setDisplayedProjects(projects.slice(0, visibleCount));
-  }, [projects, visibleCount]);
 
   const handleCardClick = (project: Project) => {
     setSelectedProject(project);
@@ -163,16 +163,13 @@ const ProjectList: React.FC = () => {
               &times;
             </span>
             <div className="project-popup-header">
-             
-                <img src={selectedProject.image} alt={selectedProject.name} />
-             
-            
+              <img src={selectedProject.image} alt={selectedProject.name} />
               <div className="project-popup-info">
                 <div className="project-popup-name">{selectedProject.name}</div>
                 {selectedProject.type && (
                   <div className="project-popup-buildingtype">
                     <p style={{ color: "#364FC7" }}>
-                      Building Type: <br></br>
+                      Building Type: <br />
                     </p>
                     {selectedProject.type}
                   </div>
@@ -180,7 +177,7 @@ const ProjectList: React.FC = () => {
                 {selectedProject.location && (
                   <div className="project-popup-location">
                     <p style={{ color: "#364FC7" }}>
-                      Location: <br></br>
+                      Location: <br />
                     </p>
                     {selectedProject.location}
                   </div>
@@ -188,7 +185,7 @@ const ProjectList: React.FC = () => {
                 {selectedProject.developer && (
                   <div className="project-popup-developer">
                     <p style={{ color: "#364FC7" }}>
-                      Developer: <br></br>
+                      Developer: <br />
                     </p>
                     {selectedProject.developer}
                   </div>
@@ -196,19 +193,19 @@ const ProjectList: React.FC = () => {
                 {selectedProject.client && (
                   <div className="project-popup-client">
                     <p style={{ color: "#364FC7" }}>
-                      Client: <br></br>
+                      Client: <br />
                     </p>
                     {selectedProject.client}
                   </div>
                 )}
-                {selectedProject.awards && (
+                {selectedProject.awards && selectedProject.awards.length > 0 && (
                   <div className="project-popup-awards">
                     <p style={{ color: "#364FC7" }}>
-                      Awards: <br></br>
+                      Awards: <br />
                     </p>
-                    {selectedProject.awards.split("\\n").map((line, index) => (
+                    {selectedProject.awards.map((award, index) => (
                       <React.Fragment key={index}>
-                        {line}
+                        - {award}
                         <br />
                       </React.Fragment>
                     ))}
@@ -217,7 +214,7 @@ const ProjectList: React.FC = () => {
                 {selectedProject.completion && (
                   <div className="project-popup-completion">
                     <p style={{ color: "#364FC7" }}>
-                      Completion: <br></br>
+                      Completion: <br />
                     </p>
                     {selectedProject.completion}
                   </div>

@@ -94,25 +94,61 @@
   color: #721c24;
 }
 
-.awards {
+
+/* AWARDS */
+.edit-awards-field {
   display: flex;
-  column-gap: 5px;
-  margin-bottom: 5px;
+  flex-direction: column;
+  align-items: start;
+  margin-top: 10px;
 }
 
+.edit-awards-header {
+  margin-bottom: 10px;
+}
 
-.awards-header {
+.edit-awards-desc {
+  margin-bottom: 10px;
+}
+
+.edit-award-input-ctr {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.edit-award-input-ctr input {
+  flex: 1;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   margin-bottom: 0px;
 }
 
-.separate-text {
-    margin-top: 1px;
+.add-award-btn,
+.remove-award-btn {
+  background-color: #1fb185;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+  padding: 10px 12.5px;
 }
 
-.awards-field {
-  margin-top: 10px;
-  margin-bottom: 20px;
+.add-award-btn:hover,
+.remove-award-btn:hover {
+  background-color: #13644c;
 }
+
+.remove-award-btn {
+  background-color: #ff4d4d;
+}
+
+.remove-award-btn:hover {
+  background-color: #cc0000;
+}
+
 
 /* FOR TOGGLE BUTTON */
 .featured-switch-ctr {

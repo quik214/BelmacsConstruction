@@ -4,7 +4,7 @@ import "./Create-media.css";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { db, storage } from "../../../firebase";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, collection } from "firebase/firestore";
 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
@@ -16,7 +16,6 @@ const Create: React.FC = () => {
     image: "",
     name: "",
     developer: "",
-    awards: "",
     type: "",
     completion: "",
     client: "",
@@ -25,12 +24,17 @@ const Create: React.FC = () => {
     ProjectType: "residential",
   });
 
+  type Award = {
+    title: string;
+  };
+
+  const [awards, setAwards] = useState<Award[]>([]);
+
   // useState function with array to hold error messages
   const [errors, setErrors] = useState({
     image: "",
     name: "",
     developer: "",
-    awards: "",
     type: "",
     completion: "",
     client: "",
@@ -141,7 +145,6 @@ const Create: React.FC = () => {
       image: "",
       name: "",
       developer: "",
-      awards: "",
       type: "",
       completion: "",
       client: "",
@@ -154,7 +157,10 @@ const Create: React.FC = () => {
       isValid = false;
     }
 
-    if (!projectDetails.developer.trim()) {
+    if (
+      !projectDetails.developer.trim() &&
+      projectDetails.ProjectType !== "existingBuildingRetrofit"
+    ) {
       newErrors.developer = "Developer is required";
       isValid = false;
     }
@@ -165,7 +171,7 @@ const Create: React.FC = () => {
     }
 
     if (!projectDetails.type.trim()) {
-      newErrors.completion = "Type is required";
+      newErrors.type = "Type is required";
       isValid = false;
     }
 
@@ -183,12 +189,25 @@ const Create: React.FC = () => {
     return isValid;
   };
 
+  const handleAwardChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const newAwards = [...awards];
+    newAwards[index].title = e.target.value;
+    setAwards(newAwards);
+  };
+
+  const handleAddAward = () => {
+    setAwards([...awards, { title: "" }]);
+  };
+
+  const handleRemoveAward = (index: number) => {
+    const newAwards = awards.filter((_, i) => i !== index);
+    setAwards(newAwards);
+  };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // if (!imageFile) {
-    //   alert("Please select an image file");
-    //   return;
-    // }
 
     if (!validate() || !imageFile) {
       createErrorToast();
@@ -219,19 +238,35 @@ const Create: React.FC = () => {
           const { ProjectType, ...filteredDetails } = projectDetails;
 
           // Save project details along with image URL in Firestore
-          await setDoc(
-            doc(
-              db,
-              `${projectDetails.ProjectType}-projects`,
-              projectDetails.name
-            ),
-            {
-              ...filteredDetails,
-              image: downloadURL,
-            }
+          const projectRef = doc(
+            db,
+            `${projectDetails.ProjectType}-projects`,
+            projectDetails.name
           );
-          createSuccessToast(projectDetails.name);
+          await setDoc(projectRef, {
+            ...filteredDetails,
+            image: downloadURL,
+          });
 
+          // Save awards as sub-collection
+          for (const award of awards) {
+            if (award.title.trim()) {
+              await setDoc(
+                doc(
+                  collection(
+                    db,
+                    `${projectDetails.ProjectType}-projects`,
+                    projectDetails.name,
+                    "awards"
+                  ),
+                  award.title
+                ),
+                { title: award.title }
+              );
+            }
+          }
+
+          createSuccessToast(projectDetails.name);
           navigate("/admin/dashboard");
         }
       );
@@ -314,19 +349,34 @@ const Create: React.FC = () => {
             <label htmlFor="awards" className="create-field-header">
               Awards
             </label>
-            (\n to separate awards)
-          </div>
 
-          <input
-            id="awards"
-            type="text"
-            name="awards"
-            placeholder="Awards"
-            value={projectDetails.awards}
-            onChange={handleChange}
-            className="create-input"
-          />
-          {errors.awards && <p className="error-msg">{errors.awards}</p>}
+            {awards.map((award, index) => (
+              <div key={index} className="award-input-ctr">
+                <input
+                  type="text"
+                  name="awards"
+                  placeholder="Award"
+                  value={award.title}
+                  onChange={(e) => handleAwardChange(e, index)}
+                  className="create-input"
+                />
+                <button
+                  type="button"
+                  onClick={() => handleRemoveAward(index)}
+                  className="remove-award-button"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={handleAddAward}
+              className="add-award-button"
+            >
+              Add Award
+            </button>
+          </div>
 
           <label htmlFor="type" className="create-field-header">
             Type
@@ -398,7 +448,7 @@ const Create: React.FC = () => {
                 type="checkbox"
                 id="featured"
                 name="featured"
-                value={projectDetails.featured}
+                checked={projectDetails.featured === "yes"}
                 onChange={handleToggleChange}
               />
               <span className="featured-slider round"></span>

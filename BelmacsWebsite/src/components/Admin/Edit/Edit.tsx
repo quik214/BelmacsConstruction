@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { doc, getDoc, setDoc, deleteDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  setDoc,
+  deleteDoc,
+  collection,
+  getDocs,
+} from "firebase/firestore";
 import {
   getStorage,
   ref,
@@ -21,12 +28,12 @@ interface Project {
   image: string;
   name: string;
   developer: string;
-  awards: string;
   type: string;
   completion: string;
   client: string;
   location: string;
   featured: "yes" | "no";
+  awards: string[];
 }
 
 const EditProject: React.FC = () => {
@@ -41,14 +48,11 @@ const EditProject: React.FC = () => {
     type || "residential"
   );
   const [editSuccess, setEditSuccess] = useState<boolean>(false);
-  const [notification, setNotification] = useState<{
-    message: string;
-    type: "success" | "error";
-  } | null>(null);
   const navigate = useNavigate();
 
   // for form errors
   const [errors, setErrors] = useState<{ [key: string]: string | null }>({});
+  const [awards, setAwards] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -61,7 +65,13 @@ const EditProject: React.FC = () => {
         if (docSnap.exists()) {
           const projectData = docSnap.data() as Project;
           setProject(projectData);
-          setSelectedImage(projectData.image);
+
+          // Fetch awards from sub-collection
+          const awardsCollectionRef = collection(docRef, "awards");
+          const awardsSnapshot = await getDocs(awardsCollectionRef);
+          const awardsData = awardsSnapshot.docs.map((doc) => doc.data().title);
+
+          setAwards(awardsData); // Set awards state with data from Firebase sub-collection
         } else {
           console.error("No such document!");
         }
@@ -104,6 +114,21 @@ const EditProject: React.FC = () => {
     if (event.target.files && event.target.files[0]) {
       setSelectedImage(event.target.files[0]);
     }
+  };
+
+  const handleAwardChange = (index: number, value: string) => {
+    const newAwards = [...awards];
+    newAwards[index] = value;
+    setAwards(newAwards);
+  };
+
+  const handleAddAward = () => {
+    setAwards([...awards, ""]);
+  };
+
+  const handleRemoveAward = (index: number) => {
+    const newAwards = awards.filter((_, i) => i !== index);
+    setAwards(newAwards);
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -168,30 +193,61 @@ const EditProject: React.FC = () => {
       const oldProjectRef = doc(db, `${type}-projects`, oldId);
       await deleteDoc(oldProjectRef);
 
+      // Delete the old awards subcollection
+      const oldAwardsCollectionRef = collection(oldProjectRef, "awards");
+      const oldAwardsSnapshot = await getDocs(oldAwardsCollectionRef);
+      const deleteAwardsPromises = oldAwardsSnapshot.docs.map(async (doc) => {
+        await deleteDoc(doc.ref);
+      });
+      await Promise.all(deleteAwardsPromises);
+
       // Add project details to the new collection
       const newProjectRef = doc(db, `${selectedType}-projects`, project.name);
       await setDoc(newProjectRef, { ...project, image: imageUrl });
 
+
+      // Filter out empty awards
+      const filteredAwards = awards.filter((award) => award.trim() !== "");
+
+      // Add awards as a subcollection with award title as document ID
+      const awardsCollectionRef = collection(newProjectRef, "awards");
+      await Promise.all(
+        filteredAwards.map(async (award) => {
+          await setDoc(doc(awardsCollectionRef, award), { title: award });
+        })
+      );
+
       // show toast
       editSuccessToast(project.name);
 
+      // hides the entire form upon success
       setEditSuccess(true);
-      setTimeout(() => {
-        setNotification(null);
-        navigate(-1);
-      }, 1500);
+
+      // navigates the user back to dashboard
+      navigate("/admin/dashboard");
     } catch (error) {
-      console.error("Error updating project: ", error);
-      setNotification({ message: "Error updating project", type: "error" });
-      setTimeout(() => {
-        setNotification(null);
-      }, 2500);
+      createErrorToast();
+      console.log(error);
     }
   };
 
   if (loading) {
     return <div>Loading...</div>;
   }
+
+  // createErrorToast
+  const createErrorToast = () => {
+    toast.error("Please fill in the required fields.", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
 
   // toast setup for login success
   const editSuccessToast = (projectName: string) => {
@@ -202,7 +258,7 @@ const EditProject: React.FC = () => {
       </div>,
       {
         position: "bottom-right",
-        autoClose: 1000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: false,
@@ -214,11 +270,9 @@ const EditProject: React.FC = () => {
   };
 
   // form validation
-
   const validateForm = () => {
     const newErrors: { [key: string]: string | null } = {};
 
-    
     if (!project?.name) {
       newErrors.name = "Name is required.";
     }
@@ -235,11 +289,6 @@ const EditProject: React.FC = () => {
 
   return (
     <div className="edit-project-ctr">
-      {notification && (
-        <div className={`notification ${notification.type}`}>
-          {notification.message}
-        </div>
-      )}
       {!editSuccess && project && (
         <form onSubmit={handleSubmit}>
           <p className="edit-project-header">Edit Project</p>
@@ -310,18 +359,36 @@ const EditProject: React.FC = () => {
             </div>
           )}
 
-          <div className="edit-field">
-            <div className="awards">
-              <label className="awards-header edit-field-header">Awards </label>
-              <span className="separate-text">(\n to separate awards)</span>
-            </div>
-
-            <textarea
-              name="awards"
-              className="awards-field"
-              value={project.awards}
-              onChange={handleInputChange}
-            />
+          <div className="edit-awards-field">
+            <label className="edit-awards-header">Awards</label>
+            {awards.length > 0 ? (
+              awards.map((award, index) => (
+                <div key={index} className="edit-award-input-ctr">
+                  <input
+                    type="text"
+                    placeholder="Award Title"
+                    value={award}
+                    onChange={(e) => handleAwardChange(index, e.target.value)}
+                  />
+                  <button
+                    type="button"
+                    className="remove-award-btn"
+                    onClick={() => handleRemoveAward(index)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))
+            ) : (
+              <p className="edit-awards-desc">No awards yet.</p>
+            )}
+            <button
+              type="button"
+              className="add-award-btn"
+              onClick={handleAddAward}
+            >
+              Add Award
+            </button>
           </div>
 
           <div className="edit-field">
@@ -359,17 +426,6 @@ const EditProject: React.FC = () => {
               />
             </div>
           )}
-
-          <div className="edit-field">
-            <label className="edit-field-header">Location</label>
-            <input
-              type="text"
-              name="location"
-              value={project.location}
-              onChange={handleInputChange}
-            />
-            {errors.location && <p className="error">{errors.location}</p>}
-          </div>
 
           <div className="edit-field">
             <label className="edit-field-header">Featured</label>

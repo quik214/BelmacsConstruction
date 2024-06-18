@@ -52,6 +52,16 @@
   gap: 10px;
 }
 
+/* Adjust awards list styles */
+.project-table .mobile-table ul {
+  padding-left: 15px;
+  list-style-type: disc;
+}
+
+.project-table .mobile-table ul li {
+  margin-bottom: 4px; /* Adjust as needed to separate each award */
+}
+
 .add-project-ctr {
   display: flex;
   margin-left: auto;

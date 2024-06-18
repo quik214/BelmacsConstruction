@@ -96,6 +96,54 @@
 
 
 
+/* AWARDS */
+
+.awards-field {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.awards-header {
+  margin-bottom: 0;
+}
+
+.award-input-ctr {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.award-input-ctr input {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.add-award-button,
+.remove-award-button {
+  background-color: #1fb185;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+  padding: 10px 12.5px;
+}
+
+.add-award-button:hover,
+.remove-award-button:hover {
+  background-color: #13644c;
+}
+
+.remove-award-button {
+  background-color: #ff4d4d;
+}
+
+.remove-award-button:hover {
+  background-color: #cc0000;
+}
+
+
 
 
 /* TOGGLE SWITCH CSS */
@@ -155,3 +203,4 @@
     border-radius: 50%;
   }
   
+
