@@ -125,7 +125,7 @@
   max-width: 1051px; /* Adjust max-width as needed */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: relative;
-  height: 50%; /* Ensure sufficient height for scrolling */
+  height: 65%; /* Ensure sufficient height for scrolling */
   display: flex;
   animation: openScaleEffect 0.5s ease forwards; /* Apply the scale animation */
   overflow: hidden; /* Hide overflow on the main content to control scrolling on .project-popup-info */
@@ -181,8 +181,8 @@
 
 .close-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 5px;
+  right: 20px;
   font-size: 38px;
   cursor: pointer;
   color: black;

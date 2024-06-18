@@ -17,6 +17,10 @@ import { db, storage } from "../../../firebase";
 import { useNavigate } from "react-router-dom";
 import { ref, deleteObject } from "firebase/storage";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+// Project object to store each Project's values
 interface Project {
   id: string;
   image: string;
@@ -30,10 +34,12 @@ interface Project {
 }
 
 const Dashboard: React.FC = () => {
+  // for displaying of Projects
   const [projects, setProjects] = useState<Project[]>([]);
   const [displayedProjects, setDisplayedProjects] = useState<Project[]>([]);
   const [selectedType, setSelectedType] = useState<string>("residential");
 
+  // for navigation between pages
   const navigate = useNavigate();
 
   // for search
@@ -47,113 +53,147 @@ const Dashboard: React.FC = () => {
     type: "success" | "error";
   } | null>(null);
 
+  // toast setup for project delete
+  const deleteSuccessToast = (project: string) => {
+    toast.success(
+      <div>
+        <b>{project}</b> has been deleted
+      </div>,
+      {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }
+    );
+  };
+
+  // function to retrieve data from database
   useEffect(() => {
     const fetchDataFromFirestore = async () => {
-      if (!selectedType) return;
-
       try {
-        const projectsCollectionRef = collection(db, `${selectedType}-projects`);
-        const querySnapshot = await getDocs(projectsCollectionRef);
+        const projectsCollectionRef = collection(
+          db,
+          `${selectedType}-projects`
+        ); // assign variable collection of (projects) type
+        const querySnapshot = await getDocs(projectsCollectionRef); // retrieve data from the selected (projects) type
 
-        const data: Project[] = [];
+        const data: Project[] = []; // create an empty Object array
         await Promise.all(
-          querySnapshot.docs.map(async (doc: QueryDocumentSnapshot<DocumentData>) => {
-            const projectData = doc.data();
-            const awardsCollectionRef = collection(doc.ref, "awards");
-            const awardsSnapshot = await getDocs(awardsCollectionRef);
+          querySnapshot.docs.map(
+            async (doc: QueryDocumentSnapshot<DocumentData>) => {
+              const projectData = doc.data(); // put data for selected project type inside projectData
+              const awardsCollectionRef = collection(doc.ref, "awards"); // assign variable the sub-collection of awards from a project-document within a project type
+              const awardsSnapshot = await getDocs(awardsCollectionRef); // retrieve awards based on (projects type) and (project - document)
 
-            const awards = awardsSnapshot.docs.map((awardDoc) => ({
-              id: awardDoc.id,
-              title: awardDoc.data().title,
-            }));
+              // for the creation of awards array
+              const awards = awardsSnapshot.docs.map((awardDoc) => ({
+                id: awardDoc.id, // award id
+                title: awardDoc.data().title, // award title
+              }));
 
-            data.push({
-              id: doc.id,
-              ...projectData,
-              awards: awards,
-            } as Project);
-          })
+              // combine all the data from main fields and awards into Project array
+              data.push({
+                id: doc.id,
+                ...projectData,
+                awards: awards,
+              } as Project);
+            }
+          )
         );
 
+        // sort based on descending order of date
         data.sort((a, b) => {
           const dateA: any = new Date(a.completion);
           const dateB: any = new Date(b.completion);
           return dateB - dateA;
         });
 
+        // setProjects is used to push the projects in the (sorted) data variable into the Projects array created in line 36
         setProjects(data);
-        setDisplayedProjects(data);
-        
+        setDisplayedProjects(data); // used for filtering
       } catch (error) {
         console.error("Error fetching projects: ", error);
       }
     };
 
-    fetchDataFromFirestore();
+    fetchDataFromFirestore(); // retrieve from firebase firestore
   }, [selectedType]);
 
   // for search
   useEffect(() => {
-    const filteredProjects = projects.filter((project) =>
-      project.name.toLowerCase().includes(searchQuery.toLowerCase())
+    const filteredProjects = projects.filter(
+      (project) =>
+        project.name.toLowerCase().includes(searchQuery.toLowerCase()) // converts search field text to lowercase and project name to lowercase for easier searching
     );
-    setDisplayedProjects(filteredProjects);
+    setDisplayedProjects(filteredProjects); // only display projects based on search field
   }, [projects, searchQuery]);
 
+  // for handling project type change
   const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedType(event.target.value);
+    setSelectedType(event.target.value); // set selected type to selected type from dropdown
   };
 
+  // navigate to edit page based on selected project id
   const handleEdit = (project: Project) => {
     navigate(`/admin/edit/${selectedType}/${project.id}`, {
-      state: { paramData: project },
+      state: { paramData: project }, // push Project object to be stored in the next page's URL
     });
   };
 
+  // handles delete function
   const handleDelete = (project: Project) => {
-    setSelectedProject(project);
-    setShowDeleteConfirmation(true);
+    setSelectedProject(project); // push selected Project data into selectedProject variable
+    setShowDeleteConfirmation(true); // display delete pop up
   };
 
   const confirmDelete = async () => {
-    if (!selectedType || !selectedProject) return;
+    if (!selectedType || !selectedProject) return; // ensure selectedType and selectedProject both exist (for below parts)
     try {
       // Delete firestore storage image
-      const oldImageRef = ref(storage, selectedProject.image);
-      await deleteObject(oldImageRef);
+      const imageRef = ref(storage, selectedProject.image);
+      await deleteObject(imageRef);
 
       // Delete subcollection 'awards' first
-      const projectRef = doc(db, `${selectedType}-projects`, selectedProject.id);
-      const awardsCollectionRef = collection(projectRef, "awards");
-      const awardsSnapshot = await getDocs(awardsCollectionRef);
+      const projectRef = doc(
+        db,
+        `${selectedType}-projects`,
+        selectedProject.id
+      ); // assign projectRef variable the Project document (within Firebase)
+      const awardsCollectionRef = collection(projectRef, "awards"); // assign awardsCollectionRef the awards collection for the selected Project document
+      const awardsSnapshot = await getDocs(awardsCollectionRef); // retrieve awards collection data based on awardsCollectionRef variable
 
+      // function used to iterate through each award and delete each
       const deletePromises = awardsSnapshot.docs.map(async (doc) => {
-        await deleteDoc(doc.ref);
+        await deleteDoc(doc.ref); // delete each award
       });
-      await Promise.all(deletePromises);
 
-      // Delete firestore data
+      await Promise.all(deletePromises); // ensure all awards are deleted successfully, before moving on to code below
+      // else, return
+
+      // Delete firestore data using details in projectRef
       await deleteDoc(projectRef);
 
-      // Update projects and displayedProjects after deletion
+      // Update projects after deletion
       setProjects((prevProjects) =>
         prevProjects.filter((project) => project.id !== selectedProject.id)
       );
+
+      // Update displayedProjects after deletion
       setDisplayedProjects((prevDisplayedProjects) =>
         prevDisplayedProjects.filter(
-          (project) => project.id !== selectedProject.id
+          (project) => project.id !== selectedProject.id // filter a deleted project
         )
       );
 
-      console.log("Project deleted:", selectedProject.id);
+      console.log("Project deleted:", selectedProject.id); // log the deleted project
       setShowDeleteConfirmation(false); // Hide the confirmation dialog after deletion
-      setNotification({
-        message: selectedProject.name + " deleted successfully",
-        type: "success",
-      }); // Show success notification
-      setTimeout(() => {
-        setNotification(null);
-      }, 2500);
+
+      deleteSuccessToast(selectedProject.name); // display toast 
     } catch (error) {
       console.error("Error deleting project:", error);
       setShowDeleteConfirmation(false); // Hide the confirmation dialog on error
@@ -168,7 +208,9 @@ const Dashboard: React.FC = () => {
   };
 
   const handleAddProject = () => {
-    navigate("/admin/create"); // Navigate to AddProject component
+    navigate(`/admin/create/${selectedType}`), {
+      state: { paramData: selectedType}
+    }; // Navigate to AddProject component
   };
 
   // for search
@@ -251,13 +293,13 @@ const Dashboard: React.FC = () => {
                 {selectedType !== "existingBuildingRetrofit" && (
                   <td className="mobile-table">{projectItem.developer}</td>
                 )}
-<td className="mobile-table">
-  <ul className="awards-list">
-    {projectItem.awards.map((award) => (
-      <li key={award.id}>{award.title}</li>
-    ))}
-  </ul>
-</td>
+                <td className="mobile-table">
+                  <ul className="awards-list">
+                    {projectItem.awards.map((award) => (
+                      <li key={award.id}>{award.title}</li>
+                    ))}
+                  </ul>
+                </td>
                 <td className="mobile-table">{projectItem.type}</td>
                 <td className="mobile-table">{projectItem.completion}</td>
                 {selectedType === "existingBuildingRetrofit" && (

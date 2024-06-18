@@ -66,7 +66,7 @@ function MainApp() {
             }
           />
           <Route
-            path="/admin/create"
+            path="/admin/create/:selectedType"
             element={
               <PrivateRoute>
                 <AdminCreate />

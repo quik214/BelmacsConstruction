@@ -2,7 +2,7 @@ import "./Create.css";
 import "./Create-media.css";
 
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { db, storage } from "../../../firebase";
 import { setDoc, doc, collection } from "firebase/firestore";
 
@@ -12,6 +12,9 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Create: React.FC = () => {
+
+  const { selectedType } = useParams<{ selectedType: string }>();
+  // console.log(selectedType);
   const [projectDetails, setProjectDetails] = useState({
     image: "",
     name: "",
@@ -21,7 +24,7 @@ const Create: React.FC = () => {
     client: "",
     location: "",
     featured: "no",
-    ProjectType: "residential",
+    ProjectType: selectedType,
   });
 
   type Award = {

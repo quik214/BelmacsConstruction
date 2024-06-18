@@ -205,7 +205,6 @@ const EditProject: React.FC = () => {
       const newProjectRef = doc(db, `${selectedType}-projects`, project.name);
       await setDoc(newProjectRef, { ...project, image: imageUrl });
 
-
       // Filter out empty awards
       const filteredAwards = awards.filter((award) => award.trim() !== "");
 
@@ -426,6 +425,16 @@ const EditProject: React.FC = () => {
               />
             </div>
           )}
+
+          <div className="edit-field">
+            <label className="edit-field-header">Location</label>
+            <input
+              type="text"
+              name="location"
+              value={project.location}
+              onChange={handleInputChange}
+            />
+          </div>
 
           <div className="edit-field">
             <label className="edit-field-header">Featured</label>
