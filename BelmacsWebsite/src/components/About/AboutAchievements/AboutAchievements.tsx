@@ -13,6 +13,7 @@ import "./AboutAchievements-media.css";
 import buildingLogo from "../../../assets/Icons/AboutAchievements/building-office.svg";
 import hatLogo from "../../../assets/Icons/AboutAchievements/hard-hat.svg";
 import certificateLogo from "../../../assets/Icons/AboutAchievements/certificate.svg";
+import calendarLogo from "../../../assets/Icons/AboutAchievements/calendar-check.svg";
 
 // for particles.js
 import Particles, { initParticlesEngine } from "@tsparticles/react";
@@ -151,17 +152,21 @@ const AboutAchievements = () => {
           <div className="achievement">
             <img className="icon" src={hatLogo} alt="Hard Hat Icon"></img>
             <div className="info">
-              <h3> {inView && <CountUp end={1994} duration={2} />}</h3>
+              <h3>
+                {" "}
+                {inView && <CountUp end={1994} duration={2} separator="" />}
+              </h3>
               <p>Year Established</p>
             </div>
           </div>
         </div>
         <div className="circle-wrapper">
           <div className="achievement">
-            <img className="icon" src={hatLogo} alt="Hard Hat Icon"></img>
+            <img className="icon" src={calendarLogo} alt="Calendar Icon"></img>
             <div className="info">
               <h3>
-                {inView && <CountUp end={yearsOfExperience} duration={3} />} years
+                {inView && <CountUp end={yearsOfExperience} duration={3} />}{" "}
+                years
               </h3>
               <p>of Experience</p>
             </div>
