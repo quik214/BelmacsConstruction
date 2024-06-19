@@ -213,8 +213,9 @@ const EditProject: React.FC = () => {
         // otherwise, if both the type OR project name has changed, then we re-upload the old image
 
         // if the user does not upload a new image
+        // and if the type changed or project name changed
       } else if (type !== selectedType || project.name !== oldId) {
-        // if the type changed, or project name changed
+        
 
         const oldImageRef = ref(storage, project.image); // create a reference to the old image URL
 
@@ -227,10 +228,9 @@ const EditProject: React.FC = () => {
           throw new Error("Failed to fetch old image.");
         }
 
-        //////////////////////////////// continue
 
         const blob = await response.blob(); // blob contains the binary data of the image file, including the MIME type
-        // basically the blob is the image
+        // basicallyblob is the image
 
         // create a reference to the new path (of the image file)
         const newImageRef = ref(
@@ -242,36 +242,36 @@ const EditProject: React.FC = () => {
 
         // upload the blob to the new path
         await uploadBytes(newImageRef, blob);
-        imageUrl = await getDownloadURL(newImageRef); // get download URL of the new image
+        imageUrl = await getDownloadURL(newImageRef); // get download URL of the newly uploaded image
 
-        // Delete the old image if necessary
+        // Delete the old image (at the old path )
         await deleteObject(oldImageRef);
       }
 
       // Delete the old document
-      const oldProjectRef = doc(db, `${type}-projects`, oldId);
-      await deleteDoc(oldProjectRef);
+      const oldProjectRef = doc(db, `${type}-projects`, oldId); // create a reference to the old path
+      await deleteDoc(oldProjectRef); // delete the old document (project)
 
       // Delete the old awards subcollection
-      const oldAwardsCollectionRef = collection(oldProjectRef, "awards");
-      const oldAwardsSnapshot = await getDocs(oldAwardsCollectionRef);
+      const oldAwardsCollectionRef = collection(oldProjectRef, "awards"); // create reference to old awards collection
+      const oldAwardsSnapshot = await getDocs(oldAwardsCollectionRef); // get the snapshot of the collection
       const deleteAwardsPromises = oldAwardsSnapshot.docs.map(async (doc) => {
-        await deleteDoc(doc.ref);
+        await deleteDoc(doc.ref); // map through each document in the awards snapshot, and delete each of them 
       });
-      await Promise.all(deleteAwardsPromises);
+      await Promise.all(deleteAwardsPromises); // waits until all delete operations are completed 
 
       // Add project details to the new collection
-      const newProjectRef = doc(db, `${selectedType}-projects`, project.name);
-      await setDoc(newProjectRef, { ...project, image: imageUrl });
+      const newProjectRef = doc(db, `${selectedType}-projects`, project.name); // create reference to collection with new name 
+      await setDoc(newProjectRef, { ...project, image: imageUrl }); // set the data at the reference 
 
       // Filter out empty awards
       const filteredAwards = awards.filter((award) => award.trim() !== "");
 
       // Add awards as a subcollection with award title as document ID
-      const awardsCollectionRef = collection(newProjectRef, "awards");
+      const awardsCollectionRef = collection(newProjectRef, "awards"); // reference the awards collection at the location of newProjectRef
       await Promise.all(
-        filteredAwards.map(async (award) => {
-          await setDoc(doc(awardsCollectionRef, award), { title: award });
+        filteredAwards.map(async (award) => { // map over each filteredAward, and create a document 
+          await setDoc(doc(awardsCollectionRef, award), { title: award }); // with the award title as the id 
         })
       );
 
