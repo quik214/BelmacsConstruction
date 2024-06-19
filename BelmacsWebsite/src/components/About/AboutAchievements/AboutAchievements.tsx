@@ -12,16 +12,12 @@ import "./AboutAchievements-media.css";
 
 import buildingLogo from "../../../assets/Icons/AboutAchievements/building-office.svg";
 import hatLogo from "../../../assets/Icons/AboutAchievements/hard-hat.svg";
-import usersLogo from "../../../assets/Icons/AboutAchievements/users-three.svg";
 import certificateLogo from "../../../assets/Icons/AboutAchievements/certificate.svg";
 
 // for particles.js
 import Particles, { initParticlesEngine } from "@tsparticles/react";
-import {
-  type Container,
-  type ISourceOptions,
-} from "@tsparticles/engine";
-import { loadSlim } from "@tsparticles/slim"; 
+import { type Container, type ISourceOptions } from "@tsparticles/engine";
+import { loadSlim } from "@tsparticles/slim";
 
 import CountUp from "react-countup";
 
@@ -39,7 +35,6 @@ interface Project {
 }
 
 const AboutAchievements = () => {
-  const [init, setInit] = useState(false);
   const [totalAwards, setTotalAwards] = useState(0);
   const [totalProjects, setTotalProjects] = useState(0);
   const [yearsOfExperience, setYearsOfExperience] = useState(0);
@@ -110,8 +105,6 @@ const AboutAchievements = () => {
   useEffect(() => {
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
-    }).then(() => {
-      setInit(true);
     });
   }, []);
 
@@ -119,7 +112,8 @@ const AboutAchievements = () => {
     console.log(container);
   };
 
-  const particlesOptions: ISourceOptions = particlesJSON as unknown as ISourceOptions;
+  const particlesOptions: ISourceOptions =
+    particlesJSON as unknown as ISourceOptions;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -177,13 +171,16 @@ const AboutAchievements = () => {
           </div>
         </div>
         <div className="achievement">
-          <img className="icon" src={certificateLogo} alt="Certificate Logo"></img>
+          <img
+            className="icon"
+            src={certificateLogo}
+            alt="Certificate Logo"
+          ></img>
           <div className="info">
             <h3>{inView && <CountUp end={totalAwards} duration={3} />}</h3>
             <p>Awards Won</p>
           </div>
         </div>
-        
       </div>
     </div>
   );
