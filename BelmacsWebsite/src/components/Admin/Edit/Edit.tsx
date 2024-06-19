@@ -24,6 +24,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./Edit.css";
 import "./Edit-media.css";
 
+// create a Project object
 interface Project {
   image: string;
   name: string;
@@ -37,39 +38,49 @@ interface Project {
 }
 
 const EditProject: React.FC = () => {
-  const { id, type } = useParams<{ id: string; type: string }>();
-  const [oldId] = useState<string>(id || "");
-  const [project, setProject] = useState<Project | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [selectedImage, setSelectedImage] = useState<string | File | null>(
+  const { type, id } = useParams<{ type: string; id: string }>(); // useParams used to retrieve the id and type from the URL
+  // they must match the naming in App.tsx (where we define the routing)
+  const [oldId] = useState<string>(id || ""); // useState to store the oldId, which is taken from id (above)
+  const [project, setProject] = useState<Project | null>(null); // useState used to modify the project variable (of type Project)
+  // project can either be Project or null - which means that there may be no project data available
+  const [loading, setLoading] = useState<boolean>(true); // useState used to set the loading variable
+  const [selectedImage, setSelectedImage] = useState<string | File | null>( // useState to set the selectedImage
     null
   );
-  const [selectedType, setSelectedType] = useState<string>(
-    type || "residential"
+  const [selectedType, setSelectedType] = useState<string>( // useState for selectedType
+    type || "residential" // if type is falsy, then we set selectedType to have the value of "residential"
   );
-  const [editSuccess, setEditSuccess] = useState<boolean>(false);
-  const navigate = useNavigate();
+  const [editSuccess, setEditSuccess] = useState<boolean>(false); // useState for editSuccess, currently set to false
+  const navigate = useNavigate(); // function used for navigation (in later parts of code)
 
   // for form errors
+  // errors is a variable that consists of an array of key-value pairs
   const [errors, setErrors] = useState<{ [key: string]: string | null }>({});
+
+  // for awards
+  // awards is an array of strings (that each represent an award)
   const [awards, setAwards] = useState<string[]>([]);
 
+  // ** USEEFFECT FOR ID OR TYPE CHANGE ** // - basically triggered whenever we click on the 'Edit' button in the Dashboard
+  // useEffect is run whenever the id or type variables change
   useEffect(() => {
+    // define a fetchProject function (obviously used to fetch projects) within this useEffect
     const fetchProject = async () => {
       if (!id || !type) return;
 
       try {
-        const docRef = doc(db, `${type}-projects`, oldId);
-        const docSnap = await getDoc(docRef);
+        const docRef = doc(db, `${type}-projects`, oldId); // set the reference to point to the type-projects, and the oldId (document id)
+        const docSnap = await getDoc(docRef); // gets the document snapshot from Firebase, basically just represents the document
 
+        // if the document exists, then perform the following
         if (docSnap.exists()) {
-          const projectData = docSnap.data() as Project;
-          setProject(projectData);
+          const projectData = docSnap.data() as Project; // set projectData to be a Project object that essentially cotains all the data from the snapshot
+          setProject(projectData); // set the project to be projectData using setProject (which we will later display in the HTML)
 
           // Fetch awards from sub-collection
-          const awardsCollectionRef = collection(docRef, "awards");
-          const awardsSnapshot = await getDocs(awardsCollectionRef);
-          const awardsData = awardsSnapshot.docs.map((doc) => doc.data().title);
+          const awardsCollectionRef = collection(docRef, "awards"); // assign the awardsCollectionRef variable to reference the awards collection in docRef
+          const awardsSnapshot = await getDocs(awardsCollectionRef); // get a snapshot of the data in the awards collection
+          const awardsData = awardsSnapshot.docs.map((doc) => doc.data().title); // set awardsData (an array) to contain the title of each award using awardsSnapshot
 
           setAwards(awardsData); // Set awards state with data from Firebase sub-collection
         } else {
@@ -83,98 +94,145 @@ const EditProject: React.FC = () => {
     };
 
     fetchProject();
-  }, [id, type]);
+  }, [id, type]); // the useEffect will only run whenever there is a change to the id or type
+  // this means that whenever we click the 'Edit' button (in the Dashboard), then there will be a change to this file (page)'s id and type
+  // (since we have the useParams to change them )
+  // thus triggering this useEffect() function run and perform the above
 
+  // ** USEEFFECT FOR PROJECT TYPE CHANGE ** //
+  // useEffect that runs whenever there is a change to selectedType
   useEffect(() => {
+    // if the project exists
     if (project) {
+      // if the selectedType is not "existingBuildingRetrofit"
       if (selectedType !== "existingBuildingRetrofit") {
         setProject((prevProject) => ({
-          ...prevProject!,
-          client: "",
+          // then we pass in prevProject to setProject (which is essentially project's previous state)
+          ...prevProject!, // set all the details
+          client: "", // but set client to be an empty string
         }));
+        // if the selectedType is "existingBuildingRetrofit"
       } else {
         setProject((prevProject) => ({
-          ...prevProject!,
-          developer: "",
+          // then we pass in prevProject to setProject
+          ...prevProject!, // set all the details
+          developer: "", // but set developer to be an empty string
         }));
       }
-    }
-  }, [selectedType]);
 
+      // the setting of the empty string will be used for the purpose of hiding in the HTML in later parts
+    }
+  }, [selectedType]); // useEffect runs whenever there is a change to selectedType
+
+  // ** FUNCTION FOR FIELD CHANGE ** //
   const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> // event coming from <input> and <textarea> elements (depending on what is changed)
+    // the events trigger this function
   ) => {
-    const { name, value } = event.target;
+    const { name, value } = event.target; // destructure the name and value from the elements, and assign to name and value
     if (project) {
-      setProject({ ...project, [name]: value });
+      // if project exists (used to ensure that the project is not undefined or null before updating its state)
+      setProject({ ...project, [name]: value }); // use existing key-value (values) in project, and set the key with name to the value
     }
   };
 
+  // ** FUNCTION FOR HANDLING IMAGE CHANGE ** //
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // the event that triggers this function is a change to the <input> element
     if (event.target.files && event.target.files[0]) {
-      setSelectedImage(event.target.files[0]);
+      // if the event.target has a set of files, or has a single file
+      setSelectedImage(event.target.files[0]); // then we will set the selectedImage to be the first file
     }
   };
 
+  // ** FUNCTION FOR HANDLING AWARD CHANGE ** //
   const handleAwardChange = (index: number, value: string) => {
-    const newAwards = [...awards];
-    newAwards[index] = value;
-    setAwards(newAwards);
+    // pass in the index and the value of the award (that is modified)
+    const newAwards = [...awards]; // set newAwards to be an array of awards (taken from awards), we call this spreading
+    newAwards[index] = value; // set the newAwards at the specific index to have the new value (entered into the HTML)
+    setAwards(newAwards); // setAwards to be the entire new array of awards with any value changes to the awards
   };
 
+  // ** FUNCTION FOR HANDLING AWARD ADD ** //
   const handleAddAward = () => {
-    setAwards([...awards, ""]);
+    setAwards([...awards, ""]); // setAwards to make awards have its current values, along with an empty string, representing the new award
+    // (that was added upon clicking 'Add Award')
   };
 
+  // ** FUNCTION FOR HANDLING AWARD REMOVE ** //
   const handleRemoveAward = (index: number) => {
-    const newAwards = awards.filter((_, i) => i !== index);
-    setAwards(newAwards);
+    // pass in the index to the function
+    const newAwards = awards.filter((_, i) => i !== index); // filter the awards to only have the awards without the specified index, assign to newAwards
+    setAwards(newAwards); // setAwards to contain the awards in newAwards
   };
 
+  // ** FUNCTION FOR HANDLING EDIT FORM SUBMIT ** //
   const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
+    // this function is triggered by the form submission ('Save' button)
+    event.preventDefault(); // prevent any default actions
 
+    // if form validation does not pass, then return immediately
     if (!validateForm()) {
       return;
     }
 
+    // if there is no project and no type, we return
+    // this is simply used for checking
     if (!project || !type) return;
 
-    const storage = getStorage();
-    let imageUrl = project.image;
+    const storage = getStorage(); // return an instace of our Firebase storage
+    let imageUrl = project.image; // imageUrl assigned the value of project.image
 
     try {
+      // if the user uploads a new image
       if (selectedImage instanceof File) {
         // If a new image is uploaded
-        const imageFormat = selectedImage.type.split("/")[1]; // Extract format from MIME type
+        const imageFormat = selectedImage.type.split("/")[1]; // Extract image file format from MIME type
+        // given an image file name such as "belmacs/jpg", we split it into an array, and then get the jpg part only (which we assign to imageFormat)
+
+        // create a reference to the image using the type, name, and imageFormat
         const newImageRef = ref(
           storage,
           `belmacs_images/${selectedType}/${project.name}.${imageFormat}`
         );
 
         // Upload new image
-        await uploadBytes(newImageRef, selectedImage);
-        imageUrl = await getDownloadURL(newImageRef);
+        await uploadBytes(newImageRef, selectedImage); // upload the image to the reference location
+        imageUrl = await getDownloadURL(newImageRef); // get the download URL for the newly uploaded image
 
-        // If project name or type changed, delete the old image
+        // If (project name OR type changed, then we delete the old image)
         if (
           project.image &&
-          (project.name !== oldId || type !== selectedType)
+          (project.name !== oldId || type !== selectedType) // the project name is not oldId (means name change) OR type is not selectedType (change type)
+          // project.name !== oldId means that there was a name change (meaning that project.name was changed), and thus it will no longer match oldId
+          // since oldId is the old project's name
         ) {
-          const oldImageRef = ref(storage, project.image);
-          await deleteObject(oldImageRef);
+          const oldImageRef = ref(storage, project.image); // create a reference to the old image URL
+          await deleteObject(oldImageRef); // delete the old image at the referenced location
         }
+        // otherwise, if both the type OR project name has changed, then we re-upload the old image
+
+        // if the user does not upload a new image
       } else if (type !== selectedType || project.name !== oldId) {
-        // If type or name has changed and no new image is uploaded, re-upload the old image
-        const oldImageRef = ref(storage, project.image);
+        // if the type changed, or project name changed
+
+        const oldImageRef = ref(storage, project.image); // create a reference to the old image URL
 
         // Fetch the old image and re-upload it
-        const oldImageUrl = await getDownloadURL(oldImageRef);
-        const response = await fetch(oldImageUrl);
+        const oldImageUrl = await getDownloadURL(oldImageRef); // get the download URL from the reference
+        const response = await fetch(oldImageUrl); // CORS request
+
+        // if response is not ok (error)
         if (!response.ok) {
           throw new Error("Failed to fetch old image.");
         }
-        const blob = await response.blob();
+
+        //////////////////////////////// continue
+
+        const blob = await response.blob(); // blob contains the binary data of the image file, including the MIME type
+        // basically the blob is the image
+
+        // create a reference to the new path (of the image file)
         const newImageRef = ref(
           storage,
           `belmacs_images/${selectedType}/${project.name}.${
@@ -182,8 +240,9 @@ const EditProject: React.FC = () => {
           }`
         );
 
+        // upload the blob to the new path
         await uploadBytes(newImageRef, blob);
-        imageUrl = await getDownloadURL(newImageRef);
+        imageUrl = await getDownloadURL(newImageRef); // get download URL of the new image
 
         // Delete the old image if necessary
         await deleteObject(oldImageRef);
@@ -252,8 +311,7 @@ const EditProject: React.FC = () => {
   const editSuccessToast = (projectName: string) => {
     toast.success(
       <div>
-        Successfully edited <b>{projectName}</b>, redirecting you to the
-        dashboard
+        Successfully edited <b>{projectName}</b>
       </div>,
       {
         position: "bottom-right",
@@ -401,18 +459,16 @@ const EditProject: React.FC = () => {
             {errors.type && <p className="error">{errors.type}</p>}
           </div>
 
-          {project.completion && (
-            <div className="edit-field">
-              <label className="edit-field-header">Completion</label>
+          <div className="edit-field">
+            <label className="edit-field-header">Completion</label>
 
-              <input
-                type="text"
-                name="completion"
-                value={project.completion}
-                onChange={handleInputChange}
-              />
-            </div>
-          )}
+            <input
+              type="text"
+              name="completion"
+              value={project.completion}
+              onChange={handleInputChange}
+            />
+          </div>
 
           {selectedType === "existingBuildingRetrofit" && (
             <div className="edit-field">

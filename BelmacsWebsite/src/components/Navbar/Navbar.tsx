@@ -127,6 +127,8 @@ export default function Navbar() {
           theme: "light",
         });
       });
+
+      localStorage.clear()
   };
 
   return (

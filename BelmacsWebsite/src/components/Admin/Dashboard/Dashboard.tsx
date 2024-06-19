@@ -235,7 +235,6 @@ const Dashboard: React.FC = () => {
           value={selectedType}
           onChange={handleTypeChange}
         >
-          {/* <option value="">--Select Type--</option> */}
 
           <option value="residential">Residential</option>
           <option value="commercial">Commercial</option>

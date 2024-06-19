@@ -374,6 +374,8 @@ const Create: React.FC = () => {
     <div className="create-project-ctr">
       <div className="create-project-header">Add New Project</div>
       <div className="create-project-form-ctr">
+
+        {/* CREATE Form */}
         <form onSubmit={handleSubmit}>
           <label htmlFor="ProjectType">Select Project Type</label>
           <select
