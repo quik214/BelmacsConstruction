@@ -8,23 +8,70 @@
 
 /* Landscape Tablets */
 @media (max-width: 1200px) {
+  .achievements-header {
+    font-size: 1.6rem;
+  }
 
+  .icon {
+    width: 45px;
+    height: 45px;
+  }
+
+  .info h3 {
+    font-size: 1.8em;
+  }
+
+  .info p {
+    font-size: 0.9em;
+  }
 }
 
 /* Tablets */
 @media (max-width: 900px) {
+  
+  .icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .info h3 {
+    font-size: 1.6em;
+  }
+
+  .info p {
+    font-size: 0.85em;
+  }
 }
 
 /* Smaller Tablets */
 @media (max-width: 700px) {
   .achievements-container {
-    height: 800px;
+    height: 1200px;
   }
 
   .achievements {
     flex-direction: column;
     align-items: center;
     margin-top: 50px;
+  }
+
+   .circle-wrapper {
+    width: 140px;
+    height: 140px;
+    padding: 20px;
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .info h3 {
+    font-size: 1.6em;
+  }
+
+  .info p {
+    font-size: 0.85em;
   }
 }
 
