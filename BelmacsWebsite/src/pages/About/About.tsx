@@ -8,7 +8,7 @@ import AboutIMS from "../../components/About/AboutIMS/AboutIMS";
 import AboutWSH from "../../components/About/AboutWSH/AboutWSH";
 import AboutBizSafe from "../../components/About/AboutBizSafe/AboutBizSafe";
 import AboutPDPA from "../../components/About/AboutPDPA/AboutPDPA";
-import AboutAchievements from "../../components/About/AboutStatistics/AboutAchievements";
+import AboutAchievements from "../../components/About/AboutAchievements/AboutAchievements";
 
 export default function () {
   const reveal = () => {

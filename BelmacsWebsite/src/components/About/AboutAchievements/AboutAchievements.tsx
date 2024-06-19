@@ -133,13 +133,7 @@ const AboutAchievements = () => {
             <p>Awards Won</p>
           </div>
         </div>
-        <div className="achievement">
-          <img className="icon" src={usersLogo}></img>
-          <div className="info">
-            <h3>1253</h3>
-            <p>Number of Employees</p>
-          </div>
-        </div>
+      
       </div>
     </div>
   );
