@@ -37,7 +37,9 @@ const Dashboard: React.FC = () => {
   // for displaying of Projects
   const [projects, setProjects] = useState<Project[]>([]);
   const [displayedProjects, setDisplayedProjects] = useState<Project[]>([]);
-  const [selectedType, setSelectedType] = useState<string>("residential");
+  const [selectedType, setSelectedType] = useState<string>(() => {
+    return localStorage.getItem("selectedType") || "residential";
+  });
 
   // for navigation between pages
   const navigate = useNavigate();
@@ -135,7 +137,9 @@ const Dashboard: React.FC = () => {
 
   // for handling project type change
   const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedType(event.target.value); // set selected type to selected type from dropdown
+    const newType = event.target.value; // set newType variable to be selected type from dropdown
+    setSelectedType(newType); // change selectedType using setSelectedType
+    localStorage.setItem("selectedType", newType); // set the localStorage to contain the selected project type
   };
 
   // navigate to edit page based on selected project id
@@ -193,7 +197,7 @@ const Dashboard: React.FC = () => {
       console.log("Project deleted:", selectedProject.id); // log the deleted project
       setShowDeleteConfirmation(false); // Hide the confirmation dialog after deletion
 
-      deleteSuccessToast(selectedProject.name); // display toast 
+      deleteSuccessToast(selectedProject.name); // display toast
     } catch (error) {
       console.error("Error deleting project:", error);
       setShowDeleteConfirmation(false); // Hide the confirmation dialog on error
@@ -208,9 +212,10 @@ const Dashboard: React.FC = () => {
   };
 
   const handleAddProject = () => {
-    navigate(`/admin/create/${selectedType}`), {
-      state: { paramData: selectedType}
-    }; // Navigate to AddProject component
+    navigate(`/admin/create/${selectedType}`),
+      {
+        state: { paramData: selectedType },
+      }; // Navigate to AddProject component
   };
 
   // for search
