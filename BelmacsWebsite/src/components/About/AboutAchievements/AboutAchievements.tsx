@@ -147,38 +147,46 @@ const AboutAchievements = () => {
 
       <div className="achievements-header">Our Achievements</div>
       <div className="achievements">
-        <div className="achievement">
-          <img className="icon" src={hatLogo} alt="Hard Hat Icon"></img>
-          <div className="info">
-            <h3> {inView && <CountUp end={1994} duration={2} />}</h3>
-            <p>Year Established</p>
+        <div className="circle-wrapper">
+          <div className="achievement">
+            <img className="icon" src={hatLogo} alt="Hard Hat Icon"></img>
+            <div className="info">
+              <h3> {inView && <CountUp end={1994} duration={2} />}</h3>
+              <p>Year Established</p>
+            </div>
           </div>
         </div>
-        <div className="achievement">
-          <img className="icon" src={hatLogo} alt="Hard Hat Icon"></img>
-          <div className="info">
-            <h3>
-              {inView && <CountUp end={yearsOfExperience} duration={3} />} years
-            </h3>
-            <p>of Experience</p>
+        <div className="circle-wrapper">
+          <div className="achievement">
+            <img className="icon" src={hatLogo} alt="Hard Hat Icon"></img>
+            <div className="info">
+              <h3>
+                {inView && <CountUp end={yearsOfExperience} duration={3} />} years
+              </h3>
+              <p>of Experience</p>
+            </div>
           </div>
         </div>
-        <div className="achievement">
-          <img className="icon" src={buildingLogo} alt="Building Logo"></img>
-          <div className="info">
-            <h3>{inView && <CountUp end={totalProjects} duration={3} />}</h3>
-            <p>Number of Projects</p>
+        <div className="circle-wrapper">
+          <div className="achievement">
+            <img className="icon" src={buildingLogo} alt="Building Logo"></img>
+            <div className="info">
+              <h3>{inView && <CountUp end={totalProjects} duration={3} />}</h3>
+              <p>Number of Projects</p>
+            </div>
           </div>
         </div>
-        <div className="achievement">
-          <img
-            className="icon"
-            src={certificateLogo}
-            alt="Certificate Logo"
-          ></img>
-          <div className="info">
-            <h3>{inView && <CountUp end={totalAwards} duration={3} />}</h3>
-            <p>Awards Won</p>
+        <div className="circle-wrapper">
+          <div className="achievement">
+            <img
+              className="icon"
+              src={certificateLogo}
+              alt="Certificate Logo"
+            ></img>
+            <div className="info">
+              <h3>{inView && <CountUp end={totalAwards} duration={3} />}</h3>
+              <p>Awards Won</p>
+            </div>
           </div>
         </div>
       </div>
