@@ -1,6 +1,7 @@
 import "./Create.css";
 import "./Create-media.css";
 
+// import libraries 
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { db, storage } from "../../../firebase";
@@ -8,13 +9,19 @@ import { setDoc, doc, collection } from "firebase/firestore";
 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
+// toast library 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Create: React.FC = () => {
 
+  // ** OBJECT DECLARATION **
+
+  // get the selectedType from the URL (passed from the dashboard), assign it to variable selectedType
   const { selectedType } = useParams<{ selectedType: string }>();
   // console.log(selectedType);
+
+  // projectDetails is an Object that represents the value in the CREATE form 
   const [projectDetails, setProjectDetails] = useState({
     image: "",
     name: "",
@@ -24,16 +31,21 @@ const Create: React.FC = () => {
     client: "",
     location: "",
     featured: "no",
-    ProjectType: selectedType,
+    ProjectType: selectedType, // assign ProjectType to be the selectedType (from line 18)
   });
 
+  // declare Award object 
   type Award = {
     title: string;
   };
 
+  // useState for Awards 
+  // setAwards is used to set the array of Awards, which is asigned to awards variable 
   const [awards, setAwards] = useState<Award[]>([]);
 
-  // useState function with array to hold error messages
+  // useState
+  // setErrors is used to update the errors object
+  // errors is an object with the properties 'image', 'name', etc.
   const [errors, setErrors] = useState({
     image: "",
     name: "",
@@ -44,55 +56,177 @@ const Create: React.FC = () => {
     location: "",
   });
 
+  // useState to set the imageFile (File object)
+  // initial value is null
+  const [imageFile, setImageFile] = useState<File | null>(null);
+
+  // useNavigate hook. Essentially a function that can be used to navigate user to different routes (URL)
+  const navigate = useNavigate(); // will be used in later parts of the code for navigation to a different URL
+
+  // ** PROJECTTYPE DROPDOWN CHANGE ** // 
+
+  // this useEffect runs whenever there is a change in projectDetails.ProjectType 
+  // or setProjectDetails changes
   useEffect(() => {
     // Reset the fields based on the project type
-    if (projectDetails.ProjectType !== "existingBuildingRetrofit") {
+
+    // if the ProjectType is not equals to existingBuildingRetrofit, the field to enter the client is removed
+    if (projectDetails.ProjectType !== "existingBuildingRetrofit") { 
       setProjectDetails((prevDetails) => ({
-        ...prevDetails,
-        client: "", // Clear the client field
+        ...prevDetails, // everything is included but we
+        client: "", // clear the client field
       }));
+    // otherwise, if the ProjectType is equals to existingBuildingRetrofit, the field to enter the developer is removed 
     } else {
       setProjectDetails((prevDetails) => ({
-        ...prevDetails,
-        developer: "", // Clear the developer field
+        ...prevDetails, // everything is included but we 
+        developer: "", // clear the developer field
       }));
     }
-  }, [projectDetails.ProjectType, setProjectDetails]);
+  }, [projectDetails.ProjectType, setProjectDetails]); // this line is used to specify that on projectDetails.ProjectType change, then the useEffect will run
+  // (setProjectDetails is not actually required here, since it is a function and there will not be a change to it ) 
 
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const navigate = useNavigate();
+  // ** HANDLE CHANGES TO INPUT (ENTER DATA INTO INPUT AND SELECT) ** // 
 
+  // handleChange function, used to handle any changes to the following elements:
+  // <input> elements
+  // <select> elements 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> // this specifies the elements that on change, the function will react upon 
+    // we are essentially assigning variable e the element's name and value (for use in line 90)
+    // think of it as on change of a certain element (stated above), we will constantly pass in the element's details, of which includes the above 
   ) => {
-    const { name, value } = e.target;
-    setProjectDetails((prevDetails) => ({
-      ...prevDetails,
-      [name]: value,
+    const { name, value } = e.target; // destructure target into name and value variables 
+    setProjectDetails((prevDetails) => ({ // set the projectDetails to take in its prevDetails (previous state, prior to this function being called)
+      ...prevDetails, // every value from the previous state is copied over to the new state
+      [name]: value, // but for the property name in projectDetails, it will be set to the value of the element that is being edited
+      // this means that each field in the form has a name that matches the projectDetails object property
+      // and it will take the value entered into the field, and be used here in this function to update the new state 
     }));
   };
 
+  // ** FUNCTION TO NAVIGATE TO PREVIOUS PAGE ** //
+  // function used to navigate to the previous page upon a cancellation (if user does not wish to edit the CREATE form)
   const handleCancel = () => {
     navigate(-1); // Go back to the previous page
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setImageFile(e.target.files[0]);
+  // ** FUNCTION TO HANDLE IMAGE CHANGE ** //
+  // handle changes of any im
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => { // pass in the details of the <input> element 
+    if (e.target.files && e.target.files[0]) { // checks if 'files' property exists (on e), and there is at least 1 file selected 
+      // e.target.files is only defined for file input elements (<input type="file"></input>)
+      setImageFile(e.target.files[0]); // if above is true, set the image file using setImageFile function (declared above) 
     }
   };
 
+  // ** FUNCTION TO HANDLE TOGGLE FOR FEATURED PROJECT ** // 
   // for toggle switch (project.featured)
   const handleToggleChange: React.ChangeEventHandler<HTMLInputElement> = (
     e
   ) => {
-    const { name } = e.target;
-    const currentFeaturedValue =
+    // e.target represents the HTML element 
+    const { name } = e.target; // destructure e.target to get the name attribute (from the HTML element)
+    // depending on projectDetails.featured's value, currentFeaturedValue will be set to either yes or no 
+    // if the current featured value (in the above object) is yes, we set to no
+    // if it is no, we set it to yes
+    const currentFeaturedValue = 
       projectDetails.featured === "yes" ? "no" : "yes";
     setProjectDetails((prevDetails) => ({
       ...prevDetails,
-      [name]: currentFeaturedValue,
+      [name]: currentFeaturedValue, // we then use setProjectDetails to change the projectDetails 'featured' property to be set to currentFeaturedValue
     }));
+  };
+
+  
+
+  // ** FUNCTION FOR FORM VALIDATION ** // 
+  const validate = () => {
+
+    // create an Object with each property representing the errors of each field (and property of projectDetails)
+    const newErrors = {
+      image: "",
+      name: "",
+      developer: "",
+      type: "",
+      completion: "",
+      client: "",
+      location: "",
+    };
+    let isValid = true;
+
+    // trim the projectDetails name, then check if it is empty
+    // if true, we set the newErrors property to be the below string
+    if (!projectDetails.name.trim()) {
+      newErrors.name = "Project name is required";
+      isValid = false;
+    }
+
+    // trim the projectDetails developer, and check if it is empty AND check if the projectType is NOT existingBuildingRetrofit
+    // then we set the error message to be the below string 
+    if (
+      !projectDetails.developer.trim() &&
+      projectDetails.ProjectType !== "existingBuildingRetrofit"
+    ) {
+      newErrors.developer = "Developer is required";
+      isValid = false;
+    }
+
+    // trim the projectDetails completion, check if it is empty
+    // then we set the error message to be the below string
+    if (!projectDetails.completion.trim()) {
+      newErrors.completion = "Completion date is required";
+      isValid = false;
+    }
+
+    // trim the projectDetails type, check if it is empty
+    // then we set the error message to be the below string 
+    if (!projectDetails.type.trim()) {
+      newErrors.type = "Type is required";
+      isValid = false;
+    }
+
+    // trim the projectDetails location, check if it is empty
+    // then we set the error message to be the below string 
+    if (!projectDetails.location.trim()) {
+      newErrors.location = "Location is required";
+      isValid = false;
+    }
+
+    // if the imageFile variable (declared at the top) is empty
+    // then we set the error message to be the below string 
+    if (!imageFile) {
+      newErrors.image = "Image file is required";
+      isValid = false;
+    }
+
+    // afterwards, set the errors (declared above) to have the values of newErrors
+    setErrors(newErrors);
+    return isValid;
+  };
+
+  // ** FUNCTION TO HANDLE AWARDS CHANGE ** //
+  const handleAwardChange = (
+    e: React.ChangeEvent<HTMLInputElement>, // set e variable to be the <input> element 
+    index: number // index is the position of the award in the awards array
+  ) => {
+    const newAwards = [...awards];  // creates a shallow copy of the awards array 
+    newAwards[index].title = e.target.value; // set newAwards[index] title to be the value of the awards <input> element 
+    setAwards(newAwards); // setAwards function to set the (above declared) awards array to have the values of newAwards
+  };
+
+  // ** FUNCTION TO HANDLE ADD AWARD ** // 
+  const handleAddAward = () => { 
+    setAwards([...awards, { title: "" }]); // setAwards to have its previous awards, but also a new award with an empty title 
+  };
+
+  // ** FUNCTION TO HANDLE REMOVE AWARD ** // 
+  const handleRemoveAward = (index: number) => { // remove award at a specific index in the awards array 
+    const newAwards = awards.filter((_, i) => i !== index); 
+    // (_, i) - _ is the current element (which we no longer need), i is the current index of the element 
+    // the awards.filter() function then filters all the projects, where i (current index) will not be included
+    // we set the filtered awards to be stored in the variable newAwards
+    setAwards(newAwards); // we then set the awards array to be newAwards 
   };
 
   // createErrorToast
@@ -142,119 +276,76 @@ const Create: React.FC = () => {
     });
   };
 
-  // form validation function
-  const validate = () => {
-    const newErrors = {
-      image: "",
-      name: "",
-      developer: "",
-      type: "",
-      completion: "",
-      client: "",
-      location: "",
-    };
-    let isValid = true;
-
-    if (!projectDetails.name.trim()) {
-      newErrors.name = "Project name is required";
-      isValid = false;
-    }
-
-    if (
-      !projectDetails.developer.trim() &&
-      projectDetails.ProjectType !== "existingBuildingRetrofit"
-    ) {
-      newErrors.developer = "Developer is required";
-      isValid = false;
-    }
-
-    if (!projectDetails.completion.trim()) {
-      newErrors.completion = "Completion date is required";
-      isValid = false;
-    }
-
-    if (!projectDetails.type.trim()) {
-      newErrors.type = "Type is required";
-      isValid = false;
-    }
-
-    if (!projectDetails.location.trim()) {
-      newErrors.location = "Location is required";
-      isValid = false;
-    }
-
-    if (!imageFile) {
-      newErrors.image = "Image file is required";
-      isValid = false;
-    }
-
-    setErrors(newErrors);
-    return isValid;
-  };
-
-  const handleAwardChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const newAwards = [...awards];
-    newAwards[index].title = e.target.value;
-    setAwards(newAwards);
-  };
-
-  const handleAddAward = () => {
-    setAwards([...awards, { title: "" }]);
-  };
-
-  const handleRemoveAward = (index: number) => {
-    const newAwards = awards.filter((_, i) => i !== index);
-    setAwards(newAwards);
-  };
+  // ** FUNCTION TO HANDLE SUBMIT OF CREATE FORM ** // 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
+    e.preventDefault(); // used to prevent default behaviour of the form submission
+    
+    // if the form is not validated (validate() returns false) OR there is no imageFile, then we will display the createErrorToast 
+    // !imageFile is simply to ensure that in the below line, imageFile does not have an error 
     if (!validate() || !imageFile) {
-      createErrorToast();
+      createErrorToast(); // display the error toast 
       return;
     }
 
     try {
       // Upload image to Firebase Storage
-      const storageRef = ref(
+      // ref creates a reference to a specific locaiton in Firebase Storage 
+      // takes 2 arguments: storage instance (based on import above), and the path where the file will be stored
+      // path is as shown
+      const storageRef = ref( 
         storage,
         `belmacs_images/${projectDetails.ProjectType}/${projectDetails.name}`
       );
-      const uploadTask = uploadBytesResumable(storageRef, imageFile);
+      const uploadTask = uploadBytesResumable(storageRef, imageFile); 
+      // uploadBytesResumable is a function used to upload files to Firebase Storage (in a resumable way)
+      // this means that if the file upload was interrupted, it can be resumed where it left off 
+      // the imageFile will thus be uploaded to the reference location specified in storageRef 
 
+      // uploadTask.on is a method used to handle events related to the uploading of the imageFile
+      // this means that uploadBytesResumable is a function used to upload the imageFile, while uploadTask itself has a .on property
+      // that contains the state of the upload (in a way)
       uploadTask.on(
-        "state_changed",
-        (_snapshot) => {
-          // Handle progress if needed
+        "state_changed", // event type that is triggered whenever there is change in upload state (progress, pause, resume)
+        (_snapshot) => { // _snapshot contains information about current state of the upload, such as number of bytes transferred and total bytes 
+          // snapshot can actually be excluded 
         },
+        // handle any errors during file upload 
         (error) => {
           console.error("Error uploading file: ", error);
         },
+        // async is used to handle actions after the image file upload is completed successfully 
         async () => {
-          // Get the download URL
+          // Get the download URL from the uploaded file (in Firebase Storage)
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
 
-          // Destructure projectType out of projectDetails and assign the rest to filteredDetails
+          // Extract (destructure) projectType from projectDetails and store the rest of the details in filteredDetails
           const { ProjectType, ...filteredDetails } = projectDetails;
 
-          // Save project details along with image URL in Firestore
+          // Create a reference to firstly, the selected ProjectType-projects
+          // and the projectDetails.name (that the user has entered into the field)
           const projectRef = doc(
             db,
             `${projectDetails.ProjectType}-projects`,
             projectDetails.name
           );
+
+          // set the document data using the Firebase setDoc function
+          // takes in 2 parameters, the reference to the location in Firebase,
+          // along with the data object containing the data to be written to the document 
           await setDoc(projectRef, {
-            ...filteredDetails,
-            image: downloadURL,
+            ...filteredDetails, // set the object to have filteredDetails
+            image: downloadURL, // along with the image URL 
           });
 
           // Save awards as sub-collection
-          for (const award of awards) {
-            if (award.title.trim()) {
+          for (const award of awards) { // for each award in awards array 
+            if (award.title.trim()) { // if the award is not empty (after trimming)
+              // again, setDoc is used to upload data to a collection in Firebase 
               await setDoc(
+                // doc takes in a reference to the collection, which now is:
+                // ProjectType-projects
+                // name of the project
+                // awards collection in the above 
                 doc(
                   collection(
                     db,
@@ -262,15 +353,15 @@ const Create: React.FC = () => {
                     projectDetails.name,
                     "awards"
                   ),
-                  award.title
+                  award.title // the award title is set to be the ID within the 'awards' sub-collection 
                 ),
-                { title: award.title }
+                { title: award.title } // set the data to be simply title: award.title
               );
             }
           }
 
-          createSuccessToast(projectDetails.name);
-          navigate("/admin/dashboard");
+          createSuccessToast(projectDetails.name); // display successToast upon successful project creation 
+          navigate("/admin/dashboard"); // navigate back to the admin dashboard
         }
       );
     } catch (error) {
