@@ -1,52 +1,98 @@
 .achievements-container {
-    margin-top: 100px;
-    text-align: center;
-    background-color: #364fc7; /* Adjust background color */
-    color: white;
-    background-image: url('../../../assets/Projects/HeroImages/CommercialHero.jpg'); /* Background image */
-    background-size: cover;
-    background-blend-mode: multiply;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  .icon {
-    width: 40px;
-  }
-  
-  .achievements-header {
-    padding-top: 100px;
-    font-size: 2.5rem;
-    font-weight: bold;
-  }
-  
-  .achievements {
-    display: flex;
-    justify-content:center;
-    flex-wrap: nowrap;
-    
-  }
-  
-  .achievement {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: auto;
-    margin-top: 100px;
-    margin-bottom: 100px;
-  }
-  
-  .icon {
-    font-size: 3em;
-    margin-bottom: 15px;
-  }
-  
-  .info h3 {
-    font-size: 2em;
-    margin: 5px 0;
-  }
-  
-  .info p {
-    font-size: 1em;
-    margin: 5px 0;
-  }
-  
+  position: relative;
+  margin-top: 100px;
+  text-align: center;
+  background-color: #121731;
+  color: white;
+  background-size: cover;
+  background-blend-mode: multiply;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 550px;
+}
+
+.icon {
+  width: 40px;
+}
+
+.achievements-header {
+  padding-top: 100px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  position: relative;
+  z-index: 1;
+}
+
+.achievements {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  position: relative;
+  z-index: 1;
+  height: 70%;
+}
+
+.achievement {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+ 
+}
+
+.icon {
+  font-size: 3em;
+  margin-bottom: 15px;
+}
+
+.info h3 {
+  font-size: 2em;
+  margin: 5px 0;
+}
+
+.info p {
+  font-size: 1em;
+  margin: 5px 0;
+}
+
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #121731;
+  background-image: url("");
+  background-repeat: no-repeat;
+  background-size: 20%;
+  background-position: 50% 50%;
+} /* ---- stats.js ---- */
+.count-particles {
+  background: #000022;
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 80px;
+  color: #13e8e9;
+  font-size: 0.8em;
+  text-align: left;
+  text-indent: 4px;
+  line-height: 14px;
+  padding-bottom: 2px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}
+.js-count-particles {
+  font-size: 1.1em;
+}
+#stats,
+.count-particles {
+  -webkit-user-select: none;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+#stats {
+  border-radius: 3px 3px 0 0;
+  overflow: hidden;
+}
+.count-particles {
+  border-radius: 0 0 3px 3px;
+}
