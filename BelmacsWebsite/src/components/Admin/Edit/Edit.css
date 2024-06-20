@@ -1,14 +1,11 @@
 .edit-project-ctr {
   font-family: Arial, Helvetica, sans-serif;
-  display: flex;
-  flex-direction: column;
   padding-bottom: 15px;
 }
 
 .edit-project-header {
   font-size: 2rem;
   color: #364fc7;
-  font-family: Arial, Helvetica, sans-serif;
   font-size: 32px;
   margin-bottom: 25px;
 }
