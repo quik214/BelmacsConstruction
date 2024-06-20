@@ -1,100 +1,96 @@
 .create-project-ctr {
-    font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 15px;   
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 15px;
 }
 
 .create-project-header {
-    font-size: 2rem;
-    color: #364FC7;
+  font-size: 2rem;
+  color: #364fc7;
 }
 
 .upload-image-input {
-    border: 2px dashed #ccc;
+  border: 2px dashed #ccc;
 }
 
 .create-project-secondary-header {
-    font-size: 1.4rem;
-    font-weight: bold;
-    margin-top: 25px;
-    margin-bottom: 25px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 
 .create-project-form-ctr {
-    margin-top: 40px;
+  margin-top: 40px;
 }
 
 .create-project-type {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .create-project-button-ctr {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: row-reverse;
-    gap: 10px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
 }
 
 .create-project-button {
-    background-color: #1fb185;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-  
-    border-radius: 4px;
-    padding: 10px 12.5px;
+  background-color: #1fb185;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+
+  border-radius: 4px;
+  padding: 10px 12.5px;
 }
 
 .cancel-project-button {
-    color: white;
-    background-color: grey;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-  
-    border-radius: 4px;
-    padding: 9px 12.5px;
+  color: white;
+  background-color: grey;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+
+  border-radius: 4px;
+  padding: 9px 12.5px;
 }
 
 .create-project-button:hover {
-    background-color: #13644c;
-    
-  }
-  
-  .cancel-project-button:hover {
-    background-color: rgb(211, 211, 211);
-  } 
+  background-color: #13644c;
+}
 
-  .awards-field {
-    display: flex;
-    align-items: center;
-    column-gap: 5px;
-    margin-bottom: 5px;
+.cancel-project-button:hover {
+  background-color: rgb(211, 211, 211);
+}
+
+/* AWARDS */
+.awards-field {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-top: 10px;
 }
 
 .awards-header {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 .create-input {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
-
-
 .create-field-header {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .error-msg {
-    margin-top: 5px;
-    color: #ff0000;
-    margin-bottom: 10px;
+  margin-top: 5px;
+  color: #ff0000;
+  margin-bottom: 10px;
 }
-
-
 
 /* AWARDS */
 
@@ -143,64 +139,59 @@
   background-color: #cc0000;
 }
 
-
-
-
 /* TOGGLE SWITCH CSS */
 
 .featured-switch-ctr {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .featured-switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-  }
-  
-  .featured-switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  
-  .featured-slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: .4s;
-  }
-  
-  .featured-slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    transition: .4s;
-  }
-  
-  input:checked + .featured-slider {
-    background-color: #2196F3;
-  }
-  
-  input:checked + .featured-slider:before {
-    transform: translateX(26px);
-  }
-  
-  .featured-slider.round {
-    border-radius: 34px;
-  }
-  
-  .featured-slider.round:before {
-    border-radius: 50%;
-  }
-  
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
 
+.featured-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.featured-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+}
+
+.featured-slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .featured-slider {
+  background-color: #2196f3;
+}
+
+input:checked + .featured-slider:before {
+  transform: translateX(26px);
+}
+
+.featured-slider.round {
+  border-radius: 34px;
+}
+
+.featured-slider.round:before {
+  border-radius: 50%;
+}
