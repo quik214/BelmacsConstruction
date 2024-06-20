@@ -99,6 +99,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  width:50%
 }
 
 .edit-award-input-ctr input {
