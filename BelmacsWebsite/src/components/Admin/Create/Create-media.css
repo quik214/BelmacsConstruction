@@ -12,18 +12,20 @@
 
 /* Tablets */
 @media (max-width: 900px) {
+  .create-project-header {
+    font-size: 1.6rem;
+  }
 
-    .create-project-header {
-        font-size: 1.6rem;
-    }
+  .create-project-secondary-header {
+    font-size: 1.2rem;
+  }
 
-    .create-project-secondary-header {
-        font-size: 1.2rem;
-    }
-
-    .create-project-ctr label{
-        font-size: 1rem;
-    }
+  .create-project-ctr label {
+    font-size: 1rem;
+  }
+  .award-input-ctr {
+    width: 100%;
+  }
 }
 
 /* Smaller Tablets */
@@ -31,18 +33,21 @@
 }
 
 /* Mobile */
-@media (max-width: 550px) { 
-    .create-project-header {
-        font-size: 1.4rem;
-    }
+@media (max-width: 550px) {
+  .create-project-header {
+    font-size: 1.4rem;
+  }
+  .award-input-ctr {
+    width: 100%;
+  }
 
-    .create-project-secondary-header {
-        font-size: 1.1rem;
-    }
+  .create-project-secondary-header {
+    font-size: 1.1rem;
+  }
 
-    .create-project-ctr label{
-        font-size: 0.9rem;
-    }
+  .create-project-ctr label {
+    font-size: 0.9rem;
+  }
 }
 
 /* Small Mobile */

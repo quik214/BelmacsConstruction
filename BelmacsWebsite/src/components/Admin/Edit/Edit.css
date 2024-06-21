@@ -1,11 +1,11 @@
 .edit-project-ctr {
+  font-family: Arial, Helvetica, sans-serif;
   padding-bottom: 15px;
 }
 
 .edit-project-header {
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: #364fc7;
-  font-family: Arial, Helvetica, sans-serif;
   font-size: 32px;
   margin-bottom: 25px;
 }
@@ -29,6 +29,7 @@
 
 .edit-project-secondary-header {
   font-size: 1.4rem;
+  font-weight: bold;
   margin-top: 25px;
   margin-bottom: 25px;
 }
@@ -78,23 +79,6 @@
   background-color: rgb(211, 211, 211);
 }
 
-.notification {
-  margin-top: 15px;
-  padding: 10px;
-  border-radius: 4px;
-}
-
-.notification.success {
-  background-color: #d4edda;
-  color: #155724;
-}
-
-.notification.error {
-  background-color: #f8d7da;
-  color: #721c24;
-}
-
-
 /* AWARDS */
 .edit-awards-field {
   display: flex;
@@ -115,6 +99,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  width:50%
 }
 
 .edit-award-input-ctr input {
@@ -148,7 +133,6 @@
 .remove-award-btn:hover {
   background-color: #cc0000;
 }
-
 
 /* FOR TOGGLE BUTTON */
 .featured-switch-ctr {
@@ -209,5 +193,5 @@ input:checked + .featured-slider:before {
 }
 
 .error {
-    margin-top: -5px;
+  margin-top: -5px;
 }

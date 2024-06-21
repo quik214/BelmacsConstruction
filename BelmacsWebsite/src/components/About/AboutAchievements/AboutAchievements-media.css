@@ -1,18 +1,5 @@
 /* Large Screens */
 @media (1700px <= width <= 2500px) {
-  .achievements {
-    column-gap: 100px;
-  }
-
-  .info h3 {
-    font-size: 1.8rem;
-    margin: 5px 0;
-  }
-
-  .info p {
-    font-size: 0.9rem;
-    margin: 5px 0;
-  }
 }
 
 /* Normal Screens - currently designed for this */
@@ -26,70 +13,51 @@
   }
 
   .icon {
-    width: 40px;
-    height: 40px;
-  }
-
-  .achievements {
-    column-gap: 10px;
-  }
-
-  .circle-wrapper {
-    height: 180px;
-    width: 180px;
-    margin: 20px;
+    width: 45px;
+    height: 45px;
   }
 
   .info h3 {
-    font-size: 1.6rem;
+    font-size: 1.8em;
   }
 
   .info p {
-    font-size: 0.8rem;
+    font-size: 0.9em;
   }
 }
 
 /* Tablets */
 @media (max-width: 900px) {
+  
   .icon {
-    width: 35px;
-    height: 35px;
-  }
-
-  .achievements {
-    column-gap: 0px;
-  }
-
-  .circle-wrapper {
-    height: 160px;
-    width: 160px;
-    margin: 20px;
+    width: 40px;
+    height: 40px;
   }
 
   .info h3 {
-    font-size: 1.4rem;
+    font-size: 1.6em;
   }
 
   .info p {
-    font-size: 0.75rem;
+    font-size: 0.85em;
   }
 }
 
 /* Smaller Tablets */
 @media (max-width: 700px) {
   .achievements-container {
-    height: 1000px;
+    height: 1200px;
   }
 
   .achievements {
     flex-direction: column;
     align-items: center;
-    margin-top: 75px;
+    margin-top: 50px;
   }
 
-  .circle-wrapper {
-    width: 120px;
-    height: 120px;
+   .circle-wrapper {
+    width: 140px;
+    height: 140px;
     padding: 20px;
   }
 
@@ -99,16 +67,17 @@
   }
 
   .info h3 {
-    font-size: 1.4em;
+    font-size: 1.6em;
   }
 
   .info p {
-    font-size: 0.75em;
+    font-size: 0.85em;
   }
 }
 
 /* Mobile */
-@media (max-width: 550px) {
+@media (max-width: 550px) { 
+
 }
 
 /* Small Mobile */
