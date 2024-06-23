@@ -105,8 +105,7 @@ button:hover {
   margin-left: 10px;
 }
 
-.error {
-  margin-top: 5px;
+.form-error {
   color: red;
 }
 
@@ -136,4 +135,8 @@ button:hover {
 
 .message-appear {
   display: block;
+}
+
+.message-field {
+  margin-bottom: 15px;
 }

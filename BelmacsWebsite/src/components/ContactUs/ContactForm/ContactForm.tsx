@@ -178,7 +178,7 @@ const ContactForm: React.FC = () => {
                 placeholder="Enter your name"
                 required
               />
-              {nameError && <p className="error">{nameError}</p>}
+              {nameError && <p className="form-error">{nameError}</p>}
               <br />
               <br />
             </div>
@@ -196,7 +196,7 @@ const ContactForm: React.FC = () => {
                 placeholder="you@mail.com"
                 required
               />
-              {emailError && <p className="error">{emailError}</p>}
+              {emailError && <p className="form-error">{emailError}</p>}
               <br />
               <br />
             </div>
@@ -221,7 +221,7 @@ const ContactForm: React.FC = () => {
                 <option value="sales">Sales</option>
                 <option value="feedback">Feedback</option>
               </select>
-              {enquiryTypeError && <p className="error">{enquiryTypeError}</p>}
+              {enquiryTypeError && <p className="form-error">{enquiryTypeError}</p>}
               <br />
               <br />
             </div>
@@ -237,9 +237,10 @@ const ContactForm: React.FC = () => {
                 onChange={(e) => setMessage(e.target.value)}
                 onBlur={validateMessage}
                 placeholder="Enter your message"
+                className="message-field"
                 required
               ></textarea>
-              {messageError && <p className="error">{messageError}</p>}
+              {messageError && <p className="form-error">{messageError}</p>}
               <br />
               <br />
             </div>
@@ -256,7 +257,7 @@ const ContactForm: React.FC = () => {
                 By checking this box, you consent to the processing and sharing
                 of your personal data for the purposes of addressing your
                 specified queries
-                {checkboxError && <p className="error">{checkboxError}</p>}
+                {checkboxError && <p className="form-error">{checkboxError}</p>}
               </p>
             </div>
 

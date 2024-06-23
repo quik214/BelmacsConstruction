@@ -13,8 +13,6 @@ import ExisitingBuildingRetrofitImage from "../../../assets/Projects/HeroImages/
 import InfrastructureImage from "../../../assets/Projects/HeroImages/InfrastructureHero.jpg";
 import IndustrialImage from "../../../assets/Projects/HeroImages/IndustrialHero.jpg";
 
-
-
 export type projectTypeItem = {
   title?: string;
   image?: string;
@@ -59,7 +57,6 @@ export default function ProjectsTypes() {
 
   const handleClick = (project: projectTypeItem) => {
     navigate(`/projects/${project.path}`, { state: { paramData: project } });
-
   };
 
   return (
@@ -81,14 +78,17 @@ export default function ProjectsTypes() {
         {projectTypes.map((type) => (
           <div
             key={type.title} // Assuming title is unique for each category
-            // make sure css works correctly
             className={`project-types-grid-item ${type.title
               ?.toLowerCase()
               .replace(/ /g, "-")}`}
             onClick={() => handleClick(type)}
-            style={{ cursor: "pointer" }}
           >
-            <div className="overlay">{type.title}</div>
+            <div className="title">{type.title}</div>
+            <div className="overlay">
+              <div className="box">
+                <span>View</span>
+              </div>
+            </div>
           </div>
         ))}
       </div>

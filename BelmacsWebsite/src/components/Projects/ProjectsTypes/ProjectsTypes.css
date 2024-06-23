@@ -7,7 +7,6 @@
   font-family: "Lato";
   text-shadow: 0 0 0 rgb(112, 123, 177);
   color: rgb(54, 79, 199);
-  
 }
 
 .project-types-desc {
@@ -38,6 +37,7 @@
   background-position: center;
   border-radius: 8px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .project-types-grid-item::before {
@@ -58,7 +58,7 @@
   padding-top: 100%;
 }
 
-.project-types-grid-item .overlay {
+.project-types-grid-item .title {
   position: absolute;
   top: 20px;
   left: 18px;
@@ -70,14 +70,41 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.project-types-grid-item img {
+.project-types-grid-item .overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  z-index: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-types-grid-item:hover .overlay {
+  opacity: 1;
+}
+
+.project-types-grid-item .overlay span {
+  color: white;
+  font-size: 1.2rem;
+  font-family: "Lato";
+  font-weight: normal;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.project-types-grid-item .overlay .box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 110px;
+  height: 40px;
+  border: 1px solid white;
+  
 }
 
 .residential {

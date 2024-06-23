@@ -379,50 +379,56 @@ const Create: React.FC = () => {
         <p className="create-project-header">Add New Project</p>
         {/* CREATE Form */}
         <form onSubmit={handleSubmit}>
-          <label htmlFor="ProjectType">Select Project Type</label>
-          <select
-            id="ProjectType"
-            className="create-project-type"
-            name="ProjectType"
-            value={projectDetails.ProjectType}
-            onChange={handleChange}
-          >
-            <option value="residential">Residential</option>
-            <option value="commercial">Commercial</option>
-            <option value="existingBuildingRetrofit">
-              Existing Building Retrofit
-            </option>
-            <option value="institutional">Institutional</option>
-            <option value="infrastructure">Infrastructure</option>
-            <option value="industrial">Industrial</option>
-          </select>
-
-          <label htmlFor="name">Upload Image File</label>
-          <input
-            className="upload-image-input create-input"
-            type="file"
-            onChange={handleImageChange}
-            accept="image/*"
-          />
-          {errors.image && <p className="error-msg">{errors.image}</p>}
-
-          <div className="create-project-secondary-header">
-            Enter Project Details:
+          <div className="create-field">
+            <label htmlFor="ProjectType" className="create-field-header">Select Project Type</label>
+            <select
+              id="ProjectType"
+              className="create-project-type"
+              name="ProjectType"
+              value={projectDetails.ProjectType}
+              onChange={handleChange}
+            >
+              <option value="residential">Residential</option>
+              <option value="commercial">Commercial</option>
+              <option value="existingBuildingRetrofit">
+                Existing Building Retrofit
+              </option>
+              <option value="institutional">Institutional</option>
+              <option value="infrastructure">Infrastructure</option>
+              <option value="industrial">Industrial</option>
+            </select>
           </div>
 
-          <label htmlFor="name" className="create-field-header">
-            Project Name
-          </label>
-          <input
-            id="name"
-            type="text"
-            name="name"
-            placeholder="Project Name"
-            value={projectDetails.name}
-            onChange={handleChange}
-            className="create-input"
-          />
-          {errors.name && <p className="error-msg">{errors.name}</p>}
+          <div className="create-field">
+            <label htmlFor="name">Upload Image File</label>
+            <input
+              className="upload-image-input create-input"
+              type="file"
+              onChange={handleImageChange}
+              accept="image/*"
+            />
+            {errors.image && <p className="error-msg">{errors.image}</p>}
+          </div>
+
+          <div className="create-project-secondary-header">
+            Enter Project Details
+          </div>
+
+          <div className="create-field">
+            <label htmlFor="name" className="create-field-header">
+              Project Name
+            </label>
+            <input
+              id="name"
+              type="text"
+              name="name"
+              placeholder="Project Name"
+              value={projectDetails.name}
+              onChange={handleChange}
+              className="create-input"
+            />
+            {errors.name && <p className="error-msg">{errors.name}</p>}
+          </div>
 
           {projectDetails.ProjectType !== "existingBuildingRetrofit" && (
             <div className="create-field">
@@ -443,6 +449,7 @@ const Create: React.FC = () => {
               )}
             </div>
           )}
+
           <div className="awards-field">
             <label htmlFor="awards" className="create-field-header">
               Awards
@@ -546,7 +553,7 @@ const Create: React.FC = () => {
           </div>
 
           <div className="featured-switch-ctr">
-            <label htmlFor="featured" className="create-featured-header">
+            <label htmlFor="featured" className="create-field-header">
               Featured
             </label>
             <label className="featured-switch">

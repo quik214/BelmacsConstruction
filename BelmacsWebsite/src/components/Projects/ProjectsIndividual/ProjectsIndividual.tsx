@@ -121,7 +121,11 @@ const ProjectList: React.FC = () => {
     <div className="projects-individual">
       <Hero
         imageUrl={paramData.image}
-        heroText={paramData.title + " Projects"}
+        heroText = {
+          paramData.title === "Existing Building Retrofit"
+            ? paramData.title
+            : paramData.title + " Projects"
+        }
       />
       <div className="projects-individual-container">
         <div className="projects-individual-grid-container">
@@ -147,7 +151,7 @@ const ProjectList: React.FC = () => {
           {showSentinel && (
             <>
               <FaCheckCircle className="sentinel-icon" />
-              <p>All projects loaded</p>
+              <p>All projects displayed</p>
             </>
           )}
         </div>

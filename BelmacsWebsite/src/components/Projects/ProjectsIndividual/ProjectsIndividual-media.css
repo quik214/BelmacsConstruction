@@ -5,13 +5,17 @@
   }
 }
 
+@media (max-width: 1200px) {
+  .project-popup-content {
+    height: 45%;
+  }
+}
+
 /* Tablets */
 @media (max-width: 1000px) {
   .project-popup-content {
-    height: 40%;
+    height: 38%;
   }
-
- 
 
   .project-popup-content img {
     width: 40%;
