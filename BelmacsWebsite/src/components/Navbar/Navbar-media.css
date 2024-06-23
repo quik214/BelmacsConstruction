@@ -22,6 +22,7 @@
 
   .nav-sidebar-icon {
     display: block;
+    align-self: center;
   }
 }
 
@@ -45,18 +46,19 @@
   .nav-sidebar-icon {
     display: block;
     margin-right: -30px;
+    align-self: center;
   }
 }
 
 /* Small Mobile */
 @media (max-width: 390px) {
   .sidebar .sidebar-img {
-    margin-top: 5px;
+    margin-top: 0px;
   }
 
   .navbar-logo {
     width: 160px;
     height: 40px;
-    margin-left: 30px;
+    margin-left: 20px;
   }
 }
