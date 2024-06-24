@@ -187,13 +187,11 @@ export default function Navbar() {
 
       <nav className="sidebar">
         <div className="sidebar-links">
-          <Link to="/">
-            <img
-              src={CloseIcon}
-              className="sidebar-img"
-              onClick={hideSideBar}
-            ></img>
-          </Link>
+          <img
+            src={CloseIcon}
+            className="sidebar-img"
+            onClick={hideSideBar}
+          ></img>
           {!authUser && location.pathname !== "/admin" && (
             <>
               <Link to="/" className="sidebar-link">
