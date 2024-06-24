@@ -53,9 +53,6 @@ const EditProject: React.FC = () => {
   const [editSuccess, setEditSuccess] = useState<boolean>(false); // useState for editSuccess, currently set to false
   const navigate = useNavigate(); // function used for navigation (in later parts of code)
 
-  // for storing original image
-  const [originalImageUrl, setOriginalImageUrl] = useState<string | null>(null);
-
   // for form errors
   // errors is a variable that consists of an array of key-value pairs
   const [errors, setErrors] = useState<{ [key: string]: string | null }>({});
@@ -79,8 +76,6 @@ const EditProject: React.FC = () => {
         if (docSnap.exists()) {
           const projectData = docSnap.data() as Project; // set projectData to be a Project object that essentially cotains all the data from the snapshot
           setProject(projectData); // set the project to be projectData using setProject (which we will later display in the HTML)
-
-          setOriginalImageUrl(projectData.image); // Store the original image URL
 
           // Fetch awards from sub-collection
           const awardsCollectionRef = collection(docRef, "awards"); // assign the awardsCollectionRef variable to reference the awards collection in docRef
@@ -145,21 +140,8 @@ const EditProject: React.FC = () => {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     // the event that triggers this function is a change to the <input> element
     if (event.target.files && event.target.files[0]) {
-      setSelectedImage(event.target.files[0]);
-  
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        if (project) {
-          setProject({ ...project, image: reader.result as string });
-        }
-      };
-      reader.readAsDataURL(event.target.files[0]);
-    } else {
-      // Restore original image if the input is cleared
-      if (project && originalImageUrl) {
-        setProject({ ...project, image: originalImageUrl });
-        setSelectedImage(null);
-      }
+      // if the event.target has a set of files, or has a single file
+      setSelectedImage(event.target.files[0]); // then we will set the selectedImage to be the first file
     }
   };
 
