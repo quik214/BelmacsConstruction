@@ -55,7 +55,7 @@ const AboutProjects: React.FC = () => {
   const settings = {
     dots: true,
     infinite: data.length > 1,
-    speed: 1000,
+    speed: 2500,
     slidesToShow: slidesToShow,
     slidesToScroll: slidesToScroll,
     autoplay: true,
