@@ -179,8 +179,6 @@ const ContactForm: React.FC = () => {
                 required
               />
               {nameError && <p className="form-error">{nameError}</p>}
-              <br />
-              <br />
             </div>
 
             <div>
@@ -197,8 +195,6 @@ const ContactForm: React.FC = () => {
                 required
               />
               {emailError && <p className="form-error">{emailError}</p>}
-              <br />
-              <br />
             </div>
 
             <div>
@@ -222,10 +218,8 @@ const ContactForm: React.FC = () => {
                 <option value="feedback">Feedback</option>
               </select>
               {enquiryTypeError && <p className="form-error">{enquiryTypeError}</p>}
-              <br />
-              <br />
+ 
             </div>
-
             <div>
               <p className="field-label">Message</p>
               <br />
@@ -241,8 +235,6 @@ const ContactForm: React.FC = () => {
                 required
               ></textarea>
               {messageError && <p className="form-error">{messageError}</p>}
-              <br />
-              <br />
             </div>
 
             <div className="checkbox-ctr">
