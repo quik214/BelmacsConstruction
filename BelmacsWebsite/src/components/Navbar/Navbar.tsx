@@ -128,17 +128,19 @@ export default function Navbar() {
         });
       });
 
-      localStorage.clear()
+    localStorage.clear();
   };
 
   return (
     <div>
       {/* DESKTOP NAVBAR */}
       <nav className={authUser || navbar ? "navbar active" : "navbar"}>
-        <img
-          src={logo || authUser ? BelmacsBlueBlack : BelmacsWhiteWhite}
-          className="navbar-logo"
-        />
+        <Link to="/">
+          <img
+            src={logo || authUser ? BelmacsBlueBlack : BelmacsWhiteWhite}
+            className="navbar-logo"
+          />
+        </Link>
         <div className="nav-links">
           {/* (If user is not authenticated) && (The page is not admin), */}
           {!authUser && location.pathname !== "/admin" && (
@@ -185,11 +187,13 @@ export default function Navbar() {
 
       <nav className="sidebar">
         <div className="sidebar-links">
-          <img
-            src={CloseIcon}
-            className="sidebar-img"
-            onClick={hideSideBar}
-          ></img>
+          <Link to="/">
+            <img
+              src={CloseIcon}
+              className="sidebar-img"
+              onClick={hideSideBar}
+            ></img>
+          </Link>
           {!authUser && location.pathname !== "/admin" && (
             <>
               <Link to="/" className="sidebar-link">
