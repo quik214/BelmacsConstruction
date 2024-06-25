@@ -10,6 +10,10 @@ import AboutBizSafe from "../../components/About/AboutBizSafe/AboutBizSafe";
 import AboutPDPA from "../../components/About/AboutPDPA/AboutPDPA";
 import AboutAchievements from "../../components/About/AboutAchievements/AboutAchievements";
 
+// import { useState, useEffect } from "react";
+// import SplashScreen from "../../components/About/AboutSplash/AboutSplash";
+// import SplashLogo from "../../assets/About/AboutSplash/BelmacsTransparent.png";
+
 export default function () {
   const reveal = () => {
     const reveals = document.querySelectorAll(
@@ -55,41 +59,79 @@ export default function () {
     runRevealAfterDOMLoaded();
   }
 
+  // const [isSplashVisible, setIsSplashVisible] = useState(true);
+  // const [isContentLoaded, setIsContentLoaded] = useState(false);
+  // const [minDurationElapsed, setMinDurationElapsed] = useState(false);
+
+  // useEffect(() => {
+  //   const minDurationTimer = setTimeout(() => {
+  //     setMinDurationElapsed(true);
+  //   }, 500); // Minimum duration of 1 second
+
+  //   return () => clearTimeout(minDurationTimer);
+  // }, []);
+
+  // useEffect(() => {
+  //   if (isContentLoaded && minDurationElapsed) {
+  //     const timer = setTimeout(() => {
+  //       setIsSplashVisible(false);
+  //     }, 500); // Adjust the duration to match your fade-out animation duration
+
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [isContentLoaded, minDurationElapsed]);
+
+  // const handleContentLoaded = () => {
+  //   setIsContentLoaded(true);
+  // };
+
+
   return (
-    <div>
-      <AboutHero />
+    <>
+       {/* {isSplashVisible && (
+        <SplashScreen
+          logo={SplashLogo}
+          duration={500}
+          onFinish={() => setIsSplashVisible(false)}
+        />
+      )} */}
 
-      <div className="container">
-        <AboutCompany />
+      {/*<div> style={{ display: isSplashVisible ? 'none' : 'block' }} onLoad={handleContentLoaded} </div>*/}
+      <div >
+        <AboutHero />
+
+        <div className="container">
+          <AboutCompany />
+        </div>
+
+        <div className="out-container">
+          <AboutVM />
+        </div>
+
+        <div className="container">
+          <AboutProjects />
+          <AboutPeople />
+        </div>
+
+        <div className="out-container">
+          <AboutAchievements />
+        </div>
+
+        <div className="container">
+          <AboutIMS />
+          <AboutWSH />
+        </div>
+
+        <div className="out-container">
+          <AboutBizSafe />
+        </div>
+
+        <div className="container">
+          <AboutPDPA />
+        </div>
+
+        <div className="out-container"></div>
       </div>
-
-      <div className="out-container">
-        <AboutVM />
-      </div>
-
-      <div className="container">
-        <AboutProjects />
-        <AboutPeople />
-      </div>
-
-      <div className="out-container">
-        <AboutAchievements />
-      </div>
-
-      <div className="container">
-        <AboutIMS />
-        <AboutWSH />
-      </div>
-
-      <div className="out-container">
-        <AboutBizSafe />
-      </div>
-
-      <div className="container">
-        <AboutPDPA />
-      </div>
-
-      <div className="out-container"></div>
-    </div>
+    </>
   );
 }
