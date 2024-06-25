@@ -110,11 +110,13 @@ const ProjectList: React.FC = () => {
   const handleCardClick = (project: Project) => {
     setSelectedProject(project);
     setShowPopup(true);
+    document.body.classList.add("no-scroll");
   };
 
   const closePopup = () => {
     setShowPopup(false);
     setSelectedProject(null);
+    document.body.classList.remove("no-scroll");
   };
 
   return (

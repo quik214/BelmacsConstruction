@@ -104,6 +104,8 @@
   transform: scale(1.01);
 }
 
+
+
 /* -- Popup --*/
 
 .project-popup {
@@ -186,4 +188,9 @@
   font-size: 38px;
   cursor: pointer;
   color: black;
+}
+
+/* Prevent scrolling */
+.no-scroll {
+  overflow: hidden;
 }
