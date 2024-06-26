@@ -105,12 +105,14 @@ button:hover {
   height: 15px; /* Explicit height for checkbox */
   margin-right: 10px; /* Space between checkbox and text */
 }
-
 .checkbox-text {
   flex: 1; /* Allows the text to take up remaining space */
   font-family: Arial, sans-serif; /* Ensures consistent font */
   display: inline-block; /* Makes sure the text respects the flex container */
   margin-top: -6px;
+}
+.recaptcha {
+  margin-top: 10px;
 }
 
 .form-error {
@@ -144,8 +146,4 @@ button:hover {
 
 .message-appear {
   display: block;
-}
-
-.recaptcha {
-  margin-top: 10px;
 }

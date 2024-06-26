@@ -126,8 +126,6 @@ const ContactForm: React.FC = () => {
               form.classList.add("hidden");
               submittext.classList.add("message-appear");
             }
-
-           
           },
           (error) => {
             console.log("FAILED...", error.text);
@@ -217,8 +215,9 @@ const ContactForm: React.FC = () => {
                 <option value="sales">Sales</option>
                 <option value="feedback">Feedback</option>
               </select>
-              {enquiryTypeError && <p className="form-error">{enquiryTypeError}</p>}
- 
+              {enquiryTypeError && (
+                <p className="form-error">{enquiryTypeError}</p>
+              )}
             </div>
             <div>
               <p className="field-label">Message</p>
@@ -250,7 +249,6 @@ const ContactForm: React.FC = () => {
                 of your personal data for the purposes of addressing your
                 specified queries
               </p>
-              
             </div>
             {checkboxError && <p className="form-error">{checkboxError}</p>}
 
@@ -268,7 +266,10 @@ const ContactForm: React.FC = () => {
 
       <div className="on-submit-ctr">
         <img className="mailbox" src={mailbox}></img>
-        <p className="on-submit-text">Thank you for your submission. <br></br> A confirmation email has been sent to the provided email address. </p>
+        <p className="on-submit-text">
+          Thank you for your submission. <br></br> A confirmation email has been
+          sent to the provided email address.{" "}
+        </p>
       </div>
     </div>
   );

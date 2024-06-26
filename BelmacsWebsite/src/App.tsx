@@ -32,7 +32,7 @@ function MainApp() {
   // Define paths where you don't want to show the footer
   const noFooterPaths = [
     "/admin",
-    "/admin/dashboard",
+    "/admin/projects",
     "/admin/create",
     "/admin/edit",
   ];
@@ -57,8 +57,16 @@ function MainApp() {
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<AdminLogin />} />
+          {/* <Route
+            path="/admin/about"
+            element={
+              <PrivateRoute>
+               <AdminDashboard />
+              </PrivateRoute>
+            }
+          />*/}
           <Route
-            path="/admin/dashboard"
+            path="/admin/projects"
             element={
               <PrivateRoute>
                 <AdminDashboard />
