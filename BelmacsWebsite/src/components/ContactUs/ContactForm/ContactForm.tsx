@@ -165,6 +165,7 @@ const ContactForm: React.FC = () => {
             />
             <div>
               <p className="field-label">Full Name</p>
+              <br />
               <input
                 type="text"
                 name="name"
@@ -180,6 +181,7 @@ const ContactForm: React.FC = () => {
 
             <div>
               <p className="field-label">Email Address</p>
+              <br />
               <input
                 type="email"
                 name="email"
@@ -195,6 +197,7 @@ const ContactForm: React.FC = () => {
 
             <div>
               <p className="field-label">Enquiry Type</p>
+              <br />
               <select
                 name="enquiry-type"
                 id="enquiry-type"
@@ -218,6 +221,7 @@ const ContactForm: React.FC = () => {
             </div>
             <div>
               <p className="field-label">Message</p>
+              <br />
               <textarea
                 rows={5}
                 name="message"
