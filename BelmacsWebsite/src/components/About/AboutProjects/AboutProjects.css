@@ -31,6 +31,11 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   flex: 1 1 calc(33.33% - 2rem);
   transition: 0.2s all ease-in-out; /* Animation */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  position: relative;
 }
 
 .card-img {
@@ -45,8 +50,10 @@
   padding: 0.6rem 0.6rem;
   margin-left: 10px;
   margin-top: 5px;
- 
+  width: 100%; /* Ensure full width */
+  transition: transform 0.3s ease;
 }
+
 
 .card-header {
   font-size: 1.2rem;
@@ -59,12 +66,50 @@
   flex-wrap: nowrap;
   margin-top: 0.6rem;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .card-desc {
   font-size: 1.0rem;
   font-family: "Montserrat";
-  margin-bottom: 0.6rem;
+}
+
+.awards-container {
+  position: absolute;
+  bottom: -30px;
+  transition: bottom 0.3s ease;
+}
+
+.award-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  font-family: "Montserrat";
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.card:hover .card-text-container {
+  transform: translateY(-30px); /* Default transform value on hover */
+}
+
+.location-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.award-icon {
+  width: 20px;
+  height: 20px; 
+  margin-right: 10px;
+}
+
+.award-item {
+  margin-bottom: 10px;
 }
 
 .slick-slide > div {
