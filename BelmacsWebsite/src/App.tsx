@@ -57,8 +57,16 @@ function MainApp() {
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<AdminLogin />} />
+          {/* <Route
+            path="/admin/about"
+            element={
+              <PrivateRoute>
+               <AdminDashboard />
+              </PrivateRoute>
+            }
+          />*/}
           <Route
-            path="/admin/dashboard"
+            path="/admin/projects"
             element={
               <PrivateRoute>
                 <AdminDashboard />

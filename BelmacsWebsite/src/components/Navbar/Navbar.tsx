@@ -25,6 +25,14 @@ export default function Navbar() {
   const [menuIcon, setMenuIcon] = useState(false);
   const [authUser, setAuthUser] = useState<User | null>(null);
   const location = useLocation();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+  const closeDropdown = () => {
+    setDropdownOpen(false);
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -93,6 +101,7 @@ export default function Navbar() {
       setTimeout(() => {
         sidebar.style.display = "none";
       }, 300);
+      closeDropdown();
     } else {
       console.error("Sidebar element not found or is not an HTMLElement.");
     }
@@ -160,18 +169,40 @@ export default function Navbar() {
             </>
           )}
           {authUser && (
-            <>
-              <Link to="/admin/dashboard" className="nav-link hideOnMobile">
+            <div className="dropdown">
+              <Link
+                to="#"
+                onClick={toggleDropdown}
+                className="nav-link hideOnMobile dropdown-trigger"
+              >
                 Dashboard
               </Link>
+              {dropdownOpen && (
+                <div className="dropdown-content">
+                  <Link
+                    to="/"
+                    className="dropdown-item"
+                    onClick={closeDropdown}
+                  >
+                    About
+                  </Link>
+                  <Link
+                    to="/admin/projects"
+                    className="dropdown-item"
+                    onClick={closeDropdown}
+                  >
+                    Projects
+                  </Link>
+                </div>
+              )}
               <Link
-                to="/projects"
+                to="/"
                 onClick={handleSignOut}
                 className="nav-link hideOnMobile"
               >
                 Sign Out
               </Link>
-            </>
+            </div>
           )}
           {(authUser || location.pathname !== "/admin") && (
             <img
@@ -211,13 +242,48 @@ export default function Navbar() {
 
           {authUser && (
             <>
-              <Link to="/admin/dashboard" className="sidebar-link ">
-                Dashboard
-              </Link>
+              <div className="dropdown">
+                <Link
+                  to="#"
+                  onClick={toggleDropdown}
+                  className="sidebar-link dropdown-trigger"
+                >
+                  Dashboard
+                </Link>
+                {dropdownOpen && (
+                  <div className="dropdown-content">
+                    <Link
+                      to="/"
+                      className="dropdown-item"
+                      onClick={() => {
+                        closeDropdown();
+                        hideSideBar(); // Close sidebar when item clicked
+                      }}
+                    >
+                      About
+                    </Link>
+                    <Link
+                      to="/admin/projects"
+                      className="dropdown-item"
+                      onClick={() => {
+                        closeDropdown();
+                        hideSideBar(); // Close sidebar when item clicked
+                      }}
+                    >
+                      Projects
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* Sign Out Button */}
               <Link
-                to="/admin"
-                onClick={handleSignOut}
-                className="sidebar-link "
+                to="/"
+                onClick={() => {
+                  handleSignOut();
+                  hideSideBar(); // Close sidebar after sign out
+                }}
+                className="sidebar-link"
               >
                 Sign Out
               </Link>

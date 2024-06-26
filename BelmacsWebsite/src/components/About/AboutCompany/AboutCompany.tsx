@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import { db } from "../../../firebase";
 import { getDocs, collection } from "firebase/firestore";
 
-import AboutCompanyImage from "../../../assets/About/AboutCompany/about-company.jpg";
 interface Company {
   descriptionOne: string;
   descriptionTwo: string;
