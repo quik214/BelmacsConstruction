@@ -20,7 +20,7 @@ const ContactForm: React.FC = () => {
   // const [isValid, setIsValid] = useState(false);
 
   const handleRecaptchaChange = (value: string | null) => {
-    if (value && isCheckboxChecked) {
+    if (name && email && enquiryType && message && value && isCheckboxChecked) {
       const sidebar = document.querySelector(".submit-button");
       if (sidebar) {
         sidebar.classList.add("enabled");
@@ -179,8 +179,6 @@ const ContactForm: React.FC = () => {
                 required
               />
               {nameError && <p className="form-error">{nameError}</p>}
-              <br />
-              <br />
             </div>
 
             <div>
@@ -197,8 +195,6 @@ const ContactForm: React.FC = () => {
                 required
               />
               {emailError && <p className="form-error">{emailError}</p>}
-              <br />
-              <br />
             </div>
 
             <div>
@@ -222,10 +218,8 @@ const ContactForm: React.FC = () => {
                 <option value="feedback">Feedback</option>
               </select>
               {enquiryTypeError && <p className="form-error">{enquiryTypeError}</p>}
-              <br />
-              <br />
+ 
             </div>
-
             <div>
               <p className="field-label">Message</p>
               <br />
@@ -241,8 +235,6 @@ const ContactForm: React.FC = () => {
                 required
               ></textarea>
               {messageError && <p className="form-error">{messageError}</p>}
-              <br />
-              <br />
             </div>
 
             <div className="checkbox-ctr">
@@ -257,9 +249,10 @@ const ContactForm: React.FC = () => {
                 By checking this box, you consent to the processing and sharing
                 of your personal data for the purposes of addressing your
                 specified queries
-                {checkboxError && <p className="form-error">{checkboxError}</p>}
               </p>
+              
             </div>
+            {checkboxError && <p className="form-error">{checkboxError}</p>}
 
             <ReCAPTCHA
               sitekey="6Lf9YPIpAAAAAFnSu5xNGs-Ib8-BT88I9UnZf5ib"

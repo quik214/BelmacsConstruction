@@ -14,13 +14,14 @@
 /* Tablets */
 @media (max-width: 1000px) {
   .project-popup-content {
-    height: 38%;
+    height: 360px;
   }
 
   .project-popup-content img {
     width: 40%;
-    min-height: 333px;
-    max-height: 333px;
+    
+    min-height: 360px;
+    max-height: 360px;
   }
 
   .project-popup-content .project-popup-name {
