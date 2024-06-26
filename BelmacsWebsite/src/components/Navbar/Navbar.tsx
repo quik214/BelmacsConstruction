@@ -51,7 +51,7 @@ export default function Navbar() {
     const checkInitialStates = () => {
       if (
         location.pathname === "/admin" ||
-        location.pathname.includes("/dashboard") ||
+        location.pathname.includes("/projects") ||
         location.pathname.includes("/create") ||
         location.pathname.includes("/edit")
       ) {

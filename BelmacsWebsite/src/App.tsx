@@ -32,7 +32,7 @@ function MainApp() {
   // Define paths where you don't want to show the footer
   const noFooterPaths = [
     "/admin",
-    "/admin/dashboard",
+    "/admin/projects",
     "/admin/create",
     "/admin/edit",
   ];
