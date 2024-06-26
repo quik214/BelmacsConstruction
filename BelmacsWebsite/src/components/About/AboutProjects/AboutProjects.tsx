@@ -31,7 +31,7 @@ const AboutProjects: React.FC = () => {
     "commercial-projects",
     "institutional-projects",
     "existingBuildingRetrofit-projects",
-    "infrastructure-projects"
+    "infrastructure-projects",
   ];
 
   useEffect(() => {
@@ -44,8 +44,12 @@ const AboutProjects: React.FC = () => {
           const querySnapshot = await getDocs(q);
           for (const doc of querySnapshot.docs) {
             const projectData = doc.data() as Project;
-            const awardsSnapshot = await getDocs(collection(db, `${type}/${doc.id}/awards`));
-            const awards: Award[] = awardsSnapshot.docs.map((awardDoc) => awardDoc.data() as Award);
+            const awardsSnapshot = await getDocs(
+              collection(db, `${type}/${doc.id}/awards`)
+            );
+            const awards: Award[] = awardsSnapshot.docs.map(
+              (awardDoc) => awardDoc.data() as Award
+            );
             const totalAwards = awards.length;
             allProjects.push({ ...projectData, awards, totalAwards });
           }
@@ -73,10 +77,10 @@ const AboutProjects: React.FC = () => {
     arrows: false,
     responsive: [
       {
-        breakpoint: 900,
+        breakpoint: 1000,
         settings: {
-          slidesToShow: Math.min(data.length, 2),
-          slidesToScroll: 1,
+          slidesToShow: 2,
+          slidesToScroll: 2,
         },
       },
       {
@@ -89,8 +93,8 @@ const AboutProjects: React.FC = () => {
     ],
   };
 
-  const calculateTransform = (awardsCount: number): string => {
-    return `translateY(${-30 * awardsCount}px)`;
+  const calculateTransform = (totalAwards: number): string => {
+    return `translateY(${-30 * totalAwards}px)`;
   };
 
   const calculateBottom = (totalAwards: number): string => {
@@ -104,38 +108,60 @@ const AboutProjects: React.FC = () => {
         <Slider {...settings}>
           {data.map((d, index) => (
             <div
-              className="card"
+              className="project-card"
               key={index}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
               <img className="card-img" src={d.image} alt={d.image} />
-              <div className="card-text-container" style={{
-                transform: hoveredIndex === index ? calculateTransform(d.totalAwards) : "translateY(0)",
-                top: hoveredIndex === index ? `-${30 * d.totalAwards}px` : "0",
-                transition: "transform 0.3s ease",
-              }}>
-                <p className="card-header">{d.name}</p>
+              <div
+                className="card-text-container"
+                style={{
+                  transform:
+                    hoveredIndex === index
+                      ? calculateTransform(d.totalAwards)
+                      : "translateY(0)",
+                  top:
+                    hoveredIndex === index ? `-${30 * d.totalAwards}px` : "0",
+                  transition: "transform 0.3s ease",
+                }}
+              >
+                <div className="card-header">{d.name}</div>
                 <div className="card-desc-container">
-                  <img src={LocationIcon} alt="Location Icon" className="location-icon" />
+                  <img
+                    src={LocationIcon}
+                    alt="Location Icon"
+                    className="location-icon"
+                  />
                   <div className="card-desc">{d.location}</div>
                 </div>
-              </div>
-              {d.awards && d.awards.length > 0 && (
-                  <div className="awards-container" style={{
-                    bottom: hoveredIndex === index ? calculateBottom(d.totalAwards) : calculateBottom(d.totalAwards),
-                    transition: "bottom 0.3s ease",
-                  }}>
-                    <ul className="awards-list">
+                {d.awards && d.awards.length > 0 && (
+                  <div
+                    className="awards-container"
+                    style={{
+                      bottom:
+                        hoveredIndex === index
+                          ? calculateBottom(d.totalAwards)
+                          : calculateBottom(d.totalAwards),
+                      transition: "bottom 0.3s ease",
+
+                    }}
+                  >
+                    <div className="awards-list">
                       {d.awards.map((award, awardIndex) => (
-                        <li key={awardIndex} className="award-item">
-                          <img src={AwardIcon} alt="Award Icon" className="award-icon" />
+                        <div key={awardIndex} className="award-item">
+                          <img
+                            src={AwardIcon}
+                            alt="Award Icon"
+                            className="award-icon"
+                          />
                           <span>{award.title}</span>
-                        </li>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 )}
+              </div>
             </div>
           ))}
         </Slider>

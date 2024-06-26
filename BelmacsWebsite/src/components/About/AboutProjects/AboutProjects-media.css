@@ -16,41 +16,39 @@
   }
 
   .card-header {
-    font-size: 1.1rem;
+    padding-top: 10px;
+    font-size: 1rem;
   }
 
   .card-desc {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
+  }
+
+  .award-item {
+    font-size: 0.7rem;
+  }
+
+  .card-header , .card-desc-container, .award-item {
+    padding-left: 10px;
   }
 }
 
 /* Tablets */
 @media (max-width: 900px) {
-  .flex-container {
-    width: 102%;
-  }
+  
 }
 
 /* Smaller Tablets */
 @media (max-width: 700px) {
-  .flex-container {
-    width: 103%;
-  }
-  .flex-container {
-    margin-top: 25px;
-  }
-
-  .card-text-container {
-    padding-left: 4px;
-    padding-top: 10px;
-    padding-bottom: 5px;
-  }
-
   .card-header {
     font-size: 0.9rem;
   }
 
   .card-desc {
+    font-size: 0.6rem;
+  }
+
+  .award-item {
     font-size: 0.6rem;
   }
 
@@ -61,10 +59,6 @@
 
 /* Mobile */
 @media (max-width: 550px) {
-  .flex-container {
-    width: 104%;
-  }
-
   .projects-header {
     font-size: 1.2rem;
   }
@@ -73,25 +67,12 @@
     height: 10rem;
   }
 
-  .card-text-container {
-    padding: 0.6rem 0.6rem;
-    margin-left: 5px;
-  }
 }
 
 /* Small Mobile */
 @media (max-width: 390px) {
-  .flex-container {
-    width: 105%;
-  }
-
   .card-header {
     font-size: 0.8rem;
   }
 
-  .card-text-container {
-    padding-left: 7px;
-    padding-top: 10px;
-    padding-bottom: 4px;
-  }
 }
