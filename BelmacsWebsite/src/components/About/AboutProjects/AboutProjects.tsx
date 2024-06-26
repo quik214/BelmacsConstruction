@@ -98,7 +98,7 @@ const AboutProjects: React.FC = () => {
   };
 
   const calculateBottom = (totalAwards: number): string => {
-    return `${-30 * totalAwards}px`;
+    return `${-30 * totalAwards + 1}px`;
   };
 
   return (
@@ -121,11 +121,10 @@ const AboutProjects: React.FC = () => {
                     hoveredIndex === index
                       ? calculateTransform(d.totalAwards)
                       : "translateY(0)",
-                  top:
-                    hoveredIndex === index ? `-${30 * d.totalAwards}px` : "0",
                   transition: "transform 0.3s ease",
                 }}
               >
+                <span className ="ribbon ribbon-edge">{d.totalAwards} Awards</span>
                 <div className="card-header">{d.name}</div>
                 <div className="card-desc-container">
                   <img

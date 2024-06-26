@@ -31,6 +31,17 @@
   .card-header , .card-desc-container, .award-item {
     padding-left: 10px;
   }
+
+  .ribbon{
+    top: 10px;
+    line-height: 20px;
+	  height: 22px;
+    font-size: 0.7rem;
+  }
+
+  .ribbon-edge:before{
+    border-width: 13px 8px;
+}
 }
 
 /* Tablets */
@@ -55,6 +66,16 @@
   .card-img {
     height: 11rem;
   }
+
+  .ribbon{
+    line-height: 18px;
+	  height: 20px;
+    font-size: 0.6rem;
+  }
+
+  .ribbon-edge:before{
+    border-width: 12px 8px;
+}
 }
 
 /* Mobile */
@@ -67,6 +88,18 @@
     height: 10rem;
   }
 
+  .ribbon{
+    line-height: 16px;
+	  height:16px;
+  }
+
+  .ribbon-edge:before{
+    left: -8px;
+    border-width: 10px 8px;
+}
+
+
+
 }
 
 /* Small Mobile */
@@ -74,5 +107,6 @@
   .card-header {
     font-size: 0.8rem;
   }
+
 
 }
