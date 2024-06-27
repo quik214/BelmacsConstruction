@@ -8,15 +8,12 @@ import React, { useState, useEffect } from "react";
 import {
   getDocs,
   collection,
-  //deleteDoc,
+  deleteDoc,
   doc,
-  getDoc,
-  //DocumentData,
-  QueryDocumentSnapshot,
 } from "firebase/firestore";
-import { db /*storage*/ } from "../../../../../firebase";
+import { db , storage } from "../../../../../firebase";
 import { useNavigate } from "react-router-dom";
-//import { ref, deleteObject } from "firebase/storage";
+import { ref, deleteObject } from "firebase/storage";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -33,24 +30,19 @@ interface People {
 const PeopleDashboard: React.FC = () => {
   // for displaying of People
   const [people, setPeople] = useState<People[]>([]);
-  //const [displayedProjects, setDisplayedProjects] = useState<Project[]>([]);
 
   // for navigation between pages
   const navigate = useNavigate();
 
   // for delete
-  //const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
-  //const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  //const [notification, setNotification] = useState<{
-  //message: string;
-  //type: "success" | "error";
-  // } | null>(null);
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [selectedPeople, setSelectedPeople] = useState<People | null>(null);
 
-  // toast setup for project delete
-  /*const deleteSuccessToast = (project: string) => {
+  // toast setup for people delete
+  const deleteSuccessToast = (people: string) => {
     toast.success(
       <div>
-        <b>{project}</b> has been deleted
+        <b>{people}</b> has been deleted
       </div>,
       {
         position: "bottom-right",
@@ -63,7 +55,7 @@ const PeopleDashboard: React.FC = () => {
         theme: "light",
       }
     );
-  };*/
+  };
 
   // function to retrieve the OurPeople data from database
   useEffect(() => {
@@ -82,87 +74,71 @@ const PeopleDashboard: React.FC = () => {
   }, []);
 
   const handleEditPeople = (person: People) => {
-    navigate("/admin/about/people/edit", {
+    navigate(`/admin/about/people/edit/${person.name}`, {
       state: { paramData: person }, // push person object to be stored in the next page's state
     });
   };
-  // handles delete function
-  //const handleDelete = (project: Project) => {
-  //setSelectedProject(project); // push selected Project data into selectedProject variable
-  //setShowDeleteConfirmation(true); // display delete pop up
-  //};
 
-  /*  const confirmDelete = async () => {
-    if (!selectedType || !selectedProject) return; // ensure selectedType and selectedProject both exist (for below parts)
+  // handles delete function
+  const handleDelete = (people: People) => {
+  setSelectedPeople(people); // push selected People data into selectedPeople variable
+  setShowDeleteConfirmation(true); // display delete pop up
+  };
+
+  const confirmDelete = async () => {
+    if (!selectedPeople) return; // ensure selectedPeople both exist (for below parts)
     try {
+
       // Delete firestore storage image
-      const imageRef = ref(storage, selectedProject.image);
+      const imageRef = ref(storage, selectedPeople.image);
       await deleteObject(imageRef);
 
-      // Delete subcollection 'awards' first
-      const projectRef = doc(
+      const peopleRef = doc(
         db,
-        `${selectedType}-projects`,
-        selectedProject.id
-      ); // assign projectRef variable the Project document (within Firebase)
-      const awardsCollectionRef = collection(projectRef, "awards"); // assign awardsCollectionRef the awards collection for the selected Project document
-      const awardsSnapshot = await getDocs(awardsCollectionRef); // retrieve awards collection data based on awardsCollectionRef variable
+        `about-people`,
+        selectedPeople.name
+      ); // assign peopleRef variable the People document (within Firebase)
 
-      // function used to iterate through each award and delete each
-      const deletePromises = awardsSnapshot.docs.map(async (doc) => {
-        await deleteDoc(doc.ref); // delete each award
-      });
+      // Delete firestore data using details in peopleRef
+      await deleteDoc(peopleRef);
 
-      await Promise.all(deletePromises); // ensure all awards are deleted successfully, before moving on to code below
-      // else, return
-
-      // Delete firestore data using details in projectRef
-      await deleteDoc(projectRef);
-
-      // Update projects after deletion
-      setProjects((prevProjects) =>
-        prevProjects.filter((project) => project.id !== selectedProject.id)
+      // Update people after deletion
+      setPeople((prevPeople) =>
+        prevPeople.filter((people) => people.name !== selectedPeople.name)
       );
 
-      // Update displayedProjects after deletion
-      setDisplayedProjects((prevDisplayedProjects) =>
-        prevDisplayedProjects.filter(
-          (project) => project.id !== selectedProject.id // filter a deleted project
-        )
-      );
-
-      console.log("Project deleted:", selectedProject.id); // log the deleted project
+      console.log("Director deleted:", selectedPeople.name); // log the deleted people
       setShowDeleteConfirmation(false); // Hide the confirmation dialog after deletion
 
-      deleteSuccessToast(selectedProject.name); // display toast
+      deleteSuccessToast(selectedPeople.name); // display toast
     } catch (error) {
-      console.error("Error deleting project:", error);
+      console.error("Error deleting director:", error);
       setShowDeleteConfirmation(false); // Hide the confirmation dialog on error
-      setNotification({
-        message: "Error deleting " + selectedProject.name,
-        type: "error",
-      }); // Show error notification
-      setTimeout(() => {
-        setNotification(null);
-      }, 2500);
     }
   };
 
-  const handleAddProject = () => {
-    navigate(`/admin/create/${selectedType}`),
-      {
-        state: { paramData: selectedType },
-      }; // Navigate to AddProject component
-  };
-
-  // for search
+  /*
+    // for search
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
   };
+
+
 */
+
+  const handleAddPeople = () => {
+    navigate(`/admin/about/people/create`)
+  };
+
 return (
     <div className="people-ctr">
       <div className="people-header">Our People</div>
+
+      <div className="add-people-ctr">
+        <button className="add-people-button" onClick={handleAddPeople}>
+          Add Director
+        </button>
+      </div>
 
       <div className="people-table-ctr">
         {people.length > 0 && (
@@ -173,7 +149,7 @@ return (
                 <th>Name</th>
                 <th>Position</th>
                 <th>Qualifications</th>
-                <th>Description</th>
+                <th className="people-table-description">Description</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -214,7 +190,7 @@ return (
                     </button>
                     <button
                     className="action-button delete-button"
-                    onClick={() => handleEditPeople(person)}
+                    onClick={() => handleDelete(person)}
                   >
                     <img src={DeleteIcon} className="action-icons" />
                   </button>
@@ -225,8 +201,8 @@ return (
           </table>
         )}
       </div>
-      {/*
-      {showDeleteConfirmation && selectedProject && (
+      
+      {showDeleteConfirmation && selectedPeople && (
         <>
           <div className="delete-overlay"></div>
           <div className="delete-confirmation-popup">
@@ -235,7 +211,7 @@ return (
               <div className="delete-confirmation-description">
                 Are you sure you want to delete{" "}
                 <span style={{ color: "#364FC7" }}>
-                  {selectedProject.name}?
+                  {selectedPeople.name}?
                 </span>{" "}
                 This action cannot be undone.
               </div>
@@ -255,13 +231,6 @@ return (
           </div>
         </>
       )}
-*/}
-      {/* Notification 
-      {notification && (
-        <div className={`notification-btm-right ${notification.type}`}>
-          {notification.message}
-        </div>
-      )}*/}
     </div>
   );
 };

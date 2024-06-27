@@ -1,0 +1,133 @@
+.create-person-ctr {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 15px;
+  }
+  
+  .create-person-header {
+    font-size: 2rem;
+    color: #364fc7;
+    font-size: 32px;
+    margin-bottom: 25px;
+  }
+  
+  .upload-image-input {
+    border: 2px dashed #ccc;
+  }
+  
+  .create-person-form-ctr {
+    margin-top: 40px;
+  }
+  
+  
+  .create-person-button-ctr {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 10px;
+  }
+  
+  .create-person-button {
+    background-color: #1fb185;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  
+    border-radius: 4px;
+    padding: 10px 12.5px;
+  }
+  
+  .cancel-person-button {
+    color: white;
+    background-color: grey;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  
+    border-radius: 4px;
+    padding: 9px 12.5px;
+  }
+  
+  .create-person-button:hover {
+    background-color: #13644c;
+  }
+  
+  .cancel-person-button:hover {
+    background-color: rgb(211, 211, 211);
+  }
+  
+  /* QUALIFICATIONS */
+  .qualifications-field {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-top: 20px;
+  }
+  
+  .create-input {
+    margin-bottom: 0px;
+  }
+  
+  .create-field {
+    margin-top: 20px;
+  }
+  
+  .create-field-header {
+    margin-bottom: 10px;
+  }
+
+  
+  .qualifications-field {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-top: 20px;
+  }
+  
+  .qualifications-header {
+    margin-bottom: 0;
+  }
+  
+  .qualification-input-ctr {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 30%;
+  }
+  
+  .qualification-input-ctr input {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .add-qualification-button,
+  .remove-qualification-button {
+    background-color: #1fb185;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+    padding: 10px 12.5px;
+  }
+  
+  .add-qualification-button:hover,
+  .remove-qualification-button:hover {
+    background-color: #13644c;
+  }
+  
+  .remove-qualification-button {
+    background-color: #ff4d4d;
+  }
+  
+  .remove-qualification-button:hover {
+    background-color: #cc0000;
+  }
+  
+  .error-msg {
+    margin-top: 5px;
+    color: #ff0000;
+    margin-bottom: 10px;
+  }

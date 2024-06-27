@@ -1,0 +1,157 @@
+.edit-people-ctr {
+  font-family: Arial, Helvetica, sans-serif;
+  padding-bottom: 15px;
+}
+
+.edit-people-header {
+  font-size: 2rem;
+  color: #364fc7;
+  font-size: 32px;
+  margin-bottom: 25px;
+}
+
+.edit-field {
+  margin-top: 20px;
+}
+
+.edit-description-field {
+  margin-top: 20px;
+}
+
+
+.edit-field-header {
+  margin-bottom: 10px;
+}
+
+.qualifications-header.edit-field-header {
+  margin-bottom: 10px;
+}
+
+.upload-image-input {
+  border: 2px dashed #ccc;
+  margin-top: 15px;
+}
+
+.edit-current-new-img-ctr {
+  display: flex;
+  flex-direction: row;
+}
+
+.edit-new-img-ctr {
+  margin-left: 100px;
+}
+
+.current-img,
+.new-img {
+  display: inline-block;
+  margin-left: 0px;
+}
+
+.upload-image-input {
+  margin-top: 10px;
+}
+
+.edit-people-secondary-header {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.edit-people-form-ctr {
+  margin-top: 40px;
+}
+
+.edit-people-button-ctr {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+}
+
+.edit-people-button {
+  background-color: #1fb185;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+  padding: 10px 12.5px;
+}
+
+.cancel-people-button {
+  color: white;
+  background-color: grey;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+  padding: 9px 12.5px;
+}
+
+.edit-people-button:hover {
+  background-color: #13644c;
+}
+
+.cancel-people-button:hover {
+  background-color: rgb(211, 211, 211);
+}
+
+/* QUALIFICATIONS */
+.edit-qualifications-field {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-top: 20px;
+}
+
+.edit-qualifications-header {
+  margin-bottom: 10px;
+}
+
+.edit-qualifications-desc {
+  margin-bottom: 10px;
+}
+
+.edit-qualification-input-ctr {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 30%;
+}
+
+.edit-qualification-input-ctr input {
+  flex: 1;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 0px;
+}
+
+.add-qualification-btn,
+.remove-qualification-btn {
+  background-color: #1fb185;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+  padding: 10px 12.5px;
+}
+
+.add-qualification-btn:hover,
+.remove-qualification-btn:hover {
+  background-color: #13644c;
+}
+
+.remove-qualification-btn {
+  background-color: #ff4d4d;
+}
+
+.remove-qualification-btn:hover {
+  background-color: #cc0000;
+}
+
+.error {
+  margin-top: -5px;
+}
