@@ -82,7 +82,7 @@ const About: React.FC = () => {
     fetchDataFromFirestore();
   }, []);
 
-  const handleEditCompany = (company: Company) => {
+  const handleEditCompany = () => {
     navigate("/admin/about/edit/company", {
       state: { paramData: company }, // push Company object to be stored in the next page's state
     });
@@ -162,43 +162,45 @@ const About: React.FC = () => {
   };
 */
   return (
-    <div className="about-ctr">
+    <div className="company-ctr">
       <div className="company-header">The Company</div>
 
       <div className="company-table-ctr">
-        <table className="company-table">
-          <thead>
-            <tr>
-              <th>Company Image</th>
-              <th>Description 1</th>
-              <th>Description 2</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {company.map((companyItem, index) => (
-              <tr key={index}>
+        {company && (
+          <table className="company-table">
+            <thead>
+              <tr>
+                <th>Company Image</th>
+                <th>Descriptions</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
                 <td>
                   <img
-                    src={companyItem.image}
+                    src={company.image}
                     alt={"Company image"}
                     className="company-image"
                   />
                 </td>
-                <td>{companyItem.descriptionOne}</td>
-                <td>{companyItem.descriptionTwo}</td>
+                <td>
+                  <p>{company.descriptionOne}</p>
+                  <br></br>
+                  <p>{company.descriptionTwo}</p>
+                </td>
                 <td className="table-actions">
                   <button
                     className="action-button edit-button"
-                    onClick={() => handleEditCompany(companyItem)}
+                    onClick={handleEditCompany}
                   >
-                    <img src={EditIcon} className="action-icons" />
+                    <img src={EditIcon} alt="Edit" className="action-icons" />
                   </button>
                 </td>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        )}
       </div>
       {/*
       {showDeleteConfirmation && selectedProject && (
