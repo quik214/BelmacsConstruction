@@ -18,7 +18,8 @@ import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
 import AdminCreate from "./pages/Admin/AdminCreate/AdminCreate";
 import AdminEdit from "./pages/Admin/AdminEdit/AdminEdit";
 
-import AdminCompany from "./pages/Admin/AdminAbout/AdminAboutCompany/AdminCompany/AdminCompany";
+// Admin Page (AboutCompany)
+import AdminAboutCompany from "./pages/Admin/AdminAbout/AdminAboutCompany/AdminAboutCompany/AdminAboutCompany";
 import AdminEditCompany from "./pages/Admin/AdminAbout/AdminAboutCompany/AdminEditCompany/AdminEditCompany";
 
 import PrivateRoute from "./components/Admin/PrivateRoute";
@@ -67,7 +68,7 @@ function MainApp() {
             path="/admin/about"
             element={
               <PrivateRoute>
-                <AdminCompany />
+                <AdminAboutCompany />
               </PrivateRoute>
             }
           />

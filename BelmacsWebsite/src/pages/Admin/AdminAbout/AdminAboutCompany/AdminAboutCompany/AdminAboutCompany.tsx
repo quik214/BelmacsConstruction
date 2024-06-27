@@ -1,4 +1,4 @@
-import "./AdminCompany.css";
+import "./AdminAboutCompany.css";
 
 import AdminAbout from "../../../../../components/Admin/About/AboutCompany/CompanyDashboard/CompanyDashboard"
 
