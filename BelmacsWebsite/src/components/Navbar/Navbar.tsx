@@ -13,8 +13,8 @@ import {
 import "../../assets/fonts.css";
 import "./Navbar.css";
 import "./Navbar-media.css";
-import BelmacsBlueBlack from "../../assets/Logos/belmacs-blueblack.png";
-import BelmacsWhiteWhite from "../../assets/Logos/belmacs-whitewhite.png";
+import BelmacsBlueBlack from "../../assets/Logos/BelmacsDefault.png";
+import BelmacsWhiteWhite from "../../assets/Logos/BelmacsDefaultBlueWhite.png";
 import CloseIcon from "../../assets/Icons/close.svg";
 import MenuBlackIcon from "../../assets/Icons/menu-black.svg";
 import MenuWhiteIcon from "../../assets/Icons/menu-white.svg";
