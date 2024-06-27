@@ -215,8 +215,6 @@ const EditProject: React.FC = () => {
         // if the user does not upload a new image
         // and if the type changed or project name changed
       } else if (type !== selectedType || project.name !== oldId) {
-        
-
         const oldImageRef = ref(storage, project.image); // create a reference to the old image URL
 
         // Fetch the old image and re-upload it
@@ -227,7 +225,6 @@ const EditProject: React.FC = () => {
         if (!response.ok) {
           throw new Error("Failed to fetch old image.");
         }
-
 
         const blob = await response.blob(); // blob contains the binary data of the image file, including the MIME type
         // basicallyblob is the image
@@ -256,13 +253,13 @@ const EditProject: React.FC = () => {
       const oldAwardsCollectionRef = collection(oldProjectRef, "awards"); // create reference to old awards collection
       const oldAwardsSnapshot = await getDocs(oldAwardsCollectionRef); // get the snapshot of the collection
       const deleteAwardsPromises = oldAwardsSnapshot.docs.map(async (doc) => {
-        await deleteDoc(doc.ref); // map through each document in the awards snapshot, and delete each of them 
+        await deleteDoc(doc.ref); // map through each document in the awards snapshot, and delete each of them
       });
-      await Promise.all(deleteAwardsPromises); // waits until all delete operations are completed 
+      await Promise.all(deleteAwardsPromises); // waits until all delete operations are completed
 
       // Add project details to the new collection
-      const newProjectRef = doc(db, `${selectedType}-projects`, project.name); // create reference to collection with new name 
-      await setDoc(newProjectRef, { ...project, image: imageUrl }); // set the data at the reference 
+      const newProjectRef = doc(db, `${selectedType}-projects`, project.name); // create reference to collection with new name
+      await setDoc(newProjectRef, { ...project, image: imageUrl }); // set the data at the reference
 
       // Filter out empty awards
       const filteredAwards = awards.filter((award) => award.trim() !== "");
@@ -270,8 +267,9 @@ const EditProject: React.FC = () => {
       // Add awards as a subcollection with award title as document ID
       const awardsCollectionRef = collection(newProjectRef, "awards"); // reference the awards collection at the location of newProjectRef
       await Promise.all(
-        filteredAwards.map(async (award) => { // map over each filteredAward, and create a document 
-          await setDoc(doc(awardsCollectionRef, award), { title: award }); // with the award title as the id 
+        filteredAwards.map(async (award) => {
+          // map over each filteredAward, and create a document
+          await setDoc(doc(awardsCollectionRef, award), { title: award }); // with the award title as the id
         })
       );
 
@@ -282,7 +280,7 @@ const EditProject: React.FC = () => {
       setEditSuccess(true);
 
       // navigates the user back to dashboard
-      navigate("/admin/dashboard");
+      navigate("/admin/projects");
     } catch (error) {
       createErrorToast();
       console.log(error);

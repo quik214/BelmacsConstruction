@@ -1,0 +1,71 @@
+.edit-company-ctr {
+  font-family: Arial, Helvetica, sans-serif;
+  padding-bottom: 15px;
+}
+
+.edit-company-header {
+  font-size: 2rem;
+  color: #364fc7;
+  font-size: 32px;
+  margin-bottom: 25px;
+}
+
+.edit-field {
+  margin-top: 20px;
+}
+
+.edit-field-header {
+  margin-bottom: 10px;
+}
+.upload-image-input {
+  border: 2px dashed #ccc;
+  margin-top: 15px;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif; /* Ensure font consistency */
+  font-size: 16px; /* Ensure font size consistency */
+  margin-bottom: 10px;
+}
+
+.edit-company-button-ctr {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+}
+
+.edit-company-button {
+  background-color: #1fb185;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+
+  border-radius: 4px;
+  padding: 10px 12.5px;
+}
+
+.cancel-company-button {
+  color: white;
+  background-color: grey;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+
+  border-radius: 4px;
+  padding: 9px 12.5px;
+}
+
+.edit-company-button:hover {
+  background-color: #13644c;
+}
+
+.cancel-company-button:hover {
+  background-color: rgb(211, 211, 211);
+}

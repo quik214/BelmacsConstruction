@@ -18,6 +18,7 @@ import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
 import AdminCreate from "./pages/Admin/AdminCreate/AdminCreate";
 import AdminEdit from "./pages/Admin/AdminEdit/AdminEdit";
 import AdminAbout from "./pages/Admin/AdminAbout/AdminAbout";
+import AdminEditCompany from "./pages/Admin/AdminEditCompany/AdminEditCompany";
 import PrivateRoute from "./components/Admin/PrivateRoute";
 
 import Navbar from "./components/Navbar/Navbar";
@@ -37,6 +38,7 @@ function MainApp() {
     "/admin/create",
     "/admin/edit",
     "/admin/about",
+    "/admin/about/company/edit",
   ];
 
   // Check if the current path includes any of the paths in noFooterPaths
@@ -68,10 +70,10 @@ function MainApp() {
             }
           />
           <Route
-            path="/admin/about/edit/company"
+            path="/admin/about/company/edit"
             element={
               <PrivateRoute>
-                <AdminAbout />
+                <AdminEditCompany />
               </PrivateRoute>
             }
           />

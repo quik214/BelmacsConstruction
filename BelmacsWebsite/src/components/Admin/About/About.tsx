@@ -83,7 +83,7 @@ const About: React.FC = () => {
   }, []);
 
   const handleEditCompany = () => {
-    navigate("/admin/about/edit/company", {
+    navigate("/admin/about/company/edit", {
       state: { paramData: company }, // push Company object to be stored in the next page's state
     });
   };
