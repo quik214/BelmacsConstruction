@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../../firebase"; // Adjust the import based on your firebase setup
+import { db } from "../../../../../firebase"; // Adjust the import based on your firebase setup
 
 import "./CompanyEdit.css";
 import "./CompanyEdit-media.css";
