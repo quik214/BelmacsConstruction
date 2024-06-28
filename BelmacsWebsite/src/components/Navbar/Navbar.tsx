@@ -253,7 +253,7 @@ export default function Navbar() {
                 {dropdownOpen && (
                   <div className="dropdown-content">
                     <Link
-                      to="/"
+                      to="/admin/about"
                       className="dropdown-item"
                       onClick={() => {
                         closeDropdown();

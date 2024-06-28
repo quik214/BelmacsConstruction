@@ -109,7 +109,7 @@ const Login = () => {
         const userEmail = userCredential.user.email ?? "unknown email"; // get user's email address, if unknown, will display unknown email (will not happen)
         // "unknown email is just a fallback"
         loginSuccessToast(userEmail); // display the success toast
-        navigate("/admin/projects"); // navigate user to the dashboard upon a successful login
+        navigate("/admin/about"); // navigate user to the dashboard upon a successful login
       })
       .catch((error) => {
         console.log(error); // catch any errors
