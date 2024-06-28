@@ -1,8 +1,8 @@
-import "./Dashboard.css";
-import "./Dashboard-media.css";
+import "./ProjectsDashboard.css";
+import "./ProjectsDashboard-media.css";
 
-import EditIcon from "../../../assets/Icons/AdminDashboard/pencil-simple.svg";
-import DeleteIcon from "../../../assets/Icons/AdminDashboard/trash.svg";
+import EditIcon from "../../../../assets/Icons/AdminDashboard/pencil-simple.svg";
+import DeleteIcon from "../../../../assets/Icons/AdminDashboard/trash.svg";
 
 import React, { useState, useEffect } from "react";
 import {
@@ -13,7 +13,7 @@ import {
   DocumentData,
   QueryDocumentSnapshot,
 } from "firebase/firestore";
-import { db, storage } from "../../../firebase";
+import { db, storage } from "../../../../firebase";
 import { useNavigate } from "react-router-dom";
 import { ref, deleteObject } from "firebase/storage";
 
@@ -235,7 +235,6 @@ const Dashboard: React.FC = () => {
           value={selectedType}
           onChange={handleTypeChange}
         >
-
           <option value="residential">Residential</option>
           <option value="commercial">Commercial</option>
           <option value="existingBuildingRetrofit">

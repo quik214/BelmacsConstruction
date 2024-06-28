@@ -1,10 +1,10 @@
-import "./Create.css";
-import "./Create-media.css";
+import "./ProjectsCreate.css";
+import "./ProjectsCreate-media.css";
 
 // import libraries
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { db, storage } from "../../../firebase";
+import { db, storage } from "../../../../firebase";
 import { setDoc, doc, collection } from "firebase/firestore";
 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -364,7 +364,7 @@ const Create: React.FC = () => {
           }
 
           createSuccessToast(projectDetails.name); // display successToast upon successful project creation
-          navigate("/admin/dashboard"); // navigate back to the admin dashboard
+          navigate("/admin/projects"); // navigate back to the admin dashboard
         }
       );
     } catch (error) {
@@ -380,7 +380,9 @@ const Create: React.FC = () => {
         {/* CREATE Form */}
         <form onSubmit={handleSubmit}>
           <div className="create-field">
-            <label htmlFor="ProjectType" className="create-field-header">Select Project Type</label>
+            <label htmlFor="ProjectType" className="create-field-header">
+              Select Project Type
+            </label>
             <select
               id="ProjectType"
               className="create-project-type"

@@ -14,9 +14,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 // Admin Page
 import AdminLogin from "./pages/Admin/AdminLogin/AdminLogin";
-import AdminDashboard from "./pages/Admin/AdminDashboard/AdminDashboard";
-import AdminCreate from "./pages/Admin/AdminCreate/AdminCreate";
-import AdminEdit from "./pages/Admin/AdminEdit/AdminEdit";
+import AdminDashboard from "./pages/Admin/AdminProjects/AdminProjectsDashboard/AdminProjectsDashboard";
+import AdminCreate from "./pages/Admin/AdminProjects/AdminProjectsCreate/AdminProjectsCreate";
+import AdminEdit from "./pages/Admin/AdminProjects/AdminProjectsEdit/AdminProjectsEdit";
 
 // Admin Page (About)
 import AdminAboutCompany from "./pages/Admin/AdminAbout/AdminAbout/AdminAbout";

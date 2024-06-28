@@ -15,14 +15,14 @@ import {
   getDownloadURL,
   deleteObject,
 } from "firebase/storage";
-import { db } from "../../../firebase";
+import { db } from "../../../../firebase";
 
 // toast
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import "./Edit.css";
-import "./Edit-media.css";
+import "./ProjectsEdit.css";
+import "./ProjectsEdit-media.css";
 
 // create a Project object
 interface Project {
