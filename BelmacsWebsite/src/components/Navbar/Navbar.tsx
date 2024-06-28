@@ -25,14 +25,24 @@ export default function Navbar() {
   const [menuIcon, setMenuIcon] = useState(false);
   const [authUser, setAuthUser] = useState<User | null>(null);
   const location = useLocation();
-  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
+  // for dashboard dropdown
+
+  const [dashboardDropdown, setDashboardDropdownOpen] = useState(false);
+
+  const toggleDashboardDropdown = () => {
+    setDashboardDropdownOpen(!dashboardDropdown);
   };
-  const closeDropdown = () => {
-    setDropdownOpen(false);
-  };
+
+  // for user view dashboard dropdown
+
+  const [userViewDashboardDropdown, setUserViewDashboardDropdown] = useState(false);
+
+  const toggleUserViewDashboardDropdown = () => {
+    setUserViewDashboardDropdown(!userViewDashboardDropdown);
+  }
+
+  
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -101,7 +111,7 @@ export default function Navbar() {
       setTimeout(() => {
         sidebar.style.display = "none";
       }, 300);
-      closeDropdown();
+      // closeDashboardDropdown
     } else {
       console.error("Sidebar element not found or is not an HTMLElement.");
     }
@@ -169,32 +179,61 @@ export default function Navbar() {
             </>
           )}
           {authUser && (
-            <div className="dropdown">
-              <Link
-                to="#"
-                onClick={toggleDropdown}
-                className="nav-link hideOnMobile dropdown-trigger"
-              >
-                Dashboard
-              </Link>
-              {dropdownOpen && (
-                <div className="dropdown-content">
+            <div className="admin-nav-container">
+              <div className="dropdown">
+                <Link
+                  to="#"
+                  onClick={toggleUserViewDashboardDropdown}
+                  className="nav-link hideOnMobile dropdown-trigger"
+                >
+                  User View
+                </Link>
+                {userViewDashboardDropdown && (
+                  <div className="dropdown-content">
                   <Link
-                    to="/admin/about"
+                    to="/about"
                     className="dropdown-item"
-                    onClick={closeDropdown}
+                    onClick={toggleUserViewDashboardDropdown}
                   >
                     About
                   </Link>
                   <Link
-                    to="/admin/projects"
+                    to="/projects"
                     className="dropdown-item"
-                    onClick={closeDropdown}
+                    onClick={toggleUserViewDashboardDropdown}
                   >
                     Projects
                   </Link>
                 </div>
-              )}
+                )}
+              </div>
+              <div className="dropdown">
+                <Link
+                  to="#"
+                  onClick={toggleDashboardDropdown}
+                  className="nav-link hideOnMobile dropdown-trigger"
+                >
+                  Dashboard
+                </Link>
+                {dashboardDropdown && (
+                  <div className="dropdown-content">
+                    <Link
+                      to="/admin/about"
+                      className="dropdown-item"
+                      onClick={toggleDashboardDropdown}
+                    >
+                      About
+                    </Link>
+                    <Link
+                      to="/admin/projects"
+                      className="dropdown-item"
+                      onClick={toggleDashboardDropdown}
+                    >
+                      Projects
+                    </Link>
+                  </div>
+                )}
+              </div>
               <Link
                 to="/"
                 onClick={handleSignOut}
@@ -204,6 +243,7 @@ export default function Navbar() {
               </Link>
             </div>
           )}
+
           {(authUser || location.pathname !== "/admin") && (
             <img
               src={menuIcon ? MenuBlackIcon : MenuWhiteIcon}
@@ -245,18 +285,18 @@ export default function Navbar() {
               <div className="dropdown">
                 <Link
                   to="#"
-                  onClick={toggleDropdown}
+                  onClick={toggleDashboardDropdown}
                   className="sidebar-link dropdown-trigger"
                 >
                   Dashboard
                 </Link>
-                {dropdownOpen && (
+                {dashboardDropdown && (
                   <div className="dropdown-content">
                     <Link
                       to="/admin/about"
                       className="dropdown-item"
                       onClick={() => {
-                        closeDropdown();
+                        toggleDashboardDropdown();
                         hideSideBar(); // Close sidebar when item clicked
                       }}
                     >
@@ -266,7 +306,7 @@ export default function Navbar() {
                       to="/admin/projects"
                       className="dropdown-item"
                       onClick={() => {
-                        closeDropdown();
+                        toggleDashboardDropdown();
                         hideSideBar(); // Close sidebar when item clicked
                       }}
                     >

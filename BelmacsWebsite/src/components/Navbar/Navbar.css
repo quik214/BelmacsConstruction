@@ -187,3 +187,7 @@ body {
 .dropdown-item:hover {
   background-color: #f1f1f1;
 }
+
+.admin-nav-container {
+  display: flex;
+}
