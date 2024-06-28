@@ -144,7 +144,7 @@ const Dashboard: React.FC = () => {
 
   // navigate to edit page based on selected project id
   const handleEdit = (project: Project) => {
-    navigate(`/admin/edit/${selectedType}/${project.id}`, {
+    navigate(`/admin/projects/edit/${selectedType}/${project.id}`, {
       state: { paramData: project }, // push Project object to be stored in the next page's URL
     });
   };
@@ -212,7 +212,7 @@ const Dashboard: React.FC = () => {
   };
 
   const handleAddProject = () => {
-    navigate(`/admin/create/${selectedType}`),
+    navigate(`/admin/projects/create/${selectedType}`),
       {
         state: { paramData: selectedType },
       }; // Navigate to AddProject component

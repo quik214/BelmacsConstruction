@@ -108,7 +108,7 @@ function MainApp() {
             }
           />
           <Route
-            path="/admin/create/:selectedType"
+            path="/admin/projects/create/:selectedType"
             element={
               <PrivateRoute>
                 <AdminCreate />
@@ -116,7 +116,7 @@ function MainApp() {
             }
           />
           <Route
-            path="/admin/edit/:type/:id"
+            path="/admin/projects/edit/:type/:id"
             element={
               <PrivateRoute>
                 <AdminEdit />
