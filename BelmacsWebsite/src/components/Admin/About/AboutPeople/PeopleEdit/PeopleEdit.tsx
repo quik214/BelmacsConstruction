@@ -298,8 +298,8 @@ const EditPeople: React.FC = () => {
   }
 
   return (
-    <div className="edit-people-ctr">
-      <div className="edit-people-header">Edit Person</div>
+    <div className="edit-person-ctr">
+      <div className="edit-person-header">Edit Person</div>
       {person && (
         <form onSubmit={handleSubmit}>
           <div className="edit-image-field">
@@ -414,13 +414,13 @@ const EditPeople: React.FC = () => {
             )}
           </div>
 
-          <div className="edit-people-button-ctr">
-            <button type="submit" className="edit-people-button">
+          <div className="edit-person-button-ctr">
+            <button type="submit" className="edit-person-button">
               Save
             </button>
             <button
               type="button"
-              className="cancel-people-button"
+              className="cancel-person-button"
               onClick={() => navigate(-1)}
             >
               Cancel

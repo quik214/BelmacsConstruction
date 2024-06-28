@@ -1,0 +1,55 @@
+/* Large Screens */
+@media (1700px <= width <= 2500px) {
+}
+
+/* Normal Screens - currently designed for this */
+@media (max-width: 1700px) {
+}
+
+/* Landscape Tablets */
+@media (max-width: 1200px) {
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+  .create-person-header {
+    font-size: 1.6rem;
+  }
+
+  .create-person-secondary-header {
+    font-size: 1.2rem;
+  }
+
+  .create-person-ctr label {
+    font-size: 1rem;
+  }
+  .qualifcation-input-ctr {
+    width: 100%;
+  }
+}
+
+/* Smaller Tablets */
+@media (max-width: 700px) {
+}
+
+/* Mobile */
+@media (max-width: 550px) {
+  .create-person-header {
+    font-size: 1.4rem;
+  }
+  .qualification-input-ctr {
+    width: 100%;
+  }
+
+  .create-person-secondary-header {
+    font-size: 1.1rem;
+  }
+
+  .create-person-ctr label {
+    font-size: 0.9rem;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 390px) {
+}

@@ -1,9 +1,9 @@
-.edit-people-ctr {
+.edit-person-ctr {
   font-family: Arial, Helvetica, sans-serif;
   padding-bottom: 15px;
 }
 
-.edit-people-header {
+.edit-person-header {
   font-size: 2rem;
   color: #364fc7;
   font-size: 32px;
@@ -59,25 +59,25 @@
 }
 
 
-.edit-people-secondary-header {
+.edit-person-secondary-header {
   font-size: 1.4rem;
   font-weight: bold;
   margin-top: 25px;
   margin-bottom: 25px;
 }
 
-.edit-people-form-ctr {
+.edit-person-form-ctr {
   margin-top: 40px;
 }
 
-.edit-people-button-ctr {
+.edit-person-button-ctr {
   margin-top: 10px;
   display: flex;
   flex-direction: row-reverse;
   gap: 10px;
 }
 
-.edit-people-button {
+.edit-person-button {
   background-color: #1fb185;
   color: white;
   border: none;
@@ -87,7 +87,7 @@
   padding: 10px 12.5px;
 }
 
-.cancel-people-button {
+.cancel-person-button {
   color: white;
   background-color: grey;
   border: none;
@@ -97,11 +97,11 @@
   padding: 9px 12.5px;
 }
 
-.edit-people-button:hover {
+.edit-person-button:hover {
   background-color: #13644c;
 }
 
-.cancel-people-button:hover {
+.cancel-person-button:hover {
   background-color: rgb(211, 211, 211);
 }
 
@@ -125,7 +125,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-  width: 30%;
+  width: 50%;
 }
 
 .edit-qualification-input-ctr input {

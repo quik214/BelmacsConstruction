@@ -157,9 +157,9 @@ return (
               <tr>
                 <th>Image</th>
                 <th>Name</th>
-                <th>Position</th>
-                <th>Qualifications</th>
-                <th className="people-table-description">Description</th>
+                <th className="mobile-table">Position</th>
+                <th className="mobile-table">Qualifications</th>
+                <th className="people-table-description mobile-table">Description</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -176,10 +176,10 @@ return (
                   <td>
                     <p>{person.name}</p>
                   </td>
-                  <td>
+                  <td className="mobile-table">
                     <p>{person.position}</p>
                   </td>
-                  <td>
+                  <td className="mobile-table">
                   {person.qualifications.length > 0 ? (
                       person.qualifications.map((qualification, qIndex) => (
                         <p key={qIndex}>- {qualification}</p>
@@ -188,7 +188,7 @@ return (
                       <p>No qualifications listed</p>
                     )}
                   </td>
-                  <td>
+                  <td className="mobile-table">
                     <p>{createNewLine(person.description)}</p>
                   </td>
                   <td className="table-actions">
