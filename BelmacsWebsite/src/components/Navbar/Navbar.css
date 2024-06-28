@@ -157,6 +157,7 @@ body {
   position: relative;
 }
 
+
 .dropdown-trigger::after {
   content: " ▼";
   font-size: 0.6em;

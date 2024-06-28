@@ -36,13 +36,29 @@ export default function Navbar() {
 
   // for user view dashboard dropdown
 
-  const [userViewDashboardDropdown, setUserViewDashboardDropdown] = useState(false);
+  const [userViewDashboardDropdown, setUserViewDashboardDropdown] =
+    useState(false);
 
   const toggleUserViewDashboardDropdown = () => {
     setUserViewDashboardDropdown(!userViewDashboardDropdown);
-  }
+  };
 
-  
+  // for mobile dashboard dropdown
+
+  const [mobileDashboardDropdown, setMobileDashboardDropdown] = useState(false);
+
+  const toggleMobileDashboardDropdown = () => {
+    setMobileDashboardDropdown(!mobileDashboardDropdown);
+  };
+
+  // for mobile user view dashboard dropdown
+
+  const [mobileUserViewDashboardDropdown, setMobileUserViewDashboardDropdown] =
+    useState(false);
+
+  const toggleMobileUserViewDashboardDropdown = () => {
+    setMobileUserViewDashboardDropdown(!mobileUserViewDashboardDropdown);
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -59,12 +75,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const checkInitialStates = () => {
-      if (
-        location.pathname === "/admin" ||
-        location.pathname.includes("/projects") ||
-        location.pathname.includes("/create") ||
-        location.pathname.includes("/edit")
-      ) {
+      if (authUser || location.pathname === "/admin") {
         setNavbar(true);
         setLogo(true);
         setMenuIcon(true);
@@ -78,10 +89,10 @@ export default function Navbar() {
     return () => {
       window.removeEventListener("scroll", changeBackground);
     };
-  }, [location.pathname]);
+  }, [authUser, location.pathname]);
 
   const changeBackground = () => {
-    if (window.scrollY >= 40) {
+    if (authUser || window.scrollY >= 40) {
       setNavbar(true);
       setLogo(true);
       setMenuIcon(true);
@@ -111,7 +122,7 @@ export default function Navbar() {
       setTimeout(() => {
         sidebar.style.display = "none";
       }, 300);
-      // closeDashboardDropdown
+      toggleDashboardDropdown;
     } else {
       console.error("Sidebar element not found or is not an HTMLElement.");
     }
@@ -190,21 +201,21 @@ export default function Navbar() {
                 </Link>
                 {userViewDashboardDropdown && (
                   <div className="dropdown-content">
-                  <Link
-                    to="/about"
-                    className="dropdown-item"
-                    onClick={toggleUserViewDashboardDropdown}
-                  >
-                    About
-                  </Link>
-                  <Link
-                    to="/projects"
-                    className="dropdown-item"
-                    onClick={toggleUserViewDashboardDropdown}
-                  >
-                    Projects
-                  </Link>
-                </div>
+                    <Link
+                      to="/about"
+                      className="dropdown-item"
+                      onClick={toggleUserViewDashboardDropdown}
+                    >
+                      About
+                    </Link>
+                    <Link
+                      to="/projects"
+                      className="dropdown-item"
+                      onClick={toggleUserViewDashboardDropdown}
+                    >
+                      Projects
+                    </Link>
+                  </div>
                 )}
               </div>
               <div className="dropdown">
@@ -285,18 +296,51 @@ export default function Navbar() {
               <div className="dropdown">
                 <Link
                   to="#"
-                  onClick={toggleDashboardDropdown}
+                  onClick={toggleMobileUserViewDashboardDropdown}
+                  className="sidebar-link dropdown-trigger"
+                >
+                  User View
+                </Link>
+                {mobileUserViewDashboardDropdown && (
+                  <div className="dropdown-content">
+                    <Link
+                      to="/about"
+                      className="dropdown-item"
+                      onClick={() => {
+                        toggleMobileUserViewDashboardDropdown();
+                        hideSideBar(); // Close sidebar when item clicked
+                      }}
+                    >
+                      About
+                    </Link>
+                    <Link
+                      to="/projects"
+                      className="dropdown-item"
+                      onClick={() => {
+                        toggleMobileUserViewDashboardDropdown();
+                        hideSideBar(); // Close sidebar when item clicked
+                      }}
+                    >
+                      Projects
+                    </Link>
+                  </div>
+                )}
+              </div>
+              <div className="dropdown">
+                <Link
+                  to="#"
+                  onClick={toggleMobileDashboardDropdown}
                   className="sidebar-link dropdown-trigger"
                 >
                   Dashboard
                 </Link>
-                {dashboardDropdown && (
+                {mobileDashboardDropdown && (
                   <div className="dropdown-content">
                     <Link
                       to="/admin/about"
                       className="dropdown-item"
                       onClick={() => {
-                        toggleDashboardDropdown();
+                        toggleMobileDashboardDropdown();
                         hideSideBar(); // Close sidebar when item clicked
                       }}
                     >
@@ -306,7 +350,7 @@ export default function Navbar() {
                       to="/admin/projects"
                       className="dropdown-item"
                       onClick={() => {
-                        toggleDashboardDropdown();
+                        toggleMobileDashboardDropdown();
                         hideSideBar(); // Close sidebar when item clicked
                       }}
                     >
