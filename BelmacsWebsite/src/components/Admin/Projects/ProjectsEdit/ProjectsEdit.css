@@ -27,6 +27,18 @@
   margin-top: 15px;
 }
 
+.current-project-img,
+.new-project-img {
+  width: 229px;
+  height: 305px;
+  margin-top: 10px; 
+}
+
+.new-project-img {
+  cursor: pointer;
+}
+
+
 .edit-project-secondary-header {
   font-size: 1.4rem;
   font-weight: bold;

@@ -8,7 +8,6 @@ import {
   ref,
   uploadBytes,
   getDownloadURL,
-  deleteObject,
 } from "firebase/storage";
 
 import "./CompanyEdit.css";
@@ -36,12 +35,10 @@ const EditCompany = () => {
   const [company, setCompany] = useState<Company>(paramData);
 
   const [description, setDescription] = useState(company.description);
-  const [originalImageUrl, setOriginalImageUrl] = useState(company.image);
+  const [originalImageUrl] = useState(company.image);
   const [selectedImage, setSelectedImage] = useState<string | File | null>( // useState to set the selectedImage
     null
   );
-
-  const [editSuccess, setEditSuccess] = useState<boolean>(false); // useState for editSuccess, currently set to false
 
   const [errors, setErrors] = useState({
     description: "",
@@ -146,7 +143,6 @@ const EditCompany = () => {
         const newDocRef = doc(db, `about-company`, `about-company`);
         await setDoc(newDocRef, updatedCompany);
 
-        setEditSuccess(true); // set editSuccess to true (indicating successful edit)
         editSuccessToast();
         setTimeout(() => {
           navigate("/admin/about");
@@ -192,6 +188,10 @@ const EditCompany = () => {
                       src={selectedImage ? company.image : ImagePlaceHolder}
                       alt="New Image"
                       className="new-company-img"
+                      onClick={() =>
+                        (document.getElementById('upload-image-input') as HTMLInputElement)
+                          .click()
+                      }
                     />
                   </div>
                 </div>
@@ -202,6 +202,7 @@ const EditCompany = () => {
                 accept="image/*"
                 onChange={handleImageChange}
                 className="upload-image-input"
+                id="upload-image-input"
               />
             </div>
           </div>

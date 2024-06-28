@@ -293,6 +293,10 @@ const EditPeople: React.FC = () => {
                     src={selectedImage ? person.image : ImagePlaceHolder}
                     alt="New Image"
                     className="new-person-img"
+                    onClick={() =>
+                      (document.getElementById('upload-image-input') as HTMLInputElement)
+                        .click()
+                    }
                   />
                 </div>
               </div>
@@ -303,6 +307,7 @@ const EditPeople: React.FC = () => {
               accept="image/*"
               onChange={handleImageChange}
               className="upload-image-input"
+              id="upload-image-input"
             />
           </div>
 

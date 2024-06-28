@@ -76,3 +76,7 @@ textarea {
   height: 305px;
   margin-top: 10px; 
 }
+
+.new-company-img {
+  cursor: pointer;
+}

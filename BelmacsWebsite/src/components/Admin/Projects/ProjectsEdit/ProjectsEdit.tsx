@@ -24,6 +24,8 @@ import "react-toastify/dist/ReactToastify.css";
 import "./ProjectsEdit.css";
 import "./ProjectsEdit-media.css";
 
+import ImagePlaceHolder from "../../../../assets/Icons/AdminDashboard/empty-image-placeholder.png";
+
 // create a Project object
 interface Project {
   image: string;
@@ -44,6 +46,7 @@ const EditProject: React.FC = () => {
   const [project, setProject] = useState<Project | null>(null); // useState used to modify the project variable (of type Project)
   // project can either be Project or null - which means that there may be no project data available
   const [loading, setLoading] = useState<boolean>(true); // useState used to set the loading variable
+  const [originalImageUrl, setOriginalImageUrl] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<string | File | null>( // useState to set the selectedImage
     null
   );
@@ -76,6 +79,7 @@ const EditProject: React.FC = () => {
         if (docSnap.exists()) {
           const projectData = docSnap.data() as Project; // set projectData to be a Project object that essentially cotains all the data from the snapshot
           setProject(projectData); // set the project to be projectData using setProject (which we will later display in the HTML)
+          setOriginalImageUrl(projectData.image);
 
           // Fetch awards from sub-collection
           const awardsCollectionRef = collection(docRef, "awards"); // assign the awardsCollectionRef variable to reference the awards collection in docRef
@@ -138,10 +142,22 @@ const EditProject: React.FC = () => {
 
   // ** FUNCTION FOR HANDLING IMAGE CHANGE ** //
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // the event that triggers this function is a change to the <input> element
     if (event.target.files && event.target.files[0]) {
-      // if the event.target has a set of files, or has a single file
-      setSelectedImage(event.target.files[0]); // then we will set the selectedImage to be the first file
+      setSelectedImage(event.target.files[0]);
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (project) {
+          setProject({ ...project, image: reader.result as string });
+        }
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    } else {
+      // Restore original image if the input is cleared
+      if (project && originalImageUrl) {
+        setProject({ ...project, image: originalImageUrl });
+        setSelectedImage(null);
+      }
     }
   };
 
@@ -378,27 +394,43 @@ const EditProject: React.FC = () => {
           </div>
 
           <div className="edit-field">
-            <label className="edit-field-header">Image</label>
-            <div className="current-img">
-              {project.image && (
-                <div>
+            <div className="edit-current-new-img-ctr">
+              <div className="edit-current-img-ctr">
+                <label className="edit-field-header">Current Image</label>
+                <div className="current-img">
+                  {originalImageUrl && (
+                    <div>
+                      <img
+                        src={originalImageUrl}
+                        alt="Current Image"
+                        className="current-project-img"
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="edit-new-img-ctr">
+                <label className="edit-field-header">New Image</label>
+                <div className="new-project-img">
                   <img
-                    src={project.image}
-                    alt="Current Project"
-                    style={{
-                      width: "100px",
-                      height: "100px",
-                      marginTop: "10px",
-                    }}
+                    src={selectedImage ? project.image : ImagePlaceHolder}
+                    alt="New Image"
+                    className="new-project-img"
+                    onClick={() =>
+                      (document.getElementById('upload-image-input') as HTMLInputElement)
+                        .click()
+                    }
                   />
                 </div>
-              )}
+              </div>
             </div>
+
             <input
               type="file"
               accept="image/*"
               onChange={handleImageChange}
               className="upload-image-input"
+              id="upload-image-input"
             />
           </div>
 

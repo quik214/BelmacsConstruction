@@ -48,6 +48,10 @@
   margin-top: 10px; 
 }
 
+.new-person-img {
+  cursor: pointer;
+}
+
 
 
 .upload-image-input {
