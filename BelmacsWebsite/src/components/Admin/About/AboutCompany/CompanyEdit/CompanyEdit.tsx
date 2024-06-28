@@ -14,35 +14,26 @@ const EditCompany = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { paramData } = location.state;
-  console.log(paramData.descriptionOne);
+  console.log(paramData.description);
 
-  const [descriptionOne, setDescriptionOne] = useState(
-    paramData.descriptionOne
-  );
-  const [descriptionTwo, setDescriptionTwo] = useState(
-    paramData.descriptionTwo
-  );
+  const [description, setDescription] = useState(paramData.description);
+
   const [image, setImage] = useState(paramData.image);
 
   const [errors, setErrors] = useState({
-    descriptionOne: "",
-    descriptionTwo: "",
+    description: "",
+ 
     image: "",
   });
 
   const validateForm = () => {
     const newErrors = {
-      descriptionOne: "",
-      descriptionTwo: "",
+      description: "",
       image: "",
     };
 
-    if (!descriptionOne.trim()) {
-      newErrors.descriptionOne = "Description One is required";
-    }
-
-    if (!descriptionTwo.trim()) {
-      newErrors.descriptionTwo = "Description Two is required";
+    if (!description.trim()) {
+      newErrors.description = "Description is required";
     }
 
     if (!image) {
@@ -52,7 +43,7 @@ const EditCompany = () => {
     setErrors(newErrors);
 
     return (
-      !newErrors.descriptionOne && !newErrors.descriptionTwo && !newErrors.image
+      !newErrors.description && !newErrors.image
     );
   };
 
@@ -75,7 +66,7 @@ const EditCompany = () => {
 
     try {
       const docRef = doc(db, "about-company", "about-company");
-      await setDoc(docRef, { descriptionOne, descriptionTwo, image });
+      await setDoc(docRef, { description, image });
       toast.success("Company information updated successfully!", {
         position: "bottom-right",
         autoClose: 5000,
@@ -98,6 +89,11 @@ const EditCompany = () => {
         progress: undefined,
       });
     }
+  };
+
+  // for converting newlines 
+  const createNewLine = (companyDesc: String) => {
+    return companyDesc.replace(/\\n/g, "\n");
   };
 
   return (
@@ -130,27 +126,17 @@ const EditCompany = () => {
           {errors.image && <p className="error">{errors.image}</p>}
         </div>
         <div className="edit-field">
-          <label className="edit-field-header">Description 1</label>
+          <label className="edit-field-header">Description</label>
           <textarea
             rows={5}
-            value={descriptionOne}
-            onChange={(e) => setDescriptionOne(e.target.value)}
+            value={createNewLine(description)}
+            onChange={(e) => setDescription(e.target.value)}
           />
-          {errors.descriptionOne && (
-            <p className="error">{errors.descriptionOne}</p>
+          {errors.description && (
+            <p className="error">{errors.description}</p>
           )}
         </div>
-        <div className="edit-field">
-          <label className="edit-field-header">Description 2</label>
-          <textarea
-            rows={5}
-            value={descriptionTwo}
-            onChange={(e) => setDescriptionTwo(e.target.value)}
-          />
-          {errors.descriptionTwo && (
-            <p className="error">{errors.descriptionTwo}</p>
-          )}
-        </div>
+
         <div className="edit-company-button-ctr">
           <button type="submit" className="edit-company-button">
             Save

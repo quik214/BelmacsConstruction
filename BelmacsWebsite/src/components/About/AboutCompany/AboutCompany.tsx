@@ -6,8 +6,7 @@ import { db } from "../../../firebase";
 import { getDocs, collection } from "firebase/firestore";
 
 interface Company {
-  descriptionOne: string;
-  descriptionTwo: string;
+  description: string;
   image: string;
 }
 const TheCompany: React.FC = () => {
@@ -21,6 +20,8 @@ const TheCompany: React.FC = () => {
           (doc) => doc.data() as Company
         );
         setData(companyData);
+
+        companyData.forEach(company => console.log(company.description));
       } catch (error) {
         console.error("Error fetching projects: ", error);
       }
@@ -29,14 +30,23 @@ const TheCompany: React.FC = () => {
     fetchDataFromFirestore();
   }, []);
 
+  // for converting newlines
+  const createNewLine = (companyDesc: string) => {
+    return companyDesc.split('\n').map((line, index) => (
+      <React.Fragment key={index}>
+        {line}
+        <br />
+      </React.Fragment>
+    ));
+  };
+
   return (
     <div className="company reveal">
       {data.map((company, index) => (
         <React.Fragment key={index}>
           <div key={index} className="company-text">
             <p className="company-header">The Company</p>
-            <p className="company-desc one">{company.descriptionOne}</p>
-            <p className="company-desc two">{company.descriptionTwo}</p>
+            <p className="company-desc one">{createNewLine(company.description)}</p>
           </div>
           <div className="company-img-ctr">
             <img src={company.image} alt="Company" className="company-img" />
