@@ -147,6 +147,7 @@ const EditPeople: React.FC = () => {
 
     // if form validation does not pass, then return immediately
     if (!validateForm()) {
+      EditErrorToast(); // display the error toast
       return;
     }
 
@@ -229,7 +230,7 @@ const EditPeople: React.FC = () => {
       }
 
       setEditSuccess(true); // set editSuccess to true (indicating successful edit)
-      toast.success("Person updated successfully!"); // use toast to display successful edit message
+      editSuccessToast(person.name); 
       setTimeout(() => {
         navigate("/admin/about");
       }, 1000); // navigate back to /admin/about after 1 second
@@ -248,7 +249,7 @@ const EditPeople: React.FC = () => {
     }
 
     if (!person?.position) {
-      newErrors.title = "Title is required.";
+      newErrors.position = "Position is required.";
     }
 
     if (!person?.description) {
@@ -258,6 +259,37 @@ const EditPeople: React.FC = () => {
     setErrors(newErrors);
 
     return Object.keys(newErrors).length === 0;
+  };
+
+  const EditErrorToast = () => {
+    toast.error("Please fix the errors in the form", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
+  const editSuccessToast = (message: string) => {
+    toast.success(
+      <div>
+        <b>{message}</b> has been updated!
+      </div>,
+      {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }
+    );
   };
 
   // display loading message if loading is true

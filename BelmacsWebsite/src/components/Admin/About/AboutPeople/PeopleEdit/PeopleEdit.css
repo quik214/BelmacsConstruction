@@ -161,5 +161,7 @@
 }
 
 .error {
-  margin-top: -5px;
+  margin-top: 5px;
+  color: #ff0000;
+  margin-bottom: 10px;
 }
