@@ -19,7 +19,7 @@ import AdminCreate from "./pages/Admin/AdminProjects/AdminProjectsCreate/AdminPr
 import AdminEdit from "./pages/Admin/AdminProjects/AdminProjectsEdit/AdminProjectsEdit";
 
 // Admin Page (About)
-import AdminAboutCompany from "./pages/Admin/AdminAbout/AdminAbout/AdminAbout";
+import AdminAboutCompany from "./pages/Admin/AdminAbout/AdminAboutDashboard/AdminAboutDashboard";
 import AdminEditCompany from "./pages/Admin/AdminAbout/AdminEditCompany/AdminEditCompany";
 
 import AdminCreatePeople from "./pages/Admin/AdminAbout/AdminCreatePeople/AdminCreatePeople";
