@@ -7,10 +7,12 @@
   .people-header {
     font-size: 2rem;
   }
+
 }
 
 /* Normal Screens - currently designed for this */
 @media (max-width: 1700px) {
+
 }
 
 /* Bigger Tablets*/
@@ -86,8 +88,8 @@
   }
 
   .people-card {
-    flex-basis: calc(40% - 40px); /* Adjust to fit two cards per row */
-    max-width: 100%; /* Ensure cards do not exceed container width */
+    flex-basis: calc(40% - 400px); /* Adjust to fit two cards per row */
+    max-width: 100%; /* Ensure cards do not exceed container width */ 
   }
 
   .people-card img {
