@@ -147,6 +147,18 @@ const EditCompany = () => {
         setTimeout(() => {
           navigate("/admin/about");
         }, 1000); // navigate back to /admin/about after 1 second
+      } else {
+
+        const updatedCompany = { ...company };
+
+        // set the reference to the new person name, and update the reference document with the updatedPerson object data
+        const newDocRef = doc(db, `about-company`, `about-company`);
+        await setDoc(newDocRef, updatedCompany);
+
+        editSuccessToast();
+        setTimeout(() => {
+          navigate("/admin/about");
+        }, 1000); // navigate back to /admin/about after 1 second
       }
     } catch (error) {
       console.error("Error updating person: ", error);
@@ -213,7 +225,10 @@ const EditCompany = () => {
           <textarea
             rows={5}
             value={createNewLine(company.description)}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e) => {
+              setDescription(e.target.value);
+              setCompany({ ...company, description: e.target.value });
+            }}
           />
           {errors.description && <p className="error">{errors.description}</p>}
         </div>
