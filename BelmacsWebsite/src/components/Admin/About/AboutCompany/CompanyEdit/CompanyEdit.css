@@ -69,3 +69,10 @@ textarea {
 .cancel-company-button:hover {
   background-color: rgb(211, 211, 211);
 }
+
+.current-company-img,
+.new-company-img {
+  width: 229px;
+  height: 305px;
+  margin-top: 10px; 
+}

@@ -130,6 +130,16 @@ const PeopleDashboard: React.FC = () => {
     navigate(`/admin/about/people/create`)
   };
 
+  const createNewLine = (companyDesc: string) => {
+    return companyDesc.split('\n').map((line, index) => (
+      <React.Fragment key={index}>
+        {line}
+        <br />
+      </React.Fragment>
+    ));
+  };
+
+
 return (
     <div className="people-ctr">
       <div className="people-header">Our People</div>
@@ -179,7 +189,7 @@ return (
                     )}
                   </td>
                   <td>
-                    <p>{person.description}</p>
+                    <p>{createNewLine(person.description)}</p>
                   </td>
                   <td className="table-actions">
                     <button

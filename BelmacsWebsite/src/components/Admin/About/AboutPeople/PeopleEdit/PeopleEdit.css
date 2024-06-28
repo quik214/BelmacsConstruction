@@ -41,15 +41,19 @@
   margin-left: 100px;
 }
 
-.current-img,
-.new-img {
-  display: inline-block;
-  margin-left: 0px;
+.current-person-img,
+.new-person-img {
+  width: 229px;
+  height: 305px;
+  margin-top: 10px; 
 }
+
+
 
 .upload-image-input {
   margin-top: 10px;
 }
+
 
 .edit-people-secondary-header {
   font-size: 1.4rem;

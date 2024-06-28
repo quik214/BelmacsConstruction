@@ -70,7 +70,6 @@ const EditPeople: React.FC = () => {
           setQualifications(personData.qualifications); // Set awards state with data from Firebase array
 
           setOriginalImageUrl(personData.image);
-        
         } else {
           console.error("No such document!");
         }
@@ -80,7 +79,6 @@ const EditPeople: React.FC = () => {
         setLoading(false);
       }
     };
-    
 
     fetchPerson();
   }, [name]); // the useEffect will only run whenever there is a change to the id
@@ -178,12 +176,13 @@ const EditPeople: React.FC = () => {
 
         // If (person name changed, then we delete the old image)
         if (
+          originalImageUrl &&
           person.image &&
           person.name !== oldName // the person name is not oldId (means name change)
           // person.name !== oldId means that there was a name change (meaning that person.name was changed), and thus it will no longer match oldId
           // since oldId is the old person's name
         ) {
-          const oldImageRef = ref(storage, person.image); // create a reference to the old image URL
+          const oldImageRef = ref(storage, originalImageUrl); // create a reference to the old image URL
           await deleteObject(oldImageRef); // delete the old image at the referenced location
         }
         // otherwise, if both the name has changed, then we re-upload the old image
@@ -279,17 +278,9 @@ const EditPeople: React.FC = () => {
                   {person?.image && (
                     <div>
                       <img
-                        src={
-                          originalImageUrl
-                            ? originalImageUrl
-                            : person.image
-                        }
-                        alt="Current Project"
-                        style={{
-                          width: "229px",
-                          height: "305px",
-                          marginTop: "10px",
-                        }}
+                        src={originalImageUrl ? originalImageUrl : person.image}
+                        alt="Current Image"
+                        className="current-person-img"
                       />
                     </div>
                   )}
@@ -297,20 +288,11 @@ const EditPeople: React.FC = () => {
               </div>
               <div className="edit-new-img-ctr">
                 <label className="edit-field-header">New Image</label>
-                <div className="new-img">
+                <div className="new-person-img">
                   <img
-                    src={
-                      selectedImage
-                        ? person.image
-                        : ImagePlaceHolder
-                    }
-                    alt="New Project"
-                    style={{
-                      width: "229px",
-                      height: "305px",
-                      marginTop: "10px",
-                      marginLeft: "10px",
-                    }}
+                    src={selectedImage ? person.image : ImagePlaceHolder}
+                    alt="New Image"
+                    className="new-person-img"
                   />
                 </div>
               </div>
