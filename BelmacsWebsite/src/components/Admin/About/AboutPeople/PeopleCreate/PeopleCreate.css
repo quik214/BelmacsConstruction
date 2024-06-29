@@ -11,7 +11,11 @@
     font-size: 32px;
     margin-bottom: 25px;
   }
-  
+
+    .new-person-img {
+      margin-bottom: 10px;
+    }
+    
   .upload-image-input {
     border: 2px dashed #ccc;
   }

@@ -9,6 +9,8 @@ import { setDoc, doc, collection } from "firebase/firestore";
 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
+import ImagePlaceHolder from "../../../../assets/Icons/AdminDashboard/empty-image-placeholder.png";
+
 // toast library
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -112,13 +114,27 @@ const Create: React.FC = () => {
   };
 
   // ** FUNCTION TO HANDLE IMAGE CHANGE ** //
-  // handle changes of any im
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // pass in the details of the <input> element
-    if (e.target.files && e.target.files[0]) {
-      // checks if 'files' property exists (on e), and there is at least 1 file selected
-      // e.target.files is only defined for file input elements (<input type="file"></input>)
-      setImageFile(e.target.files[0]); // if above is true, set the image file using setImageFile function (declared above)
+  // handle changes of any image
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      setImageFile(event.target.files[0]);
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (projectDetails) {
+          setProjectDetails({
+            ...projectDetails,
+            image: reader.result as string,
+          });
+        }
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    } else {
+      // Restore original image if the input is cleared
+      if (projectDetails && ImagePlaceHolder) {
+        setProjectDetails({ ...projectDetails, image: ImagePlaceHolder });
+        setImageFile(null);
+      }
     }
   };
 
@@ -403,8 +419,23 @@ const Create: React.FC = () => {
 
           <div className="create-field">
             <label htmlFor="name">Upload Image File</label>
+            <div className="new-project-img">
+              <img
+                src={imageFile ? projectDetails.image : ImagePlaceHolder}
+                alt="New Image"
+                className="new-project-img"
+                onClick={() =>
+                  (
+                    document.getElementById(
+                      "upload-image-input"
+                    ) as HTMLInputElement
+                  ).click()
+                }
+              />
+            </div>
             <input
               className="upload-image-input create-input"
+              id="upload-image-input"
               type="file"
               onChange={handleImageChange}
               accept="image/*"

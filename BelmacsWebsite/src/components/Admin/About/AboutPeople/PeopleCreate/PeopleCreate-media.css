@@ -30,6 +30,11 @@
 
 /* Smaller Tablets */
 @media (max-width: 700px) {
+  .new-person-img {
+    width: 189px;
+    height: 265px;
+    margin-top: 10px;
+  }
 }
 
 /* Mobile */

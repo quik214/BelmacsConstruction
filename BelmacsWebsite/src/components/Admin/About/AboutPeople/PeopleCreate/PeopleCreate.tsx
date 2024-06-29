@@ -9,6 +9,8 @@ import { setDoc, doc } from "firebase/firestore";
 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
+import ImagePlaceHolder from "../../../../../assets/Icons/AdminDashboard/empty-image-placeholder.png";
+
 // toast library
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -25,7 +27,7 @@ const PeopleCreate: React.FC = () => {
     description: "",
   });
 
-    // useState for Qualifications
+  // useState for Qualifications
   // setQualifications is used to set the array of Qualifications, which is asigned to qualifications variable
   const [qualifications, setQualifications] = useState<string[]>([]);
 
@@ -73,24 +75,37 @@ const PeopleCreate: React.FC = () => {
 
   // ** FUNCTION TO HANDLE IMAGE CHANGE ** //
   // handle changes of any image
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // pass in the details of the <input> element
-    if (e.target.files && e.target.files[0]) {
-      // checks if 'files' property exists (on e), and there is at least 1 file selected
-      // e.target.files is only defined for file input elements (<input type="file"></input>)
-      setImageFile(e.target.files[0]); // if above is true, set the image file using setImageFile function (declared above)
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      setImageFile(event.target.files[0]);
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (personDetails) {
+          setPersonDetails({
+            ...personDetails,
+            image: reader.result as string,
+          });
+        }
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    } else {
+      // Restore original image if the input is cleared
+      if (personDetails && ImagePlaceHolder) {
+        setPersonDetails({ ...personDetails, image: ImagePlaceHolder });
+        setImageFile(null);
+      }
     }
   };
-
 
   // ** FUNCTION FOR FORM VALIDATION ** //
   const validate = () => {
     // create an Object with each property representing the errors of each field (and property of personDetails)
     const newErrors = {
-        name: "",
-        image: "",
-        position: "",
-        description: "",
+      name: "",
+      image: "",
+      position: "",
+      description: "",
     };
     let isValid = true;
 
@@ -103,7 +118,7 @@ const PeopleCreate: React.FC = () => {
 
     // trim the personDetails position, and check if it is empty
     // then we set the error message to be the below string
-    if (!personDetails.position.trim() ) {
+    if (!personDetails.position.trim()) {
       newErrors.position = "Position is required";
       isValid = false;
     }
@@ -136,7 +151,6 @@ const PeopleCreate: React.FC = () => {
     newQualifications[index] = e.target.value; // set newQualifications[index] to be the value of the qualifications <input> element
     setQualifications(newQualifications); // setQualifications function to set the (above declared) qualifications array to have the values of newQualifications
   };
-
 
   // ** FUNCTION TO HANDLE ADD QUALIFICATION ** //
   const handleAddQualification = () => {
@@ -244,11 +258,7 @@ const PeopleCreate: React.FC = () => {
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
 
           // Create a reference to the personDetails.name (that the user has entered into the field)
-          const personRef = doc(
-            db,
-            `about-people`,
-            personDetails.name
-          );
+          const personRef = doc(db, `about-people`, personDetails.name);
 
           // set the document data using the Firebase setDoc function
           // takes in 2 parameters, the reference to the location in Firebase,
@@ -277,11 +287,25 @@ const PeopleCreate: React.FC = () => {
         <p className="create-person-header">Add New Director</p>
         {/* CREATE Form */}
         <form onSubmit={handleSubmit}>
-          
           <div className="create-field">
             <label htmlFor="name">Upload Image File</label>
+            <div className="new-person-img">
+              <img
+                src={imageFile ? personDetails.image : ImagePlaceHolder}
+                alt="New Image"
+                className="new-person-img"
+                onClick={() =>
+                  (
+                    document.getElementById(
+                      "upload-image-input"
+                    ) as HTMLInputElement
+                  ).click()
+                }
+              />
+            </div>
             <input
               className="upload-image-input create-input"
+              id="upload-image-input"
               type="file"
               onChange={handleImageChange}
               accept="image/*"
@@ -323,7 +347,7 @@ const PeopleCreate: React.FC = () => {
 
           <div className="qualifications-field">
             <label htmlFor="qualifications" className="create-field-header">
-                Qualifications
+              Qualifications
             </label>
 
             {qualifications.map((qualification, index) => (
@@ -335,7 +359,7 @@ const PeopleCreate: React.FC = () => {
                   value={qualification}
                   onChange={(e) => handleQualificationChange(e, index)}
                   className="create-input"
-                />  
+                />
                 <button
                   type="button"
                   onClick={() => handleRemoveQualification(index)}
@@ -356,17 +380,19 @@ const PeopleCreate: React.FC = () => {
 
           <div className="create-field">
             <label htmlFor="description" className="create-field-header">
-                Description
+              Description
             </label>
             <textarea
-                rows={15}
+              rows={15}
               id="description"
               name="description"
               placeholder="Description"
               value={personDetails.description}
               onChange={handleChange}
             />
-            {errors.description && <p className="error-msg">{errors.description}</p>}
+            {errors.description && (
+              <p className="error-msg">{errors.description}</p>
+            )}
           </div>
 
           <div className="create-person-button-ctr">
