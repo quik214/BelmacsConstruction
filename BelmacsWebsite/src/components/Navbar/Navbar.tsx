@@ -293,7 +293,7 @@ export default function Navbar() {
 
           {authUser && (
             <>
-              <div className="dropdown">
+              <div className="mobile-dropdown">
                 <Link
                   to="#"
                   onClick={toggleMobileUserViewDashboardDropdown}
@@ -302,7 +302,7 @@ export default function Navbar() {
                   User View
                 </Link>
                 {mobileUserViewDashboardDropdown && (
-                  <div className="dropdown-content">
+                  <div className="mobile-dropdown-content">
                     <Link
                       to="/about"
                       className="dropdown-item"
@@ -326,7 +326,7 @@ export default function Navbar() {
                   </div>
                 )}
               </div>
-              <div className="dropdown">
+              <div className="mobile-dropdown">
                 <Link
                   to="#"
                   onClick={toggleMobileDashboardDropdown}
@@ -335,7 +335,7 @@ export default function Navbar() {
                   Dashboard
                 </Link>
                 {mobileDashboardDropdown && (
-                  <div className="dropdown-content">
+                  <div className="mobile-dropdown-content">
                     <Link
                       to="/admin/about"
                       className="dropdown-item"

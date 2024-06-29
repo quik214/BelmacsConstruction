@@ -157,7 +157,6 @@ body {
   position: relative;
 }
 
-
 .dropdown-trigger::after {
   content: " ▼";
   font-size: 0.6em;
@@ -191,4 +190,15 @@ body {
 
 .admin-nav-container {
   display: flex;
+}
+
+.mobile-dropdown {
+  font-size: 14px;
+  color: black;
+  text-decoration: none;
+  font-family: Inter;
+  transition: color 0.4s ease-in-out;
+  margin-top: 30px;
+}
+.mobile-dropdown-content {
 }
