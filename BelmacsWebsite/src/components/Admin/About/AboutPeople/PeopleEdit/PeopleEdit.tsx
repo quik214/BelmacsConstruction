@@ -303,7 +303,7 @@ const EditPeople: React.FC = () => {
       {person && (
         <form onSubmit={handleSubmit}>
           <div className="edit-image-field">
-            <div className="edit-current-new-img-ctr">
+            <div className="edit-current-person-new-img-ctr">
               <div className="edit-current-img-ctr">
                 <label className="edit-field-header">Current Image</label>
                 <div className="current-img">
@@ -318,7 +318,7 @@ const EditPeople: React.FC = () => {
                   )}
                 </div>
               </div>
-              <div className="edit-new-img-ctr">
+              <div className="edit-new-person-img-ctr">
                 <label className="edit-field-header">New Image</label>
                 <div className="new-person-img">
                   <img

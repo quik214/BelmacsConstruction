@@ -1,4 +1,4 @@
-.people-ctr {
+.person-ctr {
     margin-top: 120px;
     font-family: Arial, Helvetica, sans-serif;
   
@@ -6,39 +6,39 @@
     margin-right: auto;
   }
   
-  .people-header {
+  .person-header {
     font-size: 2rem;
     color: #364fc7;
   }
   
-  .people-table-ctr {
+  .person-table-ctr {
     margin-top: 20px;
   }
 
-  .people-table-description {
+  .person-table-description {
     width: 50%;
   }
   
-  .people-image {
+  .person-image {
     height: 100px; /* Set your desired height */
     width: 120px;
-  
+
     object-fit: cover;
   }
   
-  .people-table {
+  .person-table {
     width: 100%;
     border-collapse: collapse;
   }
   
-  .people-table th,
-  .people-table td {
+  .person-table th,
+  .person-table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
   }
   
-  .people-table th {
+  .person-table th {
     background-color: #f2f2f2;
     font-weight: bold;
   }
@@ -48,22 +48,22 @@
   }
   
   /* Adjust awards list styles */
-  .people-table .mobile-table ul {
+  .person-table .mobile-table ul {
     padding-left: 15px;
     list-style-type: disc;
   }
   
-  .people-table .mobile-table ul li {
+  .person-table .mobile-table ul li {
     margin-bottom: 4px; /* Adjust as needed to separate each award */
   }
   
-  .add-people-ctr {
+  .add-person-ctr {
     display: flex;
     margin-left: auto;
     justify-content: flex-end;
   }
   
-  .add-people-button {
+  .add-person-button {
     margin-top: 10px;
     background-color: #1fb185;
     color: white;

@@ -25,6 +25,9 @@
 
 /* Smaller Tablets */
 @media (max-width: 700px) {
+  .edit-new-person-img-ctr {
+    margin-left: 15px;
+  }
 }
 
 /* Mobile */
@@ -38,11 +41,11 @@
   .edit-qualification-input-ctr {
     width: 100%;
   }
-  .edit-new-project-img-ctr {
+  .edit-new-person-img-ctr {
     margin-left: 50px;
   }
-  .current-project-img,
-  .new-project-img {
+  .current-person-img,
+  .new-person-img {
     width: 120px;
     height: 150px;
   }
@@ -50,7 +53,5 @@
 
 /* Small Mobile */
 @media (max-width: 390px) {
-  .edit-new-project-img-ctr {
-    margin-left: 15px;
-  }
+
 }

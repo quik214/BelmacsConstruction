@@ -1,5 +1,5 @@
-import "./PeopleDashboard-media.css";
 import "./PeopleDashboard.css";
+import "./PeopleDashboard-media.css";
 
 import EditIcon from "../../../../../assets/Icons/AdminDashboard/pencil-simple.svg"
 import DeleteIcon from "../../../../../assets/Icons/AdminDashboard/trash.svg";
@@ -141,25 +141,25 @@ const PeopleDashboard: React.FC = () => {
 
 
 return (
-    <div className="people-ctr">
-      <div className="people-header">Our People</div>
+    <div className="person-ctr">
+      <div className="person-header">Our People</div>
 
-      <div className="add-people-ctr">
-        <button className="add-people-button" onClick={handleAddPeople}>
+      <div className="add-person-ctr">
+        <button className="add-person-button" onClick={handleAddPeople}>
           Add Director
         </button>
       </div>
 
-      <div className="people-table-ctr">
+      <div className="person-table-ctr">
         {people.length > 0 && (
-          <table className="people-table">
+          <table className="person-table">
             <thead>
               <tr>
                 <th>Image</th>
                 <th>Name</th>
                 <th className="mobile-table">Position</th>
                 <th className="mobile-table">Qualifications</th>
-                <th className="people-table-description mobile-table">Description</th>
+                <th className="person-table-description mobile-table">Description</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -169,8 +169,8 @@ return (
                   <td>
                     <img
                       src={person.image}
-                      alt={"people image"}
-                      className="people-image"
+                      alt={"person image"}
+                      className="person-image"
                     />
                   </td>
                   <td>

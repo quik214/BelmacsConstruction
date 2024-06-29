@@ -32,12 +32,12 @@
   margin-top: 15px;
 }
 
-.edit-current-new-img-ctr {
+.edit-current-person-new-img-ctr {
   display: flex;
   flex-direction: row;
 }
 
-.edit-new-img-ctr {
+.edit-new-person-img-ctr {
   margin-left: 100px;
 }
 
