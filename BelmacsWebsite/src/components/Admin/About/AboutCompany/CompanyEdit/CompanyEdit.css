@@ -69,12 +69,20 @@ textarea {
 .cancel-company-button:hover {
   background-color: rgb(211, 211, 211);
 }
+.edit-current-new-comapny-img-ctr {
+  display: flex;
+  flex-direction: row;
+}
+
+.edit-new-company-img-ctr {
+  margin-left: 100px;
+}
 
 .current-company-img,
 .new-company-img {
   width: 229px;
   height: 305px;
-  margin-top: 10px; 
+  margin-top: 10px;
 }
 
 .new-company-img {

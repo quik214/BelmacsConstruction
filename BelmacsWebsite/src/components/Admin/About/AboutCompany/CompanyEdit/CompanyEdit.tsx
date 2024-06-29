@@ -3,12 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../../../firebase"; // Adjust the import based on your firebase setup
 
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL,
-} from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import "./CompanyEdit.css";
 import "./CompanyEdit-media.css";
@@ -148,7 +143,6 @@ const EditCompany = () => {
           navigate("/admin/about");
         }, 1000); // navigate back to /admin/about after 1 second
       } else {
-
         const updatedCompany = { ...company };
 
         // set the reference to the new person name, and update the reference document with the updatedPerson object data
@@ -178,8 +172,8 @@ const EditCompany = () => {
         <div className="edit-field">
           <div>
             <div className="edit-image-field">
-              <div className="edit-current-new-img-ctr">
-                <div className="edit-current-img-ctr">
+              <div className="edit-current-new-comapny-img-ctr">
+                <div className="edit-current-company-img-ctr">
                   <label className="edit-field-header">Current Image</label>
                   <div className="current-img">
                     {company?.image && (
@@ -193,7 +187,7 @@ const EditCompany = () => {
                     )}
                   </div>
                 </div>
-                <div className="edit-new-img-ctr">
+                <div className="edit-new-company-img-ctr">
                   <label className="edit-field-header">New Image</label>
                   <div className="new-img">
                     <img
@@ -201,8 +195,11 @@ const EditCompany = () => {
                       alt="New Image"
                       className="new-company-img"
                       onClick={() =>
-                        (document.getElementById('upload-image-input') as HTMLInputElement)
-                          .click()
+                        (
+                          document.getElementById(
+                            "upload-image-input"
+                          ) as HTMLInputElement
+                        ).click()
                       }
                     />
                   </div>
