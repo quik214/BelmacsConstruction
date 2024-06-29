@@ -11,21 +11,51 @@
   color: rgb(54, 79, 199);
 }
 
-.people-card-container {
-  display: flex;
-  flex-wrap: wrap;
-  row-gap: 30px; /* Adjust the gap value to the desired spacing */
-  justify-content: space-between; /* Ensure proper spacing between cards */
+.people-grid-container {
+  display: grid;
   margin-top: 30px;
+  justify-content: space-around;
+  row-gap: 30px;
 }
 
+/* Default layout for fewer people */
+.people-grid-container.default {
+  grid-template-columns: repeat(4, 1fr); /* Three columns */
+  column-gap: 150px;
+}
+
+/* Layout for 5 people */
+.people-grid-container.five {
+  grid-template-columns: repeat(5, 1fr); /* Three columns */
+  column-gap: 25px; 
+}
+
+/* Layout for 6 people */
+.people-grid-container.six {
+  grid-template-columns: repeat(6, 1fr); /* Three columns */
+  column-gap: 25px;
+}
+
+/* Layout for 7 or more people */
+.people-grid-container.seven {
+  grid-template-columns: repeat(4, 1fr); /* Three columns */
+  column-gap: 150px;
+}
+
+
 .people-card {
+  height: auto; 
+  width: auto;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box; /* Include padding and border in the height/width */
+  background: #fff; /* Background color for better visibility */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: box-shadow 0.3s ease, height 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for scaling and shadow */
   overflow: hidden;
   position: relative;
-  flex-basis: calc(25% - 20px); /* 100% / 4 - adjust margin as needed */
-  max-width: 255px;
+  flex-direction: column;
+  
 }
 
 .people-card img {
@@ -34,8 +64,6 @@
 }
 
 .people-card-info {
-  padding: 12.5px;
-  padding-left: 15px;
   background: white;
   transition: transform 0.3s ease;
 }
@@ -70,7 +98,9 @@
 .people-name {
   font-size: 20px;
   font-family: "Lato";
-  padding-bottom: 10px;
+  padding-top: 12.5px;
+  padding-left: 15px;
+  padding-bottom: 12.5px;
 }
 
 .people-role {
@@ -78,6 +108,8 @@
   font-family: "Lato";
   font-weight: 100;
   color: #495057;
+  padding-left: 15px;
+  padding-bottom: 12.5px;
 }
 
 

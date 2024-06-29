@@ -25,10 +25,16 @@ const People: React.FC = () => {
       const peopleData = querySnapshot.docs.map((doc) => doc.data() as Person);
 
       // Define the sort order
-      const sortOrder = ["Managing Director", "Founder and Director", "Director"];
+      const sortOrder = [
+        "Managing Director",
+        "Founder and Director",
+        "Director",
+      ];
 
       // Sort people by role based on the sort order
-      peopleData.sort((a, b) => sortOrder.indexOf(a.position) - sortOrder.indexOf(b.position));
+      peopleData.sort(
+        (a, b) => sortOrder.indexOf(a.position) - sortOrder.indexOf(b.position)
+      );
 
       setPeople(peopleData);
     };
@@ -46,19 +52,31 @@ const People: React.FC = () => {
     setSelectedPerson(null);
   };
 
+  const peopleCount = people.length;
+
   return (
-    <>
+<>
       <div className="people reveal">
         <p className="people-header">Our People</p>
-        <div className={`people-card-container`}>
+        <div
+          className={`people-grid-container ${
+            peopleCount === 5 ? 'five' :
+            peopleCount === 6 ? 'six' :
+            peopleCount >= 7 ? 'seven' :
+            'default'
+          }`}
+        >
           {people.map((person, index) => (
             <div
               key={index}
               className="people-card"
               onClick={() => handleCardClick(person)}
+              aria-label={`View details for ${person.name}`}
+              role="button"
             >
               <img src={person.image} alt={person.name} />
               <div className="people-card-info">
+                
                 <p className="people-name">{person.name}</p>
                 <p className="people-role">{person.position}</p>
               </div>
@@ -81,7 +99,10 @@ const People: React.FC = () => {
                 <p className="popup-role">{selectedPerson.position}</p>
                 <p className="popup-qualifications">
                   {selectedPerson.qualifications.map((qualification, index) => (
-                    <span key={index}>- {qualification}<br/></span>
+                    <span key={index}>
+                      - {qualification}
+                      <br />
+                    </span>
                   ))}
                 </p>
               </div>

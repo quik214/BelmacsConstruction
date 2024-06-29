@@ -7,32 +7,47 @@
   .people-header {
     font-size: 2rem;
   }
-
 }
 
 /* Normal Screens - currently designed for this */
 @media (max-width: 1700px) {
-
 }
 
 /* Bigger Tablets*/
 @media (max-width: 1400px) {
-  .people-card {
-    min-width: 225px;
-    max-width: 225px;
-  }
-
-  .people-card img {
-    width: 225px;
-    height: 300px;
-  }
-
   .people-name {
     font-size: 1rem;
   }
 
   .people-role {
     font-size: 0.8rem;
+  }
+
+  .people-grid-container {
+    column-gap: 50px;
+  }
+
+  /* Default laypout for 4  people */
+  .people-grid-container.default {
+    grid-template-columns: repeat(4, 1fr); /* Three columns */
+    column-gap: 20px;
+  }
+
+  /* layout for 6 people */
+  .people-grid-container.five {
+    grid-template-columns: repeat(5, 1fr); /* Three columns */
+    column-gap: 20px;
+  }
+
+  /* Layout for 6 people */
+  .people-grid-container.six {
+    grid-template-columns: repeat(3, 1fr); /* Three columns */
+    column-gap: 150px;
+  }
+
+  /* Layout for 7 or more people */
+  .people-grid-container.seven {
+    column-gap: 50px; /* Column gap for 7 or more people */
   }
 }
 
@@ -50,18 +65,8 @@
     font-size: 1.6rem;
   }
 
-  .people-card-container {
+  .people-grid-container {
     margin-top: -10px;
-  }
-
-  .people-card {
-    min-width: 185px;
-    max-width: 185px;
-  }
-
-  .people-card img {
-    width: 185px;
-    height: 230px;
   }
 
   .people-name {
@@ -79,22 +84,17 @@
     row-gap: 40px;
   }
 
-  .people-card-container {
-    flex-wrap: wrap;
+  .people-grid-container {
+    column-gap: 20px;
   }
 
   .people-header {
     font-size: 1.6rem;
   }
 
-  .people-card {
-    flex-basis: calc(40% - 400px); /* Adjust to fit two cards per row */
-    max-width: 100%; /* Ensure cards do not exceed container width */ 
-  }
-
-  .people-card img {
-    width: 100%;
-    height: auto;
+  /* Layout for 6 people */
+  .people-grid-container.six {
+    column-gap: 100px;
   }
 
   .popup-content .popup-name {
@@ -116,9 +116,26 @@
 
 /* Smaller Tablets */
 @media (max-width: 800px) {
-  .people-card {
-    flex-basis: calc(45% - 40px); /* Adjust to fit two cards per row */
-    max-width: 100%; /* Ensure cards do not exceed container width */
+  /* Default laypout for 4  people */
+  .people-grid-container.default {
+    grid-template-columns: repeat(2, 1fr); /* Three columns */
+    column-gap: 40px;
+  }
+
+  /* Layout for 5 and below */
+  .people-grid-container.five {
+    grid-template-columns: repeat(2, 1fr); /* Three columns */
+    column-gap: 40px;
+  }
+
+  /* Layout for 6 people */
+  .people-grid-container.six {
+    grid-template-columns: repeat(2, 1fr); /* Three columns */
+  }
+
+  /* Layout for 7 people */
+  .people-grid-container.seven {
+    grid-template-columns: repeat(2, 1fr); /* Three columns */
   }
 
   .popup-content-header {
@@ -154,23 +171,8 @@
 
 /* Mobile */
 @media (max-width: 550px) {
-  .people-card-info {
-    padding-top: 7.5px;
-    padding-left: 12.5px;
-  }
-
   .people-header {
     font-size: 1.2rem;
-  }
-
-  .people-card {
-    min-width: 150px;
-    max-width: 150px;
-  }
-
-  .people-card img {
-    width: 100%;
-    height: auto;
   }
 
   .people-name {
@@ -180,10 +182,11 @@
   .people-role {
     font-size: 0.6rem;
   }
-  
+
   .people-card-read-more {
     font-size: 0.7rem;
   }
+
   .popup-content {
     width: 70%;
   }
@@ -195,16 +198,6 @@
 
 /* Small Mobile */
 @media (max-width: 400px) {
-  .people-card {
-    min-width: 130px;
-    max-width: 130px;
-  }
-
-  .people-card img {
-    width: 100%;
-    height: auto;
-  }
-
   .people-name {
     font-size: 0.8rem;
   }
