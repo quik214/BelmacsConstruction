@@ -394,8 +394,8 @@ const EditProject: React.FC = () => {
           </div>
 
           <div className="edit-field">
-            <div className="edit-current-new-img-ctr">
-              <div className="edit-current-img-ctr">
+            <div className="edit-current-new-project-img-ctr">
+              <div className="edit-current-project-img-ctr">
                 <label className="edit-field-header">Current Image</label>
                 <div className="current-img">
                   {originalImageUrl && (
@@ -409,7 +409,7 @@ const EditProject: React.FC = () => {
                   )}
                 </div>
               </div>
-              <div className="edit-new-img-ctr">
+              <div className="edit-new-project-img-ctr">
                 <label className="edit-field-header">New Image</label>
                 <div className="new-project-img">
                   <img
@@ -417,8 +417,11 @@ const EditProject: React.FC = () => {
                     alt="New Image"
                     className="new-project-img"
                     onClick={() =>
-                      (document.getElementById('upload-image-input') as HTMLInputElement)
-                        .click()
+                      (
+                        document.getElementById(
+                          "upload-image-input"
+                        ) as HTMLInputElement
+                      ).click()
                     }
                   />
                 </div>

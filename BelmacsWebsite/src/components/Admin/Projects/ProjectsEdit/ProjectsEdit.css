@@ -26,18 +26,24 @@
   border: 2px dashed #ccc;
   margin-top: 15px;
 }
+.edit-current-new-project-img-ctr {
+  display: flex;
+  flex-direction: row;
+}
 
+.edit-new-project-img-ctr {
+  margin-left: 100px;
+}
 .current-project-img,
 .new-project-img {
   width: 229px;
   height: 305px;
-  margin-top: 10px; 
+  margin-top: 10px;
 }
 
 .new-project-img {
   cursor: pointer;
 }
-
 
 .edit-project-secondary-header {
   font-size: 1.4rem;
@@ -49,7 +55,6 @@
 .edit-project-form-ctr {
   margin-top: 40px;
 }
-
 
 .edit-project-button-ctr {
   margin-top: 10px;
@@ -108,7 +113,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-  width: 30%
+  width: 30%;
 }
 
 .edit-award-input-ctr input {

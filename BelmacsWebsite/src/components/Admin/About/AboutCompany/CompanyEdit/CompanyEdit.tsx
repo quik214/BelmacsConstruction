@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../../../../../firebase"; // Adjust the import based on your firebase setup
 
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -26,11 +26,13 @@ const EditCompany = () => {
 
   const location = useLocation();
 
-  const { paramData } = location.state;
-  const [company, setCompany] = useState<Company>(paramData);
+  const [company, setCompany] = useState<Company>({
+    description: "",
+    image: "",
+  });
 
   const [description, setDescription] = useState(company.description);
-  const [originalImageUrl] = useState(company.image);
+  const [originalImageUrl, setOriginalImageUrl] = useState(company.image);
   const [selectedImage, setSelectedImage] = useState<string | File | null>( // useState to set the selectedImage
     null
   );
@@ -39,6 +41,34 @@ const EditCompany = () => {
     description: "",
     image: "",
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (location.state?.paramData) {
+        const { description, image } = location.state.paramData;
+        setDescription(description);
+        setOriginalImageUrl(image);
+        setCompany({ description, image });
+      } else {
+        try {
+          const docRef = doc(db, "about-company", "about-company");
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            const data = docSnap.data() as Company;
+            setDescription(data.description);
+            setOriginalImageUrl(data.image);
+            setCompany(data);
+          } else {
+            console.error("No such document!");
+          }
+        } catch (error) {
+          console.error("Error fetching document: ", error);
+        }
+      }
+    };
+
+    fetchData();
+  }, [location.state]);
 
   const validateForm = () => {
     const newErrors = {
