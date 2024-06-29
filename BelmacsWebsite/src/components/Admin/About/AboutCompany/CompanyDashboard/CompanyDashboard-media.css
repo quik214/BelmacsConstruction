@@ -34,23 +34,12 @@
     font-size: 0.8rem;
   }
 
-  .project-table td {
+  .company-table td {
     font-size: 0.8rem;
   }
 
   .table-actions {
     gap: 10px;
-  }
-
-  .add-project-ctr {
-    display: flex;
-    margin-left: auto;
-    justify-content: flex-end;
-  }
-
-  .add-project-button {
-    font-size: 14px;
-    padding: 8px 10.5px;
   }
 
   .action-button {
@@ -64,10 +53,6 @@
     margin: auto;
   }
 
-  .delete-button {
-    margin-top: 10px;
-  }
-
   .action-icons {
     height: 20px;
     width: 20px;
@@ -79,54 +64,14 @@
   .mobile-table {
     display: none;
   }
-
-  .delete-confirmation-popup {
-    width: 50%;
-  }
-
-  .delete-confirmation-header {
-    font-size: 1.4rem;
-  }
-
-  .delete-confirmation-description {
-    font-size: 1rem;
-    text-align: center;
-  }
-
-  .popup-cancel-btn {
-    font-size: 1.1rem;
-  }
-
-  .popup-confirm-btn {
-    font-size: 1.1rem;
-  }
 }
 
 /* Smaller Tablets */
 @media (max-width: 700px) {
-  .delete-confirmation-header {
-    font-size: 1.2rem;
-  }
-
-  .delete-confirmation-description {
-    font-size: 0.9rem;
-    text-align: center;
-  }
-
-  .popup-cancel-btn {
-    font-size: 1rem;
-  }
-
-  .popup-confirm-btn {
-    font-size: 1rem;
-  }
 }
 
 /* Mobile */
 @media (max-width: 550px) {
-  .delete-confirmation-popup {
-    width: 65%;
-  }
 }
 
 /* Small Mobile */
