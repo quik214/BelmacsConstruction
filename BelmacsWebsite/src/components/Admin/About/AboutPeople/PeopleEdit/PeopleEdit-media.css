@@ -26,7 +26,14 @@
 /* Smaller Tablets */
 @media (max-width: 700px) {
   .edit-new-person-img-ctr {
-    margin-left: 15px;
+    margin-left: 50px;
+  }
+
+  .current-person-img,
+  .new-person-img {
+    width: 189px;
+    height: 265px;
+    margin-top: 10px;
   }
 }
 
@@ -53,5 +60,7 @@
 
 /* Small Mobile */
 @media (max-width: 390px) {
-
+  .edit-new-person-img-ctr {
+    margin-left: 15px;
+  }
 }

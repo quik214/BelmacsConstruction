@@ -8,7 +8,7 @@
 
 /* Landscape Tablets */
 @media (max-width: 1220px) {
-  .comapny-header {
+  .company-header {
     font-size: 1.6rem;
     color: #364fc7;
   }
@@ -76,7 +76,7 @@
 
 /* Small Mobile */
 @media (max-width: 390px) {
-  .project-image {
+  .company-image {
     height: 60px;
     width: 80px;
   }

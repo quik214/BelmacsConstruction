@@ -1,5 +1,5 @@
-import "./CompanyDashboard-media.css";
 import "./CompanyDashboard.css";
+import "./CompanyDashboard-media.css";
 
 import EditIcon from "../../../../../assets/Icons/AdminDashboard/pencil-simple.svg";
 
