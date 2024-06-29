@@ -94,7 +94,7 @@ const AboutAchievements = () => {
     });
   }, []);
   const particlesLoaded = async (container?: Container): Promise<void> => {
-    console.log(container);
+    //console.log(container);
   };
   const particlesOptions: ISourceOptions =
     particlesJSON as unknown as ISourceOptions;

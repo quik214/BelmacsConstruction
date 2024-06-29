@@ -20,8 +20,6 @@ const TheCompany: React.FC = () => {
           (doc) => doc.data() as Company
         );
         setData(companyData);
-
-        companyData.forEach(company => console.log(company.description));
       } catch (error) {
         console.error("Error fetching projects: ", error);
       }
@@ -32,7 +30,7 @@ const TheCompany: React.FC = () => {
 
   // for converting newlines
   const createNewLine = (companyDesc: string) => {
-    return companyDesc.split('\n').map((line, index) => (
+    return companyDesc.split("\n").map((line, index) => (
       <React.Fragment key={index}>
         {line}
         <br />
@@ -46,7 +44,9 @@ const TheCompany: React.FC = () => {
         <React.Fragment key={index}>
           <div key={index} className="company-text">
             <p className="company-header">The Company</p>
-            <p className="company-desc one">{createNewLine(company.description)}</p>
+            <p className="company-desc one">
+              {createNewLine(company.description)}
+            </p>
           </div>
           <div className="company-img-ctr">
             <img src={company.image} alt="Company" className="company-img" />
