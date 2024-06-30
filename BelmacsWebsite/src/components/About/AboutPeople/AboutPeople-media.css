@@ -7,6 +7,11 @@
   .people-header {
     font-size: 2rem;
   }
+
+  .people-card.seven {
+    flex: 0 0 calc((25.35% - 25px));
+    color: white;
+  }
 }
 
 /* Normal Screens - currently designed for this */
@@ -45,9 +50,9 @@
     column-gap: 150px;
   }
 
-  /* Layout for 7 or more people */
-  .people-grid-container.seven {
-    column-gap: 50px; /* Column gap for 7 or more people */
+  .people-card.seven {
+    flex: 0 0 calc((25.35% - 25px));
+    color: white;
   }
 }
 
@@ -75,6 +80,11 @@
 
   .people-role {
     font-size: 0.8rem;
+  }
+
+  .people-card.seven {
+    flex: 0 0 calc((25.6% - 25px));
+    color: white;
   }
 }
 
@@ -167,6 +177,31 @@
     font-size: 1rem;
     margin-top: 5px;
   }
+
+
+  .people-name {
+    padding-left: 12.5px;
+  }
+
+  .people-role {
+    padding-left: 12.5px;
+    font-size: 0.6rem;
+  }
+
+  .people-grid-container.seven {
+    column-gap: 20px;
+  }
+  
+  .people-card.seven {
+    flex: 0 0 calc((25.75% - 20px));
+  }
+}
+
+/* Special case for 7 people card */
+@media (max-width: 640px) {
+  .people-card.seven {
+    flex: 0 0 calc((50% - 25px));
+  }
 }
 
 /* Mobile */
@@ -194,17 +229,23 @@
   .popup-content .popup-qualifications {
     font-size: 0.9rem;
   }
+
+ 
 }
 
 /* Small Mobile */
 @media (max-width: 400px) {
   .people-name {
+    padding-left: 10px;
     font-size: 0.8rem;
   }
 
   .people-role {
+    padding-left: 10px;
     font-size: 0.6rem;
   }
+
+  
 
   .popup-content .popup-description {
     font-size: 0.9rem;

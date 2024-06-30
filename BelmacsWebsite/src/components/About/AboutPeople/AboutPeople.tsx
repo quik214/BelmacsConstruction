@@ -56,7 +56,7 @@ const People: React.FC = () => {
 
   return (
 <>
-      <div className="people reveal">
+      <div className='people reveal'>
         <p className="people-header">Our People</p>
         <div
           className={`people-grid-container ${
@@ -69,7 +69,7 @@ const People: React.FC = () => {
           {people.map((person, index) => (
             <div
               key={index}
-              className="people-card"
+              className={`people-card ${peopleCount === 7 ? 'seven' : 'default'}`}
               onClick={() => handleCardClick(person)}
               aria-label={`View details for ${person.name}`}
               role="button"

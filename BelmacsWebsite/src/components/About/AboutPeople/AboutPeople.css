@@ -38,8 +38,10 @@
 
 /* Layout for 7 or more people */
 .people-grid-container.seven {
-  grid-template-columns: repeat(4, 1fr); /* Three columns */
-  column-gap: 150px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 25px;
 }
 
 
@@ -55,7 +57,12 @@
   overflow: hidden;
   position: relative;
   flex-direction: column;
-  
+}
+
+.people-card.seven{
+  flex: 0 0 calc((25.45% - 25px) );
+  flex-wrap: wrap;
+  color: white;
 }
 
 .people-card img {
@@ -101,6 +108,7 @@
   padding-top: 12.5px;
   padding-left: 15px;
   padding-bottom: 12.5px;
+  color: black;
 }
 
 .people-role {

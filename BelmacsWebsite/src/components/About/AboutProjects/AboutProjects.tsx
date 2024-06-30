@@ -124,7 +124,7 @@ const AboutProjects: React.FC = () => {
                   transition: "transform 0.3s ease",
                 }}
               >
-                <span className ="ribbon ribbon-edge">{d.totalAwards} Awards</span>
+                <span className ="ribbon ribbon-edge">{d.totalAwards} {d.totalAwards === 1 ? 'Award' : 'Awards'}</span>
                 <div className="card-header">{d.name}</div>
                 <div className="card-desc-container">
                   <img

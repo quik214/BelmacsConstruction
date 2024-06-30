@@ -65,7 +65,8 @@
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  padding-bottom: 10px;
+  padding-bottom: 11px;
+  margin-bottom: -1px;
 }
 
 .card-desc {
@@ -149,8 +150,8 @@
     text-align: center;
     vertical-align: baseline;
     font-weight: normal;
-    background-color: #FFD700 !important;
-    color: black;
+    background-color: #364FC7 !important;
+    color: white;
     font-family: "Lato";
     font-size: 0.9rem;
 }
@@ -162,8 +163,10 @@
     top: 0;
     border: 9px solid transparent;
     border-width: 14px 8px;
-    border-right-color: #FFD700;
-    border-color: #FFD700;
+    border-right-color: #364FC7;
+    border-color: #364FC7;
+    /* gold: #FFD700 */
     border-left-color: transparent!important;
     left: -9px;
+  
 }
