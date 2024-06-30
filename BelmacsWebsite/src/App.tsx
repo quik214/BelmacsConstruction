@@ -2,6 +2,9 @@ import "./App.css";
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
+// Google Analytics
+import ReactGA from "react-ga4";
+
 import About from "./pages/About/About";
 import Projects from "./pages/Projects/Projects";
 import Services from "./pages/Services/Services";
@@ -56,27 +59,26 @@ function MainApp() {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
-//matomo analytic 
   useEffect(() => {
-    var _mtm = ((window as any)._mtm = (window as any)._mtm || []);
-    _mtm.push({ "mtm.startTime": new Date().getTime(), event: "mtm.Start" });
-    var d = document,
-      g = d.createElement("script"),
-      s = d.getElementsByTagName("script")[0];
-    g.async = true;
-    g.src =
-      "https://cdn.matomo.cloud/belmacs.matomo.cloud/container_S6xNr8a1.js";
-    if (s && s.parentNode) {
-      s.parentNode.insertBefore(g, s);
-    } else {
-      d.head.appendChild(g); // Append to the head as a fallback
-    }
+    ReactGA.initialize("G-FZXFG5T9KE"); // Replace with your Google Analytics Measurement ID
+    ReactGA.send("pageview");
   }, []);
+
+  const TrackPageView: React.FC = () => {
+    const location = useLocation();
+
+    useEffect(() => {
+      ReactGA.send("pageview");
+    }, [location]);
+
+    return null;
+  };
 
   return (
     <>
       <Navbar />
       <div>
+        <TrackPageView />
         <Routes>
           <Route path="/" element={<About />} />
           <Route path="/projects" element={<Projects />} />
