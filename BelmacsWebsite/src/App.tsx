@@ -56,6 +56,23 @@ function MainApp() {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
+//matomo analytic 
+  useEffect(() => {
+    var _mtm = ((window as any)._mtm = (window as any)._mtm || []);
+    _mtm.push({ "mtm.startTime": new Date().getTime(), event: "mtm.Start" });
+    var d = document,
+      g = d.createElement("script"),
+      s = d.getElementsByTagName("script")[0];
+    g.async = true;
+    g.src =
+      "https://cdn.matomo.cloud/belmacs.matomo.cloud/container_S6xNr8a1.js";
+    if (s && s.parentNode) {
+      s.parentNode.insertBefore(g, s);
+    } else {
+      d.head.appendChild(g); // Append to the head as a fallback
+    }
+  }, []);
+
   return (
     <>
       <Navbar />
