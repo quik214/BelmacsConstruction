@@ -233,7 +233,7 @@ const EditPeople: React.FC = () => {
       editSuccessToast(person.name); 
       setTimeout(() => {
         navigate("/admin/about");
-      }, 1000); // navigate back to /admin/about after 1 second
+      }); // navigate back to /admin/about after 1 second
     } catch (error) {
       console.error("Error updating person: ", error);
       toast.error("Failed to update person."); // error update message
@@ -428,7 +428,7 @@ const EditPeople: React.FC = () => {
           </div>
         </form>
       )}
-      {editSuccess && <p>Director updated successfully!</p>}
+      
     </div>
   );
 };

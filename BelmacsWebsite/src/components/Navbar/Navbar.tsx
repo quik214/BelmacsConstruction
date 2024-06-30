@@ -19,6 +19,8 @@ import CloseIcon from "../../assets/Icons/close.svg";
 import MenuBlackIcon from "../../assets/Icons/menu-black.svg";
 import MenuWhiteIcon from "../../assets/Icons/menu-white.svg";
 
+import UserIcon from "../../assets/Icons/AdminDashboard/user-circle.svg";
+
 export default function Navbar() {
   const [navbar, setNavbar] = useState(false);
   const [logo, setLogo] = useState(false);
@@ -26,6 +28,22 @@ export default function Navbar() {
   const [authUser, setAuthUser] = useState<User | null>(null);
   const location = useLocation();
 
+  // for mobile dashboard dropdown
+
+  const [mobileDashboardDropdown, setMobileDashboardDropdown] = useState(false);
+
+  const toggleMobileDashboardDropdown = () => {
+    setMobileDashboardDropdown(!mobileDashboardDropdown);
+  };
+
+  // for mobile user view dashboard dropdown
+
+  const [mobileUserViewDashboardDropdown, setMobileUserViewDashboardDropdown] =
+    useState(false);
+
+  const toggleMobileUserViewDashboardDropdown = () => {
+    setMobileUserViewDashboardDropdown(!mobileUserViewDashboardDropdown);
+  };
   // for dashboard dropdown
 
   const [dashboardDropdown, setDashboardDropdownOpen] = useState(false);
@@ -43,21 +61,12 @@ export default function Navbar() {
     setUserViewDashboardDropdown(!userViewDashboardDropdown);
   };
 
-  // for mobile dashboard dropdown
+  // for acccount dropdown
 
-  const [mobileDashboardDropdown, setMobileDashboardDropdown] = useState(false);
+  const [accountDropdown, setAccountDropdown] = useState(false);
 
-  const toggleMobileDashboardDropdown = () => {
-    setMobileDashboardDropdown(!mobileDashboardDropdown);
-  };
-
-  // for mobile user view dashboard dropdown
-
-  const [mobileUserViewDashboardDropdown, setMobileUserViewDashboardDropdown] =
-    useState(false);
-
-  const toggleMobileUserViewDashboardDropdown = () => {
-    setMobileUserViewDashboardDropdown(!mobileUserViewDashboardDropdown);
+  const toggleAccountDropdown = () => {
+    setAccountDropdown(!accountDropdown);
   };
 
   useEffect(() => {
@@ -245,13 +254,28 @@ export default function Navbar() {
                   </div>
                 )}
               </div>
-              <Link
-                to="/"
-                onClick={handleSignOut}
-                className="nav-link hideOnMobile"
-              >
-                Sign Out
-              </Link>
+              <div className="dropdown">
+                <img
+                  src={UserIcon}
+                  alt="User Icon"
+                  className="nav-link hideOnMobile user-icon"
+                  onClick={toggleAccountDropdown}
+                />
+                {accountDropdown && (
+                  <div className="account-dropdown-content">
+                    <p className="dropdown-item email">
+                      <b>{authUser.email}</b>
+                    </p>
+                    <Link
+                      to="/"
+                      className="dropdown-item sign-out"
+                      onClick={handleSignOut}
+                    >
+                      Sign Out
+                    </Link>
+                  </div>
+                )}
+              </div>
             </div>
           )}
 
@@ -293,6 +317,7 @@ export default function Navbar() {
 
           {authUser && (
             <>
+              <div className="sidebar-link email"><b>{authUser?.email}</b></div>
               <div className="mobile-dropdown">
                 <Link
                   to="#"

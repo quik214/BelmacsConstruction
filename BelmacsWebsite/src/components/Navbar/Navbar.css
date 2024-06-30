@@ -48,6 +48,8 @@ body {
   transition: color 0.4s ease-in-out;
 }
 
+
+
 .navbar.active {
   background-color: white;
 }
@@ -61,6 +63,7 @@ body {
   color: #364fc7;
 }
 
+
 /* Menu Icon (Located as part of the original navbar) */
 .nav-sidebar-icon {
   display: none;
@@ -68,6 +71,7 @@ body {
   width: 26px;
   fill: white;
 }
+
 
 /* End of Navbar */
 
@@ -120,6 +124,10 @@ body {
   color: #364fc7;
 }
 
+.sidebar .sidebar-link.email:hover {
+  color: black;
+}
+
 /* Testing for adding in sliding animation */
 
 @keyframes slideInRight {
@@ -152,7 +160,8 @@ body {
 .hidden {
   display: none;
 }
-/* Dropdown Menu */
+
+/* ADMIN Dropdown Menu */
 .dropdown {
   position: relative;
 }
@@ -174,6 +183,18 @@ body {
   min-width: 120px; /* Ensure the dropdown has a minimum width same as the trigger */
 }
 
+.account-dropdown-content {
+  position: absolute;
+  top: 100%; /* Position right below the trigger */
+  right: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 1000;
+  min-width: 150px; /* Ensure the dropdown has a minimum width same as the trigger */
+}
+
 .dropdown-item {
   display: block;
   padding: 0.5rem 1rem;
@@ -184,13 +205,19 @@ body {
   font-size: 14px;
 }
 
+.dropdown-item.email:hover {
+  background-color: transparent;
+}
+
+.dropdown-item.sign-out {
+  color: red;
+}
+
 .dropdown-item:hover {
   background-color: #f1f1f1;
 }
 
-.admin-nav-container {
-  display: flex;
-}
+
 
 .mobile-dropdown {
   font-size: 14px;
@@ -201,4 +228,23 @@ body {
   margin-top: 30px;
 }
 .mobile-dropdown-content {
+}
+
+/* USER ICON */
+.user-icon {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+/* ADMIN CONTAINER */
+.admin-nav-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Styling for user icon */
+.nav-icon {
+  margin-right: 8px; /* Adjust spacing as needed */
+  height: 36px; /* Ensure the icon size fits well with the text */
+  width: 36px; /* Ensure the icon size fits well with the text */
 }

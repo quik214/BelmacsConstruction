@@ -120,7 +120,7 @@ const EditCompany = () => {
 
   // toast setup for login success
   const editSuccessToast = () => {
-    toast.success(<div>Successfully edited Company Details</div>, {
+    toast.success(<div>Successfully edited <b>Company Details</b></div>, {
       position: "bottom-right",
       autoClose: 2000,
       hideProgressBar: false,
