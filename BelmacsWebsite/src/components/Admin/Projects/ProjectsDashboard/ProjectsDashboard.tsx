@@ -28,6 +28,7 @@ interface Project {
   developer: string;
   awards: { id: string; title: string }[];
   type: string;
+  status: string;
   completion: string;
   client: string;
   location: string;
@@ -110,8 +111,8 @@ const Dashboard: React.FC = () => {
 
         // sort based on descending order of date
         data.sort((a, b) => {
-          const dateA: any = new Date(a.completion);
-          const dateB: any = new Date(b.completion);
+          const dateA = a.completion ? new Date(a.completion).getTime() : Infinity;
+          const dateB = b.completion ? new Date(b.completion).getTime() : Infinity;
           return dateB - dateA;
         });
 
@@ -274,6 +275,7 @@ const Dashboard: React.FC = () => {
               )}
               <th className="mobile-table">Awards</th>
               <th className="mobile-table">Type</th>
+              <th className="mobile-table">Status</th>
               <th className="mobile-table">Completion</th>
               {selectedType === "existingBuildingRetrofit" && (
                 <th className="mobile-table">Client</th>
@@ -304,6 +306,7 @@ const Dashboard: React.FC = () => {
                   </ul>
                 </td>
                 <td className="mobile-table">{projectItem.type}</td>
+                <td className="mobile-table">{projectItem.status}</td>
                 <td className="mobile-table">{projectItem.completion}</td>
                 {selectedType === "existingBuildingRetrofit" && (
                   <td className="mobile-table">{projectItem.client}</td>

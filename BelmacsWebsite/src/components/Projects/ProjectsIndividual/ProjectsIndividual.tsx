@@ -10,6 +10,8 @@ import { useParams, useLocation } from "react-router-dom";
 import Hero from "../../Hero/Hero";
 import { FaCheckCircle } from "react-icons/fa"; // Import an icon from react-icons
 
+import ProjectSkeleton from './ProjectSkeleton';
+
 interface Project {
   id: string;
   image: string;
@@ -24,8 +26,10 @@ interface Project {
 
 const ProjectList: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
-  const [displayedProjects, setDisplayedProjects] = useState<Project[]>([]);
   const [visibleCount, setVisibleCount] = useState(6);
+  const [ongoingProjects, setOngoingProjects] = useState<Project[]>([]);
+  const [completedProjects, setCompletedProjects] = useState<Project[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const { type } = useParams<{ type: string }>();
   const location = useLocation();
 
@@ -40,18 +44,21 @@ const ProjectList: React.FC = () => {
 
   useEffect(() => {
     const fetchAwards = async (projectId: string) => {
-      const awardsCollection = collection(db, `${type}-projects`, projectId, 'awards');
+      const awardsCollection = collection(
+        db,
+        `${type}-projects`,
+        projectId,
+        "awards"
+      );
       const awardsSnapshot = await getDocs(awardsCollection);
-      return awardsSnapshot.docs.map(doc => doc.id);
+      return awardsSnapshot.docs.map((doc) => doc.id);
     };
 
     const fetchDataFromFirestore = async () => {
       if (!type) return;
 
       try {
-        const querySnapshot = await getDocs(
-          collection(db, `${type}-projects`)
-        );
+        const querySnapshot = await getDocs(collection(db, `${type}-projects`));
 
         const data: Project[] = [];
         for (const doc of querySnapshot.docs) {
@@ -61,15 +68,26 @@ const ProjectList: React.FC = () => {
         }
 
         data.sort((a, b) => {
-          const dateA: any = new Date(a.completion);
-          const dateB: any = new Date(b.completion);
-          return dateB - dateA;
+          const dateA = a.completion
+            ? new Date(a.completion).getTime()
+            : Infinity;
+          const dateB = b.completion
+            ? new Date(b.completion).getTime()
+            : Infinity;
+          return dateA - dateB;
         });
 
         setProjects(data);
-        setDisplayedProjects(data.slice(0, visibleCount));
+
+        const ongoing = data.filter((project) => !project.completion);
+        const completed = data.filter((project) => project.completion);
+
+        setOngoingProjects(ongoing);
+        setCompletedProjects(completed);
       } catch (error) {
         console.error("Error fetching projects: ", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -81,17 +99,13 @@ const ProjectList: React.FC = () => {
   };
 
   useEffect(() => {
-    setDisplayedProjects(projects.slice(0, visibleCount));
-  }, [projects, visibleCount]);
-
-  useEffect(() => {
     if (observer.current) observer.current.disconnect();
 
     observer.current = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
+      if (entries[0].isIntersecting && !isLoading) {
         if (visibleCount < projects.length) {
           loadMoreProjects();
-        } else {
+        } else if (visibleCount >= projects.length) {
           setShowSentinel(true);
           setTimeout(() => {
             setShowSentinel(false);
@@ -105,7 +119,7 @@ const ProjectList: React.FC = () => {
     }
 
     return () => observer.current?.disconnect();
-  }, [visibleCount, projects.length]);
+  }, [visibleCount, projects.length, isLoading]);
 
   const handleCardClick = (project: Project) => {
     setSelectedProject(project);
@@ -123,29 +137,67 @@ const ProjectList: React.FC = () => {
     <div className="projects-individual">
       <Hero
         imageUrl={paramData.image}
-        heroText = {
+        heroText={
           paramData.title === "Existing Building Retrofit"
             ? paramData.title
             : paramData.title + " Projects"
         }
       />
       <div className="projects-individual-container">
-        <div className="projects-individual-grid-container">
-          {displayedProjects.map((projectItem) => (
-            <div
-              className="project-individual-card"
-              key={projectItem.id}
-              onClick={() => handleCardClick(projectItem)}
-            >
-              <img
-                className="project-individual-img"
-                src={projectItem.image}
-                alt={projectItem.name + " images"}
-              />
-              <p className="project-individual-title">{projectItem.name}</p>
+        {isLoading ? (
+          <div className="projects-individual-grid-container">
+            {Array(6)
+              .fill(0)
+              .map((_, index) => (
+                <ProjectSkeleton key={index} />
+              ))}
+          </div>
+        ) : (
+          <>
+            {ongoingProjects.length > 0 && (
+              <>
+                <div className="projects-individual-header">
+                  Ongoing Projects
+                </div>
+                <div className="projects-individual-grid-container">
+                  {ongoingProjects.map((projectItem) => (
+                    <div
+                      className="project-individual-card"
+                      key={projectItem.id}
+                      onClick={() => handleCardClick(projectItem)}
+                    >
+                      <img
+                        className="project-individual-img"
+                        src={projectItem.image}
+                        alt={projectItem.name + " images"}
+                      />
+                      <p className="project-individual-title">
+                        {projectItem.name}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+            <div className="projects-individual-header">Completed Projects</div>
+            <div className="projects-individual-grid-container">
+              {completedProjects.map((projectItem) => (
+                <div
+                  className="project-individual-card"
+                  key={projectItem.id}
+                  onClick={() => handleCardClick(projectItem)}
+                >
+                  <img
+                    className="project-individual-img"
+                    src={projectItem.image}
+                    alt={projectItem.name + " images"}
+                  />
+                  <p className="project-individual-title">{projectItem.name}</p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        )}
         <div
           ref={sentinelRef}
           className={`sentinel ${showSentinel ? "" : "sentinel-hidden"}`}
@@ -204,19 +256,20 @@ const ProjectList: React.FC = () => {
                     {selectedProject.client}
                   </div>
                 )}
-                {selectedProject.awards && selectedProject.awards.length > 0 && (
-                  <div className="project-popup-awards">
-                    <p style={{ color: "#364FC7" }}>
-                      Awards: <br />
-                    </p>
-                    {selectedProject.awards.map((award, index) => (
-                      <React.Fragment key={index}>
-                        - {award}
-                        <br />
-                      </React.Fragment>
-                    ))}
-                  </div>
-                )}
+                {selectedProject.awards &&
+                  selectedProject.awards.length > 0 && (
+                    <div className="project-popup-awards">
+                      <p style={{ color: "#364FC7" }}>
+                        Awards: <br />
+                      </p>
+                      {selectedProject.awards.map((award, index) => (
+                        <React.Fragment key={index}>
+                          - {award}
+                          <br />
+                        </React.Fragment>
+                      ))}
+                    </div>
+                  )}
                 {selectedProject.completion && (
                   <div className="project-popup-completion">
                     <p style={{ color: "#364FC7" }}>

@@ -1,11 +1,19 @@
 /* Large Screens */
 @media (min-width: 1700px) {
+  .projects-individual-header {
+    font-size: 2rem;
+  }
+
   .project-popup-content {
     height: 50%;
   }
 }
 
 @media (max-width: 1200px) {
+  .projects-individual-header {
+    font-size: 1.6rem;
+  }
+
   .project-popup-content {
     height: 45%;
   }
@@ -142,6 +150,10 @@
 
 /* Mobile */
 @media (max-width: 550px) {
+  .projects-individual-header {
+    font-size: 1.2rem;
+  }
+
   .projects-individual-grid-container {
     margin-top: 50px;
     margin-bottom: 50px;
