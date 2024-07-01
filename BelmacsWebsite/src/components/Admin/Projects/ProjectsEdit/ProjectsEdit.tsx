@@ -37,7 +37,7 @@ interface Project {
   name: string;
   developer: string;
   type: string;
-  status: "Completed" | "Ongoing";
+  status: string;
   completion: string;
   client: string;
   location: string;
@@ -59,9 +59,9 @@ const EditProject: React.FC = () => {
   const [selectedType, setSelectedType] = useState<string>( // useState for selectedType
     type || "residential" // if type is falsy, then we set selectedType to have the value of "residential"
   );
-  const [selectedYear, setSelectedYear] = useState<string | null>(null); // New state to handle year selection
+  const [selectedYear, setSelectedYear] = useState<string | "">(""); // New state to handle year selection
   const [editSuccess, setEditSuccess] = useState<boolean>(false);
-  const [status, setStatus] = useState<"Ongoing" | "Completed">("Ongoing"); // State for status // useState for editSuccess, currently set to false
+  const [status, setStatus] = useState<string | undefined>(undefined); // State for status // useState for editSuccess, currently set to false
   const navigate = useNavigate(); // function used for navigation (in later parts of code)
 
   // for form errors
@@ -139,7 +139,9 @@ const EditProject: React.FC = () => {
 
   // ** FUNCTION FOR FIELD CHANGE ** //
   const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> // event coming from <input> and <textarea> elements (depending on what is changed)
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    > // event coming from <input> and <textarea> elements (depending on what is changed)
     // the events trigger this function
   ) => {
     const { name, value } = event.target; // destructure the name and value from the elements, and assign to name and value
@@ -153,9 +155,26 @@ const EditProject: React.FC = () => {
   const handleDateChange = (date: Date | null) => {
     if (date) {
       const yearString = getYear(date).toString();
-      setSelectedYear(yearString);
+      // setSelectedYear(yearString);
       setProject((prevProject) =>
         prevProject ? { ...prevProject, completion: yearString } : null
+      );
+    }
+  };
+
+  const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newStatus = e.target.value as "Completed" | "Ongoing";
+    setStatus(newStatus);
+    if (newStatus === "Ongoing") {
+      setSelectedYear(""); // Clear selected year for 'Ongoing' status
+      setProject((prevProject) =>
+        prevProject ? { ...prevProject, status: newStatus, completion: "" } : null
+      );
+    } else {
+      const currentYear = new Date().getFullYear().toString();
+      setSelectedYear(currentYear); // Set selected year to current year for 'Completed' status
+      setProject((prevProject) =>
+        prevProject ? { ...prevProject, status: newStatus, completion: currentYear } : null
       );
     }
   };
@@ -295,7 +314,17 @@ const EditProject: React.FC = () => {
 
       // Add project details to the new collection
       const newProjectRef = doc(db, `${selectedType}-projects`, project.name); // create reference to collection with new name
-      await setDoc(newProjectRef, { ...project, image: imageUrl }); // set the data at the reference
+
+      if (status === "Ongoing") {
+        setSelectedYear("");
+      }
+
+      await setDoc(newProjectRef, {
+        ...project,
+        image: imageUrl,
+        status: status,
+        completion: selectedYear,
+      }); // set the data at the reference
 
       // Filter out empty awards
       const filteredAwards = awards.filter((award) => award.trim() !== "");
@@ -519,9 +548,7 @@ const EditProject: React.FC = () => {
               id="status"
               name="status"
               value={status}
-              onChange={(e) =>
-                setStatus(e.target.value as "Completed" | "Ongoing")
-              }
+              onChange={handleStatusChange}
               required
             >
               <option value="Ongoing">Ongoing</option>
