@@ -32,7 +32,7 @@ const Create: React.FC = () => {
     name: "",
     developer: "",
     type: "",
-    completion: "",
+    completion: new Date().getFullYear().toString(),
     client: "",
     location: "",
     featured: "no",
@@ -554,7 +554,7 @@ const Create: React.FC = () => {
               name="completion"
               selected={
                 projectDetails.completion
-                  ? new Date(parseInt(projectDetails.completion, 10))
+                  ? new Date(parseInt(projectDetails.completion, 10), 0, 1)
                   : null
               }
               onChange={handleChangeCompletion}

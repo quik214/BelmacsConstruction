@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { getYear } from "date-fns"; // Import getYear function
 import {
   doc,
   getDoc,
@@ -23,6 +24,10 @@ import "react-toastify/dist/ReactToastify.css";
 
 import "./ProjectsEdit.css";
 import "./ProjectsEdit-media.css";
+
+//date Picker
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 import ImagePlaceHolder from "../../../../assets/Icons/AdminDashboard/empty-image-placeholder.png";
 
@@ -53,6 +58,7 @@ const EditProject: React.FC = () => {
   const [selectedType, setSelectedType] = useState<string>( // useState for selectedType
     type || "residential" // if type is falsy, then we set selectedType to have the value of "residential"
   );
+  const [selectedYear, setSelectedYear] = useState<string | null>(null); // New state to handle year selection
   const [editSuccess, setEditSuccess] = useState<boolean>(false); // useState for editSuccess, currently set to false
   const navigate = useNavigate(); // function used for navigation (in later parts of code)
 
@@ -80,7 +86,7 @@ const EditProject: React.FC = () => {
           const projectData = docSnap.data() as Project; // set projectData to be a Project object that essentially cotains all the data from the snapshot
           setProject(projectData); // set the project to be projectData using setProject (which we will later display in the HTML)
           setOriginalImageUrl(projectData.image);
-
+          setSelectedYear(projectData.completion);
           // Fetch awards from sub-collection
           const awardsCollectionRef = collection(docRef, "awards"); // assign the awardsCollectionRef variable to reference the awards collection in docRef
           const awardsSnapshot = await getDocs(awardsCollectionRef); // get a snapshot of the data in the awards collection
@@ -137,6 +143,17 @@ const EditProject: React.FC = () => {
     if (project) {
       // if project exists (used to ensure that the project is not undefined or null before updating its state)
       setProject({ ...project, [name]: value }); // use existing key-value (values) in project, and set the key with name to the value
+    }
+  };
+
+  // ** FUNCTION FOR completion date CHANGE ** //
+  const handleDateChange = (date: Date | null) => {
+    if (date) {
+      const yearString = getYear(date).toString();
+      setSelectedYear(yearString);
+      setProject((prevProject) =>
+        prevProject ? { ...prevProject, completion: yearString } : null
+      );
     }
   };
 
@@ -494,12 +511,14 @@ const EditProject: React.FC = () => {
 
           <div className="edit-field">
             <label className="edit-field-header">Completion</label>
-
-            <input
-              type="text"
-              name="completion"
-              value={project.completion}
-              onChange={handleInputChange}
+            <DatePicker
+              selected={
+                selectedYear ? new Date(Number(selectedYear), 0, 1) : null
+              }
+              onChange={handleDateChange}
+              showYearPicker
+              dateFormat="yyyy"
+              className="edit-input"
             />
           </div>
 
