@@ -32,6 +32,7 @@ const Create: React.FC = () => {
     name: "",
     developer: "",
     type: "",
+    status: "completed",
     completion: new Date().getFullYear().toString(),
     client: "",
     location: "",
@@ -56,6 +57,7 @@ const Create: React.FC = () => {
     name: "",
     developer: "",
     type: "",
+    status: "",
     completion: "",
     client: "",
     location: "",
@@ -168,6 +170,7 @@ const Create: React.FC = () => {
       name: "",
       developer: "",
       type: "",
+      status: "",
       completion: "",
       client: "",
       location: "",
@@ -216,6 +219,11 @@ const Create: React.FC = () => {
     // then we set the error message to be the below string
     if (!imageFile) {
       newErrors.image = "Image file is required";
+      isValid = false;
+    }
+
+    if (!projectDetails.status.trim()) {
+      newErrors.status = "Status is required";
       isValid = false;
     }
 
@@ -546,26 +554,48 @@ const Create: React.FC = () => {
           </div>
 
           <div className="create-field">
-            <label htmlFor="completion" className="create-field-header">
-              Completion Date
+            <label htmlFor="status" className="create-field-header">
+              Status
             </label>
-            <DatePicker
-              id="completion"
-              name="completion"
-              selected={
-                projectDetails.completion
-                  ? new Date(parseInt(projectDetails.completion, 10), 0, 1)
-                  : null
-              }
-              onChange={handleChangeCompletion}
-              dateFormat="yyyy"
-              showYearPicker
-              className="create-input"
-            />
-            {errors.completion && (
-              <p className="error-msg">{errors.completion}</p>
-            )}
+            <select
+              className={`create-project-status ${
+                errors.status && "is-invalid"
+              }`}
+              id="status"
+              name="status"
+              value={projectDetails.status}
+              onChange={handleChange}
+            >
+              <option value="completed">Completed</option>
+              <option value="ongoing">Ongoing</option>
+            </select>
+            {errors.type && <p className="error-msg">{errors.type}</p>}
           </div>
+
+          {projectDetails.status !== "ongoing" && (
+            <div className="create-field">
+              <label htmlFor="completion" className="create-field-header">
+                Completion Date
+              </label>
+              <DatePicker
+                id="completion"
+                name="completion"
+                selected={
+                  projectDetails.completion
+                    ? new Date(parseInt(projectDetails.completion, 10), 0, 1)
+                    : null
+                }
+                onChange={handleChangeCompletion}
+                dateFormat="yyyy"
+                showYearPicker
+                className="create-input"
+              />
+
+              {errors.completion && (
+                <p className="error-msg">{errors.completion}</p>
+              )}
+            </div>
+          )}
 
           <div className="create-field">
             {projectDetails.ProjectType === "existingBuildingRetrofit" && (

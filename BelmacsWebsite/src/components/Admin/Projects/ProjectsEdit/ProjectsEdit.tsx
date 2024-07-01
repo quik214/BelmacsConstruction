@@ -37,6 +37,7 @@ interface Project {
   name: string;
   developer: string;
   type: string;
+  status: "completed" | "ongoing";
   completion: string;
   client: string;
   location: string;
@@ -59,7 +60,8 @@ const EditProject: React.FC = () => {
     type || "residential" // if type is falsy, then we set selectedType to have the value of "residential"
   );
   const [selectedYear, setSelectedYear] = useState<string | null>(null); // New state to handle year selection
-  const [editSuccess, setEditSuccess] = useState<boolean>(false); // useState for editSuccess, currently set to false
+  const [editSuccess, setEditSuccess] = useState<boolean>(false);
+  const [status, setStatus] = useState<"ongoing" | "completed">("ongoing"); // State for status // useState for editSuccess, currently set to false
   const navigate = useNavigate(); // function used for navigation (in later parts of code)
 
   // for form errors
@@ -86,6 +88,7 @@ const EditProject: React.FC = () => {
           const projectData = docSnap.data() as Project; // set projectData to be a Project object that essentially cotains all the data from the snapshot
           setProject(projectData); // set the project to be projectData using setProject (which we will later display in the HTML)
           setOriginalImageUrl(projectData.image);
+          setStatus(projectData.status);
           setSelectedYear(projectData.completion);
           // Fetch awards from sub-collection
           const awardsCollectionRef = collection(docRef, "awards"); // assign the awardsCollectionRef variable to reference the awards collection in docRef
@@ -510,17 +513,35 @@ const EditProject: React.FC = () => {
           </div>
 
           <div className="edit-field">
-            <label className="edit-field-header">Completion</label>
-            <DatePicker
-              selected={
-                selectedYear ? new Date(Number(selectedYear), 0, 1) : null
+            <label className="edit-field-header">Status</label>
+            <select
+              className="edit-project-status"
+              id="status"
+              name="status"
+              value={status}
+              onChange={(e) =>
+                setStatus(e.target.value as "completed" | "ongoing")
               }
-              onChange={handleDateChange}
-              showYearPicker
-              dateFormat="yyyy"
-              className="edit-input"
-            />
+              required
+            >
+              <option value="ongoing">Ongoing</option>
+              <option value="completed">Completed</option>
+            </select>
           </div>
+          {status !== "ongoing" && (
+            <div className="edit-field">
+              <label className="edit-field-header">Completion</label>
+              <DatePicker
+                selected={
+                  selectedYear ? new Date(Number(selectedYear), 0, 1) : null
+                }
+                onChange={handleDateChange}
+                showYearPicker
+                dateFormat="yyyy"
+                className="edit-input"
+              />
+            </div>
+          )}
 
           {selectedType === "existingBuildingRetrofit" && (
             <div className="edit-field">
