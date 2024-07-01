@@ -62,7 +62,8 @@ const People: React.FC = () => {
           className={`people-grid-container ${
             peopleCount === 5 ? 'five' :
             peopleCount === 6 ? 'six' :
-            peopleCount >= 7 ? 'seven' :
+            peopleCount === 7 ? 'seven' :
+            peopleCount >= 8 ? 'eight' :
             'default'
           }`}
         >

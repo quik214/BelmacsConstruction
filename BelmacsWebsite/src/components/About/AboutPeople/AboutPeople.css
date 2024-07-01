@@ -36,11 +36,17 @@
   column-gap: 25px;
 }
 
-/* Layout for 7 or more people */
+/* Layout for 7  people */
 .people-grid-container.seven {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  column-gap: 25px;
+}
+
+/* Layout for 8 or more people */
+.people-grid-container.eight {
+  grid-template-columns: repeat(4, 1fr);
   column-gap: 25px;
 }
 
