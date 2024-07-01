@@ -5,7 +5,7 @@ import "./ProjectsIndividual-media.css";
 import React, { useState, useEffect, useRef } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../../firebase";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import Hero from "../../Hero/Hero";
 import { FaCheckCircle } from "react-icons/fa"; // Import an icon from react-icons
@@ -39,9 +39,6 @@ const ProjectList: React.FC = () => {
   const [completedProjects, setCompletedProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { type } = useParams<{ type: string }>();
-  const location = useLocation();
-
-  const { paramData } = location.state || {};
 
   const observer = useRef<IntersectionObserver | null>(null);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
@@ -145,18 +142,22 @@ const ProjectList: React.FC = () => {
     <div className="projects-individual">
       <Hero
         imageUrl={
-          paramData.title === "Residential" ? ResidentialImage :
-          paramData.title === "Commercial" ? CommercialImage :
-          paramData.title === "Institutional" ? InstitutionalImage :
-          paramData.title === "Existing Building Retrofit" ? ExisitingBuildingRetrofitImage :
-          paramData.title === "Infrastructure" ? InfrastructureImage :
-          paramData.title === "Industrial" ? IndustrialImage :
+          type === "residential" ? ResidentialImage :
+          type === "commercial" ? CommercialImage :
+          type === "institutional" ? InstitutionalImage :
+          type === "existingBuildingRetrofit" ? ExisitingBuildingRetrofitImage :
+          type === "infrastructure" ? InfrastructureImage :
+          type === "industrial" ? IndustrialImage :
           ResidentialImage
         }
         heroText={
-          paramData.title === "Existing Building Retrofit"
-            ? paramData.title
-            : paramData.title + " Projects"
+          type === "residential" ? "Residential Projects":
+          type === "commercial" ? "Commercial Projects":
+          type === "institutional" ? "Institutional Projects":
+          type === "existingBuildingRetrofit" ? "Existing Building Retrofit":
+          type === "infrastructure" ? "Infrastructure Projects":
+          type === "industrial" ? "Industrial Projects":
+          "Projects"
         }
       />
       <div className="projects-individual-container">
