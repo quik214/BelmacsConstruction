@@ -155,7 +155,7 @@ const EditProject: React.FC = () => {
   const handleDateChange = (date: Date | null) => {
     if (date) {
       const yearString = getYear(date).toString();
-      // setSelectedYear(yearString);
+      setSelectedYear(yearString);
       setProject((prevProject) =>
         prevProject ? { ...prevProject, completion: yearString } : null
       );
@@ -315,9 +315,6 @@ const EditProject: React.FC = () => {
       // Add project details to the new collection
       const newProjectRef = doc(db, `${selectedType}-projects`, project.name); // create reference to collection with new name
 
-      if (status === "Ongoing") {
-        setSelectedYear("");
-      }
 
       await setDoc(newProjectRef, {
         ...project,
