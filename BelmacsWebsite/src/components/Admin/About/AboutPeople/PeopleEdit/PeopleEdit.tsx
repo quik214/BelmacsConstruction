@@ -40,7 +40,7 @@ const EditPeople: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string | File | null>( // useState to set the selectedImage
     null
   );
-  const [editSuccess, setEditSuccess] = useState<boolean>(false); // useState for editSuccess, currently set to false
+
   const navigate = useNavigate(); // function used for navigation (in later parts of code)
 
   // for form errors
@@ -229,8 +229,7 @@ const EditPeople: React.FC = () => {
         await deleteDoc(oldDocRef); // delete the document at the reference location
       }
 
-      setEditSuccess(true); // set editSuccess to true (indicating successful edit)
-      editSuccessToast(person.name); 
+      editSuccessToast(person.name);
       setTimeout(() => {
         navigate("/admin/about");
       }); // navigate back to /admin/about after 1 second
@@ -326,8 +325,11 @@ const EditPeople: React.FC = () => {
                     alt="New Image"
                     className="new-person-img"
                     onClick={() =>
-                      (document.getElementById('upload-image-input') as HTMLInputElement)
-                        .click()
+                      (
+                        document.getElementById(
+                          "upload-image-input"
+                        ) as HTMLInputElement
+                      ).click()
                     }
                   />
                 </div>
@@ -428,7 +430,6 @@ const EditPeople: React.FC = () => {
           </div>
         </form>
       )}
-      
     </div>
   );
 };
