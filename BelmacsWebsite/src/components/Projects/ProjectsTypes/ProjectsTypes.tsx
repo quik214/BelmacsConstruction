@@ -4,15 +4,6 @@ import "./ProjectsTypes-media.css";
 
 import { useNavigate } from "react-router-dom";
 
-/* Hero Images to pass */
-/* Only Residential image is good, the rest needs to change */
-import ResidentialImage from "../../../assets/Projects/HeroImages/ResidentialHero.jpg";
-import CommercialImage from "../../../assets/Projects/HeroImages/CommercialHero.jpg";
-import InstitutionalImage from "../../../assets/Projects/HeroImages/InstitutionalHero.jpg";
-import ExisitingBuildingRetrofitImage from "../../../assets/Projects/HeroImages/ExistingBuildingHero.jpg";
-import InfrastructureImage from "../../../assets/Projects/HeroImages/InfrastructureHero.jpg";
-import IndustrialImage from "../../../assets/Projects/HeroImages/IndustrialHero.jpg";
-
 export type projectTypeItem = {
   title?: string;
   image?: string;
@@ -22,32 +13,26 @@ export type projectTypeItem = {
 export const projectTypes: projectTypeItem[] = [
   {
     title: "Residential",
-    image: ResidentialImage,
     path: "residential",
   },
   {
     title: "Commercial",
-    image: CommercialImage,
     path: "commercial",
   },
   {
     title: "Infrastructure",
-    image: InfrastructureImage,
     path: "infrastructure",
   },
   {
     title: "Existing Building Retrofit",
-    image: ExisitingBuildingRetrofitImage,
     path: "existingBuildingRetrofit",
   },
   {
     title: "Institutional",
-    image: InstitutionalImage,
     path: "institutional",
   },
   {
     title: "Industrial",
-    image: IndustrialImage,
     path: "industrial",
   },
 ];

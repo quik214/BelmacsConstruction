@@ -12,6 +12,13 @@ import { FaCheckCircle } from "react-icons/fa"; // Import an icon from react-ico
 
 import ProjectSkeleton from './ProjectSkeleton';
 
+import ResidentialImage from "../../../assets/Projects/HeroImages/ResidentialHero.jpg";
+import CommercialImage from "../../../assets/Projects/HeroImages/CommercialHero.jpg";
+import InstitutionalImage from "../../../assets/Projects/HeroImages/InstitutionalHero.jpg";
+import ExisitingBuildingRetrofitImage from "../../../assets/Projects/HeroImages/ExistingBuildingHero.jpg";
+import InfrastructureImage from "../../../assets/Projects/HeroImages/InfrastructureHero.jpg";
+import IndustrialImage from "../../../assets/Projects/HeroImages/IndustrialHero.jpg";
+
 interface Project {
   id: string;
   image: string;
@@ -19,6 +26,7 @@ interface Project {
   developer: string;
   awards: string[];
   type: string;
+  status: string;
   completion: string;
   client: string;
   location: string;
@@ -136,7 +144,15 @@ const ProjectList: React.FC = () => {
   return (
     <div className="projects-individual">
       <Hero
-        imageUrl={paramData.image}
+        imageUrl={
+          paramData.title === "Residential" ? ResidentialImage :
+          paramData.title === "Commercial" ? CommercialImage :
+          paramData.title === "Institutional" ? InstitutionalImage :
+          paramData.title === "Existing Building Retrofit" ? ExisitingBuildingRetrofitImage :
+          paramData.title === "Infrastructure" ? InfrastructureImage :
+          paramData.title === "Industrial" ? IndustrialImage :
+          ResidentialImage
+        }
         heroText={
           paramData.title === "Existing Building Retrofit"
             ? paramData.title
@@ -270,6 +286,14 @@ const ProjectList: React.FC = () => {
                       ))}
                     </div>
                   )}
+                {selectedProject.status && (
+                  <div className="project-popup-status">
+                    <p style={{ color: "#364FC7" }}>
+                      Status: <br />
+                    </p>
+                    {selectedProject.status}
+                  </div>
+                )}
                 {selectedProject.completion && (
                   <div className="project-popup-completion">
                     <p style={{ color: "#364FC7" }}>
