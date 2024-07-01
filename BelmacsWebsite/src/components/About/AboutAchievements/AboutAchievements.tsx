@@ -93,8 +93,8 @@ const AboutAchievements = () => {
       await loadSlim(engine);
     });
   }, []);
-  const particlesLoaded = async (container?: Container): Promise<void> => {
-    console.log(container);
+  const particlesLoaded = async (_container?: Container): Promise<void> => {
+    
   };
   const particlesOptions: ISourceOptions =
     particlesJSON as unknown as ISourceOptions;

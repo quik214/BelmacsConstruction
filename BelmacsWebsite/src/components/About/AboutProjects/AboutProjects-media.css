@@ -28,25 +28,26 @@
     font-size: 0.7rem;
   }
 
-  .card-header , .card-desc-container, .award-item {
+  .card-header,
+  .card-desc-container,
+  .award-item {
     padding-left: 10px;
   }
 
-  .ribbon{
+  .ribbon {
     top: 10px;
     line-height: 20px;
-	  height: 22px;
+    height: 22px;
     font-size: 0.7rem;
   }
 
-  .ribbon-edge:before{
+  .ribbon-edge:before {
     border-width: 13px 8px;
-}
+  }
 }
 
 /* Tablets */
 @media (max-width: 900px) {
-  
 }
 
 /* Smaller Tablets */
@@ -67,15 +68,19 @@
     height: 11rem;
   }
 
-  .ribbon{
+  .ribbon {
     line-height: 18px;
-	  height: 20px;
+    height: 20px;
     font-size: 0.6rem;
   }
 
-  .ribbon-edge:before{
+  .ribbon-edge:before {
     border-width: 12px 8px;
-}
+  }
+  
+  .card-desc-container {
+    margin-bottom: -2px;
+  }
 }
 
 /* Mobile */
@@ -88,18 +93,15 @@
     height: 10rem;
   }
 
-  .ribbon{
+  .ribbon {
     line-height: 16px;
-	  height:16px;
+    height: 16px;
   }
 
-  .ribbon-edge:before{
+  .ribbon-edge:before {
     left: -8px;
     border-width: 10px 8px;
-}
-
-
-
+  }
 }
 
 /* Small Mobile */
@@ -107,6 +109,4 @@
   .card-header {
     font-size: 0.8rem;
   }
-
-
 }

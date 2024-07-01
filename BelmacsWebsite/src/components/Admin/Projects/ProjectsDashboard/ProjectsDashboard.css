@@ -62,6 +62,10 @@
   margin-bottom: 4px; /* Adjust as needed to separate each award */
 }
 
+.awards-list {
+  text-wrap: wrap;
+}
+
 .add-project-ctr {
   display: flex;
   margin-left: auto;

@@ -15,6 +15,10 @@ import ImagePlaceHolder from "../../../../assets/Icons/AdminDashboard/empty-imag
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// Import DateTimePicker
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 const Create: React.FC = () => {
   // ** OBJECT DECLARATION **
 
@@ -389,6 +393,16 @@ const Create: React.FC = () => {
     }
   };
 
+  // for year picker
+  const handleChangeCompletion = (date: Date | null) => {
+    if (date) {
+      setProjectDetails((prevDetails) => ({
+        ...prevDetails,
+        completion: date.getFullYear().toString(),
+      }));
+    }
+  };
+
   return (
     <div className="create-project-ctr">
       <div className="create-project-form-ctr">
@@ -535,13 +549,17 @@ const Create: React.FC = () => {
             <label htmlFor="completion" className="create-field-header">
               Completion Date
             </label>
-            <input
+            <DatePicker
               id="completion"
-              type="text"
               name="completion"
-              placeholder="Completion Date"
-              value={projectDetails.completion}
-              onChange={handleChange}
+              selected={
+                projectDetails.completion
+                  ? new Date(parseInt(projectDetails.completion, 10))
+                  : null
+              }
+              onChange={handleChangeCompletion}
+              dateFormat="yyyy"
+              showYearPicker
               className="create-input"
             />
             {errors.completion && (

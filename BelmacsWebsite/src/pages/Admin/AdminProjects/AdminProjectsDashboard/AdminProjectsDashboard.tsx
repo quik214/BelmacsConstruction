@@ -4,7 +4,7 @@ import AdminProjectsDashboard from "../../../../components/Admin/Projects/Projec
 
 export default function AdminDashboard() {
   return (
-    <div className="container">
+    <div className="admin-container">
       <AdminProjectsDashboard />
     </div>
   );

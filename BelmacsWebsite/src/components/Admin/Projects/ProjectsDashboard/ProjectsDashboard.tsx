@@ -296,10 +296,10 @@ const Dashboard: React.FC = () => {
                 {selectedType !== "existingBuildingRetrofit" && (
                   <td className="mobile-table">{projectItem.developer}</td>
                 )}
-                <td className="mobile-table">
+                <td className="mobile-table awards">
                   <ul className="awards-list">
                     {projectItem.awards.map((award) => (
-                      <li key={award.id}>{award.title}</li>
+                      <li key={award.id} className="award-title">{award.title}</li>
                     ))}
                   </ul>
                 </td>
