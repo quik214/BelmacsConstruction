@@ -37,7 +37,7 @@ interface Project {
   name: string;
   developer: string;
   type: string;
-  status: "completed" | "ongoing";
+  status: "Completed" | "Ongoing";
   completion: string;
   client: string;
   location: string;
@@ -61,7 +61,7 @@ const EditProject: React.FC = () => {
   );
   const [selectedYear, setSelectedYear] = useState<string | null>(null); // New state to handle year selection
   const [editSuccess, setEditSuccess] = useState<boolean>(false);
-  const [status, setStatus] = useState<"ongoing" | "completed">("ongoing"); // State for status // useState for editSuccess, currently set to false
+  const [status, setStatus] = useState<"Ongoing" | "Completed">("Ongoing"); // State for status // useState for editSuccess, currently set to false
   const navigate = useNavigate(); // function used for navigation (in later parts of code)
 
   // for form errors
@@ -520,15 +520,15 @@ const EditProject: React.FC = () => {
               name="status"
               value={status}
               onChange={(e) =>
-                setStatus(e.target.value as "completed" | "ongoing")
+                setStatus(e.target.value as "Completed" | "Ongoing")
               }
               required
             >
-              <option value="ongoing">Ongoing</option>
-              <option value="completed">Completed</option>
+              <option value="Ongoing">Ongoing</option>
+              <option value="Completed">Completed</option>
             </select>
           </div>
-          {status !== "ongoing" && (
+          {status !== "Ongoing" && (
             <div className="edit-field">
               <label className="edit-field-header">Completion</label>
               <DatePicker

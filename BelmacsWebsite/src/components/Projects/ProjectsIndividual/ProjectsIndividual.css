@@ -183,7 +183,8 @@
 .project-popup-content .project-popup-location,
 .project-popup-content .project-popup-developer,
 .project-popup-content .project-popup-client,
-.project-popup-content .project-popup-awards{
+.project-popup-content .project-popup-awards,
+.project-popup-content .project-popup-status{
   font-size: 1.1rem;
   margin-bottom: 20px;
 }

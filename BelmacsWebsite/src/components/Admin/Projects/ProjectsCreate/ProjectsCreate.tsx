@@ -32,7 +32,7 @@ const Create: React.FC = () => {
     name: "",
     developer: "",
     type: "",
-    status: "completed",
+    status: "Completed",
     completion: new Date().getFullYear().toString(),
     client: "",
     location: "",
@@ -104,13 +104,26 @@ const Create: React.FC = () => {
     // think of it as on change of a certain element (stated above), we will constantly pass in the element's details, of which includes the above
   ) => {
     const { name, value } = e.target; // destructure target into name and value variables
-    setProjectDetails((prevDetails) => ({
-      // set the projectDetails to take in its prevDetails (previous state, prior to this function being called)
-      ...prevDetails, // every value from the previous state is copied over to the new state
-      [name]: value, // but for the property name in projectDetails, it will be set to the value of the element that is being edited
-      // this means that each field in the form has a name that matches the projectDetails object property
-      // and it will take the value entered into the field, and be used here in this function to update the new state
-    }));
+    setProjectDetails((prevDetails) => {
+      const newDetails = {
+        // set the projectDetails to take in its prevDetails (previous state, prior to this function being called)
+        ...prevDetails, // every value from the previous state is copied over to the new state
+        [name]: value, // but for the property name in projectDetails, it will be set to the value of the element that is being edited
+        // this means that each field in the form has a name that matches the projectDetails object property
+        // and it will take the value entered into the field, and be used here in this function to update the new state
+      };
+
+      // Check if the 'status' field was changed
+      if (name === "status") {
+        if (value === "Ongoing") {
+          newDetails.completion = ""; // Set completion to null for 'Ongoing' status
+        } else if (value === "Completed") {
+          newDetails.completion = new Date().getFullYear().toString(); // Set completion to this year's date for 'Completed' status
+        }
+      }
+
+      return newDetails;
+    });
   };
 
   // ** FUNCTION TO NAVIGATE TO PREVIOUS PAGE ** //
@@ -196,7 +209,7 @@ const Create: React.FC = () => {
 
     // trim the projectDetails completion, check if it is empty
     // then we set the error message to be the below string
-    if (!projectDetails.completion.trim()) {
+    if (projectDetails.status === "Completed" && !projectDetails.completion) {
       newErrors.completion = "Completion date is required";
       isValid = false;
     }
@@ -363,7 +376,8 @@ const Create: React.FC = () => {
           // along with the data object containing the data to be written to the document
           await setDoc(projectRef, {
             ...filteredDetails, // set the object to have filteredDetails
-            image: downloadURL, // along with the image URL
+            image: downloadURL, // along with the image URL 
+            completion: projectDetails.completion, // Ensure completion field is included
           });
 
           // Save awards as sub-collection
@@ -566,13 +580,13 @@ const Create: React.FC = () => {
               value={projectDetails.status}
               onChange={handleChange}
             >
-              <option value="completed">Completed</option>
-              <option value="ongoing">Ongoing</option>
+              <option value="Completed">Completed</option>
+              <option value="Ongoing">Ongoing</option>
             </select>
-            {errors.type && <p className="error-msg">{errors.type}</p>}
+            {errors.status && <p className="error-msg">{errors.status}</p>}
           </div>
 
-          {projectDetails.status !== "ongoing" && (
+          {projectDetails.status !== "Ongoing" && (
             <div className="create-field">
               <label htmlFor="completion" className="create-field-header">
                 Completion Date
