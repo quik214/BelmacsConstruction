@@ -17,22 +17,26 @@
 }
 
 /* Tablets */
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .edit-award-input-ctr {
     width: 100%;
+  }
+
+  .edit-current-new-project-img-ctr {
+    flex-direction: column;
+  }
+
+  .edit-new-project-img-ctr {
+    margin-left: 0px;
   }
 }
 
 /* Smaller Tablets */
 @media (max-width: 700px) {
-  .edit-new-project-img-ctr {
-    margin-left: 50px;
-  }
-
   .current-project-img,
   .new-project-img {
-    width: 189px;
-    height: 265px;
+    width: 250px;
+    height: 175px;
     margin-top: 10px;
   }
 }
@@ -49,17 +53,14 @@
     width: 100%;
   }
 
-  .current-project-img,
-  .new-project-img {
-    width: 120px;
-    height: 150px;
-  }
+ 
 }
 
 /* Small Mobile */
 @media (max-width: 390px) {
-  .edit-new-project-img-ctr {
-    margin-left: 15px;
+  .current-project-img,
+  .new-project-img {
+    width: 150px;
+    height: 125px;
   }
 }
-

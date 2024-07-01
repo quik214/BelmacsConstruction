@@ -9,7 +9,7 @@ import { setDoc, doc, collection } from "firebase/firestore";
 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-import ImagePlaceHolder from "../../../../assets/Icons/AdminDashboard/empty-image-placeholder.png";
+import ImagePlaceHolder from "../../../../assets/Admin/placeholder-landscape.png";
 
 // toast library
 import { toast } from "react-toastify";

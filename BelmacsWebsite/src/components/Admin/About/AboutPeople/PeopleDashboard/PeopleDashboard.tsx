@@ -1,17 +1,12 @@
 import "./PeopleDashboard.css";
 import "./PeopleDashboard-media.css";
 
-import EditIcon from "../../../../../assets/Icons/AdminDashboard/pencil-simple.svg"
+import EditIcon from "../../../../../assets/Icons/AdminDashboard/pencil-simple.svg";
 import DeleteIcon from "../../../../../assets/Icons/AdminDashboard/trash.svg";
 
 import React, { useState, useEffect } from "react";
-import {
-  getDocs,
-  collection,
-  deleteDoc,
-  doc,
-} from "firebase/firestore";
-import { db , storage } from "../../../../../firebase";
+import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
+import { db, storage } from "../../../../../firebase";
 import { useNavigate } from "react-router-dom";
 import { ref, deleteObject } from "firebase/storage";
 
@@ -63,7 +58,9 @@ const PeopleDashboard: React.FC = () => {
       try {
         const peopleCollectionRef = collection(db, "about-people");
         const querySnapshot = await getDocs(peopleCollectionRef);
-        const peopleData = querySnapshot.docs.map((doc) => doc.data() as People);
+        const peopleData = querySnapshot.docs.map(
+          (doc) => doc.data() as People
+        );
         setPeople(peopleData);
       } catch (error) {
         console.error("Error fetching People collection: ", error);
@@ -81,23 +78,18 @@ const PeopleDashboard: React.FC = () => {
 
   // handles delete function
   const handleDelete = (people: People) => {
-  setSelectedPeople(people); // push selected People data into selectedPeople variable
-  setShowDeleteConfirmation(true); // display delete pop up
+    setSelectedPeople(people); // push selected People data into selectedPeople variable
+    setShowDeleteConfirmation(true); // display delete pop up
   };
 
   const confirmDelete = async () => {
     if (!selectedPeople) return; // ensure selectedPeople both exist (for below parts)
     try {
-
       // Delete firestore storage image
       const imageRef = ref(storage, selectedPeople.image);
       await deleteObject(imageRef);
 
-      const peopleRef = doc(
-        db,
-        `about-people`,
-        selectedPeople.name
-      ); // assign peopleRef variable the People document (within Firebase)
+      const peopleRef = doc(db, `about-people`, selectedPeople.name); // assign peopleRef variable the People document (within Firebase)
 
       // Delete firestore data using details in peopleRef
       await deleteDoc(peopleRef);
@@ -127,11 +119,11 @@ const PeopleDashboard: React.FC = () => {
 */
 
   const handleAddPeople = () => {
-    navigate(`/admin/about/people/create`)
+    navigate(`/admin/about/people/create`);
   };
 
   const createNewLine = (companyDesc: string) => {
-    return companyDesc.split('\n').map((line, index) => (
+    return companyDesc.split("\n").map((line, index) => (
       <React.Fragment key={index}>
         {line}
         <br />
@@ -139,12 +131,10 @@ const PeopleDashboard: React.FC = () => {
     ));
   };
 
-
-return (
+  return (
     <div className="person-ctr">
-      <div className="person-header">Our People</div>
-
-      <div className="add-person-ctr">
+      <div className="header-button-ctr">
+        <div className="person-header">Our People</div>
         <button className="add-person-button" onClick={handleAddPeople}>
           Add Director
         </button>
@@ -159,7 +149,9 @@ return (
                 <th>Name</th>
                 <th className="mobile-table">Position</th>
                 <th className="mobile-table">Qualifications</th>
-                <th className="person-table-description mobile-table">Description</th>
+                <th className="person-table-description mobile-table">
+                  Description
+                </th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -180,7 +172,7 @@ return (
                     <p>{person.position}</p>
                   </td>
                   <td className="mobile-table">
-                  {person.qualifications.length > 0 ? (
+                    {person.qualifications.length > 0 ? (
                       person.qualifications.map((qualification, qIndex) => (
                         <p key={qIndex}>- {qualification}</p>
                       ))
@@ -199,11 +191,11 @@ return (
                       <img src={EditIcon} alt="Edit" className="action-icons" />
                     </button>
                     <button
-                    className="action-button delete-button"
-                    onClick={() => handleDelete(person)}
-                  >
-                    <img src={DeleteIcon} className="action-icons" />
-                  </button>
+                      className="action-button delete-button"
+                      onClick={() => handleDelete(person)}
+                    >
+                      <img src={DeleteIcon} className="action-icons" />
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -211,7 +203,7 @@ return (
           </table>
         )}
       </div>
-      
+
       {showDeleteConfirmation && selectedPeople && (
         <>
           <div className="delete-overlay"></div>
@@ -220,9 +212,7 @@ return (
               <div className="delete-confirmation-header">Are you sure?</div>
               <div className="delete-confirmation-description">
                 Are you sure you want to delete{" "}
-                <span style={{ color: "#364FC7" }}>
-                  {selectedPeople.name}?
-                </span>{" "}
+                <span style={{ color: "#364FC7" }}>{selectedPeople.name}?</span>{" "}
                 This action cannot be undone.
               </div>
 

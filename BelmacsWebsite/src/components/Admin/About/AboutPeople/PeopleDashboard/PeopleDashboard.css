@@ -57,10 +57,10 @@
     margin-bottom: 4px; /* Adjust as needed to separate each award */
   }
   
-  .add-person-ctr {
+  .header-button-ctr {
     display: flex;
-    margin-left: auto;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
   }
   
   .add-person-button {

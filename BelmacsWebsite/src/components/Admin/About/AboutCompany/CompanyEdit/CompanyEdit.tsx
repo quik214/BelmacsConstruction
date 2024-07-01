@@ -14,7 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 // for placeholder image
 
-import ImagePlaceHolder from "../../../../../assets/Icons/AdminDashboard/empty-image-placeholder.png";
+import ImagePlaceHolder from "../../../../../assets/Admin/placeholder-landscape.png";
 
 const EditCompany = () => {
   interface Company {

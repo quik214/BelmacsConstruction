@@ -26,6 +26,7 @@
   border: 2px dashed #ccc;
   margin-top: 15px;
 }
+
 .edit-current-new-project-img-ctr {
   display: flex;
   flex-direction: row;
@@ -34,10 +35,11 @@
 .edit-new-project-img-ctr {
   margin-left: 100px;
 }
+
 .current-project-img,
 .new-project-img {
-  width: 229px;
-  height: 305px;
+  width: 350px;
+  height: 250px;
   margin-top: 10px;
 }
 

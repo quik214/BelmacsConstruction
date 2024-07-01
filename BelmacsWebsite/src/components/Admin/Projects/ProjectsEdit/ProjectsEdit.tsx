@@ -29,7 +29,7 @@ import "./ProjectsEdit-media.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import ImagePlaceHolder from "../../../../assets/Icons/AdminDashboard/empty-image-placeholder.png";
+import ImagePlaceHolder from "../../../../assets/Admin/placeholder-landscape.png";
 
 // create a Project object
 interface Project {
