@@ -32,10 +32,17 @@ const People: React.FC = () => {
       ];
 
       // Sort people by role based on the sort order
-      peopleData.sort(
-        (a, b) => sortOrder.indexOf(a.position) - sortOrder.indexOf(b.position)
-      );
+      peopleData.sort((a, b) => {
+        const indexA = sortOrder.indexOf(a.position);
+        const indexB = sortOrder.indexOf(b.position);
 
+        // Positions not in the sort order should get a very high index so that they will be at the back of the list
+        const maxIndex = sortOrder.length;
+        const effectiveIndexA = indexA === -1 ? maxIndex : indexA;
+        const effectiveIndexB = indexB === -1 ? maxIndex : indexB;
+
+        return effectiveIndexA - effectiveIndexB;
+      });
       setPeople(peopleData);
     };
 
@@ -55,29 +62,34 @@ const People: React.FC = () => {
   const peopleCount = people.length;
 
   return (
-<>
-      <div className='people reveal'>
+    <>
+      <div className="people reveal">
         <p className="people-header">Our People</p>
         <div
           className={`people-grid-container ${
-            peopleCount === 5 ? 'five' :
-            peopleCount === 6 ? 'six' :
-            peopleCount === 7 ? 'seven' :
-            peopleCount >= 8 ? 'eight' :
-            'default'
+            peopleCount === 5
+              ? "five"
+              : peopleCount === 6
+              ? "six"
+              : peopleCount === 7
+              ? "seven"
+              : peopleCount >= 8
+              ? "eight"
+              : "default"
           }`}
         >
           {people.map((person, index) => (
             <div
               key={index}
-              className={`people-card ${peopleCount === 7 ? 'seven' : 'default'}`}
+              className={`people-card ${
+                peopleCount === 7 ? "seven" : "default"
+              }`}
               onClick={() => handleCardClick(person)}
               aria-label={`View details for ${person.name}`}
               role="button"
             >
               <img src={person.image} alt={person.name} />
               <div className="people-card-info">
-                
                 <p className="people-name">{person.name}</p>
                 <p className="people-role">{person.position}</p>
               </div>
