@@ -98,7 +98,7 @@ const AboutProjects: React.FC = () => {
   };
 
   const calculateBottom = (totalAwards: number): string => {
-    return `${-30 * totalAwards + 1}px`;
+    return `${-30 * totalAwards + 1 }px`;
   };
 
   return (
@@ -121,7 +121,7 @@ const AboutProjects: React.FC = () => {
                     hoveredIndex === index
                       ? calculateTransform(d.totalAwards)
                       : "translateY(0)",
-                  transition: "transform 0.3s ease",
+                  transition: "transform 0.3s ease"
                 }}
               >
                 <span className ="ribbon ribbon-edge">{d.totalAwards} {d.totalAwards === 1 ? 'Award' : 'Awards'}</span>
@@ -143,12 +143,20 @@ const AboutProjects: React.FC = () => {
                           ? calculateBottom(d.totalAwards)
                           : calculateBottom(d.totalAwards),
                       transition: "bottom 0.3s ease",
-
                     }}
                   >
                     <div className="awards-list">
                       {d.awards.map((award, awardIndex) => (
-                        <div key={awardIndex} className="award-item">
+                        <div
+                        key={awardIndex}
+                        className="award-item"
+                        style={{
+                          display:
+                          hoveredIndex === index
+                          ? "flex"
+                          : "none"
+                        }}
+                        >
                           <img
                             src={AwardIcon}
                             alt="Award Icon"
