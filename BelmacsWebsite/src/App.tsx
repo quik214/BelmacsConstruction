@@ -28,6 +28,8 @@ import AdminEditCompany from "./pages/Admin/AdminAbout/AdminEditCompany/AdminEdi
 import AdminCreatePeople from "./pages/Admin/AdminAbout/AdminCreatePeople/AdminCreatePeople";
 import AdminEditPeople from "./pages/Admin/AdminAbout/AdminEditPeople/AdminEditPeople";
 
+import AdminAnalytics from "./pages/Admin/AdminAnalytics/AdminAboutDashboard/AdminAnalyticsDashboard";
+
 import PrivateRoute from "./components/Admin/PrivateRoute";
 
 import Navbar from "./components/Navbar/Navbar";
@@ -86,6 +88,14 @@ function MainApp() {
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<AdminLogin />} />
+          <Route
+            path="/admin/analytics"
+            element={
+              <PrivateRoute>
+                <AdminAnalytics />
+              </PrivateRoute>
+            }
+          />
           <Route
             path="/admin/about"
             element={

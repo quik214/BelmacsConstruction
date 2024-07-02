@@ -238,6 +238,13 @@ export default function Navbar() {
                 {dashboardDropdown && (
                   <div className="dropdown-content">
                     <Link
+                      to="/admin/analytics"
+                      className="dropdown-item"
+                      onClick={toggleDashboardDropdown}
+                    >
+                      Analytic
+                    </Link>
+                    <Link
                       to="/admin/about"
                       className="dropdown-item"
                       onClick={toggleDashboardDropdown}
@@ -317,7 +324,9 @@ export default function Navbar() {
 
           {authUser && (
             <>
-              <div className="sidebar-link email"><b>{authUser?.email}</b></div>
+              <div className="sidebar-link email">
+                <b>{authUser?.email}</b>
+              </div>
               <div className="mobile-dropdown">
                 <Link
                   to="#"
@@ -361,6 +370,16 @@ export default function Navbar() {
                 </Link>
                 {mobileDashboardDropdown && (
                   <div className="mobile-dropdown-content">
+                    <Link
+                      to="/admin/analytics"
+                      className="dropdown-item"
+                      onClick={() => {
+                        toggleMobileDashboardDropdown();
+                        hideSideBar(); // Close sidebar when item clicked
+                      }}
+                    >
+                      Analytics
+                    </Link>
                     <Link
                       to="/admin/about"
                       className="dropdown-item"
