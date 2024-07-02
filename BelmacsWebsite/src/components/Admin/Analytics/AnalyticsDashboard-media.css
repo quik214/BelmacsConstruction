@@ -1,0 +1,33 @@
+/* Large Screens */
+@media (1700px <= width <= 2500px) {
+}
+
+/* Normal Screens - currently designed for this */
+@media (max-width: 1700px) {
+}
+
+/* Landscape Tablets */
+@media (max-width: 1200px) {
+    .analytic-header {
+    font-size: 1.6rem;
+  }
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+}
+
+/* Smaller Tablets */
+@media (max-width: 700px) {
+}
+
+/* Mobile */
+@media (max-width: 550px) { 
+    .analytic-header {
+        font-size: 1.4rem;
+      }
+}
+
+/* Small Mobile */
+@media (max-width: 390px) {
+}
