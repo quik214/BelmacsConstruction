@@ -52,6 +52,24 @@ const PeopleDashboard: React.FC = () => {
     );
   };
 
+  const maxPeopleToast = () => {
+    toast.error(
+      <div>
+        You cannot add more than 8 directors
+      </div>,
+      {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }
+    );
+  };
+
   // function to retrieve the OurPeople data from database
   useEffect(() => {
     const fetchDataFromFirestore = async () => {
@@ -119,6 +137,12 @@ const PeopleDashboard: React.FC = () => {
 */
 
   const handleAddPeople = () => {
+
+    if (people.length === 8) {
+      maxPeopleToast();
+      return;
+    } 
+
     navigate(`/admin/about/people/create`);
   };
 

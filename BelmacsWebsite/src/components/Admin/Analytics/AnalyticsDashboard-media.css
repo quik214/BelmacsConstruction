@@ -8,13 +8,16 @@
 
 /* Landscape Tablets */
 @media (max-width: 1200px) {
-    .analytic-header {
+  .analytic-header {
     font-size: 1.6rem;
   }
 }
 
 /* Tablets */
 @media (max-width: 900px) {
+  .analytic-dashboard {
+    transform: scale(1);
+  }
 }
 
 /* Smaller Tablets */
@@ -22,10 +25,10 @@
 }
 
 /* Mobile */
-@media (max-width: 550px) { 
-    .analytic-header {
-        font-size: 1.4rem;
-      }
+@media (max-width: 550px) {
+  .analytic-dashboard {
+    transform: scale(1);
+  }
 }
 
 /* Small Mobile */

@@ -288,7 +288,7 @@ const PeopleCreate: React.FC = () => {
         {/* CREATE Form */}
         <form onSubmit={handleSubmit}>
           <div className="create-field">
-            <label htmlFor="name">Upload Image File</label>
+            <label htmlFor="name">Upload Image File (229x305)</label>
             <div className="new-person-img">
               <img
                 src={imageFile ? personDetails.image : ImagePlaceHolder}

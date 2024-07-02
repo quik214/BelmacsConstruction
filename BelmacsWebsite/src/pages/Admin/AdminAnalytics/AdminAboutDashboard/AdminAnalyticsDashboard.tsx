@@ -4,7 +4,7 @@ import AdminAnalyticsDashboard from "../../../../components/Admin/Analytics/Anal
 
 export default function AdminAnalytics() {
   return (
-    <div className="container">
+    <div className="container analytics">
       <AdminAnalyticsDashboard />
     </div>
   );

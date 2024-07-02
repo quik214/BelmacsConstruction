@@ -318,7 +318,7 @@ const EditPeople: React.FC = () => {
                 </div>
               </div>
               <div className="edit-new-person-img-ctr">
-                <label className="edit-field-header">New Image</label>
+                <label className="edit-field-header">New Image (229x305)</label>
                 <div className="new-person-img">
                   <img
                     src={selectedImage ? person.image : ImagePlaceHolder}

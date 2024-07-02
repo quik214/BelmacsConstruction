@@ -171,7 +171,7 @@ const EditCompany = () => {
         editSuccessToast();
         setTimeout(() => {
           navigate("/admin/about");
-        }, 1000); // navigate back to /admin/about after 1 second
+        }); // can specify loading time
       } else {
         const updatedCompany = { ...company };
 
@@ -182,7 +182,7 @@ const EditCompany = () => {
         editSuccessToast();
         setTimeout(() => {
           navigate("/admin/about");
-        }, 1000); // navigate back to /admin/about after 1 second
+        }); // can specify loading time
       }
     } catch (error) {
       console.error("Error updating person: ", error);

@@ -242,7 +242,7 @@ export default function Navbar() {
                       className="dropdown-item"
                       onClick={toggleDashboardDropdown}
                     >
-                      Analytic
+                      Analytics
                     </Link>
                     <Link
                       to="/admin/about"
