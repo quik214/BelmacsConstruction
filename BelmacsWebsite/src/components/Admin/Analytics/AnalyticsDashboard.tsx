@@ -1,7 +1,7 @@
 import "./AnalyticsDashboard.css";
 import "./AnalyticsDashboard-media.css";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const AnalyticsDashboard: React.FC = () => {
   return (

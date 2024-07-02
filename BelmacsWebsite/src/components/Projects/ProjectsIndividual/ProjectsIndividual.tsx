@@ -79,7 +79,7 @@ const ProjectList: React.FC = () => {
           const dateB = b.completion
             ? new Date(b.completion).getTime()
             : Infinity;
-          return dateA - dateB;
+          return dateB - dateA;
         });
 
         setProjects(data);
