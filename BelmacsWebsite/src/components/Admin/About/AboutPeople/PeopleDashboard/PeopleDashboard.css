@@ -1,9 +1,10 @@
 .person-ctr {
     margin-top: 120px;
     font-family: Arial, Helvetica, sans-serif;
-  
+
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 50px;
   }
   
   .person-header {
@@ -13,7 +14,10 @@
   
   .person-table-ctr {
     margin-top: 20px;
+
   }
+
+ 
 
   .person-table-description {
     width: 50%;
@@ -35,7 +39,22 @@
   .person-table td {
     border: 1px solid #ddd;
     padding: 8px;
-    text-align: left;
+    text-align: center;
+  }
+
+  .person-table th,
+  .person-table td.person-displayOrder {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .person-displayOrder {
+    width: 5%;
+  }
+
+  .person-hamburger {
+    width: 20px;
+    height: auto;
   }
   
   .person-table th {
@@ -209,3 +228,24 @@
     background-color: #f44336; /* Red */
   }
   
+
+
+
+
+
+/* Add styles for drag previews */
+.person-table tr.dragging {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+/* Add styles for the drag over state */
+.person-table tr.drag-over {
+  background-color: #f0f0f0; /* Light gray background */
+  border-left: 4px solid #364fc7; /* Blue border on the left */
+}
+
+/* Add transition effect for the reorder animation */
+.person-table {
+  transition: transform 0.3s ease;
+}

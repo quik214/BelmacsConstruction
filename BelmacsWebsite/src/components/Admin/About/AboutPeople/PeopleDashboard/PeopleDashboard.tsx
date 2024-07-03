@@ -3,9 +3,10 @@ import "./PeopleDashboard-media.css";
 
 import EditIcon from "../../../../../assets/Icons/AdminDashboard/pencil-simple.svg";
 import DeleteIcon from "../../../../../assets/Icons/AdminDashboard/trash.svg";
+import HamburgerIcon from "../../../../../assets/Icons/menu-black.svg";
 
 import React, { useState, useEffect } from "react";
-import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
+import { getDocs, collection, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { db, storage } from "../../../../../firebase";
 import { useNavigate } from "react-router-dom";
 import { ref, deleteObject } from "firebase/storage";
@@ -13,18 +14,23 @@ import { ref, deleteObject } from "firebase/storage";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-// People object to store each Project's values
+// People object to store each Director's values
 interface People {
+  id: string;
   name: string;
   image: string;
   position: string;
   qualifications: string[];
   description: string;
+  displayOrder: number;
 }
 
 const PeopleDashboard: React.FC = () => {
   // for displaying of People
   const [people, setPeople] = useState<People[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+  const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
 
   // for navigation between pages
   const navigate = useNavigate();
@@ -76,10 +82,12 @@ const PeopleDashboard: React.FC = () => {
       try {
         const peopleCollectionRef = collection(db, "about-people");
         const querySnapshot = await getDocs(peopleCollectionRef);
-        const peopleData = querySnapshot.docs.map(
-          (doc) => doc.data() as People
-        );
-        setPeople(peopleData);
+        const peopleData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as People[];
+        setPeople(peopleData.sort((a, b) => a.displayOrder - b.displayOrder));
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching People collection: ", error);
       }
@@ -107,14 +115,14 @@ const PeopleDashboard: React.FC = () => {
       const imageRef = ref(storage, selectedPeople.image);
       await deleteObject(imageRef);
 
-      const peopleRef = doc(db, `about-people`, selectedPeople.name); // assign peopleRef variable the People document (within Firebase)
+      const peopleRef = doc(db, `about-people`, selectedPeople.id); // assign peopleRef variable the People document (within Firebase)
 
       // Delete firestore data using details in peopleRef
       await deleteDoc(peopleRef);
 
       // Update people after deletion
       setPeople((prevPeople) =>
-        prevPeople.filter((people) => people.name !== selectedPeople.name)
+        prevPeople.filter((people) => people.id !== selectedPeople.id)
       );
 
       console.log("Director deleted:", selectedPeople.name); // log the deleted people
@@ -127,33 +135,73 @@ const PeopleDashboard: React.FC = () => {
     }
   };
 
-  /*
-    // for search
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(event.target.value);
-  };
-
-
-*/
-
   const handleAddPeople = () => {
-
     if (people.length === 8) {
       maxPeopleToast();
       return;
     } 
-
     navigate(`/admin/about/people/create`);
   };
 
-  const createNewLine = (companyDesc: string) => {
-    return companyDesc.split("\n").map((line, index) => (
-      <React.Fragment key={index}>
-        {line}
-        <br />
-      </React.Fragment>
-    ));
+  // const createNewLine = (companyDesc: string) => {
+  //   return companyDesc.split("\n").map((line, index) => (
+  //     <React.Fragment key={index}>
+  //       {line}
+  //       <br />
+  //     </React.Fragment>
+  //   ));
+  // };
+
+  const handleDisplayOrderChange = async (id: string, newOrder: number) => {
+    const personRef = doc(db, "about-people", id);
+    await updateDoc(personRef, { displayOrder: newOrder });
+    setPeople((prevPeople) =>
+      prevPeople
+        .map((person) =>
+          person.id === id ? { ...person, displayOrder: newOrder } : person
+        )
+        .sort((a, b) => a.displayOrder - b.displayOrder)
+    );
   };
+
+  const handleDragStart = (index: number) => {
+    setDraggedIndex(index);
+    document.querySelectorAll('.person-table tr').forEach(row => row.classList.add('dragging'));
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLTableRowElement>, index: number) => {
+    e.preventDefault();
+    setDragOverIndex(index);
+    document.querySelectorAll('.person-table tr').forEach(row => row.classList.remove('drag-over'));
+    e.currentTarget.classList.add('drag-over');
+  };
+
+  const handleDrop = (index: number) => {
+    if (draggedIndex === null || draggedIndex === index) return;
+
+    const draggedPerson = people[draggedIndex];
+    const targetPerson = people[index];
+
+    const newPeople = [...people];
+    newPeople[draggedIndex] = targetPerson;
+    newPeople[index] = draggedPerson;
+    console.log(dragOverIndex);
+
+    // Update the display order in Firebase
+    handleDisplayOrderChange(draggedPerson.id, targetPerson.displayOrder);
+    handleDisplayOrderChange(targetPerson.id, draggedPerson.displayOrder);
+
+    // Update local state
+    setPeople(newPeople);
+
+    setDraggedIndex(null);
+    setDragOverIndex(null);
+    document.querySelectorAll('.person-table tr').forEach(row => row.classList.remove('dragging', 'drag-over'));
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="person-ctr">
@@ -169,19 +217,29 @@ const PeopleDashboard: React.FC = () => {
           <table className="person-table">
             <thead>
               <tr>
+                <th></th>
+                <th>Display Order</th>
                 <th>Image</th>
                 <th>Name</th>
                 <th className="mobile-table">Position</th>
-                <th className="mobile-table">Qualifications</th>
+                {/* <th className="mobile-table">Qualifications</th>
                 <th className="person-table-description mobile-table">
                   Description
-                </th>
+                </th> */}
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               {people.map((person, index) => (
-                <tr key={index}>
+                <tr
+                  key={person.id}
+                  draggable
+                  onDragStart={() => handleDragStart(index)}
+                  onDragOver={(e) => handleDragOver(e, index)}
+                  onDrop={() => handleDrop(index)}
+                >
+                  <td className="person-displayOrder"><img src={HamburgerIcon} className="person-hamburger" /></td>
+                  <td className="person-displayOrder">{person.displayOrder}</td>
                   <td>
                     <img
                       src={person.image}
@@ -195,7 +253,7 @@ const PeopleDashboard: React.FC = () => {
                   <td className="mobile-table">
                     <p>{person.position}</p>
                   </td>
-                  <td className="mobile-table">
+                  {/* <td className="mobile-table">
                     {person.qualifications.length > 0 ? (
                       person.qualifications.map((qualification, qIndex) => (
                         <p key={qIndex}>- {qualification}</p>
@@ -206,7 +264,7 @@ const PeopleDashboard: React.FC = () => {
                   </td>
                   <td className="mobile-table">
                     <p>{createNewLine(person.description)}</p>
-                  </td>
+                  </td> */}
                   <td className="table-actions">
                     <button
                       className="action-button edit-button"

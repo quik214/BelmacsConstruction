@@ -132,6 +132,10 @@
   .delete-confirmation-popup {
     width: 65%;
   }
+
+  .person-displayOrder {
+    width: 1%;
+  }
 }
 
 /* Small Mobile */
