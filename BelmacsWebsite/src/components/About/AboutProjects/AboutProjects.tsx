@@ -119,7 +119,7 @@ const AboutProjects: React.FC = () => {
                 style={{
                   transform:
                     hoveredIndex === index
-                      ? calculateTransform(d.totalAwards)
+                      ? calculateTransform(d.totalAwards >= 5 ? 0 : d.totalAwards)
                       : "translateY(0)",
                   transition: "transform 0.3s ease"
                 }}
@@ -140,8 +140,8 @@ const AboutProjects: React.FC = () => {
                     style={{
                       bottom:
                         hoveredIndex === index
-                          ? calculateBottom(d.totalAwards)
-                          : calculateBottom(d.totalAwards),
+                        ? calculateBottom(d.totalAwards >= 5 ? 0 : d.totalAwards)
+                        : calculateBottom(d.totalAwards >= 5 ? 0 : d.totalAwards),
                       transition: "bottom 0.3s ease",
                     }}
                   >
@@ -151,10 +151,7 @@ const AboutProjects: React.FC = () => {
                         key={awardIndex}
                         className="award-item"
                         style={{
-                          display:
-                          hoveredIndex === index
-                          ? "flex"
-                          : "none"
+                          display: hoveredIndex === index && d.totalAwards < 5 ? "flex" : "none",
                         }}
                         >
                           <img
