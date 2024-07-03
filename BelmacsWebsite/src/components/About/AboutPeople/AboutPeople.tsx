@@ -12,6 +12,7 @@ interface Person {
   position: string;
   qualifications: string[];
   description: string;
+  displayOrder: number;
 }
 
 const People: React.FC = () => {
@@ -24,25 +25,9 @@ const People: React.FC = () => {
       const querySnapshot = await getDocs(collection(db, "about-people"));
       const peopleData = querySnapshot.docs.map((doc) => doc.data() as Person);
 
-      // Define the sort order
-      const sortOrder = [
-        "Managing Director",
-        "Founder and Director",
-        "Director",
-      ];
+      // Sort people by displayOrder
+      peopleData.sort((a, b) => a.displayOrder - b.displayOrder);
 
-      // Sort people by role based on the sort order
-      peopleData.sort((a, b) => {
-        const indexA = sortOrder.indexOf(a.position);
-        const indexB = sortOrder.indexOf(b.position);
-
-        // Positions not in the sort order should get a very high index so that they will be at the back of the list
-        const maxIndex = sortOrder.length;
-        const effectiveIndexA = indexA === -1 ? maxIndex : indexA;
-        const effectiveIndexB = indexB === -1 ? maxIndex : indexB;
-
-        return effectiveIndexA - effectiveIndexB;
-      });
       setPeople(peopleData);
     };
 
@@ -82,7 +67,8 @@ const People: React.FC = () => {
             <div
               key={index}
               className={`people-card ${
-                peopleCount === 7 ? "seven" : "default"
+                peopleCount === 7 ? "seven" :
+                peopleCount === 8 ? "eight" : "default"
               }`}
               onClick={() => handleCardClick(person)}
               aria-label={`View details for ${person.name}`}

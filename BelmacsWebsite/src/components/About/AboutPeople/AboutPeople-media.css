@@ -15,11 +15,10 @@
 }
 
 /* Normal Screens - currently designed for this */
-@media (max-width: 1700px) {}
-
+@media (max-width: 1700px) {
+}
 
 @media (max-width: 1500px) {
-
   .people-grid-container.default {
     column-gap: 100px;
   }
@@ -46,18 +45,11 @@
     column-gap: 20px;
   }
 
-  /* layout for 6 people */
+  /* layout for 5 people */
   .people-grid-container.five {
     grid-template-columns: repeat(5, 1fr);
     /* Three columns */
     column-gap: 20px;
-  }
-
-  /* Layout for 6 people */
-  .people-grid-container.six {
-    grid-template-columns: repeat(3, 1fr);
-    /* Three columns */
-    column-gap: 150px;
   }
 
   .people-card.seven {
@@ -85,17 +77,29 @@
   }
 
   .people-name {
-    font-size: 1rem;
+    font-size: 0.85rem;
   }
 
   .people-role {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+  }
+
+  /* Layout for 6 people */
+  .people-grid-container.six {
+    grid-template-columns: repeat(3, 1fr);
+    /* Three columns */
+    column-gap: 150px;
   }
 
   .people-card.seven {
     flex: 0 0 calc((25.6% - 25px));
     color: white;
   }
+
+  .people-grid-container.eight {
+    column-gap: 50px;
+  }
+  
 }
 
 /* Tablets */
@@ -112,9 +116,21 @@
     font-size: 1.6rem;
   }
 
+
+  .people-grid-container.five {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .people-grid-container.five .people-card {
+    flex: 0 1 25%; /* Adjust the basis to fit 3 columns */
+    margin: 0 10px 10px; /* Adjust the margin for spacing */
+  }
+
   /* Layout for 6 people */
   .people-grid-container.six {
-    column-gap: 100px;
+    column-gap: 75px;
   }
 
   .popup-content .popup-name {
@@ -136,7 +152,6 @@
 
 /* Smaller Tablets */
 @media (max-width: 800px) {
-
   /* Default laypout for 4  people */
   .people-grid-container.default {
     grid-template-columns: repeat(2, 1fr);
@@ -144,12 +159,6 @@
     column-gap: 40px;
   }
 
-  /* Layout for 5 and below */
-  .people-grid-container.five {
-    grid-template-columns: repeat(2, 1fr);
-    /* Three columns */
-    column-gap: 40px;
-  }
 
   /* Layout for 6 people */
   .people-grid-container.six {
@@ -166,6 +175,7 @@
   .people-grid-container.eight {
     grid-template-columns: repeat(2, 1fr);
     /* 4 columns */
+    column-gap: 100px;
   }
 
   .popup-content-header {
@@ -200,7 +210,6 @@
     margin-top: 5px;
   }
 
-
   .people-name {
     padding-left: 12.5px;
   }
@@ -209,6 +218,12 @@
     padding-left: 12.5px;
     font-size: 0.6rem;
   }
+
+    .people-grid-container.five .people-card {
+      flex: 0 1 40%; /* Adjust the basis to fit 3 columns */
+      margin: 0 10px 10x; /* Adjust the margin for spacing */
+    }
+
 
   .people-grid-container.seven {
     column-gap: 20px;
@@ -223,6 +238,10 @@
 @media (max-width: 640px) {
   .people-card.seven {
     flex: 0 0 calc((50% - 25px));
+  }
+
+  .people-grid-container.eight {
+    column-gap: 50px;
   }
 }
 
@@ -251,6 +270,22 @@
   .popup-content .popup-qualifications {
     font-size: 0.9rem;
   }
+
+  .people-grid-container.five {
+    column-gap: 0px;
+  }
+
+
+
+  /* Layout for 6 people */
+  .people-grid-container.six {
+    /* Three columns */
+    column-gap: 25px;
+  }
+
+  .people-grid-container.eight {
+    column-gap: 25px;
+  }
 }
 
 /* Small Mobile */
@@ -265,10 +300,17 @@
     font-size: 0.6rem;
   }
 
-
-
   .popup-content .popup-description {
     font-size: 0.9rem;
+  }
+
+  .people-grid-container.five {
+    row-gap: 20px;
+  }
+
+  .people-grid-container.five .people-card {
+    flex: 0 1 40%; 
+    margin: 0 0px 0px;
   }
 }
 
