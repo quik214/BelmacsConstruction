@@ -15,6 +15,8 @@ import ImagePlaceHolder from "../../../../../assets/Icons/AdminDashboard/empty-i
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { getDocs, collection } from "firebase/firestore";
+
 const PeopleCreate: React.FC = () => {
   // ** OBJECT DECLARATION **
 
@@ -25,6 +27,7 @@ const PeopleCreate: React.FC = () => {
     position: "",
     qualifications: [],
     description: "",
+    displayOrder: "",
   });
 
   // useState for Qualifications
@@ -106,6 +109,7 @@ const PeopleCreate: React.FC = () => {
       image: "",
       position: "",
       description: "",
+      displayOrder: "",
     };
     let isValid = true;
 
@@ -218,61 +222,47 @@ const PeopleCreate: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(); // used to prevent default behaviour of the form submission
 
-    // if the form is not validated (validate() returns false) OR there is no imageFile, then we will display the createErrorToast
-    // !imageFile is simply to ensure that in the below line, imageFile does not have an error
     if (!validate() || !imageFile) {
-      createErrorToast(); // display the error toast
+      createErrorToast();
       return;
     }
 
     try {
+      // Get the current list of people
+      const peopleCollectionRef = collection(db, "about-people");
+      const peopleSnapshot = await getDocs(peopleCollectionRef);
+      const peopleCount = peopleSnapshot.docs.length;
+
       // Upload image to Firebase Storage
-      // ref creates a reference to a specific locaiton in Firebase Storage
-      // takes 2 arguments: storage instance (based on import above), and the path where the file will be stored
-      // path is as shown
       const storageRef = ref(
         storage,
         `belmacs_images/about/people/${personDetails.name}`
       );
       const uploadTask = uploadBytesResumable(storageRef, imageFile);
-      // uploadBytesResumable is a function used to upload files to Firebase Storage (in a resumable way)
-      // this means that if the file upload was interrupted, it can be resumed where it left off
-      // the imageFile will thus be uploaded to the reference location specified in storageRef
 
-      // uploadTask.on is a method used to handle events related to the uploading of the imageFile
-      // this means that uploadBytesResumable is a function used to upload the imageFile, while uploadTask itself has a .on property
-      // that contains the state of the upload (in a way)
       uploadTask.on(
-        "state_changed", // event type that is triggered whenever there is change in upload state (progress, pause, resume)
+        "state_changed",
         (_snapshot) => {
-          // _snapshot contains information about current state of the upload, such as number of bytes transferred and total bytes
-          // snapshot can actually be excluded
+          // snapshot can be excluded
         },
-        // handle any errors during file upload
         (error) => {
           console.error("Error uploading file: ", error);
         },
-        // async is used to handle actions after the image file upload is completed successfully
         async () => {
-          // Get the download URL from the uploaded file (in Firebase Storage)
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-
-          // Create a reference to the personDetails.name (that the user has entered into the field)
           const personRef = doc(db, `about-people`, personDetails.name);
 
-          // set the document data using the Firebase setDoc function
-          // takes in 2 parameters, the reference to the location in Firebase,
-          // along with the data object containing the data to be written to the document
           await setDoc(personRef, {
             name: personDetails.name,
             image: downloadURL,
             position: personDetails.position,
             qualifications: qualifications,
             description: personDetails.description,
+            displayOrder: peopleCount + 1, // set displayOrder to the length of the current list plus one
           });
 
-          createSuccessToast(personDetails.name); // display successToast upon successful person creation
-          navigate("/admin/about"); // navigate back to the admin about
+          createSuccessToast(personDetails.name);
+          navigate("/admin/about");
         }
       );
     } catch (error) {
