@@ -21,12 +21,7 @@ export default function Footer() {
         <div className="footer-center-right">
           <div className="footer-center">
             <p className="contact-text">Contact Us</p>
-            <div className="phone">
-              <img src={PhoneIcon} className="phone-icon"></img>
-              <a href="tel:+65 6225 6118" className="phone-number">
-                +65 6225 6118
-              </a>
-            </div>
+            
 
             <div className="mail">
               <img src={MailIcon} className="mail-icon"></img>
