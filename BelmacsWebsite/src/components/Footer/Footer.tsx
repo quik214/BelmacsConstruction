@@ -3,7 +3,6 @@ import "./Footer-media.css";
 import "../../assets/fonts.css";
 
 import BelmacsWhiteWhite from "../../assets/Logos/BelmacsDefaultWhiteWhite.png";
-import PhoneIcon from "../../assets/Icons/Footer/phone.svg";
 import MailIcon from "../../assets/Icons/Footer/mail.svg";
 import MapIcon from "../../assets/Icons/Footer/map.svg";
 
