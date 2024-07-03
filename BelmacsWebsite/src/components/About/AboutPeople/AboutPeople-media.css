@@ -1,5 +1,5 @@
 /* Large Screens */
-@media (1700px <= width <= 2500px) {
+@media (1700px <=width <=2500px) {
   .people {
     column-gap: 3.5rem;
   }
@@ -15,7 +15,14 @@
 }
 
 /* Normal Screens - currently designed for this */
-@media (max-width: 1700px) {
+@media (max-width: 1700px) {}
+
+
+@media (max-width: 1500px) {
+
+  .people-grid-container.default {
+    column-gap: 100px;
+  }
 }
 
 /* Bigger Tablets*/
@@ -34,19 +41,22 @@
 
   /* Default laypout for 4  people */
   .people-grid-container.default {
-    grid-template-columns: repeat(4, 1fr); /* Three columns */
+    grid-template-columns: repeat(4, 1fr);
+    /* Three columns */
     column-gap: 20px;
   }
 
   /* layout for 6 people */
   .people-grid-container.five {
-    grid-template-columns: repeat(5, 1fr); /* Three columns */
+    grid-template-columns: repeat(5, 1fr);
+    /* Three columns */
     column-gap: 20px;
   }
 
   /* Layout for 6 people */
   .people-grid-container.six {
-    grid-template-columns: repeat(3, 1fr); /* Three columns */
+    grid-template-columns: repeat(3, 1fr);
+    /* Three columns */
     column-gap: 150px;
   }
 
@@ -126,30 +136,36 @@
 
 /* Smaller Tablets */
 @media (max-width: 800px) {
+
   /* Default laypout for 4  people */
   .people-grid-container.default {
-    grid-template-columns: repeat(2, 1fr); /* Three columns */
+    grid-template-columns: repeat(2, 1fr);
+    /* Three columns */
     column-gap: 40px;
   }
 
   /* Layout for 5 and below */
   .people-grid-container.five {
-    grid-template-columns: repeat(2, 1fr); /* Three columns */
+    grid-template-columns: repeat(2, 1fr);
+    /* Three columns */
     column-gap: 40px;
   }
 
   /* Layout for 6 people */
   .people-grid-container.six {
-    grid-template-columns: repeat(2, 1fr); /* Three columns */
+    grid-template-columns: repeat(2, 1fr);
+    /* Three columns */
   }
 
   /* Layout for 7 people */
   .people-grid-container.seven {
-    grid-template-columns: repeat(2, 1fr); /* Three columns */
+    grid-template-columns: repeat(2, 1fr);
+    /* Three columns */
   }
 
   .people-grid-container.eight {
-    grid-template-columns: repeat(2, 1fr); /* 4 columns */
+    grid-template-columns: repeat(2, 1fr);
+    /* 4 columns */
   }
 
   .popup-content-header {
@@ -157,10 +173,12 @@
     align-items: center;
     margin-bottom: 0px;
   }
+
   .popup-content img {
     max-width: 181px;
     margin: 0 0 20px 0;
   }
+
   .popup-content-info {
     text-align: center;
   }
@@ -195,7 +213,7 @@
   .people-grid-container.seven {
     column-gap: 20px;
   }
-  
+
   .people-card.seven {
     flex: 0 0 calc((25.75% - 20px));
   }
@@ -247,7 +265,7 @@
     font-size: 0.6rem;
   }
 
-  
+
 
   .popup-content .popup-description {
     font-size: 0.9rem;

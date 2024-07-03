@@ -12,9 +12,9 @@
 }
 
 .company-address {
-  font-family: "Merriweather";
+  font-family: "Montserrat";
   font-size: 2rem;
-  color: #364fc7;
+  color:  rgba(0, 0, 0, 0.557);
 }
 
 .form-ctr {
