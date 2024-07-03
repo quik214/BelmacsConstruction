@@ -94,11 +94,11 @@ const AboutProjects: React.FC = () => {
   };
 
   const calculateTransform = (totalAwards: number): string => {
-    return `translateY(${-30 * totalAwards}px)`;
+    return `translateY(${-35 * totalAwards}px)`;
   };
 
   const calculateBottom = (totalAwards: number): string => {
-    return `${-30 * totalAwards + 1 }px`;
+    return `${-30 * totalAwards + 1}px`;
   };
 
   return (
@@ -124,7 +124,7 @@ const AboutProjects: React.FC = () => {
                   transition: "transform 0.3s ease"
                 }}
               >
-                <span className ="ribbon ribbon-edge">{d.totalAwards} {d.totalAwards === 1 ? 'Award' : 'Awards'}</span>
+                <div className ="ribbon ribbon-edge">{d.totalAwards} {d.totalAwards === 1 ? 'Award' : 'Awards'}</div>
                 <div className="card-header">{d.name}</div>
                 <div className="card-desc-container">
                   <img
