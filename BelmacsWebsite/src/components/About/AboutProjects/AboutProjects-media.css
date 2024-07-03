@@ -7,14 +7,11 @@
 
 /* Normal Screens - currently designed for this */
 @media (max-width: 1700px) {
+
 }
 
-/* Landscape Tablets */
-@media (max-width: 1200px) {
-  .projects-header {
-    font-size: 1.6rem;
-  }
-
+/* Normal Screens - currently designed for this */
+@media (max-width: 1300px) {
   .card-header {
     padding-top: 10px;
     font-size: 1rem;
@@ -26,6 +23,13 @@
 
   .award-item {
     font-size: 0.7rem;
+  }
+}
+
+/* Landscape Tablets */
+@media (max-width: 1200px) {
+  .projects-header {
+    font-size: 1.6rem;
   }
 
   .card-header,
@@ -69,12 +73,13 @@
   }
 
   .ribbon {
-    line-height: 18px;
+    line-height: 20px;
     height: 20px;
     font-size: 0.6rem;
   }
 
   .ribbon-edge:before {
+    left: -8px;
     border-width: 12px 8px;
   }
   
