@@ -110,35 +110,29 @@
 .residential {
   grid-row: 1 / span 2;
   grid-column: 1;
-  background-image: url("../../../assets/Projects/Grid-Images/Residential.png");
 }
 
 .commercial {
   grid-row: 1;
   grid-column: 2;
-  background-image: url("../../../assets/Projects/Grid-Images/Commercial.png");
 }
 
 .institutional {
   grid-row: 2;
   grid-column: 2;
-  background-image: url("../../../assets/Projects/Grid-Images/Institutional.png");
 }
 
 .existing-building-retrofit {
   grid-row: 1 / span 2;
   grid-column: 3;
-  background-image: url("../../../assets/Projects/Grid-Images/Existing-Building-Retrofit.png");
 }
 
 .infrastructure {
   grid-row: 1;
   grid-column: 4;
-  background-image: url("../../../assets/Projects/Grid-Images/Infrastructure.png");
 }
 
 .industrial {
   grid-row: 2;
   grid-column: 4;
-  background-image: url("../../../assets/Projects/Grid-Images/Industrial.png");
 }

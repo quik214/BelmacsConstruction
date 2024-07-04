@@ -2,7 +2,10 @@ import "../../../assets/fonts.css";
 import "./ProjectsTypes.css";
 import "./ProjectsTypes-media.css";
 
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { db } from '../../../firebase'; 
+import { getDocs, collection } from "firebase/firestore";
 
 export type projectTypeItem = {
   title?: string;
@@ -10,35 +13,26 @@ export type projectTypeItem = {
   path?: string;
 };
 
-export const projectTypes: projectTypeItem[] = [
-  {
-    title: "Residential",
-    path: "residential",
-  },
-  {
-    title: "Commercial",
-    path: "commercial",
-  },
-  {
-    title: "Infrastructure",
-    path: "infrastructure",
-  },
-  {
-    title: "Existing Building Retrofit",
-    path: "existingBuildingRetrofit",
-  },
-  {
-    title: "Institutional",
-    path: "institutional",
-  },
-  {
-    title: "Industrial",
-    path: "industrial",
-  },
-];
-
 export default function ProjectsTypes() {
   const navigate = useNavigate();
+  const [projectTypes, setProjectTypes] = useState<projectTypeItem[]>([]);
+
+  useEffect(() => {
+    const fetchProjectTypes = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'project-types'));
+        const types: projectTypeItem[] = [];
+        querySnapshot.forEach((doc) => {
+          types.push(doc.data() as projectTypeItem);
+        });
+        setProjectTypes(types);
+      } catch (error) {
+        console.error("Error fetching project types: ", error);
+      }
+    };
+
+    fetchProjectTypes();
+  }, []);
 
   const handleClick = (project: projectTypeItem) => {
     navigate(`/projects/${project.path}`, { state: { paramData: project } });
@@ -63,9 +57,8 @@ export default function ProjectsTypes() {
         {projectTypes.map((type) => (
           <div
             key={type.title} // Assuming title is unique for each category
-            className={`project-types-grid-item ${type.title
-              ?.toLowerCase()
-              .replace(/ /g, "-")}`}
+            className={`project-types-grid-item ${type.title?.toLowerCase().replace(/ /g, "-")}`}
+            style={{ backgroundImage: `url(${type.image})` }}
             onClick={() => handleClick(type)}
           >
             <div className="title">{type.title}</div>
