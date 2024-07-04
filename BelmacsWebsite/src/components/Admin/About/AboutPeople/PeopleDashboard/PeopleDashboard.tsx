@@ -275,7 +275,6 @@ const PeopleDashboard: React.FC = () => {
                   <td className="person-displayOrder">
                     <img
                       src={HamburgerIcon}
-                      draggable="false"
                       className="person-hamburger unselectable"
                       onContextMenu={preventDefault}
                       onTouchStart={preventDefault}
@@ -285,7 +284,6 @@ const PeopleDashboard: React.FC = () => {
                   <td>
                     <img
                       src={person.image}
-                      draggable="false"
                       alt={"person image"}
                       className="person-image"
                       onContextMenu={preventDefault}
