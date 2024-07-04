@@ -232,6 +232,8 @@ const PeopleDashboard: React.FC = () => {
     handleDrop(index);
   };
 
+  const preventDefault = (e: React.SyntheticEvent) => e.preventDefault();
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -255,10 +257,6 @@ const PeopleDashboard: React.FC = () => {
                 <th>Image</th>
                 <th>Name</th>
                 <th className="mobile-table">Position</th>
-                {/* <th className="mobile-table">Qualifications</th>
-                <th className="person-table-description mobile-table">
-                  Description
-                </th> */}
                 <th>Actions</th>
               </tr>
             </thead>
@@ -277,39 +275,27 @@ const PeopleDashboard: React.FC = () => {
                   <td className="person-displayOrder">
                     <img
                       src={HamburgerIcon}
-                      className="person-hamburger unselectable no-drag"
-                      draggable="false"
+                      className="person-hamburger unselectable"
+                      onContextMenu={preventDefault}
+                      onTouchStart={preventDefault}
                     />
                   </td>
-                  <td className="person-displayOrder unselectable">
-                    {person.displayOrder}
-                  </td>
+                  <td className="person-displayOrder">{person.displayOrder}</td>
                   <td>
                     <img
                       src={person.image}
                       alt={"person image"}
-                      className="person-image unselectable"
-                      draggable="false"
+                      className="person-image"
+                      onContextMenu={preventDefault}
+                      onTouchStart={preventDefault}
                     />
                   </td>
                   <td>
-                    <p className="unselectable">{person.name}</p>
+                    <p>{person.name}</p>
                   </td>
                   <td className="mobile-table">
                     <p>{person.position}</p>
                   </td>
-                  {/* <td className="mobile-table">
-                    {person.qualifications.length > 0 ? (
-                      person.qualifications.map((qualification, qIndex) => (
-                        <p key={qIndex}>- {qualification}</p>
-                      ))
-                    ) : (
-                      <p>No qualifications listed</p>
-                    )}
-                  </td>
-                  <td className="mobile-table">
-                    <p>{createNewLine(person.description)}</p>
-                  </td> */}
                   <td className="table-actions">
                     <button
                       className="action-button edit-button"
