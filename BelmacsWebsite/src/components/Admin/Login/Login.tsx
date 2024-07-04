@@ -42,6 +42,7 @@ const Login = () => {
   ); // For MFA
   const [verificationId, setVerificationId] = useState<string | null>(null); // For MFA
 
+
   const navigate = useNavigate();
 
   const validate = () => {
@@ -124,6 +125,7 @@ const Login = () => {
         password
       );
       const userEmail = userCredential.user.email ?? "unknown email";
+
       loginSuccessToast(userEmail);
       window.localStorage.setItem("approvedSignIn", JSON.stringify(true));
       navigate("admin/projects");
@@ -136,6 +138,7 @@ const Login = () => {
           auth,
           error as MultiFactorError
         );
+        
         setMfaResolver(resolver);
         sendOtp(resolver);
       } else {
@@ -207,7 +210,9 @@ const Login = () => {
       setMfaResolver(null);
       setVerificationCode("");
 
+      loginSuccessToast;
       navigate("/admin/projects");
+      loginSuccessToast(email);
     } catch (error) {
       console.error("MFA failed", error);
     }
