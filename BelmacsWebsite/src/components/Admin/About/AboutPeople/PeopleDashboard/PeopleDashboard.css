@@ -1,251 +1,237 @@
 .person-ctr {
-    margin-top: 120px;
-    font-family: Arial, Helvetica, sans-serif;
+  margin-top: 120px;
+  font-family: Arial, Helvetica, sans-serif;
 
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 50px;
-  }
-  
-  .person-header {
-    font-size: 2rem;
-    color: #364fc7;
-  }
-  
-  .person-table-ctr {
-    margin-top: 20px;
-
-  }
-
- 
-
-  .person-table-description {
-    width: 50%;
-  }
-  
-  .person-image {
-    height: 100px; /* Set your desired height */
-    width: 120px;
-
-    object-fit: cover;
-  }
-  
-  .person-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .person-table th,
-  .person-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-  }
-
-  .person-table th,
-  .person-table td.person-displayOrder {
-    text-align: center;
-    font-weight: bold;
-  }
-
-  .person-displayOrder {
-    width: 5%;
-  }
-
-  .person-hamburger {
-    width: 20px;
-    height: auto;
-  }
-  
-  .person-table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-  }
-  
-  .table-actions {
-    gap: 10px;
-  }
-  
-  /* Adjust awards list styles */
-  .person-table .mobile-table ul {
-    padding-left: 15px;
-    list-style-type: disc;
-  }
-  
-  .person-table .mobile-table ul li {
-    margin-bottom: 4px; /* Adjust as needed to separate each award */
-  }
-  
-  .header-button-ctr {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .add-person-button {
-    margin-top: 10px;
-    background-color: #1fb185;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-  
-    border-radius: 4px;
-    padding: 10px 12.5px;
-  }
-  
-  .action-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-    padding: 5px 7.5px;
-    margin: auto;
-  }
-  
-  .edit-button {
-    background-color: #fb980a;
-    color: white;
-  }
-  
-  .delete-button {
-    background-color: #f15858;
-    color: white;
-    margin-top: 10px;
-  }
-  
-  .action-icons {
-    height: 25px;
-    width: 25px;
-  }
-  
-  .search {
-    font-size: 1.1rem;
-    margin-top: 15px;
-  }
-  
-  .search-ctr {
-    margin-top: 10px;
-  }
-  
-  .search-ctr input {
-    padding-left: 12.5px;
-  }
-  
-  /* delete */
-  
-  .delete-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-    z-index: 1; /* Ensure it's behind the delete confirmation dialog */
-  }
-  
-  .delete-confirmation-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 30px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    font-family: "Lato";
-  }
-  
-  .delete-confirmation-ctr {
-    width: 80%;
-    margin: auto;
-  }
-  
-  .delete-confirmation p {
-    margin-bottom: 10px;
-  }
-  
-  .delete-confirmation-header {
-    margin: 25px;
-    font-size: 1.5rem;
-    text-align: center;
-    font-weight: bold;
-  }
-  
-  .delete-confirmation-description {
-    font-size: 1.1rem;
-    text-align: center;
-  }
-  
-  .button-container {
-    margin-top: 25px;
-    display: flex;
-    justify-content: space-between; /* Align buttons to the left and right */
-  }
-  
-  .delete-confirmation-popup button {
-    padding: 8px 16px;
-    cursor: pointer;
-  }
-  
-  .popup-cancel-btn {
-    font-size: 1.25rem;
-    color: white;
-    border: none;
-    background-color: grey;
-  }
-  
-  .popup-confirm-btn {
-    font-size: 1.25rem;
-    color: white;
-    background-color: #f15858;
-    border: white;
-  }
-  
-  .delete-confirmation-popup button:hover {
-    background-color: rgb(92, 92, 92);
-  }
-  
-  .delete-confirmation-popup button:last-child:hover {
-    background-color: #f03838;
-  }
-  
-  /* notification upon success/error */
-  .notification-btm-right {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 10px 20px;
-    background-color: #4caf50; /* Green */
-    color: white;
-    border-radius: 4px;
-    z-index: 9999;
-  }
-  
-  .notification-btm-right.error {
-    background-color: #f44336; /* Red */
-  }
-  
-
-
-
-
-
-/* Add styles for drag previews */
-.person-table tr.dragging {
-  opacity: 1;
-  transition: opacity 0.2s ease;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
 }
 
-/* Add styles for the drag over state */
-.person-table tr.drag-over {
-  background-color: #f0f0f0; /* Light gray background */
-  border-left: 4px solid #364fc7; /* Blue border on the left */
+.person-header {
+  font-size: 2rem;
+  color: #364fc7;
 }
 
-/* Add transition effect for the reorder animation */
+.person-table-ctr {
+  margin-top: 20px;
+}
+
+.person-table-description {
+  width: 50%;
+}
+
+.person-image {
+  height: 100px; /* Set your desired height */
+  width: 120px;
+
+  object-fit: cover;
+}
+
 .person-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.person-table th,
+.person-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.person-table th,
+.person-table td.person-displayOrder {
+  text-align: center;
+  font-weight: bold;
+}
+
+.person-displayOrder {
+  width: 5%;
+}
+
+.person-hamburger {
+  width: 20px;
+  height: auto;
+}
+
+.person-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.table-actions {
+  gap: 10px;
+}
+
+/* Adjust awards list styles */
+.person-table .mobile-table ul {
+  padding-left: 15px;
+  list-style-type: disc;
+}
+
+.person-table .mobile-table ul li {
+  margin-bottom: 4px; /* Adjust as needed to separate each award */
+}
+
+.header-button-ctr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-person-button {
+  margin-top: 10px;
+  background-color: #1fb185;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+
+  border-radius: 4px;
+  padding: 10px 12.5px;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 5px 7.5px;
+  margin: auto;
+}
+
+.edit-button {
+  background-color: #fb980a;
+  color: white;
+}
+
+.delete-button {
+  background-color: #f15858;
+  color: white;
+  margin-top: 10px;
+}
+
+.action-icons {
+  height: 25px;
+  width: 25px;
+}
+
+.search {
+  font-size: 1.1rem;
+  margin-top: 15px;
+}
+
+.search-ctr {
+  margin-top: 10px;
+}
+
+.search-ctr input {
+  padding-left: 12.5px;
+}
+
+/* delete */
+
+.delete-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 1; /* Ensure it's behind the delete confirmation dialog */
+}
+
+.delete-confirmation-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  font-family: "Lato";
+}
+
+.delete-confirmation-ctr {
+  width: 80%;
+  margin: auto;
+}
+
+.delete-confirmation p {
+  margin-bottom: 10px;
+}
+
+.delete-confirmation-header {
+  margin: 25px;
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.delete-confirmation-description {
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.button-container {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between; /* Align buttons to the left and right */
+}
+
+.delete-confirmation-popup button {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.popup-cancel-btn {
+  font-size: 1.25rem;
+  color: white;
+  border: none;
+  background-color: grey;
+}
+
+.popup-confirm-btn {
+  font-size: 1.25rem;
+  color: white;
+  background-color: #f15858;
+  border: white;
+}
+
+.delete-confirmation-popup button:hover {
+  background-color: rgb(92, 92, 92);
+}
+
+.delete-confirmation-popup button:last-child:hover {
+  background-color: #f03838;
+}
+
+/* notification upon success/error */
+.notification-btm-right {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #4caf50; /* Green */
+  color: white;
+  border-radius: 4px;
+  z-index: 9999;
+}
+
+.notification-btm-right.error {
+  background-color: #f44336; /* Red */
+}
+
+
+.person-table tbody tr {
   transition: transform 0.3s ease;
+}
+
+.person-table .dragging {
+  transform: scale(1.05);
+  background-color: #f0f0f0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }

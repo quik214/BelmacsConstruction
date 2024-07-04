@@ -1,0 +1,20 @@
+.project-skeleton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-skeleton .skeleton-img {
+    height: 245px;
+    width: 300px;
+  }
+  .project-skeleton .skeleton-title {
+    height: 20px;
+    width: 200px;
+    margin: 10px 0;
+  }
+  .project-skeleton .skeleton-subtitle {
+    height: 20px;
+    width: 100px;
+  }

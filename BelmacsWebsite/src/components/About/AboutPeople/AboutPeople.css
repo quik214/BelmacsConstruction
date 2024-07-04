@@ -33,7 +33,7 @@
 /* Layout for 6 people */
 .people-grid-container.six {
   grid-template-columns: repeat(6, 1fr); /* Three columns */
-  column-gap: 25px;
+  column-gap: 20px;
 }
 
 /* Layout for 7  people */
@@ -47,7 +47,7 @@
 /* Layout for 8 or more people */
 .people-grid-container.eight {
   grid-template-columns: repeat(4, 1fr);
-  column-gap: 25px;
+  column-gap: 100px;
 }
 
 
@@ -109,7 +109,7 @@
 }
 
 .people-name {
-  font-size: 20px;
+  font-size: 1.05rem;
   font-family: "Lato";
   padding-top: 12.5px;
   padding-left: 15px;
@@ -118,7 +118,7 @@
 }
 
 .people-role {
-  font-size: 14px;
+  font-size: 0.85rem;
   font-family: "Lato";
   font-weight: 100;
   color: #495057;

@@ -3,9 +3,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./AboutProjects.css";
 import "./AboutProjects-media.css";
+
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { db } from "../../../firebase";
 import { getDocs, collection, query, where } from "firebase/firestore";
+
+
+
 import LocationIcon from "../../../assets/About/AboutProjects/map-pin.svg";
 import AwardIcon from "../../../assets/About/AboutProjects/medal.svg";
 
@@ -24,6 +29,7 @@ interface Project {
 const AboutProjects: React.FC = () => {
   const [data, setData] = useState<Project[]>([]);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const navigate = useNavigate();
 
   const projectTypes = [
     "residential-projects",
@@ -101,6 +107,10 @@ const AboutProjects: React.FC = () => {
     return `${-30 * totalAwards + 1}px`;
   };
 
+  const navigateProjectPage = () => {
+    navigate("/projects");
+  };
+
   return (
     <div className="projects reveal">
       <p className="projects-header">Featured Projects</p>
@@ -108,6 +118,7 @@ const AboutProjects: React.FC = () => {
         <Slider {...settings}>
           {data.map((d, index) => (
             <div
+              onClick={navigateProjectPage}
               className="project-card"
               key={index}
               onMouseEnter={() => setHoveredIndex(index)}
@@ -119,7 +130,7 @@ const AboutProjects: React.FC = () => {
                 style={{
                   transform:
                     hoveredIndex === index
-                      ? calculateTransform(d.totalAwards)
+                      ? calculateTransform(d.totalAwards >= 5 ? 0 : d.totalAwards)
                       : "translateY(0)",
                   transition: "transform 0.3s ease"
                 }}
@@ -140,8 +151,8 @@ const AboutProjects: React.FC = () => {
                     style={{
                       bottom:
                         hoveredIndex === index
-                          ? calculateBottom(d.totalAwards)
-                          : calculateBottom(d.totalAwards),
+                        ? calculateBottom(d.totalAwards >= 5 ? 0 : d.totalAwards)
+                        : calculateBottom(d.totalAwards >= 5 ? 0 : d.totalAwards),
                       transition: "bottom 0.3s ease",
                     }}
                   >
@@ -151,10 +162,7 @@ const AboutProjects: React.FC = () => {
                         key={awardIndex}
                         className="award-item"
                         style={{
-                          display:
-                          hoveredIndex === index
-                          ? "flex"
-                          : "none"
+                          display: hoveredIndex === index && d.totalAwards < 5 ? "flex" : "none",
                         }}
                         >
                           <img
