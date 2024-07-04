@@ -3,9 +3,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./AboutProjects.css";
 import "./AboutProjects-media.css";
+
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { db } from "../../../firebase";
 import { getDocs, collection, query, where } from "firebase/firestore";
+
+
+
 import LocationIcon from "../../../assets/About/AboutProjects/map-pin.svg";
 import AwardIcon from "../../../assets/About/AboutProjects/medal.svg";
 
@@ -24,6 +29,7 @@ interface Project {
 const AboutProjects: React.FC = () => {
   const [data, setData] = useState<Project[]>([]);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const navigate = useNavigate();
 
   const projectTypes = [
     "residential-projects",
@@ -101,6 +107,10 @@ const AboutProjects: React.FC = () => {
     return `${-30 * totalAwards + 1}px`;
   };
 
+  const navigateProjectPage = () => {
+    navigate("/projects");
+  };
+
   return (
     <div className="projects reveal">
       <p className="projects-header">Featured Projects</p>
@@ -108,6 +118,7 @@ const AboutProjects: React.FC = () => {
         <Slider {...settings}>
           {data.map((d, index) => (
             <div
+              onClick={navigateProjectPage}
               className="project-card"
               key={index}
               onMouseEnter={() => setHoveredIndex(index)}
