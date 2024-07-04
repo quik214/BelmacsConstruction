@@ -6,7 +6,13 @@ import DeleteIcon from "../../../../../assets/Icons/AdminDashboard/trash.svg";
 import HamburgerIcon from "../../../../../assets/Icons/menu-black.svg";
 
 import React, { useState, useEffect } from "react";
-import { getDocs, collection, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  deleteDoc,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 import { db, storage } from "../../../../../firebase";
 import { useNavigate } from "react-router-dom";
 import { ref, deleteObject } from "firebase/storage";
@@ -59,21 +65,16 @@ const PeopleDashboard: React.FC = () => {
   };
 
   const maxPeopleToast = () => {
-    toast.error(
-      <div>
-        You cannot add more than 8 directors
-      </div>,
-      {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      }
-    );
+    toast.error(<div>You cannot add more than 8 directors</div>, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   };
 
   // function to retrieve the OurPeople data from database
@@ -139,7 +140,7 @@ const PeopleDashboard: React.FC = () => {
     if (people.length === 8) {
       maxPeopleToast();
       return;
-    } 
+    }
     navigate(`/admin/about/people/create`);
   };
 
@@ -166,14 +167,23 @@ const PeopleDashboard: React.FC = () => {
 
   const handleDragStart = (index: number) => {
     setDraggedIndex(index);
-    document.querySelectorAll('.person-table tr').forEach(row => row.classList.add('dragging'));
+    document
+      .querySelectorAll(".person-table tr")
+      .forEach((row) => row.classList.add("dragging"));
   };
 
-  const handleDragOver = (e: React.DragEvent<HTMLTableRowElement>, index: number) => {
+  const handleDragOver = (
+    e:
+      | React.DragEvent<HTMLTableRowElement>
+      | React.TouchEvent<HTMLTableRowElement>,
+    index: number
+  ) => {
     e.preventDefault();
     setDragOverIndex(index);
-    document.querySelectorAll('.person-table tr').forEach(row => row.classList.remove('drag-over'));
-    e.currentTarget.classList.add('drag-over');
+    document
+      .querySelectorAll(".person-table tr")
+      .forEach((row) => row.classList.remove("drag-over"));
+    e.currentTarget.classList.add("drag-over");
   };
 
   const handleDrop = (index: number) => {
@@ -185,7 +195,6 @@ const PeopleDashboard: React.FC = () => {
     const newPeople = [...people];
     newPeople[draggedIndex] = targetPerson;
     newPeople[index] = draggedPerson;
-    console.log(dragOverIndex);
 
     // Update the display order in Firebase
     handleDisplayOrderChange(draggedPerson.id, targetPerson.displayOrder);
@@ -196,7 +205,31 @@ const PeopleDashboard: React.FC = () => {
 
     setDraggedIndex(null);
     setDragOverIndex(null);
-    document.querySelectorAll('.person-table tr').forEach(row => row.classList.remove('dragging', 'drag-over'));
+    document
+      .querySelectorAll(".person-table tr")
+      .forEach((row) => row.classList.remove("dragging", "drag-over"));
+  };
+
+  const handleTouchStart = (index: number) => {
+    setDraggedIndex(index);
+    document
+      .querySelectorAll(".person-table tr")
+      .forEach((row) => row.classList.add("dragging"));
+  };
+
+  const handleTouchMove = (
+    e: React.TouchEvent<HTMLTableRowElement>,
+    index: number
+  ) => {
+    setDragOverIndex(index);
+    document
+      .querySelectorAll(".person-table tr")
+      .forEach((row) => row.classList.remove("drag-over"));
+    e.currentTarget.classList.add("drag-over");
+  };
+
+  const handleTouchEnd = (index: number) => {
+    handleDrop(index);
   };
 
   if (loading) {
@@ -237,8 +270,13 @@ const PeopleDashboard: React.FC = () => {
                   onDragStart={() => handleDragStart(index)}
                   onDragOver={(e) => handleDragOver(e, index)}
                   onDrop={() => handleDrop(index)}
+                  onTouchStart={() => handleTouchStart(index)}
+                  onTouchMove={(e) => handleTouchMove(e, index)}
+                  onTouchEnd={() => handleTouchEnd(index)}
                 >
-                  <td className="person-displayOrder"><img src={HamburgerIcon} className="person-hamburger" /></td>
+                  <td className="person-displayOrder">
+                    <img src={HamburgerIcon} className="person-hamburger" />
+                  </td>
                   <td className="person-displayOrder">{person.displayOrder}</td>
                   <td>
                     <img
