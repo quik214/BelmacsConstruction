@@ -231,6 +231,9 @@ const PeopleDashboard: React.FC = () => {
   const handleTouchEnd = (index: number) => {
     handleDrop(index);
   };
+  const handleImageClick = (e: React.MouseEvent<HTMLImageElement>) => {
+    e.preventDefault(); // Prevent the default action (e.g., navigating to image source)
+  };
 
   const preventDefault = (e: React.SyntheticEvent) => e.preventDefault();
 
@@ -276,8 +279,7 @@ const PeopleDashboard: React.FC = () => {
                     <img
                       src={HamburgerIcon}
                       className="person-hamburger unselectable"
-                      onContextMenu={preventDefault}
-                      onTouchStart={preventDefault}
+                      onClick={handleImageClick} // Prevent default action on image click
                     />
                   </td>
                   <td className="person-displayOrder">{person.displayOrder}</td>
@@ -286,8 +288,7 @@ const PeopleDashboard: React.FC = () => {
                       src={person.image}
                       alt={"person image"}
                       className="person-image"
-                      onContextMenu={preventDefault}
-                      onTouchStart={preventDefault}
+                      onClick={handleImageClick} // Prevent default action on image click
                     />
                   </td>
                   <td>
