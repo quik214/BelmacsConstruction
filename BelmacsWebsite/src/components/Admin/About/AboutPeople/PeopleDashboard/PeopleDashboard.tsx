@@ -195,6 +195,7 @@ const PeopleDashboard: React.FC = () => {
     const newPeople = [...people];
     newPeople[draggedIndex] = targetPerson;
     newPeople[index] = draggedPerson;
+    console.log(dragOverIndex);
 
     // Update the display order in Firebase
     handleDisplayOrderChange(draggedPerson.id, targetPerson.displayOrder);
@@ -275,7 +276,10 @@ const PeopleDashboard: React.FC = () => {
                   onTouchEnd={() => handleTouchEnd(index)}
                 >
                   <td className="person-displayOrder">
-                    <img src={HamburgerIcon} className="person-hamburger" />
+                    <img
+                      src={HamburgerIcon}
+                      className="person-hamburger unselectable no-drag"
+                    />
                   </td>
                   <td className="person-displayOrder">{person.displayOrder}</td>
                   <td>
