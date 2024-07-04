@@ -1,0 +1,67 @@
+/* Large Screens */
+@media (1700px <= width <= 2500px) {
+}
+
+/* Normal Screens - currently designed for this */
+@media (max-width: 1700px) {
+}
+
+/* Landscape Tablets */
+@media (max-width: 1400px) {
+    .project-skeleton .skeleton-img {
+        height: 180px;
+        width: 250px;
+      }
+      .project-skeleton .skeleton-title {
+        height: 18px;
+        width: 180px;
+        margin: 8px 0;
+      }
+      .project-skeleton .skeleton-subtitle {
+        height: 18px;
+        width: 90px;
+      }
+}
+
+/* Tablets */
+@media (max-width: 1200px) {
+    .project-skeleton .skeleton-img {
+        height: 150px;
+        width: 200px;
+      }
+      .project-skeleton .skeleton-title {
+        height: 16px;
+        width: 150px;
+        margin: 6px 0;
+      }
+      .project-skeleton .skeleton-subtitle {
+        height: 16px;
+        width: 80px;
+      }
+
+}
+
+/* Smaller Tablets */
+@media (max-width: 700px) {
+}
+
+/* Mobile */
+@media (max-width: 550px) { 
+    .project-skeleton .skeleton-img {
+        height: 150px;
+        width: 200px;
+      }
+      .project-skeleton .skeleton-title {
+        height: 16px;
+        width: 150px;
+        margin: 6px 0;
+      }
+      .project-skeleton .skeleton-subtitle {
+        height: 16px;
+        width: 80px;
+      }
+}
+
+/* Small Mobile */
+@media (max-width: 390px) {
+}
