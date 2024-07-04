@@ -5,10 +5,30 @@ import "./Login-media.css";
 import { useState } from "react";
 import { auth } from "../../../firebase";
 import { useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  getMultiFactorResolver,
+  PhoneAuthProvider,
+  RecaptchaVerifier,
+  PhoneMultiFactorGenerator,
+  MultiFactorResolver,
+  MultiFactorError,
+} from "firebase/auth";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FirebaseError } from "firebase/app";
+
+declare global {
+  interface Window {
+    recaptchaVerifier: RecaptchaVerifier;
+  }
+}
+
+// Type guard for FirebaseError
+function isFirebaseError(error: unknown): error is FirebaseError {
+  return (error as FirebaseError).code !== undefined;
+}
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,35 +36,35 @@ const Login = () => {
   const [errors, setErrors] = useState<{ email?: string; password?: string }>(
     {}
   );
+  const [verificationCode, setVerificationCode] = useState(""); // For MFA
+  const [mfaResolver, setMfaResolver] = useState<MultiFactorResolver | null>(
+    null
+  ); // For MFA
+  const [verificationId, setVerificationId] = useState<string | null>(null); // For MFA
 
   const navigate = useNavigate();
 
   const validate = () => {
-    let valid = true; // valid will be the return variable
-    const newErrors: { email?: string; password?: string } = {}; // stores error messages for email and password, will be used to set with above useState
-    // ? specifies that the keys can be there, but are not a requirement for this "dictionary"
+    let valid = true;
+    const newErrors: { email?: string; password?: string } = {};
 
     if (!email) {
-      // if the email field is empty, perform the following
-      newErrors.email = "Email field must be not be empty"; // error message
-      valid = false; // since the field is empty, valid will be false
+      newErrors.email = "Email field must not be empty";
+      valid = false;
     } else if (!/\S+@\S+\.\S+/.test(email)) {
-      // using regex, check if email field contains valid email format
-      newErrors.email = "Invalid email format"; // if invalid email format, this is the message displayed
+      newErrors.email = "Invalid email format";
       valid = false;
     }
 
     if (!password) {
-      // if password is empty ,perform the following
-      newErrors.password = "Password field must not be empty"; // error message
-      valid = false; // set valid to false
+      newErrors.password = "Password field must not be empty";
+      valid = false;
     }
 
-    setErrors(newErrors); // sets the error messages array (declared above) to hold the error messages
+    setErrors(newErrors);
     return valid;
   };
 
-  // toast setup for login error
   const loginErrorToast = () => {
     toast.error("Please fix the errors in the form", {
       position: "bottom-right",
@@ -58,7 +78,6 @@ const Login = () => {
     });
   };
 
-  // toast setup for login success
   const loginSuccessToast = (email: string) => {
     toast.success(
       <div>
@@ -77,7 +96,6 @@ const Login = () => {
     );
   };
 
-  // toast setup for login failure
   const loginFailureToast = () => {
     toast.error("Please enter a valid email address and Password", {
       position: "bottom-right",
@@ -91,63 +109,156 @@ const Login = () => {
     });
   };
 
-  const signIn = (e: any) => {
-    e.preventDefault(); // ensure that the page does not get reloaded
+  const signIn = async (e: React.FormEvent) => {
+    e.preventDefault();
 
     if (!validate()) {
-      // if validate() function returns false, then we will perform the following
-      // calls the validate function, and does the following
-      loginErrorToast(); // displays a toast specifying that the user must fix errors in the form
-      return; // does this to immediately return once validation fails
+      loginErrorToast();
+      return;
     }
 
-    signInWithEmailAndPassword(auth, email, password) // for authentication
-      .then((userCredential) => {
-        // if the sign-in attempt (through Firebase) is successful, this executes
-        console.log(userCredential); // log the user credentials to check login success
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const userEmail = userCredential.user.email ?? "unknown email";
+      loginSuccessToast(userEmail);
+      window.localStorage.setItem("approvedSignIn", JSON.stringify(true));
+      navigate("admin/projects");
+    } catch (error: unknown) {
+      if (
+        isFirebaseError(error) &&
+        error.code === "auth/multi-factor-auth-required"
+      ) {
+        const resolver = getMultiFactorResolver(
+          auth,
+          error as MultiFactorError
+        );
+        setMfaResolver(resolver);
+        sendOtp(resolver);
+      } else {
+        console.error("Login error", error);
+        loginFailureToast();
+      }
+    }
+  };
 
-        const userEmail = userCredential.user.email ?? "unknown email"; // get user's email address, if unknown, will display unknown email (will not happen)
-        // "unknown email is just a fallback"
-        loginSuccessToast(userEmail); // display the success toast
-        navigate("/admin/about"); // navigate user to the dashboard upon a successful login
-      })
-      .catch((error) => {
-        console.log(error); // catch any errors
-        loginFailureToast(); // any invalid login credentials will be further caught
-      });
+  const sendOtp = async (resolver: MultiFactorResolver) => {
+    try {
+      // Ensure that the recaptcha container exists
+      const recaptchaContainer = document.getElementById("recaptcha-container");
+      if (!recaptchaContainer) {
+        throw new Error("recaptcha-container element not found in the DOM.");
+      }
+
+      if (!window.recaptchaVerifier) {
+        window.recaptchaVerifier = new RecaptchaVerifier(
+          auth,
+          "recaptcha-container",
+          {
+            size: "invisible",
+          }
+        );
+      }
+
+      const phoneInfoOptions = {
+        multiFactorHint: resolver.hints[0],
+        session: resolver.session,
+      };
+
+      console.log("phoneInfoOptions:", phoneInfoOptions);
+
+      const phoneAuthProvider = new PhoneAuthProvider(auth);
+      const verificationId = await phoneAuthProvider.verifyPhoneNumber(
+        phoneInfoOptions,
+        window.recaptchaVerifier
+      );
+      setVerificationId(verificationId);
+      console.log(`OTP sent, verificationId: ${verificationId}`);
+    } catch (error: unknown) {
+      console.error("Error sending OTP", error);
+
+      // If error is a FirebaseError, log additional details
+      if (isFirebaseError(error)) {
+        console.error("Firebase Error Code:", error.code);
+        console.error("Firebase Error Message:", error.message);
+      } else {
+        console.error("Unexpected Error:", error);
+      }
+    }
+  };
+
+  const handleOtpSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!mfaResolver || !verificationId) return;
+
+    try {
+      const phoneCredential = PhoneAuthProvider.credential(
+        verificationId,
+        verificationCode
+      );
+      const multiFactorAssertion =
+        PhoneMultiFactorGenerator.assertion(phoneCredential);
+      await mfaResolver.resolveSignIn(multiFactorAssertion);
+
+      // Clear the resolver
+      setMfaResolver(null);
+      setVerificationCode("");
+
+      navigate("/admin/projects");
+    } catch (error) {
+      console.error("MFA failed", error);
+    }
   };
 
   return (
     <div className="signin-ctr">
-      <form onSubmit={signIn}>
-        <p className="signin-header">Admin Log In</p>
-        <div className="signin-details">
-          <p className="username-text"></p>
-          <div className="email-portion">
+      <div id="recaptcha-container"></div>
+      {!mfaResolver ? (
+        <form onSubmit={signIn}>
+          <p className="signin-header">Admin Log In</p>
+          <div className="signin-details">
+            <div className="email-portion">
+              <input
+                className="email"
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              {errors.email && <p className="error-text">{errors.email}</p>}
+            </div>
             <input
-              className="email"
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              className="password"
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
-            {errors.email && <p className="error-text">{errors.email}</p>}{" "}
-            {/* If there is input error for email, this will show*/}
+            {errors.password && <p className="error-text">{errors.password}</p>}
           </div>
+          <button type="submit" className="login-button">
+            Log In
+          </button>
+        </form>
+      ) : (
+        <form onSubmit={handleOtpSubmit}>
+          <p className="signin-header">Multi-Factor Authentication</p>
+
           <input
-            className="password"
-            type="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            type="text"
+            value={verificationCode}
+            onChange={(e) => setVerificationCode(e.target.value)}
+            placeholder="Enter OTP"
+            required
           />
-          {errors.password && <p className="error-text">{errors.password}</p>}{" "}
-          {/* If there is input error for password, this will show*/}
-        </div>
-        <button type="submit" className="login-button">
-          Log In
-        </button>
-      </form>
+          <button type="submit" className="login-button">
+            Verify
+          </button>
+        </form>
+      )}
     </div>
   );
 };
