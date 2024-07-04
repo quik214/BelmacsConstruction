@@ -1,0 +1,82 @@
+/* Large Screens */
+@media (1700px <= width <= 2500px) {
+}
+
+/* Normal Screens - currently designed for this */
+@media (max-width: 1700px) {
+}
+
+/* Landscape Tablets */
+@media (max-width: 1220px) {
+  .projectTypes-header {
+    font-size: 1.6rem;
+    color: #364fc7;
+  }
+
+  .projectTypes-table-ctr {
+    margin-top: 25px;
+  }
+
+  .projectTypes-image {
+    height: 80px; /* Set your desired height */
+    width: 100px;
+    object-fit: cover;
+  }
+
+  .projectTypes-table th,
+  .projectTypes-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  .projectTypes-table th {
+    font-size: 0.8rem;
+  }
+
+  .projectTypes-table td {
+    font-size: 0.8rem;
+  }
+
+  .table-actions {
+    gap: 10px;
+  }
+
+  .action-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 5px 5px;
+    margin: auto;
+  }
+
+  .action-icons {
+    height: 20px;
+    width: 20px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 1000px) {
+  .mobile-table {
+    display: none;
+  }
+}
+
+/* Smaller Tablets */
+@media (max-width: 700px) {
+}
+
+/* Mobile */
+@media (max-width: 550px) {
+}
+
+/* Small Mobile */
+@media (max-width: 390px) {
+  .projectTypes-image {
+    height: 60px;
+    width: 80px;
+  }
+}

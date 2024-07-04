@@ -137,6 +137,11 @@
   .project-types-desc {
     font-size: 0.8rem;
   }
+
+  .project-types-grid-item .title {
+    top: 15px;
+    left: 13px;
+  }
 }
 
 /* Small Mobile */
@@ -146,6 +151,6 @@
   }
 
   .project-types-grid-item .title {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 }
