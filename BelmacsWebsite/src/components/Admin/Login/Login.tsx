@@ -2,7 +2,7 @@ import "../../../assets/fonts.css";
 import "./Login.css";
 import "./Login-media.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { auth } from "../../../firebase";
 import { useNavigate } from "react-router-dom";
 import {
@@ -42,8 +42,25 @@ const Login = () => {
   ); // For MFA
   const [verificationId, setVerificationId] = useState<string | null>(null); // For MFA
 
-
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const mfaLogin = sessionStorage.getItem("mfaLogin");
+    const hasRefreshed = sessionStorage.getItem("hasRefreshed");
+
+    // if admin has already logged in with mfa once AND the page has not been refreshed
+    if (mfaLogin === "true" && !hasRefreshed) {
+      // then we reload the page
+      window.location.reload();
+      // and we set hasRefreshed to true in sessionStorage, so that after refresh,
+      // when the useEffect triggers again, then hasRefreshed will be 1, !1 = 0, and we will not refresh again
+      sessionStorage.setItem("hasRefreshed", "true");
+    }
+
+    // below the code, after pressing sign in, we will clear hasRefreshed from sessionStorage, such that when they go to the admin page again,
+    // we will refresh the page again once
+
+  }, []);
 
   const validate = () => {
     let valid = true;
@@ -138,7 +155,8 @@ const Login = () => {
           auth,
           error as MultiFactorError
         );
-        
+
+        sessionStorage.removeItem("hasRefreshed");
         setMfaResolver(resolver);
         sendOtp(resolver);
       } else {
@@ -210,7 +228,10 @@ const Login = () => {
       setMfaResolver(null);
       setVerificationCode("");
 
-      loginSuccessToast;
+      // add login success to session storage
+      sessionStorage.setItem("mfaLogin", "true");
+      
+
       navigate("/admin/projects");
       loginSuccessToast(email);
     } catch (error) {
@@ -220,7 +241,6 @@ const Login = () => {
 
   return (
     <div className="signin-ctr">
-      <div id="recaptcha-container"></div>
       {!mfaResolver ? (
         <form onSubmit={signIn}>
           <p className="signin-header">Admin Log In</p>
