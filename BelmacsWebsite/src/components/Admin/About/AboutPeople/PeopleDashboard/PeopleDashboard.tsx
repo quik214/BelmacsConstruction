@@ -278,18 +278,22 @@ const PeopleDashboard: React.FC = () => {
                     <img
                       src={HamburgerIcon}
                       className="person-hamburger unselectable no-drag"
+                      draggable="false"
                     />
                   </td>
-                  <td className="person-displayOrder">{person.displayOrder}</td>
+                  <td className="person-displayOrder unselectable">
+                    {person.displayOrder}
+                  </td>
                   <td>
                     <img
                       src={person.image}
                       alt={"person image"}
-                      className="person-image"
+                      className="person-image unselectable"
+                      draggable="false"
                     />
                   </td>
                   <td>
-                    <p>{person.name}</p>
+                    <p className="unselectable">{person.name}</p>
                   </td>
                   <td className="mobile-table">
                     <p>{person.position}</p>
