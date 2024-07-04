@@ -280,6 +280,8 @@ const PeopleDashboard: React.FC = () => {
                       src={HamburgerIcon}
                       className="person-hamburger unselectable"
                       onClick={handleImageClick} // Prevent default action on image click
+                      onContextMenu={preventDefault}
+                      onTouchStart={preventDefault}
                     />
                   </td>
                   <td className="person-displayOrder">{person.displayOrder}</td>
@@ -289,6 +291,8 @@ const PeopleDashboard: React.FC = () => {
                       alt={"person image"}
                       className="person-image"
                       onClick={handleImageClick} // Prevent default action on image click
+                      onContextMenu={preventDefault}
+                      onTouchStart={preventDefault}
                     />
                   </td>
                   <td>
