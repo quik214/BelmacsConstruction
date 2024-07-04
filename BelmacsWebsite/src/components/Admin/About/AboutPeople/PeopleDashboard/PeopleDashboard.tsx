@@ -173,9 +173,7 @@ const PeopleDashboard: React.FC = () => {
   };
 
   const handleDragOver = (
-    e:
-      | React.DragEvent<HTMLTableRowElement>
-      | React.TouchEvent<HTMLTableRowElement>,
+    e: React.DragEvent<HTMLTableRowElement>,
     index: number
   ) => {
     e.preventDefault();
@@ -222,6 +220,7 @@ const PeopleDashboard: React.FC = () => {
     e: React.TouchEvent<HTMLTableRowElement>,
     index: number
   ) => {
+    e.preventDefault();
     setDragOverIndex(index);
     document
       .querySelectorAll(".person-table tr")
