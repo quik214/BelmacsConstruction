@@ -5,8 +5,7 @@ import {
   getStorage,
   ref,
   uploadBytes,
-  getDownloadURL,
-  deleteObject,
+  getDownloadURL
 } from "firebase/storage";
 import { db } from "../../../../firebase";
 
@@ -37,7 +36,6 @@ const EditProjectType: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string | File | null>( // useState to set the selectedImage
     null
   );
-  const [imageClass, setImageClass] = useState<string>(""); // state for CSS class
   const navigate = useNavigate(); // function used for navigation (in later parts of code)
 
   // for form errors
