@@ -24,7 +24,8 @@
   margin-top: 15px;
 }
 
-.edit-current-project-type-new-img-ctr {
+.edit-current-new-project-type-img-ctr {
+  margin-top: 20px;
   display: flex;
   flex-direction: row;
 }
@@ -33,12 +34,6 @@
   margin-left: 100px;
 }
 
-.current-project-type-img,
-.new-project-type-img {
-  width: 350px;
-  height: 250px;
-  margin-top: 10px;
-}
 .landscape-img {
   width: 350px;
   height: 250px;

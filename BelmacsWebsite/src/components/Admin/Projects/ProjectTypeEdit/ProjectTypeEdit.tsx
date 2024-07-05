@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { doc, getDoc, setDoc, deleteDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import {
   getStorage,
   ref,
@@ -14,10 +14,11 @@ import { db } from "../../../../firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import "./ProjectTypeEdit-media.css";
 import "./ProjectTypeEdit.css";
+import "./ProjectTypeEdit-media.css";
 
-import ImagePlaceHolder from "../../../../assets/Admin/placeholder-landscape.png";
+import ImageLandscapePlaceHolder from "../../../../assets/Admin/placeholder-landscape.png";
+import ImagePortraitPlaceHolder from "../../../../assets/Icons/AdminDashboard/empty-image-placeholder.png";
 
 // create a Project object
 interface ProjectType {
@@ -145,10 +146,6 @@ const EditProjectType: React.FC = () => {
         await uploadBytes(newImageRef, selectedImage); // upload the image to the reference location
         imageUrl = await getDownloadURL(newImageRef); // get the download URL for the newly uploaded image
         // Delete the old image
-        if (originalImageUrl) {
-          const oldImageRef = ref(storage, originalImageUrl); // create a reference to the old image URL
-          await deleteObject(oldImageRef); // delete the old image at the referenced location
-        }
       }
 
       // updatedprojectType is a project type object that will store the person data, but with the new image URL (if there is one)
@@ -238,7 +235,7 @@ const EditProjectType: React.FC = () => {
             {errors.type && <span className="error">{errors.type}</span>}
           </div>
           <div className="edit-image-field">
-            <div className="edit-current-project-type-new-img-ctr">
+            <div className="edit-current-new-project-type-img-ctr">
               <div className="edit-current-project-type-img-ctr">
                 <label className="edit-field-header">Current Image</label>
                 <div className="current-img">
@@ -265,7 +262,11 @@ const EditProjectType: React.FC = () => {
                 <label className="edit-field-header">New Image</label>
                 <div className="new-project-type-img">
                   <img
-                    src={selectedImage ? projectType.image : ImagePlaceHolder}
+                    src={
+                      selectedImage 
+                        ? projectType.image 
+                        : (projectType.type === "Landscape" ? ImageLandscapePlaceHolder : ImagePortraitPlaceHolder)
+                    }
                     alt="New Image"
                     className={`new-project-type-img ${
                       projectType.type === "Landscape"
