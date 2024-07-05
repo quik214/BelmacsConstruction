@@ -2,7 +2,7 @@ import "../../../assets/fonts.css";
 import "./Login.css";
 import "./Login-media.css";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { auth } from "../../../firebase";
 import { useNavigate } from "react-router-dom";
 import {
@@ -13,6 +13,7 @@ import {
   PhoneMultiFactorGenerator,
   MultiFactorResolver,
   MultiFactorError,
+  PhoneMultiFactorInfo,
 } from "firebase/auth";
 
 import { toast } from "react-toastify";
@@ -36,30 +37,24 @@ const Login = () => {
   const [errors, setErrors] = useState<{ email?: string; password?: string }>(
     {}
   );
-  const [verificationCode, setVerificationCode] = useState(""); // For MFA
+  const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);
   const [mfaResolver, setMfaResolver] = useState<MultiFactorResolver | null>(
     null
-  ); // For MFA
-  const [verificationId, setVerificationId] = useState<string | null>(null); // For MFA
+  );
+  const [verificationId, setVerificationId] = useState<string | null>(null);
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
 
   const navigate = useNavigate();
+  const otpInputsRef = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
     const mfaLogin = sessionStorage.getItem("mfaLogin");
     const hasRefreshed = sessionStorage.getItem("hasRefreshed");
 
-    // if admin has already logged in with mfa once AND the page has not been refreshed
     if (mfaLogin === "true" && !hasRefreshed) {
-      // then we reload the page
       window.location.reload();
-      // and we set hasRefreshed to true in sessionStorage, so that after refresh,
-      // when the useEffect triggers again, then hasRefreshed will be 1, !1 = 0, and we will not refresh again
       sessionStorage.setItem("hasRefreshed", "true");
     }
-
-    // below the code, after pressing sign in, we will clear hasRefreshed from sessionStorage, such that when they go to the admin page again,
-    // we will refresh the page again once
-
   }, []);
 
   const validate = () => {
@@ -127,6 +122,20 @@ const Login = () => {
     });
   };
 
+  const mfaErrorToast = () => {
+    toast.error("Incorrect MFA code entered. Please try again.", {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
+
   const signIn = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -156,6 +165,8 @@ const Login = () => {
           error as MultiFactorError
         );
 
+        
+
         sessionStorage.removeItem("hasRefreshed");
         setMfaResolver(resolver);
         sendOtp(resolver);
@@ -168,7 +179,6 @@ const Login = () => {
 
   const sendOtp = async (resolver: MultiFactorResolver) => {
     try {
-      // Ensure that the recaptcha container exists
       const recaptchaContainer = document.getElementById("recaptcha-container");
       if (!recaptchaContainer) {
         throw new Error("recaptcha-container element not found in the DOM.");
@@ -184,6 +194,10 @@ const Login = () => {
         );
       }
 
+      // to store phone number of admin and display in HTML
+      const mfaInfo = resolver.hints[0] as PhoneMultiFactorInfo;
+      setPhoneNumber(mfaInfo.phoneNumber);
+    
       const phoneInfoOptions = {
         multiFactorHint: resolver.hints[0],
         session: resolver.session,
@@ -201,7 +215,6 @@ const Login = () => {
     } catch (error: unknown) {
       console.error("Error sending OTP", error);
 
-      // If error is a FirebaseError, log additional details
       if (isFirebaseError(error)) {
         console.error("Firebase Error Code:", error.code);
         console.error("Firebase Error Message:", error.message);
@@ -216,31 +229,50 @@ const Login = () => {
     if (!mfaResolver || !verificationId) return;
 
     try {
+      const otpCode = otp.join(""); // join all the numbers in each of the fields (from otp) together
       const phoneCredential = PhoneAuthProvider.credential(
         verificationId,
-        verificationCode
+        otpCode // this is the OTP code
       );
       const multiFactorAssertion =
         PhoneMultiFactorGenerator.assertion(phoneCredential);
       await mfaResolver.resolveSignIn(multiFactorAssertion);
 
-      // Clear the resolver
       setMfaResolver(null);
-      setVerificationCode("");
+      setOtp(["", "", "", "", "", ""]);
 
-      // add login success to session storage
       sessionStorage.setItem("mfaLogin", "true");
-      
 
       navigate("/admin/projects");
       loginSuccessToast(email);
     } catch (error) {
+
+      if (
+        isFirebaseError(error) &&
+        error.code === "auth/invalid-verification-code"
+      ) {
+        mfaErrorToast();
+      }
+
       console.error("MFA failed", error);
+    }
+  };
+
+  // as the user types in a new otp
+  const handleOtpChange = (value: string, index: number) => {
+    const newOtp = [...otp]; // we set a new const newOtp to be the array of otp values
+    newOtp[index] = value; // and the value at the index (from the parameters passed in by the field change in HTML)
+    setOtp(newOtp);
+
+    if (value && index < otpInputsRef.current.length - 1) {
+      otpInputsRef.current[index + 1]?.focus();
     }
   };
 
   return (
     <div className="signin-ctr">
+      {/* If mfaResolver is true, means that MFA user has logged in and will proceed with MFA authentication */}
+      {/* Otherwise if false, then MFA user is still logging in */}
       {!mfaResolver ? (
         <form onSubmit={signIn}>
           <p className="signin-header">Admin Log In</p>
@@ -270,16 +302,23 @@ const Login = () => {
         </form>
       ) : (
         <form onSubmit={handleOtpSubmit}>
-          <p className="signin-header">Multi-Factor Authentication</p>
-
-          <input
-            type="text"
-            value={verificationCode}
-            onChange={(e) => setVerificationCode(e.target.value)}
-            placeholder="Enter OTP"
-            required
-          />
-          <button type="submit" className="login-button">
+          <p className="signin-header">Enter Verification Code</p>
+          <p className="mfa-description">An SMS has been sent to {phoneNumber}, please enter the 6-digit OTP below.</p>
+          <div className="otp-container">
+            {/* For each value in otp (currently empty strings), we map an input element. Meaning that an input element is created for  */}
+            {otp.map((digit, index) => (
+              <input
+                key={index}
+                type="text"
+                maxLength={1}
+                value={digit}
+                onChange={(e) => handleOtpChange(e.target.value, index)}
+                className="otp-input"
+                ref={(el) => (otpInputsRef.current[index] = el)}
+              />
+            ))}
+          </div>
+          <button type="submit" className="otp-button">
             Verify
           </button>
         </form>

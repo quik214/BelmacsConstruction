@@ -42,3 +42,37 @@
   width: 380px;
 }
 
+
+.otp-container {
+  display: flex;
+  margin-top: 15px;
+}
+
+.otp-button {
+  background-color: #364fc7;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.otp-input {
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.otp-input:last-child {
+  margin-right: 0;
+}
+
+.mfa-description {
+  margin-top: 20px;
+}
