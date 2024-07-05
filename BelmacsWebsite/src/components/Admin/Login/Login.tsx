@@ -135,6 +135,19 @@ const Login = () => {
     });
   };
 
+  const mfaMaxAttemptsToast = () => {
+    toast.error("You have exceeded the number of MFA ", {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
 
   const signIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -252,6 +265,11 @@ const Login = () => {
         error.code === "auth/invalid-verification-code"
       ) {
         mfaErrorToast();
+      } else if (
+        isFirebaseError(error) && 
+        error.code === "auth/too-many-requests"
+      ) {
+        mfaMaxAttemptsToast();
       }
 
       console.error("MFA failed", error);
