@@ -1,0 +1,101 @@
+.edit-project-type-ctr {
+  font-family: Arial, Helvetica, sans-serif;
+  padding-bottom: 15px;
+  margin-top: 40px;
+}
+
+.edit-project-type-header {
+  font-size: 2rem;
+  color: #364fc7;
+  font-size: 32px;
+  margin-bottom: 25px;
+}
+
+.edit-field {
+  margin-top: 20px;
+}
+
+.edit-field-header {
+  margin-bottom: 10px;
+}
+
+.upload-image-input {
+  border: 2px dashed #ccc;
+  margin-top: 15px;
+}
+
+.edit-current-project-type-new-img-ctr {
+  display: flex;
+  flex-direction: row;
+}
+
+.edit-new-project-type-img-ctr {
+  margin-left: 100px;
+}
+
+.current-project-type-img,
+.new-project-type-img {
+  width: 350px;
+  height: 250px;
+  margin-top: 10px;
+}
+.landscape-img {
+  width: 350px;
+  height: 250px;
+  margin-top: 10px;
+}
+
+.portrait-img {
+  width: 229px;
+  height: 305px;
+  margin-top: 10px;
+}
+
+.new-project-type-img {
+  cursor: pointer;
+}
+
+.upload-image-input {
+  margin-top: 10px;
+}
+
+.edit-project-type-button-ctr {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+}
+
+.edit-project-type-button {
+  background-color: #1fb185;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+  padding: 10px 12.5px;
+}
+
+.cancel-project-type-button {
+  color: white;
+  background-color: grey;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+  padding: 9px 12.5px;
+}
+
+.edit-project-type-button:hover {
+  background-color: #13644c;
+}
+
+.cancel-project-type-button:hover {
+  background-color: rgb(211, 211, 211);
+}
+
+.error {
+  margin-top: 5px;
+  color: #ff0000;
+  margin-bottom: 10px;
+}

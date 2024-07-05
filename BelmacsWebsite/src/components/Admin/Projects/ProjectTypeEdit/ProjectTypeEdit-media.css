@@ -1,0 +1,55 @@
+/* Large Screens */
+@media (1700px <= width <= 2500px) {
+  .edit-project-type-header {
+    font-size: 2rem;
+  }
+}
+
+/* Normal Screens - currently designed for this */
+@media (max-width: 1700px) {
+}
+
+/* Landscape Tablets */
+@media (max-width: 1200px) {
+  .edit-project-type-header {
+    font-size: 1.6rem;
+  }
+}
+
+/* Tablets */
+@media (max-width: 1000px) {
+  .edit-current-new-project-type-img-ctr {
+    flex-direction: column;
+  }
+
+  .edit-new-project-type-img-ctr {
+    margin-left: 0px;
+  }
+}
+
+/* Smaller Tablets */
+@media (max-width: 700px) {
+  .portrait-img {
+    width: 120px;
+    height: 150px;
+  }
+  .landscape-img {
+    width: 250px;
+    height: 175px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 550px) {
+  .edit-field-header {
+    font-size: 1rem;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 390px) {
+  .landscape-img {
+    width: 150px;
+    height: 125px;
+  }
+}

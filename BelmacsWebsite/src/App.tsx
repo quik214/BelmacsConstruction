@@ -20,6 +20,7 @@ import AdminLogin from "./pages/Admin/AdminLogin/AdminLogin";
 import AdminDashboard from "./pages/Admin/AdminProjects/AdminProjectsDashboard/AdminProjectsDashboard";
 import AdminCreate from "./pages/Admin/AdminProjects/AdminProjectsCreate/AdminProjectsCreate";
 import AdminEdit from "./pages/Admin/AdminProjects/AdminProjectsEdit/AdminProjectsEdit";
+import AdminEditProjectType from "./pages/Admin/AdminProjects/AdminProjectTypeEdit/AdminProjectsEdit";
 
 // Admin Page (About)
 import AdminAboutCompany from "./pages/Admin/AdminAbout/AdminAboutDashboard/AdminAboutDashboard";
@@ -152,6 +153,15 @@ function MainApp() {
               </PrivateRoute>
             }
           />
+          <Route
+            path="/admin/project-types/edit/:title"
+            element={
+              <PrivateRoute>
+                <AdminEditProjectType />
+              </PrivateRoute>
+            }
+          />
+
           {/* Catch-all route for invalid paths */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

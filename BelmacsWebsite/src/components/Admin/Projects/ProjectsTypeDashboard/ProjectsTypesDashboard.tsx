@@ -27,9 +27,9 @@ const ProjectType: React.FC = () => {
         const querySnapshot = await getDocs(collectionRef);
 
         // Map through documents and extract data
-        const data: ProjectType[] = querySnapshot.docs.map(doc => ({
+        const data: ProjectType[] = querySnapshot.docs.map((doc) => ({
           id: doc.id, // Add document ID
-          ...doc.data() as ProjectType
+          ...(doc.data() as ProjectType),
         }));
 
         setProjectTypes(data);
@@ -42,8 +42,8 @@ const ProjectType: React.FC = () => {
   }, []); // Empty dependency array to run once on component mount
 
   const handleEditImage = (project: ProjectType) => {
-    navigate("/admin/project-types/edit", {
-      state: { paramData: project }
+    navigate(`/admin/project-types/edit/${project.title}`, {
+      state: { paramData: project },
     });
   };
 
@@ -65,10 +65,8 @@ const ProjectType: React.FC = () => {
             <tbody>
               {projectTypes.map((project, index) => (
                 <tr key={project.title}>
-                                      <td>
-                    <p>
-                      {project.title}
-                    </p>
+                  <td>
+                    <p>{project.title}</p>
                   </td>
                   <td>
                     <img
@@ -78,9 +76,7 @@ const ProjectType: React.FC = () => {
                     />
                   </td>
                   <td className="mobile-table">
-                    <p>
-                      {project.type}
-                    </p>
+                    <p>{project.type}</p>
                   </td>
 
                   <td className="table-actions">
