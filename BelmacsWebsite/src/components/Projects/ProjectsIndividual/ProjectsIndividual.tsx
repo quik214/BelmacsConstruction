@@ -117,7 +117,7 @@ const ProjectList: React.FC = () => {
       if (projectContainerRef.current) {
         const { top } = projectContainerRef.current.getBoundingClientRect();
         window.scrollTo({
-          top: window.scrollY + top + 200, // Adjust the pixel value as needed
+          top: window.scrollY + top + 230, // Adjust the pixel value as needed
           behavior: "smooth",
         });
       }
@@ -130,7 +130,7 @@ const ProjectList: React.FC = () => {
       if (projectContainerRef.current) {
         const { top } = projectContainerRef.current.getBoundingClientRect();
         window.scrollTo({
-          top: window.scrollY + top + 200, // Adjust the pixel value as needed
+          top: window.scrollY + top + 230, // Adjust the pixel value as needed
           behavior: "smooth",
         });
       }
