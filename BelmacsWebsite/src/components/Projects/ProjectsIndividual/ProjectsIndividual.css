@@ -1,6 +1,6 @@
 .projects-individual-container {
   width: 80%;
-  margin: 0 auto;
+  margin: auto;
   margin-top: 50px;
 }
 
@@ -204,4 +204,43 @@
 /* Prevent scrolling */
 .no-scroll {
   overflow: hidden;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.pagination .mobile-view {
+  display: none;
+}
+
+.pagination button {
+  background-color: white;
+  border: 1px solid #364fc7;
+  color: #364fc7;
+  padding: 10px 15px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 16px;
+  min-width: 40px;
+}
+
+.pagination button:hover {
+  background-color: #364fc7;
+  color: white;
+}
+
+.pagination button.active {
+  background-color: #364fc7;
+  color: white;
+}
+
+.pagination button:disabled {
+  background-color: #ddd;
+  color: #999;
+  cursor: not-allowed;
 }

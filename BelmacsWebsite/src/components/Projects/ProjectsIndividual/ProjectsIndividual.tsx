@@ -2,14 +2,12 @@ import "../../../assets/fonts.css";
 import "./ProjectsIndividual.css";
 import "./ProjectsIndividual-media.css";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../../firebase";
 import { useParams } from "react-router-dom";
 
 import Hero from "../../Hero/Hero";
-import { FaCheckCircle } from "react-icons/fa"; // Import an icon from react-icons
-
 import ProjectSkeleton from './ProjectSkeleton';
 
 import ResidentialImage from "../../../assets/Projects/HeroImages/ResidentialHero.jpg";
@@ -33,19 +31,19 @@ interface Project {
 }
 
 const ProjectList: React.FC = () => {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [visibleCount, setVisibleCount] = useState(6);
   const [ongoingProjects, setOngoingProjects] = useState<Project[]>([]);
   const [completedProjects, setCompletedProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { type } = useParams<{ type: string }>();
 
-  const observer = useRef<IntersectionObserver | null>(null);
-  const sentinelRef = useRef<HTMLDivElement | null>(null);
+  const [currentOngoingPage, setCurrentOngoingPage] = useState(1);
+  const [currentCompletedPage, setCurrentCompletedPage] = useState(1);
+
+  const projectsPerPage = 9;
+  const projectContainerRef = React.useRef<HTMLDivElement | null>(null);
 
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [showSentinel, setShowSentinel] = useState(false);
 
   useEffect(() => {
     const fetchAwards = async (projectId: string) => {
@@ -82,8 +80,6 @@ const ProjectList: React.FC = () => {
           return dateB - dateA;
         });
 
-        setProjects(data);
-
         const ongoing = data.filter((project) => !project.completion);
         const completed = data.filter((project) => project.completion);
 
@@ -99,33 +95,6 @@ const ProjectList: React.FC = () => {
     fetchDataFromFirestore();
   }, [type]);
 
-  const loadMoreProjects = () => {
-    setVisibleCount((prevCount) => prevCount + 6);
-  };
-
-  useEffect(() => {
-    if (observer.current) observer.current.disconnect();
-
-    observer.current = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && !isLoading) {
-        if (visibleCount < projects.length) {
-          loadMoreProjects();
-        } else if (visibleCount >= projects.length) {
-          setShowSentinel(true);
-          setTimeout(() => {
-            setShowSentinel(false);
-          }, 1500);
-        }
-      }
-    });
-
-    if (sentinelRef.current) {
-      observer.current.observe(sentinelRef.current);
-    }
-
-    return () => observer.current?.disconnect();
-  }, [visibleCount, projects.length, isLoading]);
-
   const handleCardClick = (project: Project) => {
     setSelectedProject(project);
     setShowPopup(true);
@@ -136,6 +105,154 @@ const ProjectList: React.FC = () => {
     setShowPopup(false);
     setSelectedProject(null);
     document.body.classList.remove("no-scroll");
+  };
+
+  // Pagination functions for ongoing and completed projects
+  const totalOngoingPages = Math.ceil(ongoingProjects.length / projectsPerPage);
+  const totalCompletedPages = Math.ceil(completedProjects.length / projectsPerPage);
+
+  const handleOngoingPageChange = (page: number) => {
+    setCurrentOngoingPage(page);
+    setTimeout(() => {
+      if (projectContainerRef.current) {
+        const { top } = projectContainerRef.current.getBoundingClientRect();
+        window.scrollTo({
+          top: window.scrollY + top + 200, // Adjust the pixel value as needed
+          behavior: "smooth",
+        });
+      }
+    }, 0);
+  };
+
+  const handleCompletedPageChange = (page: number) => {
+    setCurrentCompletedPage(page);
+    setTimeout(() => {
+      if (projectContainerRef.current) {
+        const { top } = projectContainerRef.current.getBoundingClientRect();
+        window.scrollTo({
+          top: window.scrollY + top + 200, // Adjust the pixel value as needed
+          behavior: "smooth",
+        });
+      }
+    }, 0);
+  };
+
+  const displayedOngoingProjects = ongoingProjects.slice(
+    (currentOngoingPage - 1) * projectsPerPage,
+    currentOngoingPage * projectsPerPage
+  );
+
+  const displayedCompletedProjects = completedProjects.slice(
+    (currentCompletedPage - 1) * projectsPerPage,
+    currentCompletedPage * projectsPerPage
+  );
+
+  // Pagination component
+  const Pagination = ({
+    currentPage,
+    totalPages,
+    onPageChange,
+  }: {
+    currentPage: number;
+    totalPages: number;
+    onPageChange: (page: number) => void;
+  }) => {
+    const maxButtons = 5;
+    const pages = [];
+    let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
+    let endPage = Math.min(totalPages, currentPage + Math.floor(maxButtons / 2));
+
+    if (endPage - startPage + 1 < maxButtons) {
+      if (currentPage <= Math.floor(maxButtons / 2)) {
+        endPage = Math.min(totalPages, maxButtons);
+      } else if (currentPage + Math.floor(maxButtons / 2) >= totalPages) {
+        startPage = Math.max(1, totalPages - maxButtons + 1);
+      }
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+
+    return (
+      <div className="pagination">
+        <div className="desktop-view">
+          <button
+            onClick={() => onPageChange(1)}
+            disabled={currentPage === 1}
+          >
+            &laquo;
+          </button>
+          <button
+            onClick={() => onPageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            &lt;
+          </button>
+          {pages.map((page) => (
+            <button
+              key={page}
+              onClick={() => onPageChange(page)}
+              className={currentPage === page ? "active" : ""}
+            >
+              {page}
+            </button>
+          ))}
+          <button
+            onClick={() => onPageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            &gt;
+          </button>
+          <button
+            onClick={() => onPageChange(totalPages)}
+            disabled={currentPage === totalPages}
+          >
+            &raquo;
+          </button>
+        </div>
+        <div className="mobile-view">
+        <button
+            onClick={() => onPageChange(1)}
+            disabled={currentPage === 1}
+          >
+            &laquo;
+          </button>
+          <button
+            onClick={() => onPageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            &lt;
+          </button>
+          <button
+            onClick={() => onPageChange(currentPage)}
+            className="active"
+          >
+            {currentPage}
+          </button>
+          {totalPages > 1 && (
+            <>
+              {totalPages > 2 && (
+                <button
+                  onClick={() => onPageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                >
+                  &gt;
+                </button>
+              )}
+              {totalPages > 2 && (
+                <button
+                  onClick={() => onPageChange(totalPages)}
+                  disabled={currentPage === totalPages}
+                >
+                  &raquo;
+                </button>
+              )}
+            </>
+          )}
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -160,7 +277,7 @@ const ProjectList: React.FC = () => {
           "Projects"
         }
       />
-      <div className="projects-individual-container">
+      <div className="projects-individual-container"  ref={projectContainerRef}>
         {isLoading ? (
           <div className="projects-individual-grid-container">
             {Array(6)
@@ -177,7 +294,7 @@ const ProjectList: React.FC = () => {
                   Ongoing Projects
                 </div>
                 <div className="projects-individual-grid-container">
-                  {ongoingProjects.map((projectItem) => (
+                  {displayedOngoingProjects.map((projectItem) => (
                     <div
                       className="project-individual-card"
                       key={projectItem.id}
@@ -194,38 +311,45 @@ const ProjectList: React.FC = () => {
                     </div>
                   ))}
                 </div>
+                {totalOngoingPages > 1 && (
+                  <Pagination
+                    currentPage={currentOngoingPage}
+                    totalPages={totalOngoingPages}
+                    onPageChange={handleOngoingPageChange}
+                  />
+                )}
               </>
             )}
-            <div className="projects-individual-header">Completed Projects</div>
-            <div className="projects-individual-grid-container">
-              {completedProjects.map((projectItem) => (
-                <div
-                  className="project-individual-card"
-                  key={projectItem.id}
-                  onClick={() => handleCardClick(projectItem)}
-                >
-                  <img
-                    className="project-individual-img"
-                    src={projectItem.image}
-                    alt={projectItem.name + " images"}
-                  />
-                  <p className="project-individual-title">{projectItem.name}</p>
+            {completedProjects.length > 0 && (
+              <>
+                <div className="projects-individual-header">Completed Projects</div>
+                <div className="projects-individual-grid-container">
+                  {displayedCompletedProjects.map((projectItem) => (
+                    <div
+                      className="project-individual-card"
+                      key={projectItem.id}
+                      onClick={() => handleCardClick(projectItem)}
+                    >
+                      <img
+                        className="project-individual-img"
+                        src={projectItem.image}
+                        alt={projectItem.name + " images"}
+                      />
+                      <p className="project-individual-title">{projectItem.name}</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+                {totalCompletedPages > 1 && (
+                  <Pagination
+                    currentPage={currentCompletedPage}
+                    totalPages={totalCompletedPages}
+                    onPageChange={handleCompletedPageChange}
+                  />
+                )}
+              </>
+            )}
           </>
         )}
-        <div
-          ref={sentinelRef}
-          className={`sentinel ${showSentinel ? "" : "sentinel-hidden"}`}
-        >
-          {showSentinel && (
-            <>
-              <FaCheckCircle className="sentinel-icon" />
-              <p>All projects displayed</p>
-            </>
-          )}
-        </div>
       </div>
 
       {showPopup && selectedProject && (
