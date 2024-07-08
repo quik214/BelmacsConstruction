@@ -1,4 +1,47 @@
+/* AdminProjectsDashboard.css */
+
 .admin-container {
-    margin-top: 100px;
-    width: 80%;
+  padding: 20px;
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-radius: 5px;
+  background-color: hsl(240, 7%, 97%);
+  justify-content: center; /* Horizontally center the grid */
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 75%;
+  margin: 0 auto; /* Auto margin to center horizontally */
+}
+
+.tab-button {
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s,
+    box-shadow 0.3s;
+  font-size: 16px;
+  border-radius: 5px 5px 5px 5px;
+  text-align: center;
+}
+.tab-button:hover {
+  background-color: #364fc7;
+  color: white;
+  border-color: #364fc7;
+}
+
+.tab-button.active {
+  background-color: #364fc7;
+  color: white;
+  border-color: #364fc7;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tab-content {
+  margin-top: 50px;
+  padding: 20px;
 }
