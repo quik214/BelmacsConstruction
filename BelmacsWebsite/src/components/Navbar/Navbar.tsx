@@ -9,6 +9,7 @@ import {
   onAuthStateChanged,
   User,
   signOut as firebaseSignOut,
+  sendEmailVerification
 } from "firebase/auth";
 import "../../assets/fonts.css";
 import "./Navbar.css";
@@ -170,6 +171,41 @@ export default function Navbar() {
     localStorage.clear();
   };
 
+
+  /* Email Verification */
+  const handleSendEmailVerification = () => {
+    const user = auth.currentUser;
+    if (user) {
+      sendEmailVerification(user)
+        .then(() => {
+          toast.success("Verification email sent!", {
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      toast.error("No user is signed in.", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
+
   return (
     <div>
       {/* DESKTOP NAVBAR */}
@@ -270,6 +306,13 @@ export default function Navbar() {
                 />
                 {accountDropdown && (
                   <div className="account-dropdown-content">
+                    {!authUser.emailVerified &&
+                      <Link to="#" className="dropdown-item email" onClick={handleSendEmailVerification}>
+                        Verify Email
+                      </Link>
+
+                    }
+
                     <p className="dropdown-item email">
                       <b>{authUser.email}</b>
                     </p>
